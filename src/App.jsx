@@ -5,7 +5,11 @@ import Pay from "./pages/Pay";
 import Product from "./pages/Product";
 import ProductList from "./pages/ProductList";
 import Register from "./pages/Register";
+import OrderDetail from "./components/OrderDetail";
+import OrderList from "./components/OrderList";
 import { useSelector } from "react-redux";
+import About from "./pages/About";
+import Contact from "./pages/Contact";
 import {
   BrowserRouter as Router,
   Route,
@@ -27,6 +31,11 @@ const App = () => {
         <Route path="/cart" element={<Cart/>}/>
         <Route path="/login" element={user ? <Navigate to="/"/> : <Login/>}/>
         <Route path="/register" element={user ? <Navigate to="/"/> : <Register/>}/>
+        <Route path="/order_detail/:id" element={<OrderDetail/>}/>
+        <Route path="/order_detail" element={<OrderDetail/>}/>
+        <Route path="/order_list" element={<OrderList/>}/>
+        <Route path="/contact-us" element={<Contact/>}/>
+        <Route path="/about-us" element={<About/>}/>
       </Routes>
     </Router>
   );

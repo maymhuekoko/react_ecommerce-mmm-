@@ -1,6 +1,6 @@
 import SearchIcon from '@mui/icons-material/Search';
 import Badge from '@mui/material/Badge';
-import React, { useState,useEffect }  from 'react'
+import React, { useState }  from 'react'
 import styled from 'styled-components'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
@@ -11,13 +11,11 @@ import { Link } from 'react-router-dom'
 import {FaBars} from 'react-icons/fa'
 
 const Container = styled.div`
-   
+    height: ;
     transition: 1s ease;
     background: #fff;
     text-shadow: -1px -1px 1px rgba(255,255,255,.1), 1px 1px 1px rgba(0,0,0,.5);
     background-color: transparent;
-    
-    
     ${mobile({height: "50px"})}
 `
 const Wrapper = styled.div`
@@ -73,9 +71,9 @@ const Input = styled.input`
 `
 
 const Center = styled.div`
-flex: 1;
-display: inline;
-text-align: center;
+    flex: 1;
+    display: inline;
+    text-align: center;
 `
 
 const Logo = styled.h1`
@@ -88,21 +86,21 @@ const Logo = styled.h1`
 `
 
 const Right = styled.div`
-flex: 1;
-display: flex;
-align-items: center;
-justify-content: flex-end;
-margin-bottom: 40px;
-margin-left : 20px;
-${mobile({flex:2,justifyContent: "center"})}
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    margin-bottom: 40px;
+    margin-left : 20px;
+    ${mobile({flex:2,justifyContent: "center"})}
 `
 const RightOne = styled.div`
-flex: 1;
-display: flex;
-align-items: center;
-justify-content: flex-end;
-padding: 20px;
-${mobile({flex:2,justifyContent: "center"})}
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    padding: 20px;
+    ${mobile({flex:2,justifyContent: "center"})}
 `
 
 const MenuItem = styled.div`
@@ -125,41 +123,31 @@ const NavbarDropdown = styled.div`
     }
   `;
 
-  const NavbarDropdownContent = styled.div`
-  display: none;
-  position: absolute;
-  background-color: #f9f9f9;
-  min-width: 160px;
-  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0, 2);
-  padding: 12px 16px;
-  z-index: 1;
+const NavbarDropdownContent = styled.div`
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0, 2);
+    padding: 12px 16px;
+    z-index: 1;
 `;
 
 
-const Navbar = () => {
-    const [isScroll, setIsScroll] = useState(false);
-    const [isUser, setIsUser] = useState(false);
-    window.onscroll = function() {
-        if (document.documentElement.scrollTop > 100) {
-            setIsScroll(true);
-        } else {
-            setIsScroll(false);
-        }
-    };
-    const quantity = useSelector(state=>state.cart.quantity);
-    console.log(quantity);
+const ColorNav = () => {
 
-    const username = useSelector(state=>state.user.name);
+    // const [isScroll, setIsScroll] = useState(false);
 
-    useEffect(()=>{
-        if(username != ''){
-           setIsUser(true);
-        }
-    },[])
-    // if(username != ''){
-    //     setIsUser(true);
-    // }
-   
+    // window.onscroll = function() {
+    //     if (document.documentElement.scrollTop > 100) {
+    //         setIsScroll(true);
+    //     } else {
+    //         setIsScroll(false);
+    //     }
+    // };
+
+    // const quantity = useSelector(state=>state.cart.quantity);
+    // console.log(quantity);
 
     const link = {
        textDecoration: 'none',
@@ -168,24 +156,24 @@ const Navbar = () => {
     const link1 = {
         textDecoration: 'none',
         color : 'white',
-     }
+    }
      
 
   return (
     <Container className="fixed-top">
-        {isScroll ? (
             <WrapperOne>
             <LeftOne>
                 <Language style={link1}><LocationOnIcon/>Yangon</Language>
                 
-                <Language style={link1}><PhoneInTalkIcon/>+959778654565</Language>
-
-                {/* <NavbarDropdown>
+                <NavbarDropdown>
                 <Language style={link1}>English</Language>
                 <NavbarDropdownContent>
                 <Link to="/" style={link1}>Myanmar</Link>
                 </NavbarDropdownContent>
-                </NavbarDropdown> */}
+                </NavbarDropdown>
+                
+                
+                <Language style={link1}><PhoneInTalkIcon/>+959778654565</Language>
                 {/* <SearchContainer>
                     <Input placeholder="search"/>
                     <SearchIcon style={{color:"gray",fonSize: 10}}/>
@@ -198,14 +186,12 @@ const Navbar = () => {
                 <Link to="/products" style={link1}>
                 <MenuItem>Product</MenuItem>
                 </Link>
-                {isUser ? (' '):(
                 <Link to="/register" style={link1}>
                 <MenuItem>Register</MenuItem>
-                </Link>)}
-                {isUser ? (' '):(
+                </Link>
                 <Link to="/login" style={link1}>
                 <MenuItem>SignIn</MenuItem>
-                </Link> )}
+                </Link>
                 <Link to="/contact-us" style={link1}>
                 <MenuItem>ContactUs</MenuItem>
                 </Link>
@@ -213,12 +199,11 @@ const Navbar = () => {
             </Center>
 
             <RightOne>
-            {isUser ? (<Link to="/login" style={link1}>
-                <MenuItem>LogOut</MenuItem>
-                </Link>):(
-                <Link to="/login" style={link1}>
-                <MenuItem>SignIn</MenuItem>
-                </Link> )}
+            <Link to="/login"  style={link1}>
+                <MenuItem>   
+                  Sign In
+                </MenuItem>
+                </Link>
                 <Link to="/cart" style={link1}>
                 <MenuItem>   
                <ShoppingCartIcon/>Cart
@@ -231,71 +216,8 @@ const Navbar = () => {
                 </Link>
             </RightOne>
         </WrapperOne>
-       
-      ) : (
-        <Wrapper>
-       <Left>
-           <Language style={link}><LocationOnIcon/>Yangon</Language>
-           
-           <Language style={link}><PhoneInTalkIcon/>+959778654565</Language>
-
-           {/* <NavbarDropdown>
-           <Language style={link}>English</Language>
-           <NavbarDropdownContent>
-           <Link to="/" style={link}>Myanmar</Link>
-           </NavbarDropdownContent>
-           </NavbarDropdown> */}
-           {/* <SearchContainer>
-               <Input placeholder="search"/>
-               <SearchIcon style={{color:"gray",fonSize: 10}}/>
-           </SearchContainer> */}
-       </Left>
-       <Center>
-           <Logo>Medical World</Logo>
-           <Link to="/about-us" style={link}>
-           <MenuItem>AboutUs</MenuItem>
-           </Link>
-           <Link to="/products" style={link}>
-           <MenuItem>Product</MenuItem>
-           </Link>
-           {isUser ? (' '):(
-            <Link to="/register" style={link1}>
-            <MenuItem>Register</MenuItem>
-            </Link>)}
-            {isUser ? (' '):(
-           <Link to="/login" style={link}>
-           <MenuItem>SignIn</MenuItem>
-           </Link> )}
-           <Link to="/contact-us" style={link}>
-           <MenuItem>ContactUs</MenuItem>
-           </Link>
-           
-       </Center>
-
-       <Right>
-       {isUser ? (<Link to="/login" style={link}>
-                <MenuItem>LogOut Hello</MenuItem>
-                </Link>):(
-                <Link to="/login" style={link}>
-                <MenuItem>SignIn</MenuItem>
-                </Link> )}
-           <Link to="/cart" style={link}>
-           <MenuItem>   
-          <ShoppingCartIcon/>Cart
-           </MenuItem>
-           </Link>
-           <Link to="/serach">
-           <MenuItem>   
-          <SearchIcon style={link}/>
-           </MenuItem>
-           </Link>
-       </Right>
-   </Wrapper>
-      )}
-        
-        
     </Container>
   )
 }
 
-export default Navbar
+export default ColorNav;
