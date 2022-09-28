@@ -274,7 +274,7 @@ const Navbar = () => {
 
        <Right>
        {isUser ? (<Link to="/login" style={link}>
-                <MenuItem>LogOut</MenuItem>
+                <MenuItem>LogOut Hello</MenuItem>
                 </Link>):(
                 <Link to="/login" style={link}>
                 <MenuItem>SignIn</MenuItem>
