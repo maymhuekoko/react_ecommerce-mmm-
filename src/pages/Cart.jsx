@@ -1,7 +1,7 @@
 
 import React, { useState } from 'react'
 import styled from 'styled-components'
-import Navbar from '../components/Navbar'
+import ColorNav from '../components/ColorNav'
 import Slider from '../components/Slider'
 import Announcement from '../components/Announcement'
 import Footer from '../components/Footer'
@@ -128,7 +128,7 @@ const Summary = styled.div`
     border: 0.5px solid lightgray;
     border-radius: 10px;
     padding: 20px;
-    height: 50vh;
+    height: 80vh;
 `
 const SummaryTitle = styled.h1`
     font-weight: 200;
@@ -173,8 +173,8 @@ const Cart = () => {
     }
   return (
     <Container>
-        <Navbar/>
-        <Slider/>
+        <ColorNav/>
+        
         {/* <Announcement/> */}
         <Wrapper>
             <Title>YOUR CART</Title>

@@ -1,12 +1,13 @@
 import SearchIcon from '@mui/icons-material/Search';
 import Badge from '@mui/material/Badge';
-import React, { useState }  from 'react'
+import React, { useState,useEffect }  from 'react'
 import styled from 'styled-components'
 import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import {mobile} from "../responsive"
-import { useSelector } from 'react-redux';
+import {LogoutProcess} from "../redux/userRedux"
+import {  useDispatch,useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 import {FaBars} from 'react-icons/fa'
 
@@ -136,18 +137,20 @@ const NavbarDropdownContent = styled.div`
 
 const ColorNav = () => {
 
-    // const [isScroll, setIsScroll] = useState(false);
+    const username = useSelector(state=>state.user.name);
+    const [isUser, setIsUser] = useState(false);
+    const dispatch = useDispatch();
 
-    // window.onscroll = function() {
-    //     if (document.documentElement.scrollTop > 100) {
-    //         setIsScroll(true);
-    //     } else {
-    //         setIsScroll(false);
-    //     }
-    // };
-
-    // const quantity = useSelector(state=>state.cart.quantity);
-    // console.log(quantity);
+    useEffect(()=>{
+        if(username != ''){
+           setIsUser(true);
+        }
+    },[])
+    
+    const logout = () =>{
+        dispatch(LogoutProcess());
+        setIsUser(false);
+    }
 
     const link = {
        textDecoration: 'none',
@@ -165,33 +168,35 @@ const ColorNav = () => {
             <LeftOne>
                 <Language style={link1}><LocationOnIcon/>Yangon</Language>
                 
+                <Language style={link1}><PhoneInTalkIcon/>+959778654565</Language>
+
                 <NavbarDropdown>
                 <Language style={link1}>English</Language>
                 <NavbarDropdownContent>
                 <Link to="/" style={link1}>Myanmar</Link>
                 </NavbarDropdownContent>
                 </NavbarDropdown>
-                
-                
-                <Language style={link1}><PhoneInTalkIcon/>+959778654565</Language>
                 {/* <SearchContainer>
                     <Input placeholder="search"/>
                     <SearchIcon style={{color:"gray",fonSize: 10}}/>
                 </SearchContainer> */}
             </LeftOne>
             <Center>
+                <Link to="/" style={link1}>
+                <MenuItem>Home</MenuItem>
+                </Link>
                 <Link to="/about-us" style={link1}>
                 <MenuItem>AboutUs</MenuItem>
                 </Link>
-                <Link to="/products" style={link1}>
-                <MenuItem>Product</MenuItem>
-                </Link>
+               
+                {isUser ? (' '):(
                 <Link to="/register" style={link1}>
                 <MenuItem>Register</MenuItem>
-                </Link>
+                </Link>)}
+                {isUser ? (' '):(
                 <Link to="/login" style={link1}>
                 <MenuItem>SignIn</MenuItem>
-                </Link>
+                </Link> )}
                 <Link to="/contact-us" style={link1}>
                 <MenuItem>ContactUs</MenuItem>
                 </Link>
@@ -199,11 +204,12 @@ const ColorNav = () => {
             </Center>
 
             <RightOne>
-            <Link to="/login"  style={link1}>
-                <MenuItem>   
-                  Sign In
-                </MenuItem>
-                </Link>
+            {isUser ? (<Link to="/" style={link1} onClick={logout}>
+                <MenuItem>LogOut</MenuItem>
+                </Link>):(
+                <Link to="/login" style={link1}>
+                <MenuItem>SignIn</MenuItem>
+                </Link> )}
                 <Link to="/cart" style={link1}>
                 <MenuItem>   
                <ShoppingCartIcon/>Cart

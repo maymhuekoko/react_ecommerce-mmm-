@@ -6,9 +6,11 @@ import ShoppingCartIcon from '@mui/icons-material/ShoppingCart';
 import PhoneInTalkIcon from '@mui/icons-material/PhoneInTalk';
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import {mobile} from "../responsive"
-import { useSelector } from 'react-redux';
+import {LogoutProcess} from "../redux/userRedux"
+import {  useDispatch,useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 import {FaBars} from 'react-icons/fa'
+import ColorNav from './ColorNav'
 
 const Container = styled.div`
    
@@ -139,6 +141,8 @@ const NavbarDropdown = styled.div`
 const Navbar = () => {
     const [isScroll, setIsScroll] = useState(false);
     const [isUser, setIsUser] = useState(false);
+    const dispatch = useDispatch();
+
     window.onscroll = function() {
         if (document.documentElement.scrollTop > 100) {
             setIsScroll(true);
@@ -159,7 +163,10 @@ const Navbar = () => {
     // if(username != ''){
     //     setIsUser(true);
     // }
-   
+    const logout = () =>{
+        dispatch(LogoutProcess());
+        setIsUser(false);
+    }
 
     const link = {
        textDecoration: 'none',
@@ -174,64 +181,7 @@ const Navbar = () => {
   return (
     <Container className="fixed-top">
         {isScroll ? (
-            <WrapperOne>
-            <LeftOne>
-                <Language style={link1}><LocationOnIcon/>Yangon</Language>
-                
-                <Language style={link1}><PhoneInTalkIcon/>+959778654565</Language>
-
-                {/* <NavbarDropdown>
-                <Language style={link1}>English</Language>
-                <NavbarDropdownContent>
-                <Link to="/" style={link1}>Myanmar</Link>
-                </NavbarDropdownContent>
-                </NavbarDropdown> */}
-                {/* <SearchContainer>
-                    <Input placeholder="search"/>
-                    <SearchIcon style={{color:"gray",fonSize: 10}}/>
-                </SearchContainer> */}
-            </LeftOne>
-            <Center>
-                <Link to="/about-us" style={link1}>
-                <MenuItem>AboutUs</MenuItem>
-                </Link>
-                <Link to="/products" style={link1}>
-                <MenuItem>Product</MenuItem>
-                </Link>
-                {isUser ? (' '):(
-                <Link to="/register" style={link1}>
-                <MenuItem>Register</MenuItem>
-                </Link>)}
-                {isUser ? (' '):(
-                <Link to="/login" style={link1}>
-                <MenuItem>SignIn</MenuItem>
-                </Link> )}
-                <Link to="/contact-us" style={link1}>
-                <MenuItem>ContactUs</MenuItem>
-                </Link>
-                
-            </Center>
-
-            <RightOne>
-            {isUser ? (<Link to="/login" style={link1}>
-                <MenuItem>LogOut</MenuItem>
-                </Link>):(
-                <Link to="/login" style={link1}>
-                <MenuItem>SignIn</MenuItem>
-                </Link> )}
-                <Link to="/cart" style={link1}>
-                <MenuItem>   
-               <ShoppingCartIcon/>Cart
-                </MenuItem>
-                </Link>
-                <Link to="/serach">
-                <MenuItem>   
-               <SearchIcon style={link1}/>
-                </MenuItem>
-                </Link>
-            </RightOne>
-        </WrapperOne>
-       
+            <ColorNav/>
       ) : (
         <Wrapper>
        <Left>
@@ -239,12 +189,12 @@ const Navbar = () => {
            
            <Language style={link}><PhoneInTalkIcon/>+959778654565</Language>
 
-           {/* <NavbarDropdown>
+           <NavbarDropdown>
            <Language style={link}>English</Language>
            <NavbarDropdownContent>
            <Link to="/" style={link}>Myanmar</Link>
            </NavbarDropdownContent>
-           </NavbarDropdown> */}
+           </NavbarDropdown>
            {/* <SearchContainer>
                <Input placeholder="search"/>
                <SearchIcon style={{color:"gray",fonSize: 10}}/>
@@ -252,14 +202,14 @@ const Navbar = () => {
        </Left>
        <Center>
            <Logo>Medical World</Logo>
+           <Link to="/" style={link}>
+           <MenuItem>Home</MenuItem>
+           </Link>
            <Link to="/about-us" style={link}>
            <MenuItem>AboutUs</MenuItem>
            </Link>
-           <Link to="/products" style={link}>
-           <MenuItem>Product</MenuItem>
-           </Link>
            {isUser ? (' '):(
-            <Link to="/register" style={link1}>
+            <Link to="/register" style={link}>
             <MenuItem>Register</MenuItem>
             </Link>)}
             {isUser ? (' '):(
@@ -273,8 +223,8 @@ const Navbar = () => {
        </Center>
 
        <Right>
-       {isUser ? (<Link to="/login" style={link}>
-                <MenuItem>LogOut Hello</MenuItem>
+       {isUser ? (<Link to='/' style={link} onClick={logout}>
+                <MenuItem>LogOut</MenuItem>
                 </Link>):(
                 <Link to="/login" style={link}>
                 <MenuItem>SignIn</MenuItem>
@@ -292,8 +242,7 @@ const Navbar = () => {
        </Right>
    </Wrapper>
       )}
-        
-        
+            
     </Container>
   )
 }
