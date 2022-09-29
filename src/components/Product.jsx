@@ -29,7 +29,7 @@ const MainContainer = styled.div`
 const Container = styled.div`
     flex: 1;
     margin: 5px;
-    width: 1200px;
+    width: 1300px;
     height: 500px;
     display: flex;
     align-items: center;
@@ -97,7 +97,7 @@ const SmallImgContainer = styled.div`
    
 `
 const SmallImage = styled.img`
-    width: 390px;
+    width: 430px;
     height: 45vh;
     margin-top: 25px;
     object-fit: contain;

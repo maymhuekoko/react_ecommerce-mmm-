@@ -8,9 +8,10 @@ import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import styled from 'styled-components';
 import { useSelector , useDispatch } from 'react-redux';
-import {useState} from 'react'
+import {useState,useEffect} from 'react'
 import axios from 'axios'
 import {resetProduct} from "../redux/cartRedux"
+
 
 
 
@@ -50,11 +51,6 @@ const FilterOption = styled.option``
 
 export default function CheckoutDialog(props) {
   
-  // const name = useSelector((state) => state.name);
-  // const phone = useSelector((state) => state.phone);
-  // const address = useSelector((state) => state.address);
-  // const township = useSelector((state) => state.township);
-  // const charges = useSelector((state) => state.charges);
   const [name,setName] = useState('');
   const [phone,setPhone] = useState('');
   const [address,setAddress] = useState('');
@@ -63,15 +59,42 @@ export default function CheckoutDialog(props) {
   const [paymenttype,setPaymentType] = useState('');
   const [paymentchannel,setPaymentChannel] = useState('');
   const [remark,setRemark] = useState('');
+  
+  const [townships,setTownships] = useState([]);
+
+  useEffect(()=>{
+    const getTownships = async () =>{
+      try{
+        const res = await axios.get("http://medicalworldinvpos.kwintechnologykw09.com/api/township",{
+          headers: {
+            'Access-Control-Allow-Origin' : '*',
+          }
+        });
+        console.log(res.data);
+        setTownships(res.data);
+
+      }catch(err){}
+    };
+    getTownships();
+  });
+
+  const username = useSelector(state=>state.user);
+  // console.log(username.name);
   const cart = useSelector(state=>state.cart);
   const dispatch = useDispatch();
-  console.log(cart);
+  // console.log(cart);
 
   console.log(name,phone,address,township,charges);
-  const onNameChanged = (e) => setName(e.target.value);
-  const onAddressChanged = (e) => setAddress(e.target.value);
-  const onPhoneChanged = (e) => setPhone(e.target.value);
-  const onTownshipChanged = (e) => setTownship(e.target.value);
+  
+  const onTownshipChanged = (e) => {
+    setTownship(e.target.value);
+    const res = axios.get('http://medicalworldinvpos.kwintechnologykw09.com/api/township_charges/'+e.target.value).then(function(response){
+          console.log(response.data);
+            setCharges(response.data.charges);
+        }).catch(function(error){
+            alert('fail charges');
+        })
+     };
   const onChargesChanged = (e) => setCharges(e.target.value);
   const onPaymentTypeChanged = (e) => setPaymentType(e.target.value);
   const onPaymentChannelChanged = (e) => setPaymentChannel(e.target.value);
@@ -79,9 +102,9 @@ export default function CheckoutDialog(props) {
   const orderSave = () =>{ 
     // alert(paymentchannel);
     const res = axios.post('http://medicalworldinvpos.kwintechnologykw09.com/api/ecommerce_order_store',{
-            name: name,
-            phone: phone,
-            address: address,
+            name: username.name,
+            phone: username.phone,
+            address: username.address,
             township: township,
             charges : charges,
             paymenttype : paymenttype,
@@ -108,10 +131,19 @@ export default function CheckoutDialog(props) {
             Please enter information to check out!
           </DialogContentText>
           <Form>
-            <Input type="text" id="name" name="name" placeholder="name" value={name} onChange={onNameChanged}/>
-            <Input type="text" id="phone" name="phone" placeholder="phone" value={phone} onChange={onPhoneChanged}/>
-            <Input type="text" id="address" name="address" placeholder="address" value={address} onChange={onAddressChanged}/> 
-            <Input type="text" id="township" name="township" placeholder="township" value={township} onChange={onTownshipChanged}/>   
+            <Input type="text" id="name" name="name" placeholder="name" value={username.name} />
+            <Input type="text" id="phone" name="phone" placeholder="phone" value={username.phone} />
+            <Input type="text" id="address" name="address" placeholder="address" value={username.address} /> 
+            {/* <Input type="text" id="township" name="township" placeholder="township" value={township} onChange={onTownshipChanged}/>    */}
+            <Filter>
+                <FilterTitle>Townships</FilterTitle>
+                <FilterSelect onChange={onTownshipChanged}>
+                    <FilterOption>Select Township</FilterOption>
+                      {townships.map(township=>(
+                        <FilterOption value={township.id} key={township.id}>{township.township}</FilterOption>
+                    ))}
+                </FilterSelect>
+            </Filter>
             <Input type="text" id="charges" name="charges" placeholder="charges" value={charges} onChange={onChargesChanged}/>     
             <Filter>
                 <FilterTitle>Payment Type</FilterTitle>
