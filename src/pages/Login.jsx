@@ -10,6 +10,8 @@ import { red } from '@mui/material/colors'
 import {
     Navigate,
   } from "react-router-dom";
+import ColorNav from '../components/ColorNav'
+import Footer from '../components/Footer'
 
 const Container = styled.div`
     width: 100vw;
@@ -81,6 +83,7 @@ const Login = () => {
     const background = {
         backgroundColor : 'red',
         color : 'white',
+        align : 'center',
     }
     // const {isFetching,error} = useSelector((state)=>state.user)
     useEffect(()=>{
@@ -98,8 +101,13 @@ const Login = () => {
                 username: username,
                 password: password
             }).then(function(response){
-                console.log(response.data.user.name);
-                if(response.data.status == 200){
+                // console.log(response.data.status);
+                if(response.data.status != 200){
+                    setErrmsg(' Missing Username Or Password! ');
+                    errRef.current.focus();
+                }
+                else{
+                    // alert('error');
                     const access_token = response?.data?.access_token;
                     setAuth({username,password,access_token});
                     setUsername('');
@@ -110,13 +118,8 @@ const Login = () => {
                         name : response.data.user.name,
                         phone : response.data.user.phone,
                         address : response.data.user.address,
-                    }))
+                    }))   
                     
-                   
-                }
-                else if(response.data.status == 422){
-                    setErrmsg(' Missing Username Or Password! ');
-                    errRef.current.focus();
                 }
                 
             })
@@ -130,6 +133,8 @@ const Login = () => {
     { successmsg ? (
       <Navigate to="/" />
     ) : (
+        <>
+    <ColorNav/>
     <Container>
          <Wrapper> 
         <p ref={errRef} className={errmsg ? "errmsg" : "offscreen"} aria-live='assertive' style={background}>{errmsg}</p>
@@ -145,6 +150,8 @@ const Login = () => {
         </Form>
         </Wrapper>
     </Container>
+    <Footer/>
+    </>
     )} 
    </>
   )

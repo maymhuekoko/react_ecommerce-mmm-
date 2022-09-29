@@ -28,9 +28,14 @@ const userSlice = createSlice({
             state.name = action.payload.name;
             state.phone = action.payload.phone;
             state.address = action.payload.address;
+        },
+        LogoutProcess: (state) => {
+            state.name = '';
+            state.phone = '';
+            state.address = '';
         }
     }
 })
 
-export const{loginStart,loginSuccess,loginFailure,setUserInfo} = userSlice.actions
+export const{loginStart,loginSuccess,loginFailure,setUserInfo,LogoutProcess} = userSlice.actions
 export default userSlice.reducer;
