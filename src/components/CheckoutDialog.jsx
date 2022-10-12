@@ -147,20 +147,20 @@ export default function CheckoutDialog(props) {
             <Input type="text" id="charges" name="charges" placeholder="charges" value={charges} onChange={onChargesChanged}/>     
             <Filter>
                 <FilterTitle>Payment Type</FilterTitle>
-                <FilterSelect onChange={onPaymentTypeChanged}>
+                <FilterSelect value={paymenttype} onChange={onPaymentTypeChanged}>
                     <FilterOption>Select Payment Type</FilterOption>
-                    <FilterOption value={1}>COD</FilterOption>
-                    <FilterOption value={2}>Prepaid Partial</FilterOption>
-                    <FilterOption value={3}>Prepaid Full</FilterOption>
+                    <FilterOption value='1'>COD</FilterOption>
+                    <FilterOption value='2'>Prepaid Partial</FilterOption>
+                    <FilterOption value='3'>Prepaid Full</FilterOption>
                 </FilterSelect>
             </Filter>
             <Filter>
                 <FilterTitle>Payment Channel</FilterTitle>
-                <FilterSelect onChange={onPaymentChannelChanged}>
+                <FilterSelect value={paymentchannel} onChange={onPaymentChannelChanged}>
                     <FilterOption>Select Payment Channel</FilterOption>
-                    <FilterOption value={1}>Cash</FilterOption>
-                    <FilterOption value={2}>Mobile Banking</FilterOption>
-                    <FilterOption value={3}>Internet Banking</FilterOption>
+                    <FilterOption value='1'>Cash</FilterOption>
+                    <FilterOption value='2'>Mobile Banking</FilterOption>
+                    <FilterOption value='3'>Internet Banking</FilterOption>
                 </FilterSelect>
             </Filter>
             <Input type="text" id="remark" name="remark" placeholder="remark" onChange={onRemarkChanged}/> 

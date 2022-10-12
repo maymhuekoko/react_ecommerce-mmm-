@@ -151,7 +151,7 @@ const Navbar = () => {
         }
     };
     const quantity = useSelector(state=>state.cart.quantity);
-    console.log(quantity);
+    // console.log(quantity);
 
     const username = useSelector(state=>state.user.name);
 
@@ -217,6 +217,11 @@ const Navbar = () => {
            <Link to="/login" style={link}>
            <MenuItem>SignIn</MenuItem>
            </Link> )}
+           {isUser ? (
+            <Link to="/order_list" style={link}>
+            <MenuItem>Order List</MenuItem>
+            </Link>
+            ):('')}
            <Link to="/contact-us" style={link}>
            <MenuItem>ContactUs</MenuItem>
            </Link>

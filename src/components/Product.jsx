@@ -106,7 +106,7 @@ const SmallImage = styled.img`
 
 const Product = ({item}) => {
     const { getCollapseProps, getToggleProps } = useCollapse();
-    const [items,setItems] =  useState([]);
+    const [items,setItems] =  useState([{}]);
     
     const collapse = () =>{
         // alert('hello');
@@ -121,7 +121,7 @@ const Product = ({item}) => {
         })
     };
 
-  return (
+return (
     
     <div className="collapsible" onClick={collapse}>
         <Container className="header" {...getToggleProps()}>
