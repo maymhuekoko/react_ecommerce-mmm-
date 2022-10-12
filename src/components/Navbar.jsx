@@ -200,6 +200,7 @@ const Navbar = () => {
                <SearchIcon style={{color:"gray",fonSize: 10}}/>
            </SearchContainer> */}
        </Left>
+       {/* Phyo */}
        <Center>
            <Logo>Medical World</Logo>
            <Link to="/" style={link}>
