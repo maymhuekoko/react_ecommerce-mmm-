@@ -128,7 +128,7 @@ const OrderList = () => {
                             <Td>{order.customer_name}</Td>
                             <Td>{order.deliver_address}</Td>
                             <Td>{order.order_date}</Td>
-                            <Td><Span>Confirm Order</Span></Td>
+                            <Td><Span>{order.order_status}</Span></Td>
                             <Td>{order.total_quantity}</Td>
                             <Td>{order.total_amount}</Td>
                             <Td>
@@ -139,51 +139,6 @@ const OrderList = () => {
                         </Tr>
                     ))
                 }
-                <Tr>
-                    <Td>Example</Td>
-                    <Td>Example</Td>
-                    <Td>Example</Td>
-                    <Td>Example</Td>
-                    <Td>Example</Td>
-                    <Td><Span>Confirm Order</Span></Td>
-                    <Td>Example</Td>
-                    <Td>Example</Td>
-                    <Td>
-                    <Link to='/order_detail/'>
-                        <TableButton>Order Detail</TableButton>
-                    </Link>    
-                    </Td>
-                </Tr>
-                <Tr>
-                    <Td>Example</Td>
-                    <Td>Example</Td>
-                    <Td>Example</Td>
-                    <Td>Example</Td>
-                    <Td>Example</Td>
-                    <Td><Span>Confirm Order</Span></Td>
-                    <Td>Example</Td>
-                    <Td>Example</Td>
-                    <Td>
-                    <Link to='/order_detail/'>
-                        <TableButton>Order Detail</TableButton>
-                    </Link>    
-                    </Td>
-                </Tr>
-                <Tr>
-                    <Td>Example</Td>
-                    <Td>Example</Td>
-                    <Td>Example</Td>
-                    <Td>Example</Td>
-                    <Td>Example</Td>
-                    <Td><Span>Confirm Order</Span></Td>
-                    <Td>Example</Td>
-                    <Td>Example</Td>
-                    <Td>
-                    <Link to='/order_detail/'>
-                        <TableButton>Order Detail</TableButton>
-                    </Link>    
-                    </Td>
-                </Tr>
             </Table> 
         </Wrapper>
         </Div>
