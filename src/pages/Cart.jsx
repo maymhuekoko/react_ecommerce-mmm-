@@ -1,4 +1,3 @@
-
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import ColorNav from '../components/ColorNav'
@@ -10,6 +9,7 @@ import {mobile} from "../responsive"
 import { useSelector } from 'react-redux';
 import axios from 'axios'
 import CheckoutDialog from '../components/CheckoutDialog'
+import { Link } from 'react-router-dom'
 
 const Container = styled.div``
 const Wrapper = styled.div`
@@ -179,13 +179,13 @@ const Cart = () => {
         <Wrapper>
             <Title>YOUR CART</Title>
             <Top>
-                <TopButton>CONTINUE SHOPPING</TopButton>
+                <Link to='/'><TopButton>CONTINUE SHOPPING</TopButton></Link>
                 <TopTexts>
                     <TopText>Shopping Cart(2)</TopText>
                     <TopText>Your Wishlist(0)</TopText>
                 </TopTexts>
 
-                <TopButton type="filled">CHECKOUT NOW</TopButton>
+                {/* <TopButton type="filled">CHECKOUT NOW</TopButton> */}
             </Top>
             <Bottom>
                 <Info>

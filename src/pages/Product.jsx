@@ -181,11 +181,10 @@ const Button = styled.button`
 
 const Product = () => {
 
-    const location = useLocation();
+  const location = useLocation();
   const id = location.pathname.split("/")[2];
-
   
-  console.log(id);
+//   console.log(id);
 
   const[item,setItem] = useState({});
   const[relateditems,setRelatedItems] = useState([]);
@@ -202,12 +201,47 @@ const Product = () => {
   const[stock,setStock] = useState(0);
   const dispatch = useDispatch();
 
+    const uniqueColor = [];
+    const uniqueSize = [];
+    const uniqueFabric = [];
+
+    const uniqueColors = units.filter(element => {
+        const isDuplicate = uniqueColor.includes(element.colour_name);
+        if(!isDuplicate) {
+            uniqueColor.push(element.colour_name)
+            return true;
+        }
+        return false;   
+    })
+
+    const uniqueSizes = units.filter(element => {
+        const isDuplicate = uniqueSize.includes(element.size_name);
+        if(!isDuplicate) {
+            uniqueSize.push(element.size_name)
+            return true;
+        }
+        return false;
+    })
+
+    const uniqueFabrics = units.filter(element => {
+        const isDuplicate = uniqueFabric.includes(element.fabric_name);
+        if(!isDuplicate) {
+            uniqueFabric.push(element.fabric_name)
+            return true;
+        }
+        return false;
+    })
+    
+
   useEffect(()=>{
     const getProduct = ()=> {   
             const res = axios.get("http://medicalworldinvpos.kwintechnologykw09.com/api/unitbyid_api/" +id)
             .then((response) => {setItem(response.data.item);
+                
                 setUnits(response.data.counting_units);
+
                 const obj = {'category_id':response.data.item.category_id,'subcategory_id':response.data.item.sub_category_id}
+                
                 axios.post('http://medicalworldinvpos.kwintechnologykw09.com/api/productlineitems_api',obj)
                 .then(res=>{    
                     setRelatedItems(res.data);
@@ -215,7 +249,8 @@ const Product = () => {
                 }).catch(err=>{
                     console.log(err);
                 })
-            console.log('hello')})
+            // console.log('hello')
+        })
             .catch((error)=>console.log(error));       
     }
     getProduct();
@@ -235,7 +270,6 @@ const Product = () => {
         
     })
   },[color,fabric,size]);
-
   
 
   const handleQuantity = (type) => {
@@ -246,11 +280,19 @@ const Product = () => {
     }
   }
 
-  const handleClick = ()=> {
-    dispatch(addProduct({unitid,unitname,unitcode,unitimg,color,size,fabric,quantity,price}));
-  }
+  const [butText, setButText] = useState('Add Cart');
+  const [butBackColor, setBututBackColor] = useState('white');
+  const [butColor, setBututColor] = useState('teal');
 
-  const change_photo = () => {
+    const handleClick = () => {
+        dispatch(addProduct({unitid,unitname,unitcode,unitimg,color,size,fabric,quantity,price}));
+        setButText('Success');
+        setBututBackColor('teal');
+        setBututColor('white');
+    }
+  
+
+    const change_photo = () => {
     const hel = document.getElementById('hel').src;
     const main = document.getElementById('main').src;
     document.getElementById('hel').src = main;
@@ -281,37 +323,30 @@ const Product = () => {
                 <Stock>{stock} pcs</Stock>
                 </RowContainer>
                 
-                
-                
                 <FilterContainer>
                     <Filter>
                         <FilterTitle>Color</FilterTitle>
-                        {/* {units && units.forEach((unit)=> {
-                            <FilterColor color={unit.colour_name} key={unit.id} onClick={()=>setColor(unit.colour_name)}/>
-                        
-})} */}
                         <FilterColor onChange={(e)=>setColor(e.target.value)}>
-                            {units.map((unit)=> {
-                               return(<FilterColorOption key={unit.id} value={unit.colour_name}>{unit.colour_name}</FilterColorOption>)
-})}
-                            
+                            {uniqueColors.map((unit)=> (
+                               <FilterColorOption key={unit.id} value={unit.colour_name}>{unit.colour_name}</FilterColorOption>
+                            ))}
                         </FilterColor>
                     </Filter>
                     <Filter>
                         <FilterTitle>Size</FilterTitle>
                         <FilterSize onChange={(e)=>setSize(e.target.value)}>
-                            {units.map((unit)=> {
-                               return(<FilterSizeOption key={unit.id} value={unit.size_name}>{unit.size_name}</FilterSizeOption>)
-})}
+                            {uniqueSizes.map((unit)=> (
+                               <FilterSizeOption key={unit.id} value={unit.size_name}>{unit.size_name}</FilterSizeOption>
+                            ))}
                             
                         </FilterSize>
                     </Filter>
                     <Filter>
                         <FilterTitle>Fabric</FilterTitle>
                         <FilterFabric onChange={(e)=>setFabric(e.target.value)}>
-                            {units.map((unit)=> {
-                               return(<FilterFabricOption key={unit.id} value={unit.fabric_name}>{unit.fabric_name}</FilterFabricOption>)
-                            })}
+                            {uniqueFabrics.map((unit)=> (
+                               <FilterFabricOption key={unit.id} value={unit.fabric_name}>{unit.fabric_name}</FilterFabricOption>
+                            ))}
                             
                         </FilterFabric>
                     </Filter>
@@ -324,7 +359,7 @@ const Product = () => {
                         <Amount>{quantity}</Amount>
                         <Add onClick={()=>handleQuantity("inc")}/>
                     </AmountContainer>
-                    <Button onClick={handleClick}>Add to Cart</Button>
+                    <Button id='succ' onClick={handleClick} style={{backgroundColor: butBackColor, color: butColor}}>{butText}</Button>
                 </AddContainer>
 
                 
