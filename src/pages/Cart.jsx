@@ -161,7 +161,7 @@ const Cart = () => {
 
     const onCheckOutClicked =() => {
         setShowDialog(true);
-        // const res = axios.post('http://medicalworldinvpos.kwintechnologykw09.com/api/ecommerce_order_store',{
+        // const res = axios.post('http://familyuniform.medicalworld.com.mm/api/ecommerce_order_store',{
         //     products: cart.products,
         //     quantity: cart.quantity,
         //     amount: cart.total,
@@ -192,7 +192,7 @@ const Cart = () => {
                     {cart.products.map((product)=>(
                         <Product>
                         <ProductDetail>
-                            <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/cute2.png`}/>
+                            <Image src={`http://familyuniform.medicalworld.com.mm/ecommerce/items/cute2.png`}/>
                             <Details>
                                 <ProductName><b>Product: </b> {product.unitname}</ProductName>
                                 <ProductId><b>ID: </b> {product.unitcode}</ProductId>
