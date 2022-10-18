@@ -27,7 +27,7 @@ const CheckSize = (props) => {
         <Dialog open={props.open} onClose={props.close}>
         <DialogTitle  className='text-center'><Title>Check Size</Title></DialogTitle>
         <DialogContent>
-          <Img src={`http://familyuniform.medicalworld.com.mm/ecommerce/items/cute2.png`} />
+          <Img src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/cute2.png`} />
         </DialogContent>
         <DialogActions>
           <Button onClick={props.close} style={{backgroundColor: '#79a6fa', color: 'white'}}>Close</Button>

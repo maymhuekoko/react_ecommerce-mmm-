@@ -20,7 +20,7 @@ const Products = ({cat,filters,sort}) => {
   useEffect(()=>{
     const getProducts = async () =>{
       try{
-        const res = await axios.get(cat ? `http://familyuniform.medicalworld.com.mm/api/subcategory_api/${cat}` : "http://localhost:5000/api/subcategory_api");
+        const res = await axios.get(cat ? `http://familyuniformapp.medicalworld.com.mm/api/subcategory_api/${cat}` : "http://localhost:5000/api/subcategory_api");
         console.log(res.data);
         setProducts(res.data);
         

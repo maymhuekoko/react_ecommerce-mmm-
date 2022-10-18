@@ -279,10 +279,10 @@ const Product = () => {
         }
         return false;
     })
-// familyuniform.medicalworld.com.mm
+// familyuniformapp.medicalworld.com.mm
     useEffect(() => {
         const getProduct = () => {
-            const res = axios.get("http://familyuniform.medicalworld.com.mm/api/unitbyid_api/" + id)
+            const res = axios.get("http://familyuniformapp.medicalworld.com.mm/api/unitbyid_api/" + id)
                 .then((response) => {
                     setItem(response.data.item);
 
@@ -290,7 +290,7 @@ const Product = () => {
 
                     const obj = { 'category_id': response.data.item.category_id, 'subcategory_id': response.data.item.sub_category_id }
 
-                    axios.post('http://familyuniform.medicalworld.com.mm/api/productlineitems_api', obj)
+                    axios.post('http://familyuniformapp.medicalworld.com.mm/api/productlineitems_api', obj)
                         .then(res => {
                             setRelatedItems(res.data);
                             console.log(res.data);
@@ -354,11 +354,11 @@ const Product = () => {
             {/* <Announcement/> */}
             <Wrapper style={{ marginTop: '100px' }}>
                 <ImgContainer>
-                    <MainImage src={`http://familyuniform.medicalworld.com.mm/ecommerce/items/cute1.png`} id='main' />
+                    <MainImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/cute1.png`} id='main' />
                     <SmallImgContainer>
-                        <SmallImage src={`http://familyuniform.medicalworld.com.mm/ecommerce/items/cute2.png`} onClick={change_photo} id='hel' />
-                        <SmallImage src={`http://familyuniform.medicalworld.com.mm/ecommerce/items/cute3.png`} />
-                        <SmallImage src={`http://familyuniform.medicalworld.com.mm/ecommerce/items/cute1.png`} />
+                        <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/cute2.png`} onClick={change_photo} id='hel' />
+                        <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/cute3.png`} />
+                        <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/cute1.png`} />
                     </SmallImgContainer>
                 </ImgContainer>
                 <InfoContainer>
@@ -444,7 +444,7 @@ const Product = () => {
                     <SmallImgContainerOne>
 
                         {relateditems.map((it) => (
-                            <SmallImageOne src={`http://familyuniform.medicalworld.com.mm/ecommerce/items/${it.photo_path}`} key={it.id} />
+                            <SmallImageOne src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/${it.photo_path}`} key={it.id} />
                         ))}
 
                     </SmallImgContainerOne>

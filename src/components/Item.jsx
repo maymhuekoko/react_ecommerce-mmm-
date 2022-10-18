@@ -83,7 +83,7 @@ const Item = ({item}) => {
    
     <Container>
         <Circle/>
-        <Image src={`http://familyuniform.medicalworld.com.mm/ecommerce/items/${item.photo_path}`}/>
+        <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/${item.photo_path}`}/>
         <Info>
             
             <Icon>

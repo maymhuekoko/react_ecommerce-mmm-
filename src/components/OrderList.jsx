@@ -91,7 +91,7 @@ const OrderList = () => {
     },[]);
 
     const fetchOrderList = () => {
-        axios.get('http://familyuniform.medicalworld.com.mm/api/ecommerce_order_index')
+        axios.get('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_index')
         .then(res=>{
             console.log(res.data);
             setOrders(res.data);

@@ -31,7 +31,7 @@ const HomeItems = ({title,url}) => {
   useEffect(()=>{
     const getItems = async () =>{
       try{
-        const res = await axios.get("http://familyuniform.medicalworld.com.mm/api/" + url);
+        const res = await axios.get("http://familyuniformapp.medicalworld.com.mm/api/" + url);
         console.log(res.data);
         setItems(res.data);
         
