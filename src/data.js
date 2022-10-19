@@ -1,23 +1,30 @@
+import slider1 from './slider-images/slider1.jpg'
+import slider2 from './slider-images/slider2.jpg'
+import slider3 from './slider-images/slider3.jpg'
+
 export const sliderItems = [
     {
       id: 1,
-      img: "http://medicalworldinvpos.kwintechnologykw09.com/files/attachments/slider1_update.jpg",
+      img: slider1,
+      // img: "http://medicalworldinvpos.kwintechnologykw09.com/files/attachments/slider1_update.jpg",
       title: "Medical Scrubs",
-      desc: "New Arrival and Design.Place your order now",
+      desc: "New Arrival And Design. Place Your Order Now",
       bg: "f5fafd",
     },
     {
       id: 2,
-      img: "http://medicalworldinvpos.kwintechnologykw09.com/files/attachments/slider2_update.jpg",
+      img: slider2,
+      // img: "http://medicalworldinvpos.kwintechnologykw09.com/files/attachments/slider2_update.jpg",
       title: "Doctor Coats",
-      desc: "New Arrival and Design. Place your order now",
+      desc: "New Arrival And Design. Place Your Order Now",
       bg: "fcf1ed",
     },
     {
       id: 3,
-      img: "http://medicalworldinvpos.kwintechnologykw09.com/files/attachments/slider_photo3.jpg",
+      img: slider3,
+      // img: "http://medicalworldinvpos.kwintechnologykw09.com/files/attachments/slider_photo3.jpg",
       title: "Surgeon Gowns",
-      desc: "New Arrival and Design. Place your order now",
+      desc: "New Arrival And Design. Place Your Order Now",
       bg: "fbf0f4",
     },
   ];

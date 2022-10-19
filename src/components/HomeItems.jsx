@@ -31,7 +31,13 @@ const HomeItems = ({title,url}) => {
   useEffect(()=>{
     const getItems = async () =>{
       try{
-        const res = await axios.get("http://familyuniformapp.medicalworld.com.mm/api/" + url);
+        const res = await axios.get("http://familyuniformapp.medicalworld.com.mm/api/" + url, 
+          {
+            headers: {
+              "Access-Control-Allow-Origin": "http://familyuniformapp.medicalworld.com.mm"
+            }
+          }
+        );
         console.log(res.data);
         setItems(res.data);
         

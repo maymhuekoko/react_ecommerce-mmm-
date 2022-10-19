@@ -32,7 +32,7 @@ const Title = styled.h1`
 `
 const Description = styled.div`
     width: 70%;
-    font-size: 24px;
+    font-size: 20px;
     font-weight: 300;
     margin-bottom: 20px;
     text-align: center;
@@ -56,9 +56,6 @@ const About = () => {
                     </Description>
                 </Wrapper>
             </Div>
-            <div>
-                <Newsletter/>
-            </div>
             <div>
                 <Footer/>
             </div>

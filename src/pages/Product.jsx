@@ -41,8 +41,8 @@ const SmallImgContainerOne = styled.div`
 `
 
 const MainImage = styled.img`
-    width: 100%;
-    height: 60vh;
+    width: 500px;
+    height: auto;
     object-fit: cover;
     
     ${mobile({ height: "50%" })}
@@ -242,6 +242,12 @@ const Product = () => {
     const [unitcode, setUnitCode] = useState('');
     const [unitimg, setUnitImg] = useState('default.png');
     const [quantity, setQuantity] = useState(1);
+
+    const colorFunction = (e) => {
+        setColor(e.target.value);
+        setMainImg(e.target.value)
+    }
+
     const [color, setColor] = useState("");
     const [fabric, setFabric] = useState("");
     const [size, setSize] = useState("");
@@ -347,6 +353,9 @@ const Product = () => {
         document.getElementById('main').src = hel;
     }
 
+    const [mainImg, setMainImg] = useState('ar1');
+    console.log(mainImg)
+
     return (
         <Container>
             <Navbar />
@@ -354,12 +363,26 @@ const Product = () => {
             {/* <Announcement/> */}
             <Wrapper style={{ marginTop: '100px' }}>
                 <ImgContainer>
-                    <MainImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/cute1.png`} id='main' />
+
+                    {/* <MainImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/cute1.png`} id='main' /> */}
+                    
+                    {(() => {
+                        switch(mainImg) {
+                            case 'ar1': return <MainImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/cute1.png`} id='main' />
+                            case 'ar2': return <MainImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/vtwo1.png`} id='main' />
+                            case 'ar3': return <MainImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/product_lines/gown.png`} id='main' />
+                            case 'ar4': return <MainImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/vtwo3.png`} id='main' />
+                            default: return <MainImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/cute1.png`} id='main' />
+                        }
+                    })()}
+
+
                     <SmallImgContainer>
                         <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/cute2.png`} onClick={change_photo} id='hel' />
                         <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/cute3.png`} />
                         <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/cute1.png`} />
                     </SmallImgContainer>
+
                 </ImgContainer>
                 <InfoContainer>
                     <Title>{item.item_name}</Title>
@@ -376,7 +399,7 @@ const Product = () => {
                             <FilterTitle>Color</FilterTitle>
                             <DivF>
                                 <div>
-                                    <FilterColor onChange={(e) => setColor(e.target.value)}>
+                                    <FilterColor onChange={colorFunction}>
                                         {uniqueColors.map((unit) => (
                                             <FilterColorOption key={unit.id} value={unit.colour_name}>{unit.colour_name}</FilterColorOption>
                                         ))}
@@ -452,7 +475,7 @@ const Product = () => {
                     {/* <h1>{items}</h1> */}
                 </ImgContainer>
             </Wrapper>
-            <Newsletter />
+            {/* <Newsletter /> */}
             <Footer />
             <CheckColor open={checkColor} close={() => setCheckColor(false)} />
             <CheckSize open={checkSize} close={() => setCheckSize(false)} />

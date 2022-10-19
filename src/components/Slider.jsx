@@ -8,7 +8,7 @@ import {mobile} from "../responsive";
 
 const Container = styled.div`
     width: 100%;
-    height: 100vh;
+    height: 70vh;
     display:flex;
     position: relative;
     overflow: hidden;
@@ -20,7 +20,7 @@ const Container = styled.div`
 `
 
 const Wrapper = styled.div`
-    height: 100%;
+    height: 70vh;
     display: flex;
     transition: all 1.5s ease;
     transform: translateX(${props=> props.slideIndex * -100}vw);
@@ -46,14 +46,14 @@ const Arrow = styled.div`
 `
 const Slide = styled.div`
     width: 100vw;
-    height: 100vh;
+    height: 70vh;
     display: flex;
     align-items: center;
     background-color: #${props=>props.bgc};
 `;
 
 const ImgContainer = styled.div`
-    height: 100%;
+    height: 70vh;
     width: 100vw;
     flex: 1;
     position: absolute;
@@ -70,27 +70,29 @@ const InfoContainer = styled.div`
 
 const Title = styled.h1`
     font-size: 50px;
-
+    color: #00b7ff;
 `;
 
 const Description = styled.p`
-    margin: 30px 0px;
-    font-size: 20px;
-    font-weight: 500;
+    font-size: 17px;
+    color: #616161;
     letter-spacing: 3px;
 `;
 
 const Button = styled.button`
     padding: 7px;
     font-size: 20px;
-    background-color: transparent;
+    background-color: #00b7ff;
     cursor: pointer;
-    border-radius: 10%;
+    border-radius: 5px;
+    border:none;
+    color: #ffffff;
+    box-shadow: 2px 1px 2px #777777;
 `;
 
 const Image = styled.img`
-width: 100vw;
-object-fit: cover;
+    width: 100vw;
+    object-fit: cover;
 
 `;
 
@@ -112,14 +114,14 @@ const Slider = () => {
         <Wrapper slideIndex={slideIndex}>
             {sliderItems.map((item)=>(
                 <Slide bgc={item.bg} key={item.id}>
-                <ImgContainer>
-                    <Image src={item.img}/>
-                </ImgContainer>
-                <InfoContainer>
-                    <Title>{item.title}</Title>
-                    <Description>{item.desc}</Description>
-                    <Button>Shop Now</Button>
-                </InfoContainer>
+                    <ImgContainer>
+                        <Image src={item.img}/>
+                    </ImgContainer>
+                    <InfoContainer>
+                        <Title>{item.title}</Title>
+                        <Description>{item.desc}</Description>
+                        <Button>Shop Now</Button>
+                    </InfoContainer>
                 </Slide>    
             ))}
             
