@@ -30,11 +30,7 @@ const Categories = () => {
   useEffect(()=>{
     const getCategories = async () =>{
       try{
-        const res = await axios.get("http://medicalworldinvpos.kwintechnologykw09.com/api/category_api",{
-          headers: {
-            'Access-Control-Allow-Origin' : '*',
-          }
-        });
+        const res = await axios.get("http://familyuniformapp.medicalworld.com.mm/api/category_api");
         console.log(res.data);
         setCategories(res.data);
         

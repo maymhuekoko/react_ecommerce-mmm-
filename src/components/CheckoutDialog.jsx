@@ -65,7 +65,7 @@ export default function CheckoutDialog(props) {
   useEffect(()=>{
     const getTownships = async () =>{
       try{
-        const res = await axios.get("http://medicalworldinvpos.kwintechnologykw09.com/api/township",{
+        const res = await axios.get("http://familyuniformapp.medicalworld.com.mm/api/township",{
           headers: {
             'Access-Control-Allow-Origin' : '*',
           }
@@ -88,7 +88,7 @@ export default function CheckoutDialog(props) {
   
   const onTownshipChanged = (e) => {
     setTownship(e.target.value);
-    const res = axios.get('http://medicalworldinvpos.kwintechnologykw09.com/api/township_charges/'+e.target.value).then(function(response){
+    const res = axios.get('http://familyuniformapp.medicalworld.com.mm/api/township_charges/'+e.target.value).then(function(response){
           console.log(response.data);
             setCharges(response.data.charges);
         }).catch(function(error){
@@ -101,7 +101,7 @@ export default function CheckoutDialog(props) {
   const onRemarkChanged = (e) => setRemark(e.target.value);
   const orderSave = () =>{ 
     // alert(paymentchannel);
-    const res = axios.post('http://medicalworldinvpos.kwintechnologykw09.com/api/ecommerce_order_store',{
+    const res = axios.post('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_store',{
             name: username.name,
             phone: username.phone,
             address: username.address,
@@ -147,20 +147,20 @@ export default function CheckoutDialog(props) {
             <Input type="text" id="charges" name="charges" placeholder="charges" value={charges} onChange={onChargesChanged}/>     
             <Filter>
                 <FilterTitle>Payment Type</FilterTitle>
-                <FilterSelect onChange={onPaymentTypeChanged}>
+                <FilterSelect value={paymenttype} onChange={onPaymentTypeChanged}>
                     <FilterOption>Select Payment Type</FilterOption>
-                    <FilterOption value={1}>COD</FilterOption>
-                    <FilterOption value={2}>Prepaid Partial</FilterOption>
-                    <FilterOption value={3}>Prepaid Full</FilterOption>
+                    <FilterOption value='1'>COD</FilterOption>
+                    <FilterOption value='2'>Prepaid Partial</FilterOption>
+                    <FilterOption value='3'>Prepaid Full</FilterOption>
                 </FilterSelect>
             </Filter>
             <Filter>
                 <FilterTitle>Payment Channel</FilterTitle>
-                <FilterSelect onChange={onPaymentChannelChanged}>
+                <FilterSelect value={paymentchannel} onChange={onPaymentChannelChanged}>
                     <FilterOption>Select Payment Channel</FilterOption>
-                    <FilterOption value={1}>Cash</FilterOption>
-                    <FilterOption value={2}>Mobile Banking</FilterOption>
-                    <FilterOption value={3}>Internet Banking</FilterOption>
+                    <FilterOption value='1'>Cash</FilterOption>
+                    <FilterOption value='2'>Mobile Banking</FilterOption>
+                    <FilterOption value='3'>Internet Banking</FilterOption>
                 </FilterSelect>
             </Filter>
             <Input type="text" id="remark" name="remark" placeholder="remark" onChange={onRemarkChanged}/> 

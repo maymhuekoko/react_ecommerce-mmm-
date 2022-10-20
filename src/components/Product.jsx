@@ -106,12 +106,12 @@ const SmallImage = styled.img`
 
 const Product = ({item}) => {
     const { getCollapseProps, getToggleProps } = useCollapse();
-    const [items,setItems] =  useState([]);
+    const [items,setItems] =  useState([{}]);
     
     const collapse = () =>{
         // alert('hello');
         const obj = {'category_id':item.category_id,'subcategory_id':item.id}
-        axios.post('http://medicalworldinvpos.kwintechnologykw09.com/api/productlineitems_api',obj)
+        axios.post('http://familyuniformapp.medicalworld.com.mm/api/productlineitems_api',obj)
         .then(res=>{
             
             setItems(res.data);
@@ -121,12 +121,12 @@ const Product = ({item}) => {
         })
     };
 
-  return (
+return (
     
     <div className="collapsible" onClick={collapse}>
         <Container className="header" {...getToggleProps()}>
         <Circle/>
-        <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/product_lines/${item.photo_path}`} />
+        <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/product_lines/${item.photo_path}`} />
         <Info>
             
             <Icon>
@@ -155,7 +155,7 @@ const Product = ({item}) => {
             <SmallImgContainer className="content">
 
             {items.slice(0,6).map((it)=> (
-            <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/${it.photo_path}`} key={it.id}/>
+            <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/${it.photo_path}`} key={it.id}/>
             ))} 
     
             </SmallImgContainer>

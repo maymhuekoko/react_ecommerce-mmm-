@@ -34,8 +34,7 @@ const WrapperOne = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: rgba(2,127,157,1);
-
+    background-color: #00b7ff;
     ${mobile({padding: "10px 0px"})}
 `
 
@@ -188,7 +187,11 @@ const ColorNav = () => {
                 <Link to="/about-us" style={link1}>
                 <MenuItem>AboutUs</MenuItem>
                 </Link>
-               
+                {isUser ? (
+                <Link to="/order_list" style={link}>
+                <MenuItem style={{color: '#ffffff'}}>Order List</MenuItem>
+                </Link>
+                ):('')}
                 {isUser ? (' '):(
                 <Link to="/register" style={link1}>
                 <MenuItem>Register</MenuItem>
