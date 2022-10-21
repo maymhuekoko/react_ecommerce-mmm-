@@ -306,14 +306,13 @@ const Product = () => {
                         }).catch(err => {
                             console.log(err);
                         })
-                    })
-                .catch((error) => console.log(error));
+                    }).catch((error) => console.log(error));
         }
         getProduct();
     }, [id]);
 
     useEffect(() => {
-        console.log("user changed specs");
+        // customer change specification
         units.map((unit) => {
             if (unit.size_name == size && unit.colour_name == color && unit.fabric_name == fabric) {
                 setPrice(unit.order_price);
