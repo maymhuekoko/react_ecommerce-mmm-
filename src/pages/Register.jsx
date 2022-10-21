@@ -74,7 +74,7 @@ const Register = () => {
     const onPasswordChanged = (e) => setPassword(e.target.value);
 
     const onRegisterClicked =() => {  
-        const res = axios.post('http://familyuniformapp.medicalworld.com.mm/api/website_user_store',{
+        const res = axios.post('http://medicalworldinvpos.kwintechnologykw09.com/api/website_user_store',{
             name: name,
             phone: phone,
             address: address,
