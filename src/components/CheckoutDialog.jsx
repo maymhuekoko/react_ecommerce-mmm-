@@ -76,9 +76,9 @@ export default function CheckoutDialog(props) {
       }catch(err){}
     };
     getTownships();
-  });
+  },[]);
 
-  const username = useSelector(state=>state.user);
+  const username = useSelector(state=>state.user);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
   // console.log(username.name);
   const cart = useSelector(state=>state.cart);
   const dispatch = useDispatch();
@@ -101,7 +101,7 @@ export default function CheckoutDialog(props) {
   const onRemarkChanged = (e) => setRemark(e.target.value);
   const orderSave = () =>{ 
     // alert(paymentchannel);
-    const res = axios.post('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_store',{
+    const res = axios.post('http://medicalworldinvpos.kwintechnologykw09.com/api/ecommerce_order_store',{
             name: username.name,
             phone: username.phone,
             address: username.address,
@@ -115,16 +115,18 @@ export default function CheckoutDialog(props) {
             amount: cart.total,
         }).then(function(response){
             alert('success store');
+            document.getElementById('checkout').style.visibility = "hidden";
+            dispatch(resetProduct());
         }).catch(function(error){
             alert('fail store');
         })
-        dispatch(resetProduct());
+        
   }
 
   return (
     <div>
       
-      <Dialog open={props.open} onClose={props.close}>
+      <Dialog open={props.open} onClose={props.close} id="checkout">
         <DialogTitle><b>Delivery and Payment Information</b></DialogTitle>
         <DialogContent>
           <DialogContentText>

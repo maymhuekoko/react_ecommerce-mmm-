@@ -334,13 +334,13 @@ const Product = () => {
         }
     }
 
-    const [butText, setButText] = useState('Add Cart');
+
     const [butBackColor, setBututBackColor] = useState('white');
     const [butColor, setBututColor] = useState('teal');
 
     const handleClick = () => {
         dispatch(addProduct({ unitid, unitname, unitcode, unitimg, color, size, fabric, quantity, price }));
-        setButText('Success');
+        // setButText('Success');
         setBututBackColor('teal');
         setBututColor('white');
     }
@@ -450,7 +450,7 @@ const Product = () => {
                             <Amount>{quantity}</Amount>
                             <Add onClick={() => handleQuantity("inc")} />
                         </AmountContainer>
-                        <Button id='succ' onClick={handleClick} style={{ backgroundColor: butBackColor, color: butColor }}>{butText}</Button>
+                        <Button id='succ' onClick={handleClick} style={{ backgroundColor: butBackColor, color: butColor }}>Add to Cart</Button>
                     </AddContainer>
 
                     <AddContainer>
