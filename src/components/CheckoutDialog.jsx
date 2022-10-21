@@ -40,7 +40,7 @@ const FilterTitle = styled.span`
     font-weight: 200;
     margin-bottom: 3px;
 `
-
+// hello world
 
 const FilterSelect = styled.select`
     
@@ -78,8 +78,10 @@ export default function CheckoutDialog(props) {
     getTownships();
   },[]);
 
-  const username = useSelector(state=>state.user);                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   
-  // console.log(username.name);
+
+  const username = useSelector(state=>state.user);
+  console.log(username.name);
+
   const cart = useSelector(state=>state.cart);
   const dispatch = useDispatch();
   // console.log(cart);
@@ -176,3 +178,4 @@ export default function CheckoutDialog(props) {
     </div>
   );
 }
+// phyo

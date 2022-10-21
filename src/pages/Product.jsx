@@ -288,13 +288,16 @@ const Product = () => {
 // familyuniformapp.medicalworld.com.mm
     useEffect(() => {
         const getProduct = () => {
-            const res = axios.get("http://familyuniformapp.medicalworld.com.mm/api/unitbyid_api/" + id)
+            axios.get("http://familyuniformapp.medicalworld.com.mm/api/unitbyid_api/" + id)
                 .then((response) => {
                     setItem(response.data.item);
 
                     setUnits(response.data.counting_units);
 
-                    const obj = { 'category_id': response.data.item.category_id, 'subcategory_id': response.data.item.sub_category_id }
+                    const obj = { 
+                        'category_id': response.data.item.category_id, 
+                        'subcategory_id': response.data.item.sub_category_id 
+                    }
 
                     axios.post('http://familyuniformapp.medicalworld.com.mm/api/productlineitems_api', obj)
                         .then(res => {
@@ -303,15 +306,13 @@ const Product = () => {
                         }).catch(err => {
                             console.log(err);
                         })
-                    // console.log('hello')
-                })
-                .catch((error) => console.log(error));
+                    }).catch((error) => console.log(error));
         }
         getProduct();
     }, [id]);
 
     useEffect(() => {
-        console.log("user changed specs");
+        // customer change specification
         units.map((unit) => {
             if (unit.size_name == size && unit.colour_name == color && unit.fabric_name == fabric) {
                 setPrice(unit.order_price);
@@ -321,7 +322,6 @@ const Product = () => {
                 setUnitCode(unit.unit_code);
                 return 1;
             }
-
         })
     }, [color, fabric, size]);
 
@@ -338,13 +338,18 @@ const Product = () => {
     const [butBackColor, setBututBackColor] = useState('white');
     const [butColor, setBututColor] = useState('teal');
 
-    const handleClick = () => {
-        dispatch(addProduct({ unitid, unitname, unitcode, unitimg, color, size, fabric, quantity, price }));
-        // setButText('Success');
-        setBututBackColor('teal');
-        setBututColor('white');
-    }
+    const [isClickCart, setisClickCart] = useState(false);
 
+    const handleClick = () => {
+
+        dispatch(addProduct({ unitid, unitname, unitcode, unitimg, color, size, fabric, quantity, price }));
+
+        document.getElementById("success").innerHTML = 'Success';
+
+        setBututBackColor('#027f9d');
+        setBututColor('white');
+        
+    }
 
     const change_photo = () => {
         const hel = document.getElementById('hel').src;
@@ -364,23 +369,25 @@ const Product = () => {
             <Wrapper style={{ marginTop: '100px' }}>
                 <ImgContainer>
 
-                    {/* <MainImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/cute1.png`} id='main' /> */}
-                    
+                    {/* <MainImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/${item.photo_path}`} id='main' /> */}
+
+
                     {(() => {
                         switch(mainImg) {
+                            //Procedual switch statement
                             case 'ar1': return <MainImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/cute1.png`} id='main' />
                             case 'ar2': return <MainImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/vtwo1.png`} id='main' />
                             case 'ar3': return <MainImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/product_lines/gown.png`} id='main' />
                             case 'ar4': return <MainImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/vtwo3.png`} id='main' />
-                            default: return <MainImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/cute1.png`} id='main' />
+                            default: return <MainImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/${item.photo_path}`} id='main' />
                         }
                     })()}
 
 
                     <SmallImgContainer>
                         <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/cute2.png`} onClick={change_photo} id='hel' />
-                        <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/cute3.png`} />
-                        <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/cute1.png`} />
+                        <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/cute3.png`} onClick={change_photo} id='hel'  />
+                        <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/cute1.png`} onClick={change_photo} id='hel'  />
                     </SmallImgContainer>
 
                 </ImgContainer>
@@ -443,7 +450,6 @@ const Product = () => {
                         </Filter>
                     </FilterContainer>
 
-
                     <AddContainer>
                         <AmountContainer>
                             <Remove onClick={() => handleQuantity("dec")} />
@@ -456,6 +462,11 @@ const Product = () => {
                     <AddContainer>
                         <DownloadPdf href={sample} download>Download File</DownloadPdf>
                     </AddContainer>
+
+                    <AddContainer>
+                        <p id="success" className='mx-3'></p>
+                    </AddContainer>
+
 
                 </InfoContainer>
             </Wrapper>
