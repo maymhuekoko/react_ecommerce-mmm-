@@ -334,7 +334,6 @@ const Product = () => {
         }
     }
 
-
     const [butBackColor, setBututBackColor] = useState('white');
     const [butColor, setBututColor] = useState('teal');
 
