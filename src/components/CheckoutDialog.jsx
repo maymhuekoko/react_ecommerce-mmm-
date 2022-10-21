@@ -40,7 +40,7 @@ const FilterTitle = styled.span`
     font-weight: 200;
     margin-bottom: 3px;
 `
-
+// hello world
 
 const FilterSelect = styled.select`
     
@@ -79,7 +79,7 @@ export default function CheckoutDialog(props) {
   });
 
   const username = useSelector(state=>state.user);
-  // console.log(username.name);
+  console.log(username.name);
   const cart = useSelector(state=>state.cart);
   const dispatch = useDispatch();
   // console.log(cart);
