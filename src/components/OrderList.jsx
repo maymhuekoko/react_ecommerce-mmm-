@@ -10,7 +10,7 @@ import ColorNav from './ColorNav';
 import Footer from './Footer';
 
 const Div = styled.div`
-    margin-top: 65px;
+margin-top:70px;
 `
 const Wrapper = styled.div`
     widtr: 100vw;
@@ -25,8 +25,8 @@ const Wrapper = styled.div`
     ${mobile({padding: '50'})}
 `
 const Title = styled.h1`
-    font-size: 50px;
-    margin-bottom: 20px;
+    font-size: 35px;
+    margin-bottom: 30px;
     text-align: center;
 `
 const Description = styled.div`
@@ -91,7 +91,7 @@ const OrderList = () => {
     },[]);
 
     const fetchOrderList = () => {
-        axios.get('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_index')
+        axios.get('https://medicalworldinvpos.kwintechnologykw09.com/api/ecommerce_order_index')
         .then(res=>{
             console.log(res.data);
             setOrders(res.data);
@@ -106,8 +106,7 @@ const OrderList = () => {
             </div>
         <Div>
             <Wrapper>
-            <Title>Order List</Title>
-            <Description>This is where your order list shown</Description>
+            <Title>Your Order List</Title>
             <Table>
                 <Tr>
                     <Th>No</Th>

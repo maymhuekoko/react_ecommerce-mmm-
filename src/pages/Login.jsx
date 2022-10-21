@@ -115,6 +115,7 @@ const Login = () => {
                     setSuccessmsg(true);
 
                     dispatch(setUserInfo({
+                        // id : response.data.id,
                         name : response.data.user.name,
                         phone : response.data.user.phone,
                         address : response.data.user.address,
