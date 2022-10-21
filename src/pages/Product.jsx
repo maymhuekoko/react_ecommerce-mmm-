@@ -374,19 +374,19 @@ const Product = () => {
                     {(() => {
                         switch(mainImg) {
                             //Procedual switch statement
-                            case 'ar1': return <MainImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/cute1.png`} id='main' />
-                            case 'ar2': return <MainImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/vtwo1.png`} id='main' />
-                            case 'ar3': return <MainImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/product_lines/gown.png`} id='main' />
-                            case 'ar4': return <MainImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/vtwo3.png`} id='main' />
+                            case 'ar1': return <MainImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/family_cute_front.png`} id='main' />
+                            case 'ar2': return <MainImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/family_cute_front.png`} id='main' />
+                            case 'ar3': return <MainImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/family_cute_front.png`} id='main' />
+                            case 'ar4': return <MainImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items//family_cute_front.png`} id='main' />
                             default: return <MainImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/${item.photo_path}`} id='main' />
                         }
                     })()}
 
 
                     <SmallImgContainer>
-                        <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/cute2.png`} onClick={change_photo} id='hel' />
-                        <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/cute3.png`} onClick={change_photo} id='hel'  />
-                        <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/cute1.png`} onClick={change_photo} id='hel'  />
+                        <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/family_cute_left.png`} onClick={change_photo} id='hel' />
+                        <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/family_cute_right.png`} onClick={change_photo} id='hel'  />
+                        <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/family_cute_front.png`} onClick={change_photo} id='hel'  />
                     </SmallImgContainer>
 
                 </ImgContainer>
