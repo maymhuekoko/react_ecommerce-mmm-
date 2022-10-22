@@ -16,7 +16,7 @@ import { prettyDOM } from '@testing-library/react'
 import CheckColor from '../components/CheckColor'
 import CheckSize from '../components/CheckSize'
 import CheckFabric from '../components/CheckFabric'
-import sample from '../pdf/sample.pdf'
+import sample from '../pdf/sample1.pdf'
 
 const Container = styled.div``
 const Wrapper = styled.div`
@@ -411,9 +411,9 @@ const Product = () => {
                                         ))}
                                     </FilterColor>
                                 </div>
-                                <div>
+                                {/* <div>
                                     <Check onClick={cheColor} style={{ display: 'inline-block' }}>Check</Check>
-                                </div>
+                                </div> */}
                             </DivF>
 
                         </Filter>
@@ -442,9 +442,9 @@ const Product = () => {
                                         ))}
                                     </FilterFabric>
                                 </div>
-                                <div>
+                                {/* <div>
                                     <Check onClick={cheFabric} style={{ display: 'inline-block' }}>Check</Check>
-                                </div>
+                                </div> */}
                             </DivF>
                         </Filter>
                     </FilterContainer>
@@ -459,7 +459,7 @@ const Product = () => {
                     </AddContainer>
 
                     <AddContainer>
-                        <DownloadPdf href={sample} download>Download File</DownloadPdf>
+                        <DownloadPdf href={sample} download>Download Catalog</DownloadPdf>
                     </AddContainer>
 
                     <AddContainer>
@@ -487,9 +487,9 @@ const Product = () => {
             </Wrapper>
             {/* <Newsletter /> */}
             <Footer />
-            <CheckColor open={checkColor} close={() => setCheckColor(false)} />
+            {/* <CheckColor open={checkColor} close={() => setCheckColor(false)} /> */}
             <CheckSize open={checkSize} close={() => setCheckSize(false)} />
-            <CheckFabric open={checkFabric} close={() => setCheckFabric(false)} />
+            {/* <CheckFabric open={checkFabric} close={() => setCheckFabric(false)} /> */}
         </Container>
     )
 }
