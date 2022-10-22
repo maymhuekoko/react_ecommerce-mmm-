@@ -7,6 +7,7 @@ const userSlice = createSlice({
         currentUser: null,
         isFetching: false,
         error: false,
+        id:'',
         name: '',
         phone: '',
         address: '',
@@ -25,11 +26,13 @@ const userSlice = createSlice({
             state.error = true;
         },
         setUserInfo: (state,action) => {
+            state.id = action.payload.id;
             state.name = action.payload.name;
             state.phone = action.payload.phone;
             state.address = action.payload.address;
         },
         LogoutProcess: (state) => {
+            state.id = '';
             state.name = '';
             state.phone = '';
             state.address = '';

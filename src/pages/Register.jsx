@@ -7,6 +7,8 @@ import {mobile} from "../responsive"
 import { useDispatch,useSelector } from 'react-redux'
 import { setUserInfo } from "../redux/userRedux"
 import Navbar from '../components/Navbar'
+import ColorNav from '../components/ColorNav'
+import Footer from '../components/Footer'
 
 const Container = styled.div`
     width: 100vw;
@@ -74,7 +76,7 @@ const Register = () => {
     const onPasswordChanged = (e) => setPassword(e.target.value);
 
     const onRegisterClicked =() => {  
-        const res = axios.post('http://familyuniformapp.medicalworld.com.mm/api/website_user_store',{
+        const res = axios.post('https://medicalworldinvpos.kwintechnologykw09.com/api/website_user_store',{
             name: name,
             phone: phone,
             address: address,
@@ -91,6 +93,8 @@ const Register = () => {
     }
 
   return (
+    <div>
+    <ColorNav/>
     <Container>
         <Wrapper>
         <Title>CREATE AN ACCOUNT</Title>
@@ -111,6 +115,8 @@ const Register = () => {
         </Wrapper>
        <AlertDialog open={showDialog} close={()=>setShowDialog(false)} title="User Registration" content="Your user account has been successfully registered! Enjoy Shoppping!"/>
     </Container>
+    <Footer/>
+    </div>
   )
 }
 
