@@ -35,8 +35,6 @@ const Select = styled.select`
 `
 const Option = styled.option``
 
-
-
 const ProductList = () => {
 
   const location = useLocation();
@@ -46,6 +44,7 @@ const ProductList = () => {
   const [sort,setSort] = useState("newest");
 
   const handleFilters = (e) => {
+    setFilters(()=>e.target.value)
     const value = e.target.value;
     setFilters({
       ...filters,
@@ -58,12 +57,15 @@ const ProductList = () => {
 
   return (
     <Container>
+
       <ColorNav/>
       {/* <Slider/> */}
+
       <Title>Product Line</Title>
       <FilterContainer>
         <Filter>
           <FilterText>Filter Products: </FilterText>
+
           <Select name="color" onChange={handleFilters}>
               <Option disabled>Type</Option>
               <Option>Scrubs</Option>
@@ -71,13 +73,25 @@ const ProductList = () => {
               {/* <Option>Pant 2</Option> */}
           </Select>
 
-          <Select name="size" onChange={handleFilters}>
-              <Option disabled>Gender</Option>
-              <Option>Male</Option>
-              <Option>Female</Option>
+          <Select name="part" onChange={handleFilters}>
+              <Option hidden>Selete</Option>
+              <Option value="male">Male</Option>
+              <Option value="female">Female</Option>
+              {/* <Option  value="pants">Pants</Option> */}
           </Select>
 
-          {/* <Select name="size" onChange={handleFilters}>
+          {/* <Select name="color" onChange={handleFilters}>
+              <Option disabled>Pant</Option>
+              <Option>Normal</Option>
+              <Option>black</Option>
+              <Option>red</Option>
+              <Option>blue</Option>
+              <Option>yellow</Option>
+              <Option>gray</Option>
+
+          </Select>
+
+          <Select name="size" onChange={handleFilters}>
               <Option disabled>Size</Option>
               <Option>XS</Option>
               <Option>S</Option>
@@ -90,9 +104,7 @@ const ProductList = () => {
         <Filter>
           <FilterText>Sort Porducts: </FilterText>
           <Select onChange={e=>setSort(e.target.value)}>
-              <Option value="newest">
-                Newest
-              </Option>
+              <Option value="newest">Newest</Option>
               <Option value="asc">Price (asc)</Option>
               <Option value="desc">Price (desc)</Option>
           </Select>

@@ -173,7 +173,7 @@ const Cart = () => {
 
     const onCheckOutClicked =() => {
         setShowDialog(true);
-       
+
     }
 
     const handleQuantityInc = (id) =>{   
@@ -244,7 +244,7 @@ const Cart = () => {
                     {cart.products.map((product)=>(
                         <Product>
                         <ProductDetail>
-                            <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/cute2.png`}/>
+                            <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/family_cute_front.png`}/>
                             <Details>
                                 <ProductName><b>Product: </b> {product.unitname}</ProductName>
                                 <ProductId><b>ID: </b> {product.unitcode}</ProductId>

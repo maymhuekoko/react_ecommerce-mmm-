@@ -76,15 +76,24 @@ const Register = () => {
     const onPasswordChanged = (e) => setPassword(e.target.value);
 
     const onRegisterClicked =() => {  
+
         const res = axios.post('https://medicalworldinvpos.kwintechnologykw09.com/api/website_user_store',{
+
             name: name,
             phone: phone,
             address: address,
             username: username,
             password: password
         }).then(function(response){
+            alert(response.data.id)
             setShowDialog(true);
-            dispatch(setUserInfo(name,phone,email,address));
+            // dispatch(setUserInfo(response.data.id,name,phone,email,address));
+            dispatch(setUserInfo({
+                id : response.data.id,
+                name : name,
+                phone : phone,
+                address : address,
+            })) 
             navigate('/');
         }).catch(function(error){
             console.log(error);

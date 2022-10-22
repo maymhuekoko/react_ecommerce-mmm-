@@ -14,14 +14,15 @@ display: flex;
 
 const Products = ({cat,filters,sort}) => {
   console.log(cat,filters,sort);
+
   const [products,setProducts] =  useState([]);
   const [filteredProducts,setFilteredProducts] = useState([]);
 
   useEffect(()=>{
     const getProducts = async () =>{
       try{
-        const res = await axios.get(cat ? `http://familyuniformapp.medicalworld.com.mm/api/subcategory_api/${cat}` : "http://localhost:5000/api/subcategory_api");
-        console.log(res.data);
+        const res = await axios.get(cat ? `http://medicalworldinvpos.kwintechnologykw09.com/api/subcategory_api/${cat}` : "http://localhost:5000/api/subcategory_api");
+        // console.log(res.data);
         setProducts(res.data);
         
       }catch(err){}
@@ -59,9 +60,11 @@ const Products = ({cat,filters,sort}) => {
         )) : products.slice(0,4).map((item)=>(
           <Product item={item} key={item.id}/>
       ))} */}
-      {products.slice(0,5).map((item)=> (
-        <Product item={item} key={item.id}/>
-      ))}
+      {
+      products.slice(0,6).map((item)=> (
+        <Product filter={filters.part} item={item} key={item.id}/>
+      ))
+      }
     </Container>
   )
 }
