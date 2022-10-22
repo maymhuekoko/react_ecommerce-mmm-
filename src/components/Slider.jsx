@@ -132,14 +132,14 @@ const Slider = () => {
                 <Button>Shop Now</Button>
             </InfoContainer>
             <ImgContainer>
-                <Image src="http://familyuniformapp.medicalworld.com.mm/files/attachments/slider_photo2.jpg"/>
+                <Image src="http://medicalworldinvpos.kwintechnologykw09.com/files/attachments/slider_photo2.jpg"/>
             </ImgContainer>
             
             </Slide>
 
             <Slide bgc="fbf0f4">
             <ImgContainer>
-                <Image src="http://familyuniformapp.medicalworld.com.mm/files/attachments/slider_photo3.jpg"/>
+                <Image src="http://medicalworldinvpos.kwintechnologykw09.com/files/attachments/slider_photo3.jpg"/>
             </ImgContainer>
             <InfoContainer>
                 <Title>Surgeon Gowns</Title>

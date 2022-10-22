@@ -1,6 +1,6 @@
 import { FavoriteBorderOutlined, SearchOutlined, ShoppingCartOutlined } from '@mui/icons-material'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import React,{ useEffect, useState }  from 'react'
+import React, { useEffect, useState } from 'react'
 import useCollapse from 'react-collapsed';
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
@@ -104,72 +104,61 @@ const SmallImage = styled.img`
 
 `
 
-const Product = ({item}) => {
+const Product = ({ item }, props) => {
+
     const { getCollapseProps, getToggleProps } = useCollapse();
-    const [items,setItems] =  useState([{}]);
-    
-    const collapse = () =>{
-        // alert('hello');
-        const obj = {'category_id':item.category_id,'subcategory_id':item.id}
-        axios.post('http://familyuniformapp.medicalworld.com.mm/api/productlineitems_api',obj)
-        .then(res=>{
-            
-            setItems(res.data);
-            console.log(res.data[0]);
-        }).catch(err=>{
-            console.log(err);
-        })
+    const [items, setItems] = useState([{}]);
+
+    const collapse = () => {
+        const obj = { 'category_id': item.category_id, 'subcategory_id': item.id }
+        axios.post('http://medicalworldinvpos.kwintechnologykw09.com/api/productlineitems_api', obj)
+            .then(res => {
+
+                setItems(res.data);
+                console.log(res.data[0]);
+            }).catch(err => {
+                console.log(err);
+            })
     };
 
-return (
-    
-    <div className="collapsible" onClick={collapse}>
-        <Container className="header" {...getToggleProps()}>
-        <Circle/>
-        <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/product_lines/${item.photo_path}`} />
-        <Info>
-            
-            <Icon>
-               <ShoppingCartOutlined/>          
-            </Icon>
+    return (
 
-            <Icon>
-                <Link to={`/product/${item.id}`}>
-                    <SearchOutlined/>
-                </Link>
-                
-            </Icon>
+        <div className="collapsible" onClick={collapse}>
 
-            <Icon>
-                <FavoriteBorderOutlined/>
+            <Container className="header" {...getToggleProps()}>
+                <Circle />
+                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/product_lines/${item.photo_path}`} />
+                <Info>
+                    <Icon><ShoppingCartOutlined /></Icon>
+                    <Icon><Link to={`/product/${item.id}`}><SearchOutlined /></Link></Icon>
+                    <Icon><FavoriteBorderOutlined /></Icon>
+                </Info>
+                <ProductLineTitle >{item.name}</ProductLineTitle>
+                <Button>SHOP NOW</Button>
+            </Container>
 
-            </Icon>
-            
-        </Info>
-        <ProductLineTitle >{item.name}</ProductLineTitle>
-        
-        <Button>SHOP NOW</Button>
-        </Container>
-       
-        <ImgContainer {...getCollapseProps()}>
-            <SmallImgContainer className="content">
+            <ImgContainer {...getCollapseProps()}>
+                <SmallImgContainer className="content">
 
-            {items.slice(0,6).map((it)=> (
-            <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/${it.photo_path}`} key={it.id}/>
-            ))} 
-    
-            </SmallImgContainer>
-           
-               {/* <h1>{items}</h1> */}
-        </ImgContainer>
-        
-       
+                    {/* {items.slice(0, 6).map((it) => (
+                        <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/${it.photo_path}`} key={it.id} />
+                    ))} */}
 
-        
-    </div>
-    
-    
-  )
+                    <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/product_lines/gown.png`} />
+                    <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/product_lines/doctor_coat.png`} />
+                    <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/product_lines/gown.png`} />
+                    <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/product_lines/medical_scrub.png`} />
+                    <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/product_lines/nurse_uniform.png`} />
+                    <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/product_lines/pants.png`} />
+
+
+                </SmallImgContainer>
+
+                {/* <h1>{items}</h1> */}
+            </ImgContainer>
+        </div>
+
+    )
 }
 
 export default Product

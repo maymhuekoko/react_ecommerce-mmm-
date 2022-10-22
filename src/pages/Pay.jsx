@@ -42,7 +42,7 @@ const Pay = () => {
     >
         <StripeCheckout
             name="kwintech"
-            image="http://familyuniformapp.medicalworld.com.mm/files/attachments/medical_world_logo.jpg"
+            image="http://medicalworldinvpos.kwintechnologykw09.com/files/attachments/medical_world_logo.jpg"
             billingAddress
             shippingAddress
             description="Your total is @20"
