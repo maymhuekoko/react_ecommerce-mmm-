@@ -97,7 +97,8 @@ const Login = () => {
     const handleClick = (e) => {
         e.preventDefault();
     
-            const response = axios.post('http://medicalworldinvpos.kwintechnologykw09.com/api/Login',{
+            const response = axios.post('https://medicalworldinvpos.kwintechnologykw09.com/api/Login',{
+
                 username: username,
                 password: password
             }).then(function(response){
@@ -115,7 +116,7 @@ const Login = () => {
                     setSuccessmsg(true);
 
                     dispatch(setUserInfo({
-                        // id : response.data.id,
+                        id : response.data.user.id,
                         name : response.data.user.name,
                         phone : response.data.user.phone,
                         address : response.data.user.address,

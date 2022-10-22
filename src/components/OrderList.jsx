@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import {mobile} from "../responsive";
 import { Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
+import { useSelector} from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import ColorNav from './ColorNav';
@@ -86,6 +87,8 @@ const OrderList = () => {
 
     const [orders, setOrders] = useState([]);
 
+    const username = useSelector(state=>state.user);
+
     useEffect(() =>{
         fetchOrderList();
     },[]);
@@ -94,7 +97,11 @@ const OrderList = () => {
         axios.get('https://medicalworldinvpos.kwintechnologykw09.com/api/ecommerce_order_index')
         .then(res=>{
             console.log(res.data);
-            setOrders(res.data);
+
+            const filteredData = res.data.filter((data) => {
+                return data.customer_id == username.id
+            })
+            setOrders(filteredData);
         })
     }
 

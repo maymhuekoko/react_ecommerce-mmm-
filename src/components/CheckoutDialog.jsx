@@ -80,7 +80,7 @@ export default function CheckoutDialog(props) {
 
 
   const username = useSelector(state=>state.user);
-  console.log(username.name);
+  // console.log(username.name);
 
   const cart = useSelector(state=>state.cart);
   const dispatch = useDispatch();
@@ -104,6 +104,7 @@ export default function CheckoutDialog(props) {
   const orderSave = () =>{ 
     // alert(paymentchannel);
     const res = axios.post('http://medicalworldinvpos.kwintechnologykw09.com/api/ecommerce_order_store',{
+            id: username.id,
             name: username.name,
             phone: username.phone,
             address: username.address,

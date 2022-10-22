@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import { useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import Footer from '../components/Footer'
-import Navbar from '../components/Navbar'
+import ColorNav from '../components/ColorNav'
 import Slider from '../components/Slider'
 import Products from '../components/Products'
 import {mobile} from "../responsive"
@@ -10,6 +10,7 @@ import {mobile} from "../responsive"
 const Container = styled.div``
 const Title = styled.h1`
   margin: 20px;
+  margin-top: 80px;
 `
 const FilterContainer = styled.div`
   display: flex;
@@ -56,19 +57,27 @@ const ProductList = () => {
 
   return (
     <Container>
-      <Navbar/>
-      <Slider/>
-      {/* <Announcement/> */}
+
+      <ColorNav/>
+      {/* <Slider/> */}
+
       <Title>Product Line</Title>
       <FilterContainer>
         <Filter>
           <FilterText>Filter Products: </FilterText>
 
+          <Select name="color" onChange={handleFilters}>
+              <Option disabled>Type</Option>
+              <Option>Scrubs</Option>
+              <Option>Pants</Option>
+              {/* <Option>Pant 2</Option> */}
+          </Select>
+
           <Select name="part" onChange={handleFilters}>
               <Option hidden>Selete</Option>
               <Option value="male">Male</Option>
               <Option value="female">Female</Option>
-              <Option  value="pants">Pants</Option>
+              {/* <Option  value="pants">Pants</Option> */}
           </Select>
 
           {/* <Select name="color" onChange={handleFilters}>
@@ -79,6 +88,7 @@ const ProductList = () => {
               <Option>blue</Option>
               <Option>yellow</Option>
               <Option>gray</Option>
+
           </Select>
 
           <Select name="size" onChange={handleFilters}>

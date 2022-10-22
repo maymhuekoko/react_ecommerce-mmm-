@@ -7,6 +7,8 @@ import {mobile} from "../responsive"
 import { useDispatch,useSelector } from 'react-redux'
 import { setUserInfo } from "../redux/userRedux"
 import Navbar from '../components/Navbar'
+import ColorNav from '../components/ColorNav'
+import Footer from '../components/Footer'
 
 const Container = styled.div`
     width: 100vw;
@@ -74,15 +76,24 @@ const Register = () => {
     const onPasswordChanged = (e) => setPassword(e.target.value);
 
     const onRegisterClicked =() => {  
-        const res = axios.post('http://medicalworldinvpos.kwintechnologykw09.com/api/website_user_store',{
+
+        const res = axios.post('https://medicalworldinvpos.kwintechnologykw09.com/api/website_user_store',{
+
             name: name,
             phone: phone,
             address: address,
             username: username,
             password: password
         }).then(function(response){
+            alert(response.data.id)
             setShowDialog(true);
-            dispatch(setUserInfo(name,phone,email,address));
+            // dispatch(setUserInfo(response.data.id,name,phone,email,address));
+            dispatch(setUserInfo({
+                id : response.data.id,
+                name : name,
+                phone : phone,
+                address : address,
+            })) 
             navigate('/');
         }).catch(function(error){
             console.log(error);
@@ -91,6 +102,8 @@ const Register = () => {
     }
 
   return (
+    <div>
+    <ColorNav/>
     <Container>
         <Wrapper>
         <Title>CREATE AN ACCOUNT</Title>
@@ -111,6 +124,8 @@ const Register = () => {
         </Wrapper>
        <AlertDialog open={showDialog} close={()=>setShowDialog(false)} title="User Registration" content="Your user account has been successfully registered! Enjoy Shoppping!"/>
     </Container>
+    <Footer/>
+    </div>
   )
 }
 

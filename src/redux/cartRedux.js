@@ -24,6 +24,13 @@ const cartSlice = createSlice({
           state.total += action.payload.price * action.payload.quantity;
           state.products.push(action.payload);
         },
+        removeProduct: (state, action) => {
+            for (var i = 0; i < state.products.length; i++) {
+                if (state.products[i].unitid === action.payload.id) {
+                    state.products.splice(i, 1);
+                }
+            }
+        },
         addCheckOutInfo: (state,action) => {
             state.name = action.payload.name;
             state.phone = action.payload.phone;
@@ -40,5 +47,5 @@ const cartSlice = createSlice({
     }
 })
 
-export const{addProduct,addCheckOutInfo, resetProduct} = cartSlice.actions
+export const{addProduct,removeProduct,addCheckOutInfo, resetProduct} = cartSlice.actions
 export default cartSlice.reducer;
