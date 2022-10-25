@@ -222,13 +222,14 @@ const Product = () => {
     const [checkSize, setCheckSize] = useState(false);
     const [checkFabric, setCheckFabric] = useState(false);
     const dispatch = useDispatch();
-    
+   
     
     const cheColor = () => {
         setCheckColor(true);
     }
     const cheSize = () => {
         setCheckSize(true);
+        
     }
     const cheFabric = () => {
         setCheckFabric(true);
@@ -247,10 +248,10 @@ const Product = () => {
     const [quantity, setQuantity] = useState(1);
     const [color, setColor] = useState("ar1");
     const [fabric, setFabric] = useState("");
-    const [size, setSize] = useState("");
+    const [size, setSize] = useState("xxlf");
     const [price, setPrice] = useState(0);
     const [stock, setStock] = useState(0);
-    
+    const [design, setDesign] = useState('');
 
     const uniqueColor = [];
     const uniqueSize = [];
@@ -289,13 +290,15 @@ const Product = () => {
         }
         return false;
     })
+
+    
 // medicalworldinvpos.kwintechnologykw09.com
     useEffect(() => {
         const getProduct = () => {
             axios.get("http://medicalworldinvpos.kwintechnologykw09.com/api/unitbyid_api/" + id)
                 .then((response) => {
                     setItem(response.data.item);
-
+                    setDesign(response.data.item.item_name);
                     setUnits(response.data.counting_units);
 
                     const obj = { 
@@ -311,6 +314,7 @@ const Product = () => {
                             console.log(err);
                         })
                     }).catch((error) => console.log(error));
+                    
         }
         getProduct();
     }, [id]);
@@ -395,7 +399,7 @@ const Product = () => {
 
                 </ImgContainer>
                 <InfoContainer>
-                    <Title>{item.item_name}</Title>
+                    <Title id="item_name">{item.item_name}</Title>
                     <Desc>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus quod laudantium exercitationem ea voluptas laboriosam tenetur inventore illo non, consectetur ut eveniet enim, modi nihil expedita tempora odit dignissimos quibusdam.</Desc>
                     <RowContainer>
                         <PriceLabel>Price: </PriceLabel>
@@ -494,7 +498,7 @@ const Product = () => {
             {/* <Newsletter /> */}
             <Footer />
             <CheckColor name={color} open={checkColor} close={() => setCheckColor(false)}/>
-            <CheckSize open={checkSize} close={() => setCheckSize(false)} />
+            <CheckSize gender={size} type={design} open={checkSize} close={() => setCheckSize(false)} />
             {/* <CheckFabric open={checkFabric} close={() => setCheckFabric(false)} /> */}
         </Container>
     )
