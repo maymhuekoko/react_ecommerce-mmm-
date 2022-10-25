@@ -478,11 +478,12 @@ const Product = () => {
 
                         {relateditems.map((it) => (
                             <SmallImageOne src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/${it.photo_path}`} key={it.id} />
-                        ))}
-
+                            
+                        ))} 
+                       
                     </SmallImgContainerOne>
 
-                    {/* <h1>{items}</h1> */}
+                    <h1>hello</h1>
                 </ImgContainer>
             </Wrapper>
             {/* <Newsletter /> */}
