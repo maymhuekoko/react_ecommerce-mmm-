@@ -38,7 +38,7 @@ const HomeItems = ({ title, url }) => {
       } catch (err) { }
     };
     getItems();
-  });
+  },[]);
 
   return (
     <MainContainer>
