@@ -37,7 +37,7 @@ const Categories = () => {
       }catch(err){}
     };
     getCategories();
-  });
+  },[]);
 
   return (
     <MainContainer>

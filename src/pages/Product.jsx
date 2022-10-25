@@ -10,7 +10,8 @@ import Newsletter from '../components/Newsletter'
 import { publicRequest } from '../requestMethod'
 import { mobile } from "../responsive"
 import { addProduct } from "../redux/cartRedux"
-import { useDispatch } from 'react-redux'
+import { } from "../redux/designRedux"
+import { useSelector, useDispatch } from 'react-redux'
 import axios from 'axios'
 import { prettyDOM } from '@testing-library/react'
 import CheckColor from '../components/CheckColor'
@@ -55,7 +56,7 @@ const SmallImage = styled.img`
 `
 
 const SmallImageOne = styled.img`
-    width: 60%;
+    min-width: 350px;
     height: 50vh;
     object-fit: cover;
     ${mobile({ height: "50%" })}
@@ -214,12 +215,17 @@ const DownloadPdf = styled.a`
     border-radius: 3px;
     cursor: pointer;
 `
+const SmallImgName = styled.div`
+    font-size: 20px;'
+    color: #111111;
+`
 
 const Product = () => {
 
     const [checkColor, setCheckColor] = useState(false);
     const [checkSize, setCheckSize] = useState(false);
     const [checkFabric, setCheckFabric] = useState(false);
+    const dispatch = useDispatch();
 
     const cheColor = () => {
         setCheckColor(true);
@@ -242,22 +248,23 @@ const Product = () => {
     const [unitcode, setUnitCode] = useState('');
     const [unitimg, setUnitImg] = useState('default.png');
     const [quantity, setQuantity] = useState(1);
+    const [color, setColor] = useState("ar1");
+    const [fabric, setFabric] = useState("");
+    const [size, setSize] = useState("");
+    const [price, setPrice] = useState(0);
+    const [stock, setStock] = useState(0);
+
+
+    const uniqueColor = [];
+    const uniqueSize = [];
+    const uniqueFabric = [];
 
     const colorFunction = (e) => {
         setColor(e.target.value);
         setMainImg(e.target.value)
     }
 
-    const [color, setColor] = useState("");
-    const [fabric, setFabric] = useState("");
-    const [size, setSize] = useState("");
-    const [price, setPrice] = useState(0);
-    const [stock, setStock] = useState(0);
-    const dispatch = useDispatch();
 
-    const uniqueColor = [];
-    const uniqueSize = [];
-    const uniqueFabric = [];
 
     const uniqueColors = units.filter(element => {
         const isDuplicate = uniqueColor.includes(element.colour_name);
@@ -285,7 +292,7 @@ const Product = () => {
         }
         return false;
     })
-// familyuniformapp.medicalworld.com.mm
+    // familyuniformapp.medicalworld.com.mm
     useEffect(() => {
         const getProduct = () => {
             axios.get("http://familyuniformapp.medicalworld.com.mm/api/unitbyid_api/" + id)
@@ -294,9 +301,9 @@ const Product = () => {
 
                     setUnits(response.data.counting_units);
 
-                    const obj = { 
-                        'category_id': response.data.item.category_id, 
-                        'subcategory_id': response.data.item.sub_category_id 
+                    const obj = {
+                        'category_id': response.data.item.category_id,
+                        'subcategory_id': response.data.item.sub_category_id
                     }
 
                     axios.post('http://familyuniformapp.medicalworld.com.mm/api/productlineitems_api', obj)
@@ -306,7 +313,7 @@ const Product = () => {
                         }).catch(err => {
                             console.log(err);
                         })
-                    }).catch((error) => console.log(error));
+                }).catch((error) => console.log(error));
         }
         getProduct();
     }, [id]);
@@ -347,7 +354,7 @@ const Product = () => {
 
         setBututBackColor('#027f9d');
         setBututColor('white');
-        
+
     }
 
     const change_photo = () => {
@@ -372,7 +379,7 @@ const Product = () => {
 
 
                     {(() => {
-                        switch(mainImg) {
+                        switch (mainImg) {
                             //Procedual switch statement
                             case 'ar1': return <MainImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/family_cute_front.png`} id='main' />
                             case 'ar2': return <MainImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/family_cute_front.png`} id='main' />
@@ -385,8 +392,8 @@ const Product = () => {
 
                     <SmallImgContainer>
                         <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/family_cute_left.png`} onClick={change_photo} id='hel' />
-                        <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/family_cute_right.png`} onClick={change_photo} id='hel'  />
-                        <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/family_cute_front.png`} onClick={change_photo} id='hel'  />
+                        <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/family_cute_right.png`} onClick={change_photo} id='hel' />
+                        <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/family_cute_front.png`} onClick={change_photo} id='hel' />
                     </SmallImgContainer>
 
                 </ImgContainer>
@@ -411,9 +418,9 @@ const Product = () => {
                                         ))}
                                     </FilterColor>
                                 </div>
-                                {/* <div>
+                                <div>
                                     <Check onClick={cheColor} style={{ display: 'inline-block' }}>Check</Check>
-                                </div> */}
+                                </div>
                             </DivF>
 
                         </Filter>
@@ -423,6 +430,7 @@ const Product = () => {
                                 <div>
                                     <FilterSize onChange={(e) => setSize(e.target.value)}>
                                         {uniqueSizes.map((unit) => (
+
                                             <FilterSizeOption key={unit.id} value={unit.size_name}>{unit.size_name}</FilterSizeOption>
                                         ))}
                                     </FilterSize>
@@ -477,18 +485,26 @@ const Product = () => {
                     <SmallImgContainerOne>
 
                         {relateditems.map((it) => (
-                            <SmallImageOne src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/${it.photo_path}`} key={it.id} />
-                            
-                        ))} 
-                       
-                    </SmallImgContainerOne>
+                            <div>
+                                <div>
+                                    <SmallImageOne src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/${it.photo_path}`} key={it.id} />
 
-                    <h1>hello</h1>
+                                </div>
+                                <div style={{textAlign: 'center'}}>
+                                    <SmallImgName>{it.item_name}</SmallImgName>
+                                </div>
+                            </div>
+                        ))}
+
+
+                    </SmallImgContainerOne>
+                    
+
                 </ImgContainer>
             </Wrapper>
             {/* <Newsletter /> */}
             <Footer />
-            {/* <CheckColor open={checkColor} close={() => setCheckColor(false)} /> */}
+            <CheckColor name={color} open={checkColor} close={() => setCheckColor(false)} />
             <CheckSize open={checkSize} close={() => setCheckSize(false)} />
             {/* <CheckFabric open={checkFabric} close={() => setCheckFabric(false)} /> */}
         </Container>
