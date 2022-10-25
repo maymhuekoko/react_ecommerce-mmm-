@@ -10,7 +10,8 @@ import Newsletter from '../components/Newsletter'
 import { publicRequest } from '../requestMethod'
 import { mobile } from "../responsive"
 import { addProduct } from "../redux/cartRedux"
-import { useDispatch } from 'react-redux'
+import {} from "../redux/designRedux"
+import { useSelector,useDispatch } from 'react-redux'
 import axios from 'axios'
 import { prettyDOM } from '@testing-library/react'
 import CheckColor from '../components/CheckColor'
@@ -220,7 +221,9 @@ const Product = () => {
     const [checkColor, setCheckColor] = useState(false);
     const [checkSize, setCheckSize] = useState(false);
     const [checkFabric, setCheckFabric] = useState(false);
-
+    const dispatch = useDispatch();
+    
+    
     const cheColor = () => {
         setCheckColor(true);
     }
@@ -242,22 +245,23 @@ const Product = () => {
     const [unitcode, setUnitCode] = useState('');
     const [unitimg, setUnitImg] = useState('default.png');
     const [quantity, setQuantity] = useState(1);
+    const [color, setColor] = useState("ar1");
+    const [fabric, setFabric] = useState("");
+    const [size, setSize] = useState("");
+    const [price, setPrice] = useState(0);
+    const [stock, setStock] = useState(0);
+    
+
+    const uniqueColor = [];
+    const uniqueSize = [];
+    const uniqueFabric = [];
 
     const colorFunction = (e) => {
         setColor(e.target.value);
         setMainImg(e.target.value)
     }
 
-    const [color, setColor] = useState("");
-    const [fabric, setFabric] = useState("");
-    const [size, setSize] = useState("");
-    const [price, setPrice] = useState(0);
-    const [stock, setStock] = useState(0);
-    const dispatch = useDispatch();
-
-    const uniqueColor = [];
-    const uniqueSize = [];
-    const uniqueFabric = [];
+    
 
     const uniqueColors = units.filter(element => {
         const isDuplicate = uniqueColor.includes(element.colour_name);
@@ -411,9 +415,9 @@ const Product = () => {
                                         ))}
                                     </FilterColor>
                                 </div>
-                                {/* <div>
+                                <div>
                                     <Check onClick={cheColor} style={{ display: 'inline-block' }}>Check</Check>
-                                </div> */}
+                                </div>
                             </DivF>
 
                         </Filter>
@@ -423,6 +427,7 @@ const Product = () => {
                                 <div>
                                     <FilterSize onChange={(e) => setSize(e.target.value)}>
                                         {uniqueSizes.map((unit) => (
+                                            
                                             <FilterSizeOption key={unit.id} value={unit.size_name}>{unit.size_name}</FilterSizeOption>
                                         ))}
                                     </FilterSize>
@@ -483,12 +488,12 @@ const Product = () => {
                        
                     </SmallImgContainerOne>
 
-                    <h1>hello</h1>
+                    {/* <h1>{items[0].name}</h1> */}
                 </ImgContainer>
             </Wrapper>
             {/* <Newsletter /> */}
             <Footer />
-            {/* <CheckColor open={checkColor} close={() => setCheckColor(false)} /> */}
+            <CheckColor name={color} open={checkColor} close={() => setCheckColor(false)}/>
             <CheckSize open={checkSize} close={() => setCheckSize(false)} />
             {/* <CheckFabric open={checkFabric} close={() => setCheckFabric(false)} /> */}
         </Container>

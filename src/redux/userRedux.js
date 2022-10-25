@@ -11,7 +11,6 @@ const userSlice = createSlice({
         name: '',
         phone: '',
         address: '',
-        
     },
     reducers: {
         loginStart: (state) => {
