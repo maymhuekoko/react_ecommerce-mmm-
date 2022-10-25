@@ -233,6 +233,7 @@ const Product = () => {
     }
     const cheSize = () => {
         setCheckSize(true);
+        
     }
     const cheFabric = () => {
         setCheckFabric(true);
@@ -251,9 +252,11 @@ const Product = () => {
     const [quantity, setQuantity] = useState(1);
     const [color, setColor] = useState("ar1");
     const [fabric, setFabric] = useState("");
-    const [size, setSize] = useState("");
+    const [size, setSize] = useState("xxlf");
     const [price, setPrice] = useState(0);
     const [stock, setStock] = useState(0);
+
+    const [design, setDesign] = useState('');
 
 
     const uniqueColor = [];
@@ -291,13 +294,13 @@ const Product = () => {
         }
         return false;
     })
-
+    
     useEffect(() => {
         const getProduct = () => {
             axios.get("http://familyuniformapp.medicalworld.com.mm/api/unitbyid_api/" + id)
                 .then((response) => {
                     setItem(response.data.item);
-
+                    setDesign(response.data.item.item_name);
                     setUnits(response.data.counting_units);
 
                     const obj = {
@@ -312,7 +315,10 @@ const Product = () => {
                         }).catch(err => {
                             console.log(err);
                         })
-                }).catch((error) => console.log(error));
+
+                    }).catch((error) => console.log(error));
+                    
+
         }
         getProduct();
     }, [id]);
@@ -396,7 +402,7 @@ const Product = () => {
 
                 </ImgContainer>
                 <InfoContainer>
-                    <Title>{item.item_name}</Title>
+                    <Title id="item_name">{item.item_name}</Title>
                     <Desc>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus quod laudantium exercitationem ea voluptas laboriosam tenetur inventore illo non, consectetur ut eveniet enim, modi nihil expedita tempora odit dignissimos quibusdam.</Desc>
                     <RowContainer>
                         <PriceLabel>Price: </PriceLabel>
@@ -502,8 +508,10 @@ const Product = () => {
             </Wrapper>
             {/* <Newsletter /> */}
             <Footer />
-            <CheckColor name={color} open={checkColor} close={() => setCheckColor(false)} />
-            <CheckSize open={checkSize} close={() => setCheckSize(false)} />
+
+            <CheckColor name={color} open={checkColor} close={() => setCheckColor(false)}/>
+            <CheckSize gender={size} type={design} open={checkSize} close={() => setCheckSize(false)} />
+
             {/* <CheckFabric open={checkFabric} close={() => setCheckFabric(false)} /> */}
         </Container>
     )
