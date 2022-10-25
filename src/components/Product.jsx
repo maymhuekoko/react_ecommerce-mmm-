@@ -111,7 +111,7 @@ const Product = ({ item }, props) => {
 
     const collapse = () => {
         const obj = { 'category_id': item.category_id, 'subcategory_id': item.id }
-        axios.post('http://medicalworldinvpos.kwintechnologykw09.com/api/productlineitems_api', obj)
+        axios.post('http://familyuniformapp.medicalworld.com.mm/api/productlineitems_api', obj)
             .then(res => {
 
                 setItems(res.data);
@@ -127,7 +127,7 @@ const Product = ({ item }, props) => {
 
             <Container className="header" {...getToggleProps()}>
                 <Circle />
-                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/product_lines/${item.photo_path}`} />
+                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/product_lines/${item.photo_path}`} />
                 <Info>
                     <Icon><ShoppingCartOutlined /></Icon>
                     <Icon><Link to={`/product/${item.id}`}><SearchOutlined /></Link></Icon>
@@ -140,16 +140,16 @@ const Product = ({ item }, props) => {
             <ImgContainer {...getCollapseProps()}>
                 <SmallImgContainer className="content">
 
-                    {/* {items.slice(0, 6).map((it) => (
-                        <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/${it.photo_path}`} key={it.id} />
-                    ))} */}
+                    {items.slice(0, 6).map((it) => (
+                        <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/${it.photo_path}`} key={it.id} />
+                    ))}
 
-                    <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/product_lines/gown.png`} />
-                    <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/product_lines/doctor_coat.png`} />
-                    <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/product_lines/gown.png`} />
-                    <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/product_lines/medical_scrub.png`} />
-                    <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/product_lines/nurse_uniform.png`} />
-                    <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/product_lines/pants.png`} />
+                    {/* <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/product_lines/gown.png`} />
+                    <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/product_lines/doctor_coat.png`} />
+                    <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/product_lines/gown.png`} />
+                    <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/product_lines/medical_scrub.png`} />
+                    <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/product_lines/nurse_uniform.png`} />
+                    <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/product_lines/pants.png`} /> */}
 
 
                 </SmallImgContainer>
