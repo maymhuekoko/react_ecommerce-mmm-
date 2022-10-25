@@ -9,6 +9,7 @@ import DialogTitle from '@mui/material/DialogTitle';
 import styled from 'styled-components';
 import { useSelector , useDispatch } from 'react-redux';
 import {useState,useEffect} from 'react'
+import { Navigate, useNavigate } from 'react-router-dom'
 import axios from 'axios'
 import {resetProduct} from "../redux/cartRedux"
 
@@ -59,6 +60,7 @@ export default function CheckoutDialog(props) {
   const [paymenttype,setPaymentType] = useState('');
   const [paymentchannel,setPaymentChannel] = useState('');
   const [remark,setRemark] = useState('');
+  const navigate = useNavigate();
   
   const [townships,setTownships] = useState([]);
 
@@ -117,9 +119,10 @@ export default function CheckoutDialog(props) {
             quantity: cart.quantity,
             amount: cart.total,
         }).then(function(response){
-            alert('success store');
+            // alert('success store');
             document.getElementById('checkout').style.visibility = "hidden";
             dispatch(resetProduct());
+            navigate('/order_list');
         }).catch(function(error){
             alert('fail store');
         })

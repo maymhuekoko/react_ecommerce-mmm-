@@ -85,11 +85,11 @@ const Register = () => {
             username: username,
             password: password
         }).then(function(response){
-            alert(response.data.id)
+            alert(response.data.data)
             setShowDialog(true);
             // dispatch(setUserInfo(response.data.id,name,phone,email,address));
             dispatch(setUserInfo({
-                id : response.data.id,
+                id : response.data.data,
                 name : name,
                 phone : phone,
                 address : address,
