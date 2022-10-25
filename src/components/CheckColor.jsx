@@ -36,11 +36,17 @@ const CheckColor = (props) => {
     <div>
         <Dialog open={props.open} onClose={props.close}>
         <DialogTitle  className='text-center'><Title>Check Color</Title></DialogTitle>
+
+        {/* <DialogContent>
+          <Img src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/cute1.png`} /> 
+        */}
+
         <DialogContent >
           {/* <Img src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/cute1.png`} /> */}
           <Div style={{backgroundColor:checkColor}}>
 
           </Div>
+
         </DialogContent>
         <DialogActions>
           <Button onClick={props.close} style={{backgroundColor: '#79a6fa', color: 'white'}}>Close</Button>

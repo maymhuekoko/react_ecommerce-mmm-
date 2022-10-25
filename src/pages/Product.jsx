@@ -10,8 +10,8 @@ import Newsletter from '../components/Newsletter'
 import { publicRequest } from '../requestMethod'
 import { mobile } from "../responsive"
 import { addProduct } from "../redux/cartRedux"
-import {} from "../redux/designRedux"
-import { useSelector,useDispatch } from 'react-redux'
+import { } from "../redux/designRedux"
+import { useSelector, useDispatch } from 'react-redux'
 import axios from 'axios'
 import { prettyDOM } from '@testing-library/react'
 import CheckColor from '../components/CheckColor'
@@ -36,6 +36,7 @@ const SmallImgContainer = styled.div`
 `
 
 const SmallImgContainerOne = styled.div`
+max-width: 90vw;
     display: flex;
     overflow-y: hidden; 
     overflow-x: scroll; 
@@ -56,7 +57,7 @@ const SmallImage = styled.img`
 `
 
 const SmallImageOne = styled.img`
-    width: 60%;
+    min-width: 350px;
     height: 50vh;
     object-fit: cover;
     ${mobile({ height: "50%" })}
@@ -215,6 +216,10 @@ const DownloadPdf = styled.a`
     border-radius: 3px;
     cursor: pointer;
 `
+const SmallImgName = styled.div`
+    font-size: 20px;'
+    color: #111111;
+`
 
 const Product = () => {
 
@@ -222,8 +227,7 @@ const Product = () => {
     const [checkSize, setCheckSize] = useState(false);
     const [checkFabric, setCheckFabric] = useState(false);
     const dispatch = useDispatch();
-    
-    
+
     const cheColor = () => {
         setCheckColor(true);
     }
@@ -237,7 +241,7 @@ const Product = () => {
     const location = useLocation();
     const id = location.pathname.split("/")[2];
 
-    const [item, setItem] = useState({});
+    const [item, setItem] = useState([]);
     const [relateditems, setRelatedItems] = useState([]);
     const [units, setUnits] = useState([]);
     const [unitid, setUnitId] = useState(0);
@@ -250,7 +254,7 @@ const Product = () => {
     const [size, setSize] = useState("");
     const [price, setPrice] = useState(0);
     const [stock, setStock] = useState(0);
-    
+
 
     const uniqueColor = [];
     const uniqueSize = [];
@@ -260,8 +264,6 @@ const Product = () => {
         setColor(e.target.value);
         setMainImg(e.target.value)
     }
-
-    
 
     const uniqueColors = units.filter(element => {
         const isDuplicate = uniqueColor.includes(element.colour_name);
@@ -289,28 +291,28 @@ const Product = () => {
         }
         return false;
     })
-// medicalworldinvpos.kwintechnologykw09.com
+
     useEffect(() => {
         const getProduct = () => {
-            axios.get("http://medicalworldinvpos.kwintechnologykw09.com/api/unitbyid_api/" + id)
+            axios.get("http://familyuniformapp.medicalworld.com.mm/api/unitbyid_api/" + id)
                 .then((response) => {
                     setItem(response.data.item);
 
                     setUnits(response.data.counting_units);
 
-                    const obj = { 
-                        'category_id': response.data.item.category_id, 
-                        'subcategory_id': response.data.item.sub_category_id 
+                    const obj = {
+                        'category_id': response.data.item.category_id,
+                        'subcategory_id': response.data.item.sub_category_id
                     }
 
-                    axios.post('http://medicalworldinvpos.kwintechnologykw09.com/api/productlineitems_api', obj)
+                    axios.post('http://familyuniformapp.medicalworld.com.mm/api/productlineitems_api', obj)
                         .then(res => {
                             setRelatedItems(res.data);
                             console.log(res.data);
                         }).catch(err => {
                             console.log(err);
                         })
-                    }).catch((error) => console.log(error));
+                }).catch((error) => console.log(error));
         }
         getProduct();
     }, [id]);
@@ -351,7 +353,7 @@ const Product = () => {
 
         setBututBackColor('#027f9d');
         setBututColor('white');
-        
+
     }
 
     const change_photo = () => {
@@ -372,25 +374,24 @@ const Product = () => {
             <Wrapper style={{ marginTop: '100px' }}>
                 <ImgContainer>
 
-                    {/* <MainImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/${item.photo_path}`} id='main' /> */}
+                    {/* <MainImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/${item.photo_path}`} id='main' /> */}
 
 
                     {(() => {
-                        switch(mainImg) {
-                            //Procedual switch statement
-                            case 'ar1': return <MainImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/family_cute_front.png`} id='main' />
-                            case 'ar2': return <MainImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/family_cute_front.png`} id='main' />
-                            case 'ar3': return <MainImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/family_cute_front.png`} id='main' />
-                            case 'ar4': return <MainImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items//family_cute_front.png`} id='main' />
-                            default: return <MainImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/${item.photo_path}`} id='main' />
+                        switch (mainImg) {
+                            // Procedual switch statement
+                            case 'ar1': return <MainImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/family_cute_front.png`} id='main' />
+                            case 'ar2': return <MainImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/family_cute_front.png`} id='main' />
+                            case 'ar3': return <MainImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/family_cute_front.png`} id='main' />
+                            case 'ar4': return <MainImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items//family_cute_front.png`} id='main' />
+                            default: return <MainImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/${item.photo_path}`} id='main' />
                         }
                     })()}
 
-
                     <SmallImgContainer>
-                        <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/family_cute_left.png`} onClick={change_photo} id='hel' />
-                        <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/family_cute_right.png`} onClick={change_photo} id='hel'  />
-                        <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/family_cute_front.png`} onClick={change_photo} id='hel'  />
+                        <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/family_cute_left.png`} onClick={change_photo} id='hel' />
+                        <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/family_cute_right.png`} onClick={change_photo} id='hel' />
+                        <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/family_cute_front.png`} onClick={change_photo} id='hel' />
                     </SmallImgContainer>
 
                 </ImgContainer>
@@ -427,7 +428,7 @@ const Product = () => {
                                 <div>
                                     <FilterSize onChange={(e) => setSize(e.target.value)}>
                                         {uniqueSizes.map((unit) => (
-                                            
+
                                             <FilterSizeOption key={unit.id} value={unit.size_name}>{unit.size_name}</FilterSizeOption>
                                         ))}
                                     </FilterSize>
@@ -482,18 +483,26 @@ const Product = () => {
                     <SmallImgContainerOne>
 
                         {relateditems.map((it) => (
-                            <SmallImageOne src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/${it.photo_path}`} key={it.id} />
-                            
-                        ))} 
-                       
-                    </SmallImgContainerOne>
+                            <div>
+                                <div>
+                                    <SmallImageOne src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/${it.photo_path}`} key={it.id} />
 
-                    {/* <h1>{items[0].name}</h1> */}
+                                </div>
+                                <div style={{textAlign: 'center'}}>
+                                    <SmallImgName>{it.item_name}</SmallImgName>
+                                </div>
+                            </div>
+                        ))}
+
+
+                    </SmallImgContainerOne>
+                    
+
                 </ImgContainer>
             </Wrapper>
             {/* <Newsletter /> */}
             <Footer />
-            <CheckColor name={color} open={checkColor} close={() => setCheckColor(false)}/>
+            <CheckColor name={color} open={checkColor} close={() => setCheckColor(false)} />
             <CheckSize open={checkSize} close={() => setCheckSize(false)} />
             {/* <CheckFabric open={checkFabric} close={() => setCheckFabric(false)} /> */}
         </Container>
