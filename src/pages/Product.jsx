@@ -36,6 +36,7 @@ const SmallImgContainer = styled.div`
 `
 
 const SmallImgContainerOne = styled.div`
+max-width: 90vw;
     display: flex;
     overflow-y: hidden; 
     overflow-x: scroll; 
@@ -240,7 +241,7 @@ const Product = () => {
     const location = useLocation();
     const id = location.pathname.split("/")[2];
 
-    const [item, setItem] = useState({});
+    const [item, setItem] = useState([]);
     const [relateditems, setRelatedItems] = useState([]);
     const [units, setUnits] = useState([]);
     const [unitid, setUnitId] = useState(0);
@@ -263,8 +264,6 @@ const Product = () => {
         setColor(e.target.value);
         setMainImg(e.target.value)
     }
-
-
 
     const uniqueColors = units.filter(element => {
         const isDuplicate = uniqueColor.includes(element.colour_name);
@@ -292,7 +291,7 @@ const Product = () => {
         }
         return false;
     })
-    // familyuniformapp.medicalworld.com.mm
+
     useEffect(() => {
         const getProduct = () => {
             axios.get("http://familyuniformapp.medicalworld.com.mm/api/unitbyid_api/" + id)
@@ -380,7 +379,7 @@ const Product = () => {
 
                     {(() => {
                         switch (mainImg) {
-                            //Procedual switch statement
+                            // Procedual switch statement
                             case 'ar1': return <MainImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/family_cute_front.png`} id='main' />
                             case 'ar2': return <MainImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/family_cute_front.png`} id='main' />
                             case 'ar3': return <MainImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/family_cute_front.png`} id='main' />
@@ -388,7 +387,6 @@ const Product = () => {
                             default: return <MainImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/${item.photo_path}`} id='main' />
                         }
                     })()}
-
 
                     <SmallImgContainer>
                         <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/family_cute_left.png`} onClick={change_photo} id='hel' />
