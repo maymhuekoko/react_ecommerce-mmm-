@@ -7,14 +7,13 @@ import DialogContent from '@mui/material/DialogContent';
 import DialogContentText from '@mui/material/DialogContentText';
 import DialogTitle from '@mui/material/DialogTitle';
 import styled from 'styled-components';
-import { useSelector , useDispatch } from 'react-redux';
-import {useState,useEffect} from 'react'
+import { useSelector, useDispatch } from 'react-redux';
+import { useState, useEffect } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import {resetProduct} from "../redux/cartRedux"
-
-
-
+import { resetProduct } from "../redux/cartRedux"
+import BankInfoDialog from './BankInfoDialog'
+import PaidInfoDialog from './PaidInfoDialog'
 
 const Form = styled.form`
     display: flex;
@@ -51,87 +50,98 @@ const FilterSelect = styled.select`
 const FilterOption = styled.option``
 
 export default function CheckoutDialog(props) {
-  
-  const [name,setName] = useState('');
-  const [phone,setPhone] = useState('');
-  const [address,setAddress] = useState('');
-  const [township,setTownship] = useState('');
-  const [charges,setCharges] = useState('');
-  const [paymenttype,setPaymentType] = useState('');
-  const [paymentchannel,setPaymentChannel] = useState('');
-  const [remark,setRemark] = useState('');
-  const navigate = useNavigate();
-  
-  const [townships,setTownships] = useState([]);
 
-  useEffect(()=>{
-    const getTownships = async () =>{
-      try{
-        const res = await axios.get("http://familyuniformapp.medicalworld.com.mm/api/township",{
+  const [name, setName] = useState('');
+  const [phone, setPhone] = useState('');
+  const [address, setAddress] = useState('');
+  const [township, setTownship] = useState('');
+  const [charges, setCharges] = useState('');
+  const [paymenttype, setPaymentType] = useState('');
+  const [paymentchannel, setPaymentChannel] = useState('');
+  const [remark, setRemark] = useState('');
+  const navigate = useNavigate();
+
+  const [townships, setTownships] = useState([]);
+
+  useEffect(() => {
+    const getTownships = async () => {
+      try {
+        const res = await axios.get("http://familyuniformapp.medicalworld.com.mm/api/township", {
           headers: {
-            'Access-Control-Allow-Origin' : '*',
+            'Access-Control-Allow-Origin': '*',
           }
         });
         console.log(res.data);
         setTownships(res.data);
 
-      }catch(err){}
+      } catch (err) { }
     };
     getTownships();
-  },[]);
+  }, []);
 
 
-  const username = useSelector(state=>state.user);
+  const username = useSelector(state => state.user);
   // console.log(username.name);
 
-  const cart = useSelector(state=>state.cart);
+  const cart = useSelector(state => state.cart);
   const dispatch = useDispatch();
   // console.log(cart);
 
-  console.log(name,phone,address,township,charges);
-  
+  console.log(name, phone, address, township, charges);
+
   const onTownshipChanged = (e) => {
     setTownship(e.target.value);
-    const res = axios.get('http://familyuniformapp.medicalworld.com.mm/api/township_charges/'+e.target.value).then(function(response){
-          console.log(response.data);
-            setCharges(response.data.charges);
-        }).catch(function(error){
-            alert('fail charges');
-        })
-     };
+    const res = axios.get('http://familyuniformapp.medicalworld.com.mm/api/township_charges/' + e.target.value).then(function (response) {
+      console.log(response.data);
+      setCharges(response.data.charges);
+    }).catch(function (error) {
+      alert('fail charges');
+    })
+  };
   const onChargesChanged = (e) => setCharges(e.target.value);
   const onPaymentTypeChanged = (e) => setPaymentType(e.target.value);
   const onPaymentChannelChanged = (e) => setPaymentChannel(e.target.value);
   const onRemarkChanged = (e) => setRemark(e.target.value);
-  const orderSave = () =>{ 
+  const orderSave = () => {
     // alert(paymentchannel);
-    const res = axios.post('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_store',{
-            id: username.id,
-            name: username.name,
-            phone: username.phone,
-            address: username.address,
-            township: township,
-            charges : charges,
-            paymenttype : paymenttype,
-            paymentchannel : paymentchannel,
-            remark : remark,
-            products: cart.products,
-            quantity: cart.quantity,
-            amount: cart.total,
-        }).then(function(response){
-            // alert('success store');
-            document.getElementById('checkout').style.visibility = "hidden";
-            dispatch(resetProduct());
-            navigate('/order_list');
-        }).catch(function(error){
-            alert('fail store');
-        })
-        
+    const res = axios.post('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_store', {
+      id: username.id,
+      name: username.name,
+      phone: username.phone,
+      address: username.address,
+      township: township,
+      charges: charges,
+      paymenttype: paymenttype,
+      paymentchannel: paymentchannel,
+      remark: remark,
+      products: cart.products,
+      quantity: cart.quantity,
+      amount: cart.total,
+    }).then(function (response) {
+      // alert('success store');
+      document.getElementById('checkout').style.visibility = "hidden";
+      dispatch(resetProduct());
+      navigate('/order_list');
+    }).catch(function (error) {
+      alert('fail store');
+    })
+
+  }
+
+  const [showBankInfo, setshowBankInfo] = useState(false);
+  const [showPaidInfo, setshowPaidInfo] = useState(false);
+
+  const bankInfo = () => {
+    setshowBankInfo(true);
+  }
+
+  const paidInfo = () => {
+    setshowPaidInfo(true);
   }
 
   return (
     <div>
-      
+
       <Dialog open={props.open} onClose={props.close} id="checkout">
         <DialogTitle><b>Delivery and Payment Information</b></DialogTitle>
         <DialogContent>
@@ -141,44 +151,62 @@ export default function CheckoutDialog(props) {
           <Form>
             <Input type="text" id="name" name="name" placeholder="name" value={username.name} />
             <Input type="text" id="phone" name="phone" placeholder="phone" value={username.phone} />
-            <Input type="text" id="address" name="address" placeholder="address" value={username.address} /> 
+            <Input type="text" id="address" name="address" placeholder="address" value={username.address} />
             {/* <Input type="text" id="township" name="township" placeholder="township" value={township} onChange={onTownshipChanged}/>    */}
             <Filter>
-                <FilterTitle>Townships</FilterTitle>
-                <FilterSelect onChange={onTownshipChanged}>
-                    <FilterOption>Select Township</FilterOption>
-                      {townships.map(township=>(
-                        <FilterOption value={township.id} key={township.id}>{township.township}</FilterOption>
-                    ))}
-                </FilterSelect>
+              <FilterTitle>Townships</FilterTitle>
+              <FilterSelect onChange={onTownshipChanged}>
+                <FilterOption>Select Township</FilterOption>
+                {townships.map(township => (
+                  <FilterOption value={township.id} key={township.id}>{township.township}</FilterOption>
+                ))}
+              </FilterSelect>
             </Filter>
-            <Input type="text" id="charges" name="charges" placeholder="charges" value={charges} onChange={onChargesChanged}/>     
+            <Input type="text" id="charges" name="charges" placeholder="charges" value={charges} onChange={onChargesChanged} />
             <Filter>
-                <FilterTitle>Payment Type</FilterTitle>
-                <FilterSelect value={paymenttype} onChange={onPaymentTypeChanged}>
-                    <FilterOption>Select Payment Type</FilterOption>
-                    <FilterOption value='1'>COD</FilterOption>
-                    <FilterOption value='2'>Prepaid Partial</FilterOption>
-                    <FilterOption value='3'>Prepaid Full</FilterOption>
-                </FilterSelect>
+              <FilterTitle>Payment Type</FilterTitle>
+              <FilterSelect value={paymenttype} onChange={onPaymentTypeChanged}>
+                <FilterOption>Select Payment Type</FilterOption>
+                <FilterOption value='1'>COD</FilterOption>
+                <FilterOption value='2'>Prepaid Partial</FilterOption>
+                <FilterOption value='3'>Prepaid Full</FilterOption>
+              </FilterSelect>
             </Filter>
             <Filter>
-                <FilterTitle>Payment Channel</FilterTitle>
-                <FilterSelect value={paymentchannel} onChange={onPaymentChannelChanged}>
-                    <FilterOption>Select Payment Channel</FilterOption>
-                    <FilterOption value='1'>Cash</FilterOption>
-                    <FilterOption value='2'>Mobile Banking</FilterOption>
-                    <FilterOption value='3'>Internet Banking</FilterOption>
-                </FilterSelect>
+              <FilterTitle>Payment Channel</FilterTitle>
+              <FilterSelect value={paymentchannel} onChange={onPaymentChannelChanged}>
+                <FilterOption>Select Payment Channel</FilterOption>
+                <FilterOption value='1'>Cash</FilterOption>
+                <FilterOption value='2'>Mobile Banking</FilterOption>
+                <FilterOption value='3'>Internet Banking</FilterOption>
+              </FilterSelect>
             </Filter>
-            <Input type="text" id="remark" name="remark" placeholder="remark" onChange={onRemarkChanged}/> 
-        </Form>
+
+            {
+              paymentchannel == '2' ?
+                <div>
+                  <div>
+                    <label>Bank Info</label>
+                    <Input type="radio" name="userdata" onChange={bankInfo} />
+                  </div>
+                  <div>
+                    <label>Paid Info</label>&nbsp;
+                    <Input type="radio" name="userdata" onChange={paidInfo} />
+                  </div>
+                </div>
+                : ''
+            }
+
+            <Input type="text" id="remark" name="remark" placeholder="remark" onChange={onRemarkChanged} />
+          </Form>
         </DialogContent>
         <DialogActions>
           <Button onClick={props.close}>Cancel</Button>
           <Button onClick={orderSave}>Save</Button>
         </DialogActions>
       </Dialog>
+      <BankInfoDialog open={showBankInfo} close={() => setshowBankInfo(false)} />
+      <PaidInfoDialog open={showPaidInfo} close={() => setshowPaidInfo(false)} />
     </div>
   );
 }
