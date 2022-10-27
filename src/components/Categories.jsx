@@ -17,6 +17,8 @@ const Container = styled.div`
 `
 
 const SectionTitle = styled.h2`
+    margin-top: 20px;
+    text-align: center;
     font-weight: bold;
     font-size:30px;
     margin-left: 20px;
@@ -30,7 +32,7 @@ const Categories = () => {
   useEffect(()=>{
     const getCategories = async () =>{
       try{
-        const res = await axios.get("http://medicalworldinvpos.kwintechnologykw09.com//api/category_api");
+        const res = await axios.get("http://medicalworldinvpos.kwintechnologykw09.com/api/category_api");
         console.log(res.data);
         setCategories(res.data);
         
