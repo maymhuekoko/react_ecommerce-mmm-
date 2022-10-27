@@ -6,7 +6,7 @@ import axios from 'axios'
 import { DataObjectTwoTone } from '@mui/icons-material'
 
 const Container = styled.div`
-display: flex;
+    display: flex;
     padding:20px;
     flex-wrap: wrap;
     justify-content: space-between;
@@ -21,7 +21,7 @@ const Products = ({cat,filters,sort}) => {
   useEffect(()=>{
     const getProducts = async () =>{
       try{
-        const res = await axios.get(cat ? `http://familyuniformapp.medicalworld.com.mm/api/subcategory_api/${cat}` : "http://localhost:5000/api/subcategory_api");
+        const res = await axios.get(cat ? `http://medicalworldinvpos.kwintechnologykw09.com/api/subcategory_api/${cat}` : "http://localhost:5000/api/subcategory_api");
         // console.log(res.data);
         setProducts(res.data);
         
@@ -54,7 +54,9 @@ const Products = ({cat,filters,sort}) => {
   // },[sort])
 
   return (
+    
     <Container>
+      
         {/* {cat ? filteredProducts.map((item)=>(
             <Product item={item} key={item.id}/>
         )) : products.slice(0,4).map((item)=>(

@@ -5,6 +5,7 @@ import ArrowRightOutlinedIcon from '@mui/icons-material/ArrowRightOutlined';
 import { useState } from 'react';
 import {sliderItems} from "../data"; 
 import {mobile} from "../responsive";
+import { Navigate, useNavigate  } from 'react-router-dom';
 
 const Container = styled.div`
     width: 100%;
@@ -105,6 +106,12 @@ const Slider = () => {
             setSlideIndex(slideIndex < 2 ? slideIndex+1: 0)
         }
     }
+     
+    const navigate = useNavigate();
+
+    const productline = () =>{
+        navigate("/products/1/family%20hospital");
+    }
 
   return (
     <Container>
@@ -120,7 +127,7 @@ const Slider = () => {
                     <InfoContainer>
                         <Title>{item.title}</Title>
                         <Description>{item.desc}</Description>
-                        <Button>Shop Now</Button>
+                        <Button onClick={productline}>Shop Now</Button>
                     </InfoContainer>
                 </Slide>    
             ))}

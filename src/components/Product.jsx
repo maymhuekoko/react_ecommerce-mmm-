@@ -29,7 +29,7 @@ const MainContainer = styled.div`
 const Container = styled.div`
     flex: 1;
     margin: 5px;
-    width: 1300px;
+    width: 1070px;
     height: 500px;
     display: flex;
     align-items: center;
@@ -111,7 +111,7 @@ const Product = ({ item }, props) => {
 
     const collapse = () => {
         const obj = { 'category_id': item.category_id, 'subcategory_id': item.id }
-        axios.post('http://familyuniformapp.medicalworld.com.mm/api/productlineitems_api', obj)
+        axios.post('http://medicalworldinvpos.kwintechnologykw09.com/api/productlineitems_api', obj)
             .then(res => {
 
                 setItems(res.data);
@@ -122,7 +122,6 @@ const Product = ({ item }, props) => {
     };
 
     return (
-
         <div className="collapsible" onClick={collapse}>
 
             <Container className="header" {...getToggleProps()}>

@@ -297,7 +297,7 @@ const Product = () => {
     
     useEffect(() => {
         const getProduct = () => {
-            axios.get("http://familyuniformapp.medicalworld.com.mm/api/unitbyid_api/" + id)
+            axios.get("http://medicalworldinvpos.kwintechnologykw09.com/api/unitbyid_api/" + id)
                 .then((response) => {
                     setItem(response.data.item);
                     setDesign(response.data.item.item_name);
@@ -308,7 +308,7 @@ const Product = () => {
                         'subcategory_id': response.data.item.sub_category_id
                     }
 
-                    axios.post('http://familyuniformapp.medicalworld.com.mm/api/productlineitems_api', obj)
+                    axios.post('http://medicalworldinvpos.kwintechnologykw09.com/api/productlineitems_api', obj)
                         .then(res => {
                             setRelatedItems(res.data);
                             console.log(res.data);
@@ -409,6 +409,7 @@ const Product = () => {
                         <Price>$ {price}</Price>
                         <StockLabel>Stock: </StockLabel>
                         <Stock>{stock} pcs</Stock>
+            
                     </RowContainer>
 
                     <FilterContainer>
