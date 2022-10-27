@@ -38,7 +38,7 @@ const CheckColor = (props) => {
         <DialogTitle  className='text-center'><Title>Check Color</Title></DialogTitle>
 
         {/* <DialogContent>
-          <Img src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/cute1.png`} /> 
+          <Img src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/cute1.png`} /> 
         */}
 
         <DialogContent >

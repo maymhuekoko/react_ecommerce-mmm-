@@ -71,19 +71,19 @@ const InfoContainer = styled.div`
 
 const Title = styled.h1`
     font-size: 50px;
-    color: #00b7ff;
+    color: #2b57b8;
 `;
 
 const Description = styled.p`
     font-size: 17px;
-    color: #616161;
+    color: #2b57b8;
     letter-spacing: 3px;
 `;
 
 const Button = styled.button`
     padding: 7px;
     font-size: 20px;
-    background-color: #00b7ff;
+    background-color: #2b57b8;
     cursor: pointer;
     border-radius: 5px;
     border:none;
@@ -139,14 +139,14 @@ const Slider = () => {
                 <Button>Shop Now</Button>
             </InfoContainer>
             <ImgContainer>
-                <Image src="http://familyuniformapp.medicalworld.com.mm/files/attachments/slider_photo2.jpg"/>
+                <Image src="http://medicalworldinvpos.kwintechnologykw09.com/files/attachments/slider_photo2.jpg"/>
             </ImgContainer>
             
             </Slide>
 
             <Slide bgc="fbf0f4">
             <ImgContainer>
-                <Image src="http://familyuniformapp.medicalworld.com.mm/files/attachments/slider_photo3.jpg"/>
+                <Image src="http://medicalworldinvpos.kwintechnologykw09.com/files/attachments/slider_photo3.jpg"/>
             </ImgContainer>
             <InfoContainer>
                 <Title>Surgeon Gowns</Title>
