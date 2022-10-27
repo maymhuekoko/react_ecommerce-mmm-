@@ -1,6 +1,6 @@
 import { Add, Remove } from '@mui/icons-material'
 import React, { useEffect, useState } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useLocation,Link} from 'react-router-dom'
 import styled from 'styled-components'
 import Announcement from '../components/Announcement'
 import Footer from '../components/Footer'
@@ -78,6 +78,7 @@ const Desc = styled.p`
 const RowContainer = styled.div`
     display: flex;
     align-items: center;
+    margin-top: 20px;
 `
 
 const PriceLabel = styled.label`
@@ -181,7 +182,8 @@ const Button = styled.button`
     cursor: pointer;
 
     &:hover{
-        background-color: #f8f4f4;
+        background-color: teal;
+        color: white;
     }
 `
 const DivF = styled.div`
@@ -220,6 +222,7 @@ const SmallImgName = styled.div`
     font-size: 20px;'
     color: #111111;
 `
+
 
 const Product = () => {
 
@@ -380,36 +383,38 @@ const Product = () => {
             <Wrapper style={{ marginTop: '100px' }}>
                 <ImgContainer>
 
-                    {/* <MainImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/${item.photo_path}`} id='main' /> */}
+                    {/* <MainImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/${item.photo_path}`} id='main' /> */}
 
 
                     {(() => {
                         switch (mainImg) {
                             // Procedual switch statement
-                            case 'ar1': return <MainImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/family_cute_front.png`} id='main' />
-                            case 'ar2': return <MainImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/family_cute_front.png`} id='main' />
-                            case 'ar3': return <MainImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/family_cute_front.png`} id='main' />
-                            case 'ar4': return <MainImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items//family_cute_front.png`} id='main' />
-                            default: return <MainImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/${item.photo_path}`} id='main' />
+                            case 'ar1': return <MainImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/family_cute_front.png`} id='main' />
+                            case 'ar2': return <MainImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/family_cute_front.png`} id='main' />
+                            case 'ar3': return <MainImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/family_cute_front.png`} id='main' />
+                            case 'ar4': return <MainImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items//family_cute_front.png`} id='main' />
+                            default: return <MainImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/${item.photo_path}`} id='main' />
                         }
                     })()}
 
                     <SmallImgContainer>
-                        <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/family_cute_left.png`} onClick={change_photo} id='hel' />
-                        <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/family_cute_right.png`} onClick={change_photo} id='hel' />
-                        <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/family_cute_front.png`} onClick={change_photo} id='hel' />
+                        <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/family_cute_left.png`} onClick={change_photo} id='hel' />
+                        <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/family_cute_right.png`} onClick={change_photo} id='hel' />
+                        <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/family_cute_front.png`} onClick={change_photo} id='hel' />
                     </SmallImgContainer>
 
                 </ImgContainer>
                 <InfoContainer>
                     <Title id="item_name">{item.item_name}</Title>
-                    <Desc>Lorem ipsum dolor sit amet consectetur adipisicing elit. Minus quod laudantium exercitationem ea voluptas laboriosam tenetur inventore illo non, consectetur ut eveniet enim, modi nihil expedita tempora odit dignissimos quibusdam.</Desc>
+                    <Desc>Minimum Order Quantity : </Desc>
+                    <Desc>Avaiable Color : </Desc>
+                    <Desc>Lead Time : </Desc>
+                    <Link to='/order'><Button>Make Order</Button></Link>
                     <RowContainer>
                         <PriceLabel>Price: </PriceLabel>
                         <Price>$ {price}</Price>
                         <StockLabel>Stock: </StockLabel>
                         <Stock>{stock} pcs</Stock>
-            
                     </RowContainer>
 
                     <FilterContainer>
@@ -493,7 +498,7 @@ const Product = () => {
                         {relateditems.map((it) => (
                             <div>
                                 <div>
-                                    <SmallImageOne src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/${it.photo_path}`} key={it.id} />
+                                    <SmallImageOne src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/${it.photo_path}`} key={it.id} />
 
                                 </div>
                                 <div style={{textAlign: 'center'}}>

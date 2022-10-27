@@ -180,13 +180,13 @@ const ProductList = () => {
              <Div>
              <FilterTextOne>Brands</FilterTextOne>
              <DivOne>
-             <Link className='link-primary' to='/'>Family Hospital</Link><br></br>
+             <Link className='link-primary' to='/products/1/family%20hospital'>Family Hospital</Link><br></br>
              </DivOne>
              <DivOne>
-             <Link className='link-primary' to='/'>Branded</Link><br></br>
+             <Link className='link-primary' to='/products/2/branded'>Branded</Link><br></br>
              </DivOne>
              <DivOne>
-             <Link className='link-primary' to='/'>Eco Family</Link><br></br>
+             <Link className='link-primary' to='/products/3/ecofamily'>Eco Family</Link><br></br>
              </DivOne>
              <DivOne>
              <Link className='link-primary' to='/'>Oxypas</Link><br></br>
