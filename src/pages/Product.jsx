@@ -435,8 +435,9 @@ const Product = () => {
                                 <div>
                                     <FilterSize onChange={(e) => setSize(e.target.value)}>
                                         {uniqueSizes.map((unit) => (
-
-                                            <FilterSizeOption key={unit.id} value={unit.size_name}>{unit.size_name}</FilterSizeOption>
+                                            <FilterSizeOption key={unit.id} value={unit.size_name}>
+                                                {unit.size_name.replace('xxxxx', '5x').replace('xxxx', '4x').replace('xxx', '3x').replace('xx', '2x')}
+                                            </FilterSizeOption>
                                         ))}
                                     </FilterSize>
                                 </div>
