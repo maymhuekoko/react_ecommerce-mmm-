@@ -7,6 +7,7 @@ import ProductList from "./pages/ProductList";
 import Register from "./pages/Register";
 import OrderDetail from "./components/OrderDetail";
 import OrderList from "./components/OrderList";
+import Order from "./components/Order";
 import { useSelector } from "react-redux";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -29,6 +30,7 @@ const App = () => {
         <Route path="/products/:category_id/:category_name" element={<ProductList/>}/>
         <Route path="/product/:id" element={<Product/>}/>
         <Route path="/cart" element={<Cart/>}/>
+        <Route path="/order/:name" element={<Order/>}/>
         <Route path="/login" element={user ? <Navigate to="/"/> : <Login/>}/>
         <Route path="/register" element={user ? <Navigate to="/"/> : <Register/>}/>
         <Route path="/order_detail/:id" element={<OrderDetail/>}/>

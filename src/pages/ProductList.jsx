@@ -182,13 +182,13 @@ const ProductList = () => {
              <Div>
              <FilterTextOne>Brands</FilterTextOne>
              <DivOne>
-             <Link className='link-primary text-decoration-none' to='/'>Family Hospital</Link><br></br>
+             <Link className='link-primary text-decoration-none' to='/products/1/family%20hospital'>Family Hospital</Link><br></br>
              </DivOne>
              <DivOne>
-             <Link className='link-primary text-decoration-none' to='/'>Branded</Link><br></br>
+             <Link className='link-primary text-decoration-none' to='/products/2/branded'>Branded</Link><br></br>
              </DivOne>
              <DivOne>
-             <Link className='link-primary text-decoration-none' to='/'>Eco Family</Link><br></br>
+             <Link className='link-primary text-decoration-none' to='/products/3/ecofamily'>Eco Family</Link><br></br>
              </DivOne>
              <DivOne>
              <Link className='link-primary text-decoration-none' to='/'>Oxypas</Link><br></br>
