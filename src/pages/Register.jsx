@@ -77,9 +77,7 @@ const Register = () => {
 
     const onRegisterClicked =() => {  
 
-        const res = axios.post('https://medicalworldinvpos.kwintechnologykw09.com/api/website_user_store',{
-
-            // const res = axios.post('https://medicalworldinvpos.kwintechnologykw09.com/api/website_user_store',{
+        const res = axios.post('http://familyuniformapp.medicalworld.com.mm/api/website_user_store',{
 
             name: name,
             phone: phone,
