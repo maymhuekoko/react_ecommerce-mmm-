@@ -103,8 +103,8 @@ const RightOne = styled.div`
 `
 
 const MenuItem = styled.div`
-    font-size: 17px;
-    color: #39c5fc;
+    font-size: 19px;
+    color: #2b57b8;
     cursor: pointer;
     display: inline;
     margin-left : 20px;
@@ -166,7 +166,8 @@ const Navbar = () => {
 
     const link = {
         textDecoration: 'none',
-        color: '#39c5fc',
+        fontSize: '17px',
+        color: '#2b57b8',
     }
     const link1 = {
         textDecoration: 'none',
@@ -183,7 +184,7 @@ const Navbar = () => {
                     <Left>
                         <Language style={link}><LocationOnIcon />Yangon</Language>
 
-                        <Language style={link}><PhoneInTalkIcon />+959778654565</Language>
+                        <Language style={link}><PhoneInTalkIcon />+95 9778654565</Language>
 
                         <NavbarDropdown>
                             <Language style={link}>English</Language>

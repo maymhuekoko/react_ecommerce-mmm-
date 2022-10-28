@@ -3,7 +3,9 @@ import ColorNav from './ColorNav';
 import Footer from './Footer';
 import styled from 'styled-components';
 import {mobile} from "../responsive";
-import { Add} from '@mui/icons-material'
+import { Add,Remove } from '@mui/icons-material'
+import axios from 'axios'
+import { useLocation } from 'react-router-dom'
 
 const Div = styled.div`
 margin-top: 30px;
@@ -46,6 +48,16 @@ const Btn = styled.button`
 padding:4px;
 background-color: teal;
 border : none;
+border-radius: 20px;
+color: white; 
+`
+const Delete = styled.button`
+background-color: red;
+border : none;
+border-radius: 4px;
+width: 25px;
+height: 20px;
+margin-top: 6px;
 color: white; 
 `
 const Select = styled.select`
@@ -55,8 +67,41 @@ width: 200px;
 const Option = styled.option`
 
 `
+const Qty = styled.input`
+width: 70px;
+`
 
 const Order = () => {
+    const location = useLocation();
+    const design_name = location.pathname.split("/")[2];
+    const specification = () => {
+        const val = document.getElementById('specs').value;
+        let html = '';
+        axios.get("http://medicalworldinvpos.kwintechnologykw09.com/api/ecommerce_order_type")
+                .then((response) => {  
+        if(val == 1){
+            response.data.fabric.map((el)=>{
+                html += `<Option>`+el.fabric_name+`</Option>`;
+             })
+        }
+        if(val == 2){
+            response.data.color.map((el)=>{
+                html += `<Option>`+el.colour_name+`</Option>`;
+             })
+        }
+        if(val == 3){
+            response.data.size.map((el)=>{
+                html += `<Option>`+el.size_name+`</Option>`;
+             })
+        }
+        if(val == 4){
+            response.data.gender.map((el)=>{
+                html += `<Option>`+el.gender_name+`</Option>`;
+             })
+        }    
+        document.getElementById('types').innerHTML = html;
+         })
+    }
   return (
     <div>
         <ColorNav/>
@@ -119,25 +164,27 @@ const Order = () => {
                         <th scope="col">Item Name</th>
                         <th scope="col">Specification</th>
                         <th scope="col">Quantity</th>
+                        <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
                         <tr className='text-center'>
-                        <td>Vneck </td>
+                        <td>{design_name}</td>
                         <td>
-                        <Select>
-                            <Option>Specs</Option>
-                            <Option>Fabric</Option>
-                            <Option>Color</Option>
-                            <Option>Size</Option>
-                            <Option>Gender</Option>
+                        <Select onChange={specification} id="specs">
+                            <Option value="0" hidden>Specs</Option>
+                            <Option value="1">Fabric</Option>
+                            <Option value="2">Color</Option>
+                            <Option value="3">Size</Option>
+                            <Option value="4">Gender</Option>
                         </Select>&nbsp;&nbsp;&nbsp;
-                        <Select>
+                        <Select id="types">
                             
                         </Select>&nbsp;&nbsp;&nbsp;
                         <Btn><Add/></Btn>
                         </td>
-                        <td>@mdo</td>
+                        <td><Qty/></td>
+                        <td><Delete>X</Delete></td>
                         </tr>
                         
                     </tbody>

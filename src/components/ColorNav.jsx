@@ -34,7 +34,7 @@ const WrapperOne = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: #00b7ff;
+    background-color: #32549b;
     ${mobile({padding: "10px 0px"})}
 `
 
