@@ -65,9 +65,11 @@ const Div = styled.div`
     margin-top: 26px;
     margin-left: 20px;
     width: 220px;
-    height: 350px;
+    height: 380px;
     background-color: #eef3fd;
-    position: fixed;
+    position: sticky;
+    top: 100px;
+
 `
 const DivOne = styled.div`
     margin: 10px;
@@ -76,14 +78,14 @@ const DivOne = styled.div`
     margin-left: 50px;
 `
 const Btn = styled.button`
-border-radius: 50%;
-margin-left: 7px;
-float: right;
-background: #add8e6;
-border: none;
+    border-radius: 50%;
+    margin-left: 7px;
+    float: right;
+    background: #add8e6;
+    border: none;
 `
 const A = styled.a`
-color: white;
+    color: white;
 `
 
 const Option = styled.option``
@@ -180,34 +182,34 @@ const ProductList = () => {
              <Div>
              <FilterTextOne>Brands</FilterTextOne>
              <DivOne>
-             <Link className='link-primary' to='/products/1/family%20hospital'>Family Hospital</Link><br></br>
+             <Link className='link-primary text-decoration-none' to='/products/1/family%20hospital'>Family Hospital</Link><br></br>
              </DivOne>
              <DivOne>
-             <Link className='link-primary' to='/products/2/branded'>Branded</Link><br></br>
+             <Link className='link-primary text-decoration-none' to='/products/2/branded'>Branded</Link><br></br>
              </DivOne>
              <DivOne>
-             <Link className='link-primary' to='/products/3/ecofamily'>Eco Family</Link><br></br>
+             <Link className='link-primary text-decoration-none' to='/products/3/ecofamily'>Eco Family</Link><br></br>
              </DivOne>
              <DivOne>
-             <Link className='link-primary' to='/'>Oxypas</Link><br></br>
+             <Link className='link-primary text-decoration-none' to='/'>Oxypas</Link><br></br>
              </DivOne>
              <DivOne>
-             <Link className='link-primary' to='/'>Unionmicroclean</Link><br></br>
+             <Link className='link-primary text-decoration-none' to='/'>Unionmicroclean</Link><br></br>
              </DivOne>
              <DivOne>
-             <Link className='link-primary' to='/'>Littman</Link><br></br>
+             <Link className='link-primary text-decoration-none' to='/'>Littman</Link><br></br>
              </DivOne>
              <DivOne>
-             <Link className='link-primary' to='/'>Protech Masks</Link><br></br>
+             <Link className='link-primary text-decoration-none' to='/'>Protech Masks</Link><br></br>
              </DivOne>
              <DivOne>
-             <Link className='link-primary' to='/'>Polo Club</Link><br></br>
+             <Link className='link-primary text-decoration-none' to='/'>Polo Club</Link><br></br>
              </DivOne>
              <DivOne>
-             <Link className='link-primary' to='/'>Factory Textile</Link><br></br>
+             <Link className='link-primary text-decoration-none' to='/'>Factory Textile</Link><br></br>
              </DivOne>
              <DivOne>
-             <Link className='link-primary' to='/'>Factory Material</Link><br></br>
+             <Link className='link-primary text-decoration-none' to='/'>Factory Material</Link><br></br>
              </DivOne>
             
              </Div>
