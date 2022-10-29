@@ -117,7 +117,7 @@ const Login = () => {
                     setUsername('');
                     setPassword('');
                     setSuccessmsg(true);
-
+                    
                     dispatch(setUserInfo({
                         id : response.data.user.id,
                         name : response.data.user.name,
