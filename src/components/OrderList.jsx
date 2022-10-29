@@ -129,11 +129,12 @@ const OrderList = () => {
                 {
                     orders.map((order, index) => (
                         <Tr key={order.id}>
-                            <Td>{order.id}</Td>
+                            <Td>{++index}</Td>
                             <Td>{order.order_code}</Td>
                             <Td>{order.customer_name}</Td>
                             <Td>{order.deliver_address}</Td>
-                            <Td>{order.order_date}</Td>
+                            {order.order_type == 2 ? <Td>{order.order_date}(Pre-Order)</Td> : <Td>{order.order_date}</Td>}
+                            
                             <Td><Span>{order.order_status}</Span></Td>
                             <Td>{order.total_quantity}</Td>
                             <Td>{order.total_amount}</Td>
