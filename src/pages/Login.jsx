@@ -97,7 +97,7 @@ const Login = () => {
     const handleClick = (e) => {
         e.preventDefault();
     
-            const response = axios.post('http://familyuniformapp.medicalworld.com.mm/api/Login',{
+            const response = axios.post('http://medicalworldinvpos.kwintechnologykw09.com/api/Login',{
                 username: username,
                 password: password
             }).then(function(response){
@@ -113,7 +113,7 @@ const Login = () => {
                     setUsername('');
                     setPassword('');
                     setSuccessmsg(true);
-
+                    
                     dispatch(setUserInfo({
                         id : response.data.user.id,
                         name : response.data.user.name,
