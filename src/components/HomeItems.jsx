@@ -32,8 +32,8 @@ const HomeItems = ({ title, url }) => {
   useEffect(() => {
     const getItems = async () => {
       try {
-        // const res = await axios.get("http://medicalworldinvpos.kwintechnologykw09.com/api/" + url,);
         const res = await axios.get("http://medicalworldinvpos.kwintechnologykw09.com/api/" + url,);
+        // const res = await axios.get("http://familyuniformapp.medicalworld.com.mm/api/" + url,);
         console.log(res.data);
         setItems(res.data);
       } catch (err) { }
