@@ -49,8 +49,9 @@ const Input = styled.input`
   margin-left: 45px;
   width: 300px;
   background: #add8e6;
-  border: none;
-  border-radius: 30px;
+  border: 1px solid #add8e6;
+  outline: none;
+  border-radius: 5px;
   opacity: 1;
   float: right;
   transition: all .75s ease-in;
@@ -62,21 +63,27 @@ const Input = styled.input`
 
 const Div = styled.div`
     margin-top: 26px;
-    margin-left: 20px;
+    margin-left: 10px;
     width: 220px;
-    height: 380px;
-    background-color: #eef3fd;
+    height: 500px;
+    background-color: transparent;
     position: sticky;
     top: 100px;
 `
 const DivOne = styled.div`
-    margin: 10px;
-    width: 150px;
-    height: 20px;
+    width: 170px;
     margin-left: 50px;
+    margin-top: 7px;
+    background-color: #32549b;
+    padding: 7px 5px 7px 8px;
+    color: white;
+    border-radius: 5px;
+    &:hover {
+        background-color: #2258ce;
+    }
 `
 const Btn = styled.button`
-    border-radius: 50%;
+    border-radius: 5px;
     margin-left: 7px;
     float: right;
     background: #add8e6;
@@ -136,10 +143,9 @@ const ProductList = () => {
               <Option disabled>Gender</Option>
               <Option value="male">Male</Option>
               <Option value="female">Female</Option>
-              {/* <Option  value="pants">Pants</Option> */}
             </Select>
 
-            {/* <Select name="color" onChange={handleFilters}>
+          {/* <Select name="color" onChange={handleFilters}>
               <Option disabled>Pant</Option>
               <Option>Normal</Option>
               <Option>black</Option>
@@ -147,7 +153,6 @@ const ProductList = () => {
               <Option>blue</Option>
               <Option>yellow</Option>
               <Option>gray</Option>
-
           </Select>
 
           <Select name="size" onChange={handleFilters}>
@@ -180,34 +185,34 @@ const ProductList = () => {
             <Div>
               <FilterTextOne>Brands</FilterTextOne>
               <DivOne>
-                <Link className='link-primary text-decoration-none' to='/products/1/family%20hospital'>Family Hospital</Link><br></br>
+                <Link className='text-decoration-none text-white' to='/products/1/family%20hospital'>Family Hospital</Link><br></br>
               </DivOne>
               <DivOne>
-                <Link className='link-primary text-decoration-none' to='/products/2/branded'>Branded</Link><br></br>
+                <Link className='text-decoration-none text-white' to='/products/2/branded'>Branded</Link><br></br>
               </DivOne>
               <DivOne>
-                <Link className='link-primary text-decoration-none' to='/products/3/ecofamily'>Eco Family</Link><br></br>
+                <Link className='text-decoration-none text-white' to='/products/3/ecofamily'>Eco Family</Link><br></br>
               </DivOne>
               <DivOne>
-                <Link className='link-primary text-decoration-none' to='/'>Oxypas</Link><br></br>
+                <Link className='text-decoration-none text-white' to='/'>Oxypas</Link><br></br>
               </DivOne>
               <DivOne>
-                <Link className='link-primary text-decoration-none' to='/'>Unionmicroclean</Link><br></br>
+                <Link className='text-decoration-none text-white' to='/'>Unionmicroclean</Link><br></br>
               </DivOne>
               <DivOne>
-                <Link className='link-primary text-decoration-none' to='/'>Littman</Link><br></br>
+                <Link className='text-decoration-none text-white' to='/'>Littman</Link><br></br>
               </DivOne>
               <DivOne>
-                <Link className='link-primary text-decoration-none' to='/'>Protech Masks</Link><br></br>
+                <Link className='text-decoration-none text-white' to='/'>Protech Masks</Link><br></br>
               </DivOne>
               <DivOne>
-                <Link className='link-primary text-decoration-none' to='/'>Polo Club</Link><br></br>
+                <Link className='text-decoration-none text-white' to='/'>Polo Club</Link><br></br>
               </DivOne>
               <DivOne>
-                <Link className='link-primary text-decoration-none' to='/'>Factory Textile</Link><br></br>
+                <Link className='text-decoration-none text-white' to='/'>Factory Textile</Link><br></br>
               </DivOne>
               <DivOne>
-                <Link className='link-primary text-decoration-none' to='/'>Factory Material</Link><br></br>
+                <Link className='text-decoration-none text-white' to='/'>Factory Material</Link><br></br>
               </DivOne>
 
             </Div>
