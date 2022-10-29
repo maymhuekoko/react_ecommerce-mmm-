@@ -22,12 +22,25 @@ const designSlice = createSlice({
              "gender_type": "f",
             "filename": "vneck_female_sizechart.jpg",
            },
-        ]   
+        ] ,
+        orders : []  
     },
     reducers: {
-        
+        addOrder: (state, action) => {
+            state.orders.push(action.payload);
+          },
+        removeOrder: (state, action) => {
+        for (var i = 0; i < state.orders.length; i++) {
+            if (state.orders[i].orderid === action.payload.id) {
+                state.orders.splice(i, 1);
+            }
+        }
+        },
+        resetOrder: (state) => {
+            state.orders.length = 0 ;
+        }
     }
 })
 
-export const{} = designSlice.actions
+export const{addOrder,removeOrder,resetOrder} = designSlice.actions
 export default designSlice.reducer;
