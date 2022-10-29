@@ -36,7 +36,7 @@ const SmallImgContainer = styled.div`
 `
 
 const SmallImgContainerOne = styled.div`
-max-width: 90vw;
+    max-width: 90vw;
     display: flex;
     overflow-y: hidden; 
     overflow-x: scroll; 
@@ -45,13 +45,13 @@ max-width: 90vw;
 const MainImage = styled.img`
     width: 500px;
     height: auto;
-    object-fit: cover;
+    object-fit: contain;
     
     ${mobile({ height: "50%" })}
 `
 const SmallImage = styled.img`
     width: 34%;
-    height: 25vh;
+    height: auto;
     object-fit: cover;
     ${mobile({ height: "50%" })}
 `
@@ -386,9 +386,9 @@ const Product = () => {
                     <MainImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/${item.photo_path}`} id='main' />
 
                     <SmallImgContainer>
-                        <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/${item.photo_path?.replace("front", "left")}`} onClick={change_photo} id='hel' />
-                        <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/${item.photo_path?.replace("front", "right")}`} onClick={change_photo} id='hel' />
-                        <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/${item.photo_path}`} onClick={change_photo} id='hel' />
+                        <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/${item.photo_path?.replace("front", "left")}`} onClick={change_photo} id='' />
+                        <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/${item.photo_path?.replace("front", "right")}`} onClick={change_photo} id='' />
+                        <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/${item.photo_path?.replace("front", "body")}`} onClick={change_photo} id='hel' />
 
                     </SmallImgContainer>
 

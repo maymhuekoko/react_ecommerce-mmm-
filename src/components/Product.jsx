@@ -71,8 +71,6 @@ const Icon = styled.div`
     transform: scale(1.1);
     }
 `
-
-
 const ProductLineTitle = styled.h2`
     font-weight: bold;
     font-size:30px;
@@ -81,27 +79,41 @@ const ProductLineTitle = styled.h2`
     bottom: 10%;
     
 `
-
 const Button = styled.button`
-margin-left:50px;
-position: absolute;
-bottom: 3%; 
+    margin-left:50px;
+    position: absolute;
+    bottom: 3%; 
 `
 
 const ImgContainer = styled.div`
-    flex: 1;
-
+    max-height: 350px;
 `
 const SmallImgContainer = styled.div`
-   flex: 1;
    
 `
 const SmallImage = styled.img`
-    width: 430px;
-    height: 45vh;
+    width: 250px;
+    max-height: 250pz;
     margin-top: 25px;
     object-fit: contain;
+`
+const SmallImgName = styled.span`
+    font-size: 20px;'
+    color: #111111;
+`
 
+const Wrapper = styled.div`
+    padding: 50px;
+    display: flex;
+`
+
+const SmallImgContainerOne = styled.div`
+    max-width: 70vw;
+    display: flex;
+    overflow-y: hidden; 
+    overflow-x: scroll;
+    min-width: 350px;
+    object-fit: cover;
 `
 
 const Product = ({ item }, props) => {
@@ -136,25 +148,45 @@ const Product = ({ item }, props) => {
                 <Button>SHOP NOW</Button>
             </Container>
 
-            <ImgContainer {...getCollapseProps()}>
+            {/* <ImgContainer {...getCollapseProps()}>
                 <SmallImgContainer className="content">
-
-                    {items.slice(0, 6).map((it) => (
-                        <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/${it.photo_path}`} key={it.id} />
+                    
+                    {items.map((it) => (
+                        // .slice(0, 6)
+                        <div style={{ display: 'inline-block' }}>
+                            <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                <div style={{ display: 'inline-block' }}>
+                                    <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/${it.photo_path}`} key={it.id} />
+                                </div>
+                                <div style={{ textAlign: 'center', maxWidth: '250px', display: 'inline-block' }}>
+                                    <span>{it.item_name}</span>
+                                </div>
+                            </div>
+                        </div>
                     ))}
-
-                    {/* <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/product_lines/gown.png`} />
-                    <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/product_lines/doctor_coat.png`} />
-                    <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/product_lines/gown.png`} />
-                    <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/product_lines/medical_scrub.png`} />
-                    <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/product_lines/nurse_uniform.png`} />
-                    <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/product_lines/pants.png`} /> */}
-
-
                 </SmallImgContainer>
+            </ImgContainer> */}
 
-                {/* <h1>{items}</h1> */}
-            </ImgContainer>
+            <Wrapper {...getCollapseProps()}>
+                <ImgContainer>
+                    <SmallImgContainerOne>
+                        {items.map((it) => (
+                            // .slice(0, 6)
+                            <div style={{ display: 'inline-block' }}>
+                                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                    <div style={{ display: 'inline-block' }}>
+                                        <Link to={`/product/${it.id}`}><SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/${it.photo_path}`} key={it.id} /></Link>
+                                    </div>
+                                    <div style={{ textAlign: 'center', maxWidth: '250px', display: 'inline-block' }}>
+                                        <span>{it.item_name}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </SmallImgContainerOne>
+                </ImgContainer>
+            </Wrapper>
+
         </div>
 
     )

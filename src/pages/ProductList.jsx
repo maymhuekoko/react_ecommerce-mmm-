@@ -1,12 +1,12 @@
 import React, { useState } from 'react'
-import { useLocation,Link } from 'react-router-dom'
+import { useLocation, Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Footer from '../components/Footer'
 import ColorNav from '../components/ColorNav'
 import Slider from '../components/Slider'
 import Products from '../components/Products'
 import SearchIcon from '@mui/icons-material/Search';
-import {mobile} from "../responsive"
+import { mobile } from "../responsive"
 
 const Container = styled.div`
 margin: 20px;
@@ -22,26 +22,26 @@ const FilterContainer = styled.div`
 const Filter = styled.div`
   margin: 20px;
   display: flex;
-  ${mobile({margin:"0px 20px", flexDirection: "column"})}
+  ${mobile({ margin: "0px 20px", flexDirection: "column" })}
 `
 const FilterText = styled.span`
   font-size: 20px;
   font-weight: 600;
   margin-right: 20px;
-  ${mobile({marginRight:"0px"})}
+  ${mobile({ marginRight: "0px" })}
 `
 
 const FilterTextOne = styled.h4`
   margin-left: 70px;
   padding-top: 20px;
-  ${mobile({marginRight:"0px"})}
+  ${mobile({ marginRight: "0px" })}
 `
 
 
 const Select = styled.select`
   padding: 10px;
   margin-right: 20px;
-  ${mobile({margin:"10px 0px"})}
+  ${mobile({ margin: "10px 0px" })}
 `
 const Input = styled.input`
   font-size: 18px;
@@ -54,11 +54,10 @@ const Input = styled.input`
   opacity: 1;
   float: right;
   transition: all .75s ease-in;
-  cursor: pointer;
   ::placeholder {
     color: #FFFFFF;
   }
-  ${mobile({margin:"10px 0px"})}
+  ${mobile({ margin: "10px 0px" })}
 `
 
 const Div = styled.div`
@@ -69,7 +68,6 @@ const Div = styled.div`
     background-color: #eef3fd;
     position: sticky;
     top: 100px;
-
 `
 const DivOne = styled.div`
     margin: 10px;
@@ -95,16 +93,16 @@ const ProductList = () => {
   const location = useLocation();
   const cat = location.pathname.split("/")[2];
   // const cat_name = location.pathname.split("/")[3];
-  const [filters,setFilters] = useState({});
-  const [sort,setSort] = useState("newest");
-  
+  const [filters, setFilters] = useState({});
+  const [sort, setSort] = useState("newest");
+
 
   const handleFilters = (e) => {
-    setFilters(()=>e.target.value)
+    setFilters(() => e.target.value)
     const value = e.target.value;
     setFilters({
       ...filters,
-      [e.target.name] : value,
+      [e.target.name]: value,
     });
   };
 
@@ -113,35 +111,35 @@ const ProductList = () => {
 
   return (
     <div>
-    <Container>
+      <Container>
 
-      <ColorNav/>
-      {/* <Slider/> */}
+        <ColorNav />
+        {/* <Slider/> */}
 
-      <Title>Product Line 
-      <Btn><A><SearchIcon/></A></Btn>
-        <Input placeholder='Search Items.........'></Input>  
-      </Title>
-      
-      <FilterContainer>
-        <Filter>
-          <FilterText>Filter Products: </FilterText>
+        <Title>Product Line
+          <Btn><A><SearchIcon /></A></Btn>
+          <Input placeholder='Search Items.........'></Input>
+        </Title>
 
-          <Select name="color" onChange={handleFilters}>
+        <FilterContainer>
+          <Filter>
+            <FilterText>Filter Products: </FilterText>
+
+            <Select name="color" onChange={handleFilters}>
               <Option disabled>Type</Option>
               <Option>Scrubs</Option>
               <Option>Pants</Option>
               {/* <Option>Pant 2</Option> */}
-          </Select>
+            </Select>
 
-          <Select name="part" onChange={handleFilters}>
+            <Select name="part" onChange={handleFilters}>
               <Option disabled>Gender</Option>
               <Option value="male">Male</Option>
               <Option value="female">Female</Option>
               {/* <Option  value="pants">Pants</Option> */}
-          </Select>
+            </Select>
 
-          {/* <Select name="color" onChange={handleFilters}>
+            {/* <Select name="color" onChange={handleFilters}>
               <Option disabled>Pant</Option>
               <Option>Normal</Option>
               <Option>black</Option>
@@ -160,66 +158,66 @@ const ProductList = () => {
               <Option>L</Option>
               <Option>XL</Option>
           </Select> */}
-          
-         
-        </Filter>
-         
-        
-        <Filter>
-          <FilterText>Sort Porducts: </FilterText>
-          <Select onChange={e=>setSort(e.target.value)}>
+
+
+          </Filter>
+
+
+          <Filter>
+            <FilterText>Sort Porducts: </FilterText>
+            <Select onChange={e => setSort(e.target.value)}>
               <Option value="newest">Newest</Option>
               <Option value="asc">Price (asc)</Option>
               <Option value="desc">Price (desc)</Option>
-          </Select>
-        </Filter>
+            </Select>
+          </Filter>
 
-      </FilterContainer>
-    </Container>
-    <Container>
-      <div className='row'>
+        </FilterContainer>
+      </Container>
+      <Container>
+        <div className='row'>
           <div className='col-md-2'>
-             <Div>
-             <FilterTextOne>Brands</FilterTextOne>
-             <DivOne>
-             <Link className='link-primary text-decoration-none' to='/products/1/family%20hospital'>Family Hospital</Link><br></br>
-             </DivOne>
-             <DivOne>
-             <Link className='link-primary text-decoration-none' to='/products/2/branded'>Branded</Link><br></br>
-             </DivOne>
-             <DivOne>
-             <Link className='link-primary text-decoration-none' to='/products/3/ecofamily'>Eco Family</Link><br></br>
-             </DivOne>
-             <DivOne>
-             <Link className='link-primary text-decoration-none' to='/'>Oxypas</Link><br></br>
-             </DivOne>
-             <DivOne>
-             <Link className='link-primary text-decoration-none' to='/'>Unionmicroclean</Link><br></br>
-             </DivOne>
-             <DivOne>
-             <Link className='link-primary text-decoration-none' to='/'>Littman</Link><br></br>
-             </DivOne>
-             <DivOne>
-             <Link className='link-primary text-decoration-none' to='/'>Protech Masks</Link><br></br>
-             </DivOne>
-             <DivOne>
-             <Link className='link-primary text-decoration-none' to='/'>Polo Club</Link><br></br>
-             </DivOne>
-             <DivOne>
-             <Link className='link-primary text-decoration-none' to='/'>Factory Textile</Link><br></br>
-             </DivOne>
-             <DivOne>
-             <Link className='link-primary text-decoration-none' to='/'>Factory Material</Link><br></br>
-             </DivOne>
-            
-             </Div>
+            <Div>
+              <FilterTextOne>Brands</FilterTextOne>
+              <DivOne>
+                <Link className='link-primary text-decoration-none' to='/products/1/family%20hospital'>Family Hospital</Link><br></br>
+              </DivOne>
+              <DivOne>
+                <Link className='link-primary text-decoration-none' to='/products/2/branded'>Branded</Link><br></br>
+              </DivOne>
+              <DivOne>
+                <Link className='link-primary text-decoration-none' to='/products/3/ecofamily'>Eco Family</Link><br></br>
+              </DivOne>
+              <DivOne>
+                <Link className='link-primary text-decoration-none' to='/'>Oxypas</Link><br></br>
+              </DivOne>
+              <DivOne>
+                <Link className='link-primary text-decoration-none' to='/'>Unionmicroclean</Link><br></br>
+              </DivOne>
+              <DivOne>
+                <Link className='link-primary text-decoration-none' to='/'>Littman</Link><br></br>
+              </DivOne>
+              <DivOne>
+                <Link className='link-primary text-decoration-none' to='/'>Protech Masks</Link><br></br>
+              </DivOne>
+              <DivOne>
+                <Link className='link-primary text-decoration-none' to='/'>Polo Club</Link><br></br>
+              </DivOne>
+              <DivOne>
+                <Link className='link-primary text-decoration-none' to='/'>Factory Textile</Link><br></br>
+              </DivOne>
+              <DivOne>
+                <Link className='link-primary text-decoration-none' to='/'>Factory Material</Link><br></br>
+              </DivOne>
+
+            </Div>
           </div>
           <div className='col-md-10'>
-          <Products cat={cat} filters={filters} sort={sort}/>
+            <Products cat={cat} filters={filters} sort={sort} />
           </div>
-      </div>
-    </Container>
-    <Footer/>
+        </div>
+      </Container>
+      <Footer />
     </div>
   )
 }
