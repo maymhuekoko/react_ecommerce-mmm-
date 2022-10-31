@@ -15,7 +15,6 @@ const Image = styled.img`
     object-fit: contain;
     background-color: #fcf5f5;
     ${mobile({height: "30vh"})}
-    
 `
 const Info = styled.div`
 position: absolute;

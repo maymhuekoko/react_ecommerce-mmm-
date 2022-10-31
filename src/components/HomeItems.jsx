@@ -18,7 +18,6 @@ const Container = styled.div`
 `
 
 const SectionTitle = styled.h2`
-    text-align: center;
     font-weight: bold;
     font-size:30px;
     margin-left: 20px;

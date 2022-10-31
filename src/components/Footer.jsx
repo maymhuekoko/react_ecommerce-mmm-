@@ -7,11 +7,12 @@ import PinterestIcon from '@mui/icons-material/Pinterest';
 import EmailIcon from '@mui/icons-material/Email';
 import RoomIcon from '@mui/icons-material/Room';
 import PhoneIcon from '@mui/icons-material/Phone';
-import {mobile} from "../responsive"
+import YouTubeIcon from '@mui/icons-material/YouTube';
+import { mobile } from "../responsive"
 
 const Container = styled.div`
     display: flex;
-    ${mobile({flexDirection: "column"})}
+    ${mobile({ flexDirection: "column" })}
 `
 const Left = styled.div`
     flex: 1;
@@ -34,7 +35,7 @@ const SocialIcon = styled.div`
     height: 40px;
     border-radius: 50%;
     color: white;
-    background-color: #${props=>props.bgc};
+    background-color: #${props => props.bgc};
     display: flex;
     align-items: center;
     justify-content: center;
@@ -44,7 +45,7 @@ const SocialIcon = styled.div`
 const Center = styled.div`
     flex: 1;
     padding: 20px;
-    ${mobile({display: "none"})}
+    ${mobile({ display: "none" })}
 `
 const Title = styled.h3`
     margin-bottom: 30px;
@@ -66,7 +67,7 @@ const ListItem = styled.li`
 const Right = styled.div`
     flex: 1;
     padding: 20px;
-    ${mobile({backgroundColor: "#fff8f8"})}
+    ${mobile({ backgroundColor: "#fff8f8" })}
 `
 
 const ContactItem = styled.div`
@@ -81,65 +82,68 @@ const Payment = styled.img`
 `
 
 const Footer = () => {
-  return (
-    <Container>
-        <Left>
-            <Logo>Medical World</Logo>
-            <Description>
-                Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit placeat, earum consequatur, molestias cupiditate laboriosam nisi eligendi voluptatum quod totam soluta dolor obcaecati officia sunt repudiandae eaque odio magni architecto.
-            </Description>
-            <SocialContainer>
-                <SocialIcon bgc="3B5999">
-                    <FacebookIcon/>
-                </SocialIcon>
-                <SocialIcon bgc="E4405F">
-                    <InstagramIcon/>
-                </SocialIcon >
-                <SocialIcon bgc="55ACEE">
-                    <TwitterIcon/>
-                </SocialIcon>
-                <SocialIcon bgc="E60023">
-                    <PinterestIcon/>
-                </SocialIcon>
-            </SocialContainer>
-        </Left>
+    return (
+        <Container>
+            <Left>
+                <Logo>Medical World</Logo>
+                <Description>
+                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit placeat, earum consequatur, molestias cupiditate laboriosam nisi eligendi voluptatum quod totam soluta dolor obcaecati officia sunt repudiandae eaque odio magni architecto.
+                </Description>
+                <SocialContainer>
+                    <SocialIcon bgc="3B5999">
+                        <a href='#' style={{ color: 'white' }}><FacebookIcon /></a>
+                    </SocialIcon>
+                    <SocialIcon bgc="E4405F">
+                        <a href='#' style={{ color: 'white' }}><InstagramIcon /></a>
+                    </SocialIcon >
+                    <SocialIcon bgc="E60023">
+                        <a href='#' style={{ color: 'white' }}><YouTubeIcon /></a>
+                    </SocialIcon>
+                    <SocialIcon bgc="55ACEE">
+                        <a href='#' style={{ color: 'white' }}><TwitterIcon /></a>
+                    </SocialIcon>
+                    <SocialIcon bgc="E60023">
+                        <a href='#' style={{ color: 'white' }}><PinterestIcon /></a>
+                    </SocialIcon>
+                </SocialContainer>
+            </Left>
 
-        <Center>
-            <Title>Useful Links</Title>
-            <List>
-                <ListItem>Home</ListItem>
-                <ListItem>Cart</ListItem>
-                <ListItem>Man Fashion</ListItem>
-                <ListItem>Woman Fashion</ListItem>
-                <ListItem>Accessories</ListItem>
-                <ListItem>My Account</ListItem>
-                <ListItem>Order Tracking</ListItem>
-                <ListItem>WishList</ListItem>
-                <ListItem>Terms</ListItem>
-                <ListItem>Conditions</ListItem>
-            </List>
-        </Center>
+            <Center>
+                <Title>Useful Links</Title>
+                <List>
+                    <ListItem>Home</ListItem>
+                    <ListItem>Cart</ListItem>
+                    <ListItem>Man Fashion</ListItem>
+                    <ListItem>Woman Fashion</ListItem>
+                    <ListItem>Accessories</ListItem>
+                    <ListItem>My Account</ListItem>
+                    <ListItem>Order Tracking</ListItem>
+                    <ListItem>WishList</ListItem>
+                    <ListItem>Terms</ListItem>
+                    <ListItem>Conditions</ListItem>
+                </List>
+            </Center>
 
-        <Right>
-            <Title>Contact</Title>
-            <ContactItem>
-                <RoomIcon style={{marginRight: "10px"}}/>
-                No.28, Hlaing Yadanar Mon 3rd Street, Hlaing Yadanar Mon Avenue, Hlaing Township, Yangon
-            </ContactItem>
-                
-            <ContactItem>
-            <PhoneIcon style={{marginRight: "10px"}}/>
-                09777005861,09777005862
-            </ContactItem>
-                
-            <ContactItem>
-            <EmailIcon style={{marginRight: "10px"}}/>
-                info@medicalworld.com
-            </ContactItem>
-            <Payment src="https://i.ibb.co/Qfvn4z6/payment.png"/>
-        </Right>
-    </Container>
-  )
+            <Right>
+                <Title>Contact</Title>
+                <ContactItem>
+                    <RoomIcon style={{ marginRight: "10px" }} />
+                    No.28, Hlaing Yadanar Mon 3rd Street, Hlaing Yadanar Mon Avenue, Hlaing Township, Yangon
+                </ContactItem>
+
+                <ContactItem>
+                    <PhoneIcon style={{ marginRight: "10px" }} />
+                    09777005861,09777005862
+                </ContactItem>
+
+                <ContactItem>
+                    <EmailIcon style={{ marginRight: "10px" }} />
+                    info@medicalworld.com
+                </ContactItem>
+                <Payment src="https://i.ibb.co/Qfvn4z6/payment.png" />
+            </Right>
+        </Container>
+    )
 }
 
 export default Footer
