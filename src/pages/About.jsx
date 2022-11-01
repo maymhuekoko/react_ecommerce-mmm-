@@ -11,6 +11,7 @@ import Footer from '../components/Footer';
 import Newsletter from '../components/Newsletter';
 import AboutImgTest from '../slider-images/slider1.jpg'
 import sample from '../files/sample.mp4'
+import map from '../files/map.jpg'
 
 const Div = styled.div`
     overflow: hidden;
@@ -79,7 +80,7 @@ const SmallBox = styled.div`
     border-radius: 10px;
 `
 const SmallImgBox = styled.div`
-    width: 200px;
+    width: 280px;
     height: auto;
     min-height: 120px;
     margin-left: 20px;
@@ -93,7 +94,82 @@ const Image = styled.img`
     ${mobile({ height: "30vh" })}
 `
 const DeepBox = styled.div`
-
+    width: 100%;
+`
+const FPBox = styled.div`
+    display: flex;
+    align-item: center;
+    justify-content: center;
+`
+const Left = styled.div`
+    width: auto;
+    display: flex;
+    align-item: center;
+    justify-content: center;
+    flex-direction: column;
+`
+const Center = styled.div`
+    width: 33%;
+    display: flex;
+    align-item: center;
+    justify-content: center;
+    margin-top: 50px;
+`
+const Right = styled.div`
+    width: auto;
+    display: flex;
+    align-item: end;
+    justify-content: end;
+    flex-direction: column;
+`
+const Map = styled.div`
+    
+`
+const Location = styled.div`
+    width: 70%;
+    display: flex;
+    align-item: center;
+    justify-content: center;
+    position: relative;
+`
+const Burmar = styled.img`
+    width: 300px;
+    height: auto;
+`
+const PointerOne = styled.span`
+    position: absolute;
+    left: 150px;
+    top: 200px;
+    font-size: 18px;
+    font-weight: bold;
+`
+const PointerTwo = styled.span`
+    position: absolute;
+    left: 150px;
+    bottom: 200px;
+    font-size: 18px;
+    font-weight: bold;
+`
+const PointerThree = styled.span`
+    position: absolute;
+    right: 150px;
+    top: 100px;
+    font-size: 18px;
+    font-weight: bold;
+`
+const PointerFour = styled.span`
+    position: absolute;
+    right: 150px;
+    top: 400px;
+    font-size: 18px;
+    font-weight: bold;
+`
+const PointerFive = styled.span`
+    position: absolute;
+    right: 150px;
+    bottom: 100px;
+    font-size: 18px;
+    font-weight: bold;
 `
 
 const About = () => {
@@ -145,86 +221,116 @@ const About = () => {
                     </SecondDiv>
                 </Wrapper>
 
-                <Wrapper style={{padding: '30px'}}>
-                    <FirstDiv>
-                        {/* <img src={AboutImgTest} style={{ minWidth: '100%' }} /> */}
-                        <DeepBox>
-                            <Title style={{ color: '#212529' }}>Our Brands</Title>
-                            <Box>
-                                <SmallImgBox>
-                                    <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/branded.png`} />
-                                </SmallImgBox>
-                                <SmallImgBox>
-                                    <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/ecofamily.png`} />
-                                </SmallImgBox>
-                                <SmallImgBox>
-                                    <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/family.png`} />
-                                </SmallImgBox>
-                                <SmallImgBox>
-                                    <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/oxypas.png`} />
-                                </SmallImgBox>
-                            </Box>
-                        </DeepBox>
-                        <DeepBox>
-                            <Title style={{ color: '#212529' }}>Our Products</Title>
-                            <Box>
-                                <SmallImgBox style={{ paddingBottom: '30px',}}>
-                                    <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/product_lines/medical_scrub.png`} />
-                                    <span style={{ display: 'block', textAlign: 'center' }}>Default</span>
-                                </SmallImgBox>
-                                <SmallImgBox style={{ paddingBottom: '30px',}}>
-                                    <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/product_lines/doctor_coat.png`} />
-                                    <span style={{ display: 'block', textAlign: 'center' }}>Doctor Coat</span>
-                                </SmallImgBox>
-                                <SmallImgBox style={{ paddingBottom: '30px',}}>
-                                    <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/product_lines/gown.png`} />
-                                    <span style={{ display: 'block', textAlign: 'center' }}>Gown</span>
-                                </SmallImgBox>
-                                <SmallImgBox style={{ paddingLeft: '30px',}}>
-                                    <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/product_lines/pants.png`} />
-                                    <span style={{ display: 'block', textAlign: 'center' }}>Pants</span>
-                                </SmallImgBox>
-                            </Box>
-                        </DeepBox>
-                    </FirstDiv>
-                    {/* <SecondDiv>
-                        
-                    </SecondDiv> */}
+                <Wrapper style={{ padding: '50px' }}>
+                    {/* <img src={AboutImgTest} style={{ minWidth: '100%' }} /> */}
+                    <DeepBox>
+                        <Title style={{ color: '#212529' }}>Our Brands</Title>
+                        <Box>
+                            <SmallImgBox>
+                                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/branded.png`} />
+                            </SmallImgBox>
+                            <SmallImgBox>
+                                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/ecofamily.png`} />
+                            </SmallImgBox>
+                            <SmallImgBox>
+                                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/family.png`} />
+                            </SmallImgBox>
+                            <SmallImgBox>
+                                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/oxypas.png`} />
+                            </SmallImgBox>
+                        </Box>
+                    </DeepBox>
+                    <DeepBox>
+                        <Title style={{ color: '#212529' }}>Our Products</Title>
+                        <Box>
+                            <SmallImgBox style={{ paddingBottom: '30px', }}>
+                                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/product_lines/medical_scrub.png`} />
+                                <span style={{ display: 'block', textAlign: 'center' }}>Default</span>
+                            </SmallImgBox>
+                            <SmallImgBox style={{ paddingBottom: '30px', }}>
+                                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/product_lines/doctor_coat.png`} />
+                                <span style={{ display: 'block', textAlign: 'center' }}>Doctor Coat</span>
+                            </SmallImgBox>
+                            <SmallImgBox style={{ paddingBottom: '30px', }}>
+                                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/product_lines/gown.png`} />
+                                <span style={{ display: 'block', textAlign: 'center' }}>Gown</span>
+                            </SmallImgBox>
+                            <SmallImgBox style={{ paddingLeft: '30px', }}>
+                                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/product_lines/pants.png`} />
+                                <span style={{ display: 'block', textAlign: 'center' }}>Pants</span>
+                            </SmallImgBox>
+                        </Box>
+                    </DeepBox>
                 </Wrapper>
 
-                <Wrapper style={{padding: '30px'}}>
-                    <FirstDiv>
-                        {/* <img src={AboutImgTest} style={{ minWidth: '100%' }} /> */}
-                        <DeepBox>
-                            <Title style={{ color: '#212529' }}>Our Clients</Title>
-                            <Box style={{justifyContent: 'start'}}>
-                                <SmallImgBox>
-                                    <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/branded.png`} />
-                                </SmallImgBox>
-                                <SmallImgBox>
-                                    <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/ecofamily.png`} />
-                                </SmallImgBox>
-                                <SmallImgBox>
-                                    <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/family.png`} />
-                                </SmallImgBox>
-                                <SmallImgBox>
-                                    <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/oxypas.png`} />
-                                </SmallImgBox>
-                                <SmallImgBox>
-                                    <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/branded.png`} />
-                                </SmallImgBox>
-                                {/* <SmallImgBox style={{marginTop: '20px'}}>
-                                    <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/branded.png`} />
-                                </SmallImgBox> */}
-                            </Box>
-                        </DeepBox>
-                    </FirstDiv>
-                    {/* <SecondDiv>
-                        
-                    </SecondDiv> */}
+                <Wrapper>
+                    <Title style={{ color: '#212529' }}>Our Factory and Production</Title>
+                    <FPBox>
+                        <Left>
+                            <SmallImgBox>
+                                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/branded.png`} />
+                            </SmallImgBox>
+                            <SmallImgBox style={{ marginTop: '10px' }}>
+                                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/ecofamily.png`} />
+                            </SmallImgBox>
+                        </Left>
+                        <Center>
+                            <SmallBox style={{ width: '100%', height: '180px' }}>
+                                Lorem ipsum dolor sit amet consectetur, adipisicing elit.? Lorem ipsum dolor sit amet consectetur, adipisicing elit.?
+                                Lorem ipsum dolor sit amet consectetur, adipisicing elit.? Lorem ipsum dolor sit amet consectetur, adipisicing elit.?
+                            </SmallBox>
+                        </Center>
+                        <Right>
+                            <SmallImgBox>
+                                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/branded.png`} />
+                            </SmallImgBox>
+                            <SmallImgBox style={{ marginTop: '10px' }}>
+                                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/ecofamily.png`} />
+                            </SmallImgBox>
+                        </Right>
+                    </FPBox>
                 </Wrapper>
 
-                
+                <Wrapper style={{ padding: '30px' }}>
+                    {/* <img src={AboutImgTest} style={{ minWidth: '100%' }} /> */}
+                    <DeepBox>
+                        <Title style={{ color: '#212529' }}>Our Clients</Title>
+                        <Box>
+                            <SmallImgBox>
+                                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/branded.png`} />
+                            </SmallImgBox>
+                            <SmallImgBox>
+                                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/ecofamily.png`} />
+                            </SmallImgBox>
+                            <SmallImgBox>
+                                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/family.png`} />
+                            </SmallImgBox>
+                            <SmallImgBox style={{ marginTop: '20px' }}>
+                                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/oxypas.png`} />
+                            </SmallImgBox>
+                            <SmallImgBox style={{ marginTop: '20px' }}>
+                                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/branded.png`} />
+                            </SmallImgBox>
+                            <SmallImgBox style={{ marginTop: '20px' }}>
+                                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/branded.png`} />
+                            </SmallImgBox>
+                        </Box>
+                    </DeepBox>
+                </Wrapper>
+
+                <Wrapper>
+                    <Title style={{ color: '#212529' }}>Our Sale Network</Title>
+                    <Location>
+                        <Map>
+                            <Burmar src={map} />
+                        </Map>
+                        <PointerOne>First Sale Location <br/> Our First Upper Branch</PointerOne>
+                        <PointerTwo>Second Sale Location <br/> Our Second Upper Branch</PointerTwo>
+                        <PointerThree>Third Sale Location <br/> Our Third Upper Branch</PointerThree>
+                        <PointerFour>Fourth Sale Location <br/> Our Fourth Upper Branch</PointerFour>
+                        <PointerFive>Fifth Sale Location <br/> Our Fifth Upper Branch</PointerFive>
+                    </Location>
+                </Wrapper>
 
             </Div>
             <div>
