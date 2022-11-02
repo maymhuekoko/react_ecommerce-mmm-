@@ -8,7 +8,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import ColorNav from '../components/ColorNav';
 import Footer from '../components/Footer';
-import Newsletter from '../components/Newsletter';
+import emailjs from '@emailjs/browser'; 
 
 const Div = styled.div`
     margin-top: 65px;
@@ -47,25 +47,28 @@ const Form = styled.form`
 const Input = styled.input`
     flex: 1;
     min-width: 40%;
+    min-height: 30px;
     margin: 10px 0px;
-    padding: 10px;
+    padding: 5px;
 `
 const Message = styled.textarea`
     flex: 1;
     min-width: 40%;
-    min-height: 150px;
+    min-height: 130px;
     margin: 10px 0px;
-    padding: 10px;
+    padding: 5px;
 `
 const Check = styled.input`
     display: inline-block;
-    
+    width: 18px;
+    height: 18px;
+    margin-top: 20px;
+    margin-right: 10px;
 `
 const Button = styled.button`
     width: 100%;
-    height: 70px;
+    height: 40px;
     border: none;
-    padding: 15px 20px;
     background-color: #32549b;
     color: white;
     cursor: pointer;
@@ -77,18 +80,35 @@ const Contact = () => {
     const [name, setName] = useState('');
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
+    const [subscribe, setSubscribe] = useState('');
+
+    const didSubscribe = subscribe == 'checked' ? '1' : '0';
 
     const data = {
         name: name,
         email :email,
-        message: message
+        message: message,
+        subscribe_flag: didSubscribe
     }
 
-    const SendMessage = () => {
-        axios.post('http://medicalworldinvpos.kwintechnologykw09.com/api/contact_message', data)
-        .then()
-    }
+    const SendMessage = (e) => {
+        e.preventDefault();
 
+        console.log(data);
+        // axios.post('http://medicalworldinvpos.kwintechnologykw09.com/api/send_message', data)
+
+        emailjs.sendForm('service_79e361n', 'template_pt919ms', e.target, 'plkqX8v0BRW5x7pd8')
+        .then((result) => {
+            alert('Email sent successfully');
+            setName('');
+            setEmail('');
+            setMessage('');
+            setSubscribe('');
+        }, (error) => {
+            alert('Fail to send email');
+        });
+    }
+ 
     return (
         
         <div>
@@ -103,7 +123,10 @@ const Contact = () => {
                         <Input type="text" name='name' placeholder="Name" value={name} onChange={(e)=>setName(e.target.value)}/>
                         <Input type="text" name='email' placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
                         <Message name='message' placeholder='Message' value={message} onChange={(e)=>setMessage(e.target.value)}/>
-                        <label for="check" style={{cursor: 'pointer'}}>Subscribe for Update News</label><Check id="check" type="checkbox" style={{display: 'inline-block'}}/>
+                        <div>
+                            <Check id="check" type="checkbox" onChange={(e)=>setSubscribe('checked')} style={{display: 'inline-block'}}/>
+                            <label for="check" style={{cursor: 'pointer'}}>Subscribe for Update News</label>
+                        </div>
                         <Button>Send Message</Button>
                     </Form>
                 </Wrapper>
