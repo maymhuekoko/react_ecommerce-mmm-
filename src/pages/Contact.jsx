@@ -25,8 +25,7 @@ const Wrapper = styled.div`
     flex-direction: column;
     ${mobile({padding: '50'})}
 `
-const Title = styled.h1`
-    font-size: 50px;
+const Title = styled.h2`
     margin-bottom: 20px;
     text-align: center;
 `
@@ -58,22 +57,37 @@ const Message = styled.textarea`
     margin: 10px 0px;
     padding: 10px;
 `
+const Check = styled.input`
+    display: inline-block;
+    
+`
 const Button = styled.button`
     width: 100%;
     height: 70px;
     border: none;
     padding: 15px 20px;
-    background-color: teal;
+    background-color: #32549b;
     color: white;
     cursor: pointer;
     margin-top: 20px;
-    &:disabled{
-        color: green;
-        cursor: not-allowed;
-    }
 `
 
 const Contact = () => {
+
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
+
+    const data = {
+        name: name,
+        email :email,
+        message: message
+    }
+
+    const SendMessage = () => {
+        axios.post('http://medicalworldinvpos.kwintechnologykw09.com/api/contact_message', data)
+        .then()
+    }
 
     return (
         
@@ -84,18 +98,16 @@ const Contact = () => {
             <Div>
                 <Wrapper>
                     <Title>Contact Us</Title>
-                    <Description>You are free to ask anything</Description>
-                    <Form>
-                        <Input type="text"  placeholder="User Name"/>
-                        <Input type="text" placeholder="Email"/>
-                        <Message placeholder='Write Your Message'/>
+                    <Description>Feels free to ask anything...</Description>
+                    <Form onSubmit={SendMessage}>
+                        <Input type="text" name='name' placeholder="Name" value={name} onChange={(e)=>setName(e.target.value)}/>
+                        <Input type="text" name='email' placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
+                        <Message name='message' placeholder='Message' value={message} onChange={(e)=>setMessage(e.target.value)}/>
+                        <label for="check" style={{cursor: 'pointer'}}>Subscribe for Update News</label><Check id="check" type="checkbox" style={{display: 'inline-block'}}/>
                         <Button>Send Message</Button>
                     </Form>
                 </Wrapper>
             </Div>
-            <div>
-                <Newsletter/>
-            </div>
             <div>
                 <Footer/>
             </div>

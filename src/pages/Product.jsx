@@ -17,7 +17,7 @@ import { prettyDOM } from '@testing-library/react'
 import CheckColor from '../components/CheckColor'
 import CheckSize from '../components/CheckSize'
 import CheckFabric from '../components/CheckFabric'
-import sample from '../pdf/sample1.pdf'
+import sample from '../files/sample.pdf'
 
 const Container = styled.div``
 const Wrapper = styled.div`
