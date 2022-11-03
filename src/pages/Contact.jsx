@@ -95,7 +95,7 @@ const Contact = () => {
         e.preventDefault();
 
         console.log(data);
-        // axios.post('http://medicalworldinvpos.kwintechnologykw09.com/api/send_message', data)
+        axios.post('http://medicalworldinvpos.kwintechnologykw09.com/api/send_message', data)
 
         emailjs.sendForm('service_79e361n', 'template_pt919ms', e.target, 'plkqX8v0BRW5x7pd8')
         .then((result) => {
