@@ -205,7 +205,7 @@ const savepreorder = () =>{
     ).catch(err =>{
         console.log('error');
     });
-    const res = axios.post('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_preorder_store', {
+    const res = axios.post('http://medicalworldinvpos.kwintechnologykw09.com/api/ecommerce_preorder_store', {
         id: username.id,
         name: username.name,
         phone: username.phone,

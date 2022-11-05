@@ -76,7 +76,7 @@ export default function InvoiceDialog(props) {
 
 <Div className="col-12 text-center">
     <Div>
-        <Img src="https://familyuniformapp.medicalworld.com.mm/image/medicalWorld.png"/>
+        <Img src="http://medicalworldinvpos.kwintechnologykw09.com/image/medicalWorld.png"/>
     </Div>
 
     <Div>
