@@ -33,9 +33,9 @@ const CheckSize = (props) => {
         <DialogContent>
           
         {gen == 'm' ? (
-        <Img src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/sizechart/`+deg+`_male_sizechart.jpg`} />
+        <Img src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/sizechart/`+deg+`_male_sizechart.jpg`} />
       ) : (
-        <Img src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/sizechart/`+deg+`_female_sizechart.jpg`} />
+        <Img src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/sizechart/`+deg+`_female_sizechart.jpg`} />
       )}
 
         </DialogContent>

@@ -227,16 +227,16 @@ const About = () => {
                         <Title style={{ color: '#212529' }}>Our Brands</Title>
                         <Box>
                             <SmallImgBox>
-                                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/branded.png`} />
+                                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/brands/branded.png`} />
                             </SmallImgBox>
                             <SmallImgBox>
-                                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/ecofamily.png`} />
+                                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/brands/ecofamily.png`} />
                             </SmallImgBox>
                             <SmallImgBox>
-                                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/family.png`} />
+                                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/brands/family.png`} />
                             </SmallImgBox>
                             <SmallImgBox>
-                                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/oxypas.png`} />
+                                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/brands/oxypas.png`} />
                             </SmallImgBox>
                         </Box>
                     </DeepBox>
@@ -244,19 +244,19 @@ const About = () => {
                         <Title style={{ color: '#212529' }}>Our Products</Title>
                         <Box>
                             <SmallImgBox style={{ paddingBottom: '30px', }}>
-                                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/product_lines/medical_scrub.png`} />
+                                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/product_lines/medical_scrub.png`} />
                                 <span style={{ display: 'block', textAlign: 'center' }}>Default</span>
                             </SmallImgBox>
                             <SmallImgBox style={{ paddingBottom: '30px', }}>
-                                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/product_lines/doctor_coat.png`} />
+                                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/product_lines/doctor_coat.png`} />
                                 <span style={{ display: 'block', textAlign: 'center' }}>Doctor Coat</span>
                             </SmallImgBox>
                             <SmallImgBox style={{ paddingBottom: '30px', }}>
-                                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/product_lines/gown.png`} />
+                                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/product_lines/gown.png`} />
                                 <span style={{ display: 'block', textAlign: 'center' }}>Gown</span>
                             </SmallImgBox>
                             <SmallImgBox style={{ paddingLeft: '30px', }}>
-                                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/product_lines/pants.png`} />
+                                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/product_lines/pants.png`} />
                                 <span style={{ display: 'block', textAlign: 'center' }}>Pants</span>
                             </SmallImgBox>
                         </Box>
@@ -268,10 +268,10 @@ const About = () => {
                     <FPBox>
                         <Left>
                             <SmallImgBox>
-                                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/branded.png`} />
+                                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/brands/branded.png`} />
                             </SmallImgBox>
                             <SmallImgBox style={{ marginTop: '10px' }}>
-                                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/ecofamily.png`} />
+                                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/brands/ecofamily.png`} />
                             </SmallImgBox>
                         </Left>
                         <Center>
@@ -282,10 +282,10 @@ const About = () => {
                         </Center>
                         <Right>
                             <SmallImgBox>
-                                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/branded.png`} />
+                                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/brands/branded.png`} />
                             </SmallImgBox>
                             <SmallImgBox style={{ marginTop: '10px' }}>
-                                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/ecofamily.png`} />
+                                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/brands/ecofamily.png`} />
                             </SmallImgBox>
                         </Right>
                     </FPBox>
@@ -297,22 +297,22 @@ const About = () => {
                         <Title style={{ color: '#212529' }}>Our Clients</Title>
                         <Box>
                             <SmallImgBox>
-                                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/branded.png`} />
+                                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/brands/branded.png`} />
                             </SmallImgBox>
                             <SmallImgBox>
-                                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/ecofamily.png`} />
+                                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/brands/ecofamily.png`} />
                             </SmallImgBox>
                             <SmallImgBox>
-                                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/family.png`} />
+                                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/brands/family.png`} />
                             </SmallImgBox>
                             <SmallImgBox style={{ marginTop: '20px' }}>
-                                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/oxypas.png`} />
+                                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/brands/oxypas.png`} />
                             </SmallImgBox>
                             <SmallImgBox style={{ marginTop: '20px' }}>
-                                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/branded.png`} />
+                                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/brands/branded.png`} />
                             </SmallImgBox>
                             <SmallImgBox style={{ marginTop: '20px' }}>
-                                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/branded.png`} />
+                                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/brands/branded.png`} />
                             </SmallImgBox>
                         </Box>
                     </DeepBox>

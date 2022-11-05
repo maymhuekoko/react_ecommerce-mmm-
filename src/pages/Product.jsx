@@ -299,7 +299,7 @@ const Product = () => {
     
     useEffect(() => {
         const getProduct = () => {
-            axios.get("http://medicalworldinvpos.kwintechnologykw09.com/api/unitbyid_api/" + id)
+            axios.get("http://familyuniformapp.medicalworld.com.mm/api/unitbyid_api/" + id)
                 .then((response) => {
                     setItem(response.data.item);
                     setDesign(response.data.item.item_name);
@@ -310,7 +310,7 @@ const Product = () => {
                         'subcategory_id': response.data.item.sub_category_id
                     }
 
-                    axios.post('http://medicalworldinvpos.kwintechnologykw09.com/api/productlineitems_api', obj)
+                    axios.post('http://familyuniformapp.medicalworld.com.mm/api/productlineitems_api', obj)
                         .then(res => {
                             setRelatedItems(res.data);
                             console.log(res.data);
@@ -383,12 +383,12 @@ const Product = () => {
                 <ImgContainer>
 
 
-                    <MainImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/${item.photo_path}`} id='main' />
+                    <MainImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/${item.photo_path}`} id='main' />
 
                     <SmallImgContainer>
-                        <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/${item.photo_path?.replace("front", "left")}`} onClick={change_photo} id='' />
-                        <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/${item.photo_path?.replace("front", "right")}`} onClick={change_photo} id='' />
-                        <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/${item.photo_path?.replace("front", "body")}`} onClick={change_photo} id='hel' />
+                        <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/${item.photo_path?.replace("front", "left")}`} onClick={change_photo} id='' />
+                        <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/${item.photo_path?.replace("front", "right")}`} onClick={change_photo} id='' />
+                        <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/${item.photo_path?.replace("front", "body")}`} onClick={change_photo} id='hel' />
 
                     </SmallImgContainer>
 
@@ -487,7 +487,7 @@ const Product = () => {
                         {relateditems.map((it) => (
                             <div>
                                 <div>
-                                    <SmallImageOne src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/${it.photo_path}`} key={it.id} />
+                                    <SmallImageOne src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/${it.photo_path}`} key={it.id} />
 
                                 </div>
                                 <div style={{textAlign: 'center'}}>
