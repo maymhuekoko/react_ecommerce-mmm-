@@ -91,8 +91,12 @@ const Contact = () => {
         subscribe_flag: didSubscribe
     }
 
-    const SendMessage = (e) => {
-        e.preventDefault();
+
+    const SendMessage = () => {
+        axios.post('http://familyuniformapp.medicalworld.com.mm/api/contact_message', data)
+        .then()
+    }
+
 
         console.log(data);
         axios.post('http://medicalworldinvpos.kwintechnologykw09.com/api/send_message', data)
