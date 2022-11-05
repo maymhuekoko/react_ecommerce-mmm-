@@ -9,12 +9,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import ColorNav from './ColorNav';
 import Footer from './Footer';
+import InvoiceDialog from './InvoiceDialog';
 
 const Div = styled.div`
-margin-top:70px;
+margin-top:90px;
 `
 const Wrapper = styled.div`
-    widtr: 100vw;
+    width: 100vw;
     height: auto;
     min-height: 100vh;
     padding: 50px;
@@ -58,6 +59,7 @@ const Th = styled.th`
     border: 1px solid rgba(2,127,157,1);
     color: #ffffff;
     padding: 20px;
+    text-align: center;
     ${mobile({width: "90%"})}
 `
 const Td = styled.td`
@@ -73,6 +75,18 @@ const TableButton = styled.button`
     border-radius: 3px;
     text-align: center;
 `
+const TableButton1 = styled.button`
+    padding: 3px;
+    background-color: teal;
+    color: white;
+    font-size: 17px;
+    font-weight: 600;
+    border-radius: 3px;
+    text-align: center;
+    margin-left : 10px;
+    border : none;
+`
+
 const Span = styled.span`
     background-color: rgba(2,127,157,1);
     color: white;
@@ -83,9 +97,46 @@ const Span = styled.span`
     box-shadow: 2px 2px 2px rgba(0,0,0,0.3);
 `
 
+export const Tabs = styled.div`
+  overflow: hidden;
+  background: #fff;
+  font-family: Open Sans;
+  height: 3em;
+`;
+
+export const Tab = styled.button`
+  border: none;
+  outline: none;
+  cursor: pointer;
+  width: 40%;
+  position: relative;
+
+  margin-right: 0.1em;
+  font-size: 1em;
+  border: ${props => (props.active ? "1px solid #ccc" : "")};
+  border-bottom: ${props => (props.active ? "none" : "")};
+  background-color: ${props => (props.active ? "white" : "lightgray")};
+  height: ${props => (props.active ? "3em" : "2.6em; top:.4em")};
+  transition: background-color 0.5s ease-in-out;
+
+  :hover {
+    background-color: white;
+  }
+`;
+export const Content = styled.div`
+  ${props => (props.active ? "" : "display:none")}
+`;
+
 const OrderList = () => {
 
     const [orders, setOrders] = useState([]);
+    const [preorders, setPreorders] = useState([]);
+    const [active, setActive] = useState(0);
+    const [name,setName] = useState('');
+    const [phone,setPhone] = useState('');
+    const [address,setAddress] = useState('');
+    const [countingunit,setCountingUnit] = useState([{}]);
+    const [showDialog, setShowDialog] = useState(false);
 
     const username = useSelector(state=>state.user);
 
@@ -93,17 +144,43 @@ const OrderList = () => {
         fetchOrderList();
     },[]);
 
-    const fetchOrderList = () => {
-        axios.get('https://medicalworldinvpos.kwintechnologykw09.com/api/ecommerce_order_index')
+    const onInvoiceClicked =(id) => {
+        // 
+        axios.get('https://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_detail/'+id)
         .then(res=>{
-            console.log(res.data);
+            console.log('hey');
+            setName(res.data.orders.customer_name);
+           setPhone(res.data.orders.customer_phone);
+           setAddress(res.data.orders.deliver_address);
+           setCountingUnit(res.data.counting_units);
+        })
+        setShowDialog(true);
+    }
 
-            const filteredData = res.data.filter((data) => {
+
+
+    const fetchOrderList = () => {
+        axios.get('https://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_index')
+        .then(res=>{
+            console.log(res.data.instock);
+
+            const filteredData = res.data.instock.filter((data) => {
+                return data.customer_id == username.id
+            })
+            const filteredData1 = res.data.preorder.filter((data) => {
                 return data.customer_id == username.id
             })
             setOrders(filteredData);
+            setPreorders(filteredData1);
         })
     }
+
+    const handleClick = e => {
+        const index = parseInt(e.target.id, 0);
+        if (index !== active) {
+          setActive(index);
+        }
+      };
 
     return (
         
@@ -112,9 +189,20 @@ const OrderList = () => {
                 <ColorNav/>
             </div>
         <Div>
-            <Wrapper>
-            <Title>Your Order List</Title>
-            <Table>
+        <Tabs>
+        <Tab onClick={handleClick} active={active === 0} id={0}>
+           Instock Order List
+        </Tab>
+
+        <Tab onClick={handleClick} active={active === 1} id={1}>
+           Pre Order List
+        </Tab>
+        </Tabs>
+
+        <>
+        <Content active={active === 0}>
+        <Wrapper>
+            <Table style={{marginBottom: "160px"}}>
                 <Tr>
                     <Th>No</Th>
                     <Th>Order No</Th>
@@ -133,7 +221,7 @@ const OrderList = () => {
                             <Td>{order.order_code}</Td>
                             <Td>{order.customer_name}</Td>
                             <Td>{order.deliver_address}</Td>
-                            {order.order_type == 2 ? <Td>{order.order_date}(Pre-Order)</Td> : <Td>{order.order_date}</Td>}
+                            <Td>{order.order_date}</Td>
                             
                             <Td><Span>{order.order_status}</Span></Td>
                             <Td>{order.total_quantity}</Td>
@@ -141,15 +229,57 @@ const OrderList = () => {
                             <Td>
                             <Link to={{ pathname:'/order_detail/'+order.id }}>
                                 <TableButton>Order Detail</TableButton>
-                            </Link>    
+                            </Link>   
+                            <TableButton1 onClick={()=>onInvoiceClicked(order.id)}>Invoice</TableButton1>    
                             </Td>
                         </Tr>
                     ))
                 }
             </Table> 
         </Wrapper>
+        </Content>
+        <Content active={active === 1}>
+        <Wrapper>
+            <Table>
+                <Tr>
+                    <Th>No</Th>
+                    <Th>Order No</Th>
+                    <Th>Customer Name</Th>
+                    <Th>Order Address</Th>
+                    <Th>Order Date</Th>
+                    <Th>Order Status</Th>
+                    <Th>Total Quantity</Th>
+                    <Th>Total Amount</Th>
+                    <Th>Detail</Th>
+                </Tr>
+                {
+                    preorders.map((preorder, index) => (
+                        <Tr key={preorder.id}>
+                            <Td>{++index}</Td>
+                            <Td>{preorder.order_code}</Td>
+                            <Td>{preorder.customer_name}</Td>
+                            <Td>{preorder.deliver_address}</Td>
+                            <Td>{preorder.order_date}</Td>
+                            
+                            <Td><Span>{preorder.order_status}</Span></Td>
+                            <Td>{preorder.total_quantity}</Td>
+                            <Td>{preorder.total_amount}</Td>
+                            <Td>
+                            <Link to={{ pathname:'/order_detail/'+preorder.id }}>
+                                <TableButton>Order Detail</TableButton>
+                            </Link>
+                            <TableButton1 onClick={()=>onInvoiceClicked(preorder.id)}>Invoice</TableButton1>    
+                            </Td>
+                        </Tr>
+                    ))
+                }
+            </Table> 
+        </Wrapper>
+        </Content>
+         </>
         </Div>
         <div>
+            <InvoiceDialog open={showDialog} close={()=>setShowDialog(false)} name={name} phone={phone} address={address} unit = {countingunit}/>
             <Footer/>
         </div>
         </div>

@@ -123,7 +123,7 @@ const Product = ({ item }, props) => {
 
     const collapse = () => {
         const obj = { 'category_id': item.category_id, 'subcategory_id': item.id }
-        axios.post('http://medicalworldinvpos.kwintechnologykw09.com/api/productlineitems_api', obj)
+        axios.post('http://familyuniformapp.medicalworld.com.mm/api/productlineitems_api', obj)
             .then(res => {
 
                 setItems(res.data);
@@ -138,7 +138,7 @@ const Product = ({ item }, props) => {
 
             <Container className="header" {...getToggleProps()}>
                 <Circle />
-                <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/product_lines/${item.photo_path}`} />
+                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/product_lines/${item.photo_path}`} />
                 <Info>
                     <Icon><ShoppingCartOutlined /></Icon>
                     <Icon><Link to={`/product/${item.id}`}><SearchOutlined /></Link></Icon>
@@ -156,7 +156,7 @@ const Product = ({ item }, props) => {
                         <div style={{ display: 'inline-block' }}>
                             <div style={{ display: 'flex', flexDirection: 'column' }}>
                                 <div style={{ display: 'inline-block' }}>
-                                    <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/${it.photo_path}`} key={it.id} />
+                                    <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/${it.photo_path}`} key={it.id} />
                                 </div>
                                 <div style={{ textAlign: 'center', maxWidth: '250px', display: 'inline-block' }}>
                                     <span>{it.item_name}</span>
@@ -175,7 +175,7 @@ const Product = ({ item }, props) => {
                             <div style={{ display: 'inline-block' }}>
                                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                                     <div style={{ display: 'inline-block' }}>
-                                        <Link to={`/product/${it.id}`}><SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/${it.photo_path}`} key={it.id} /></Link>
+                                        <Link to={`/product/${it.id}`}><SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/${it.photo_path}`} key={it.id} /></Link>
                                     </div>
                                     <div style={{ textAlign: 'center', maxWidth: '250px', display: 'inline-block' }}>
                                         <span>{it.item_name}</span>

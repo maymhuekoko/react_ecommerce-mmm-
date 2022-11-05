@@ -85,7 +85,7 @@ const Contact = () => {
     }
 
     const SendMessage = () => {
-        axios.post('http://medicalworldinvpos.kwintechnologykw09.com/api/contact_message', data)
+        axios.post('http://familyuniformapp.medicalworld.com.mm/api/contact_message', data)
         .then()
     }
 

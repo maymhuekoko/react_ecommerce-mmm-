@@ -45,7 +45,7 @@ const CategoryItem = ({item}) => {
   return (
     <Container>
         <Link to={`/products/${item.id}/${item.category_name}`}>
-        <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/${item.photo_path}`}/>
+        <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/brands/${item.photo_path}`}/>
         <Info>
             <Button>Details</Button>
         </Info>

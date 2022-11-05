@@ -8,6 +8,8 @@ import axios from 'axios'
 import { useLocation ,useNavigate} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { addOrder,removeOrder,resetOrder } from "../redux/designRedux"
+import Swal from 'sweetalert2'
+
 
 const Div = styled.div`
 margin-top: 30px;
@@ -116,7 +118,7 @@ const Order = () => {
      
         const val = document.getElementById('specs').value;
         let html = '';
-        axios.get("http://medicalworldinvpos.kwintechnologykw09.com/api/ecommerce_order_type")
+        axios.get("http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_type")
                 .then((response) => {  
         if(val == 1){
             response.data.fabric.map((el)=>{
@@ -151,12 +153,14 @@ const Order = () => {
     const qtychange = () =>{
        let testname = document.getElementById('item_name').innerHTML;
         let testqty = document.getElementById('qty').value;
+        let testprice = document.getElementById('price').value;
         setCount(++count);
         let orderid  = count;
         // alert(testname,testqty);
-        dispatch(addOrder({orderid,testname,testqty}));
+        dispatch(addOrder({orderid,testname,testqty,testprice}));
         document.getElementById('item_name').innerHTML = design_name;
         document.getElementById('qty').value = '';
+        document.getElementById('price').value = '';
         document.getElementById('types').innerHTML = '';
         document.getElementById("specs").selectedIndex = "0";
     }
@@ -165,8 +169,43 @@ const Order = () => {
    
 }
 
+const changeprice = ()=>{
+    const counting =  document.getElementById('item_name').innerHTML;
+    axios.post('http://familyuniformapp.medicalworld.com.mm/api/showprice',{
+           unit: counting       
+    }).then(res=>
+    {
+        alert('success');
+        document.getElementById('price').value = res.data.data;
+    }
+    ).catch(err =>{
+        console.log('error');
+    });
+}
+
 const savepreorder = () =>{
-    const res = axios.post('http://medicalworldinvpos.kwintechnologykw09.com/api/ecommerce_preorder_store', {
+    console.log(pre);
+    axios.post('http://familyuniformapp.medicalworld.com.mm/api/send/invoice_email',{
+            id: username.id,
+            name: username.name,
+            phone: username.phone,
+            address: username.address,
+            preorders: pre,
+    }).then(res=>
+    {
+      console.log(res.data['message']);
+      //Success Message in Sweetalert modal
+      Swal.fire({
+        title:  res.data['message'],
+        text: "Thanks For Your Pre-Orders! Your will be delivered within four to six weeks!",
+        type: 'success',    
+      });
+    
+    }
+    ).catch(err =>{
+        console.log('error');
+    });
+    const res = axios.post('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_preorder_store', {
         id: username.id,
         name: username.name,
         phone: username.phone,
@@ -225,6 +264,7 @@ const savepreorder = () =>{
                         <th scope="col">Item Name</th>
                         <th scope="col">Specification</th>
                         <th scope="col">Quantity</th>
+                        <th scope="col">Price</th>
                         <th scope="col"></th>
                         </tr>
                     </thead>
@@ -245,7 +285,8 @@ const savepreorder = () =>{
                  </Select>&nbsp;&nbsp;&nbsp;
                  <Btn onClick={additem}><Add/></Btn>
                  </td>
-                 <td><Qty  id={"qty"} placeholder="0"/></td>
+                 <td><Qty  id={"qty"} placeholder="0" onKeyUp={changeprice}/></td>
+                 <td><Qty  id={"price"} placeholder="0"/></td>
                  <td><Delete onClick={qtychange}>Add</Delete></td>
                  <td></td>
                  </tr>
@@ -258,25 +299,37 @@ const savepreorder = () =>{
                     <Text>Your Preorder Items</Text>
                 <div className='mt-4 mb-5' id="preorders">
                     <div className='row mt-2 text-center'>
-                        <div className='offset-md-2 col-md-3'>
+                        <div className='offset-md-1 col-md-3'>
                             <span>Item Name</span>
                         </div>
                         <div className='col-md-2'>
                             <span>Quantity</span>
                         </div>
-                        <div className='col-md-3'>
+                        <div className='col-md-2'>
+                            <span>Price</span>
+                        </div>
+                        <div className='col-md-2'>
+                            <span>Total</span>
+                        </div>
+                        <div className='col-md-2'>
                             <span>Action</span>
                         </div>
                     </div>
                     {pre.map((p)=>(
                         <div className='row mt-2 text-center'>
-                        <div className='offset-md-2 col-md-3'>
+                        <div className='offset-md-1 col-md-3'>
                             <span>{p.testname}</span>
                         </div>
                         <div className='col-md-2'>
                             <span>{p.testqty}</span>
                         </div>
-                        <div className='col-md-3'>
+                        <div className='col-md-2'>
+                            <span>{p.testprice}</span>
+                        </div>
+                        <div className='col-md-2'>
+                            <span>{p.testqty * p.testprice}</span>
+                        </div>
+                        <div className='col-md-2'>
                             <span><Cancel onClick={() => remove(p.orderid)}>Cancel</Cancel></span>
                         </div>
                     </div>
@@ -285,9 +338,6 @@ const savepreorder = () =>{
 
                 <Save onClick={savepreorder}>Make Order</Save>
             
-                    
-                   
-
                 </Div>
             </Wrapper>
         <Footer/>
