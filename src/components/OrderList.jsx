@@ -16,8 +16,7 @@ margin-top:90px;
 `
 const Wrapper = styled.div`
     width: 100vw;
-    height: auto;
-    min-height: 100vh;
+   
     padding: 50px;
     background-color: #fcf5f5;
     display: flex;
@@ -283,9 +282,7 @@ const OrderList = () => {
             <Footer/>
         </div>
         </div>
-
     );
-
 }
 
 export default OrderList;

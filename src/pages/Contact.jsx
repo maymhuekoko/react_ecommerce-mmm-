@@ -9,6 +9,7 @@ import axios from 'axios';
 import ColorNav from '../components/ColorNav';
 import Footer from '../components/Footer';
 import Newsletter from '../components/Newsletter';
+import Swal from 'sweetalert2'
 
 const Div = styled.div`
     margin-top: 65px;
@@ -78,15 +79,32 @@ const Contact = () => {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
 
-    const data = {
+    // const data = {
+    //     name: name,
+    //     email :email,
+    //     message: message
+    // }
+
+    const SendMessage = (e) => {
+        e.preventDefault();
+        axios.post('http://localhost:8000/api/contact_message',{
         name: name,
         email :email,
         message: message
+    }).then(res=>
+    {
+      console.log(res.data['message']);
+      //Success Message in Sweetalert modal
+      Swal.fire({
+        title:  res.data['message'],
+        text: "Thanks For Your Pre-Orders! Your will be delivered within four to six weeks!",
+        type: 'success',    
+      });
+    
     }
-
-    const SendMessage = () => {
-        axios.post('http://medicalworldinvpos.kwintechnologykw09.com/api/contact_message', data)
-        .then()
+    ).catch(err =>{
+        console.log('error');
+    });
     }
 
     return (

@@ -9,6 +9,8 @@ import { useLocation ,useNavigate} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { addOrder,removeOrder,resetOrder } from "../redux/designRedux"
 import Swal from 'sweetalert2'
+import BankInfoDialog from './BankInfoDialog'
+import PaidInfoDialog from './PaidInfoDialog'
 
 
 const Div = styled.div`
@@ -96,6 +98,10 @@ const Select = styled.select`
 padding: 4px;
 width: 200px;
 `
+const Select1 = styled.select`
+
+`
+
 const Option = styled.option`
 
 `
@@ -107,12 +113,26 @@ const Order = () => {
     const location = useLocation();
     const design_name = location.pathname.split("/")[2];
     let [count,setCount] = useState(1);
+    const [paymentchannel, setPaymentChannel] = useState('');
     const dispatch = useDispatch();
     const pre = useSelector(state=>state.design.orders);
     const username = useSelector(state => state.user);
     const navigate = useNavigate();
     const current = new Date();
     const date = `${current.getMonth()+1}/${current.getDate()}/${current.getFullYear()}`;
+
+    const onPaymentChannelChanged = (e) => setPaymentChannel(e.target.value);
+
+    const [showBankInfo, setshowBankInfo] = useState(false);
+    const [showPaidInfo, setshowPaidInfo] = useState(false);
+  
+    const bankInfo = () => {
+      setshowBankInfo(true);
+    }
+  
+    const paidInfo = () => {
+      setshowPaidInfo(true);
+    }
     
     const specification = () => {
      
@@ -183,6 +203,8 @@ const changeprice = ()=>{
     });
 }
 
+
+
 const savepreorder = () =>{
     console.log(pre);
     axios.post('http://familyuniformapp.medicalworld.com.mm/api/send/invoice_email',{
@@ -247,6 +269,42 @@ const savepreorder = () =>{
                        <Input className='form-control' value={date}/>
                        </div>
                     </div> 
+                    <div className='row m-3'>
+                       <div className='col-md-6 form-group'>
+                       <Lable>Payment Type</Lable>
+                       <Select1 className='form-control'>
+                       <Option>Select Payment Type</Option>
+                        <Option value='1'>Prepaid Partial</Option>
+                        <Option value='2'>Prepaid Full</Option>
+                       </Select1>
+                       </div>
+                       <div className='col-md-6'>
+                       <Lable>Payment Channel</Lable>
+                       <Select1 className='form-control' value={paymentchannel} onChange={onPaymentChannelChanged}>
+                       <Option>Select Payment Channel</Option>
+                        <Option value='1'>Mobile Banking</Option>
+                        <Option value='2'>Internet Banking</Option>
+                       </Select1>
+                       </div>
+                    </div> 
+
+                    {
+              paymentchannel == '1' ?
+                <div>
+                <div className='row m-3'>
+              <div className='offset-4 col-md-2 form-group'>
+              <Input  type="radio" name="userdata" onChange={bankInfo}></Input>
+              <Lable className='offset-1' >Bank Info</Lable>
+              </div>
+              <div className='col-md-6'>
+              <Input  type="radio" name="userdata"  onChange={paidInfo}></Input>
+              <Lable className='offset-1'>Paid Info</Lable>
+              </div>
+           </div>
+                </div>
+                : ''
+            }
+                    
                     {/* <div className='row m-3'>
                        <div className='col-md-6'>
                         
@@ -341,6 +399,8 @@ const savepreorder = () =>{
                 </Div>
             </Wrapper>
         <Footer/>
+        <BankInfoDialog open={showBankInfo} close={() => setshowBankInfo(false)} />
+        <PaidInfoDialog open={showPaidInfo} close={() => setshowPaidInfo(false)} />
     </div>
     
   )
