@@ -16,8 +16,7 @@ margin-top:90px;
 `
 const Wrapper = styled.div`
     width: 100vw;
-    height: auto;
-    min-height: 100vh;
+   
     padding: 50px;
     background-color: #fcf5f5;
     display: flex;
@@ -146,7 +145,7 @@ const OrderList = () => {
 
     const onInvoiceClicked =(id) => {
         // 
-        axios.get('https://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_detail/'+id)
+        axios.get('http://medicalworldinvpos.kwintechnologykw09.com/api/ecommerce_order_detail/'+id)
         .then(res=>{
             console.log('hey');
             setName(res.data.orders.customer_name);
@@ -160,7 +159,7 @@ const OrderList = () => {
 
 
     const fetchOrderList = () => {
-        axios.get('https://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_index')
+        axios.get('http://medicalworldinvpos.kwintechnologykw09.com/api/ecommerce_order_index')
         .then(res=>{
             console.log(res.data.instock);
 
@@ -283,9 +282,7 @@ const OrderList = () => {
             <Footer/>
         </div>
         </div>
-
     );
-
 }
 
 export default OrderList;

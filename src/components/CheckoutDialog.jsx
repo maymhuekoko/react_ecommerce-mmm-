@@ -104,7 +104,7 @@ export default function CheckoutDialog(props) {
   const onRemarkChanged = (e) => setRemark(e.target.value);
   const orderSave = () => {
     // alert(paymentchannel);
-    const res = axios.post('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_store', {
+    const res = axios.post('http://medicalworldinvpos.kwintechnologykw09.com/api/ecommerce_order_store', {
       id: username.id,
       name: username.name,
       phone: username.phone,
@@ -175,14 +175,13 @@ export default function CheckoutDialog(props) {
               <FilterTitle>Payment Channel</FilterTitle>
               <FilterSelect value={paymentchannel} onChange={onPaymentChannelChanged}>
                 <FilterOption>Select Payment Channel</FilterOption>
-                <FilterOption value='1'>Cash</FilterOption>
-                <FilterOption value='2'>Mobile Banking</FilterOption>
-                <FilterOption value='3'>Internet Banking</FilterOption>
+                <FilterOption value='1'>Mobile Banking</FilterOption>
+                <FilterOption value='2'>Internet Banking</FilterOption>
               </FilterSelect>
             </Filter>
 
             {
-              paymentchannel == '2' ?
+              paymentchannel == '1' ?
                 <div>
                   <div>
                     <label>Bank Info</label>
