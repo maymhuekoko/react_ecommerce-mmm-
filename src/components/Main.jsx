@@ -19,7 +19,7 @@ const Main = () => {
         <HomeItems title="New Arrival" url="newitem_api"/>
         <HomeItems title="Promotion Items" url="promotionitem_api"/>
         <HomeItems title="Hot Sale Items" url="hotsaleitem_api"/>
-        <SeasonalDiscountNews/>
+        {/* <SeasonalDiscountNews/> */}
     </div>
   )
 }

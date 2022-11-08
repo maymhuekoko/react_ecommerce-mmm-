@@ -92,12 +92,13 @@ const Contact = () => {
     }
 
 
-    const SendMessage = () => {
+    const SendMessage = (e) => {
+        e.preventDefault();
         axios.post('http://familyuniformapp.medicalworld.com.mm/api/contact_message', data)
 
         console.log(data);
-        
-        axios.post('http://medicalworldinvpos.kwintechnologykw09.com/api/send_message', data)
+
+        // axios.post('http://medicalworldinvpos.kwintechnologykw09.com/api/send_message', data)
 
         emailjs.sendForm('service_79e361n', 'template_pt919ms', e.target, 'plkqX8v0BRW5x7pd8')
         .then((result) => {
@@ -129,7 +130,7 @@ const Contact = () => {
                             <Check id="check" type="checkbox" onChange={(e)=>setSubscribe('checked')} style={{display: 'inline-block'}}/>
                             <label for="check" style={{cursor: 'pointer'}}>Subscribe for Update News</label>
                         </div>
-                        <Button onClick={SendMessage}>Send Message</Button>
+                        <Button>Send Message</Button>
                     </Form>
                 </Wrapper>
             </Div>

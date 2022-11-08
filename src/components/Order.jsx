@@ -8,7 +8,7 @@ import axios from 'axios'
 import { useLocation ,useNavigate} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
 import { addOrder,removeOrder,resetOrder } from "../redux/designRedux"
-import Swal from 'sweetalert2'
+// import Swal from 'sweetalert2'
 import BankInfoDialog from './BankInfoDialog'
 import PaidInfoDialog from './PaidInfoDialog'
 
@@ -217,11 +217,11 @@ const savepreorder = () =>{
     {
       console.log(res.data['message']);
       //Success Message in Sweetalert modal
-      Swal.fire({
-        title:  res.data['message'],
-        text: "Thanks For Your Pre-Orders! Your will be delivered within four to six weeks!",
-        type: 'success',    
-      });
+    //   Swal.fire({
+    //     title:  res.data['message'],
+    //     text: "Thanks For Your Pre-Orders! Your will be delivered within four to six weeks!",
+    //     type: 'success',    
+    //   });
     
     }
     ).catch(err =>{
