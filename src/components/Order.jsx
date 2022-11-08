@@ -7,8 +7,8 @@ import { Add,Remove, SettingsEthernet } from '@mui/icons-material'
 import axios from 'axios'
 import { useLocation ,useNavigate} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { addOrder,removeOrder,resetOrder } from "../redux/designRedux"
-// import Swal from 'sweetalert2'
+import { addOrder,removeOrder,resetOrder,resetPhoto } from "../redux/designRedux"
+import Swal from 'sweetalert2'
 import BankInfoDialog from './BankInfoDialog'
 import PaidInfoDialog from './PaidInfoDialog'
 
@@ -114,14 +114,18 @@ const Order = () => {
     const design_name = location.pathname.split("/")[2];
     let [count,setCount] = useState(1);
     const [paymentchannel, setPaymentChannel] = useState('');
+    const [paymenttype, setPaymentType] = useState('');
     const dispatch = useDispatch();
     const pre = useSelector(state=>state.design.orders);
+    const photo = useSelector(state=>state.design.paymentscreenshot);
+    console.log( useSelector(state=>state.design.paymentscreenshot));
     const username = useSelector(state => state.user);
     const navigate = useNavigate();
     const current = new Date();
     const date = `${current.getMonth()+1}/${current.getDate()}/${current.getFullYear()}`;
 
     const onPaymentChannelChanged = (e) => setPaymentChannel(e.target.value);
+    const onPaymentType = (e) => setPaymentType(e.target.value);
 
     const [showBankInfo, setshowBankInfo] = useState(false);
     const [showPaidInfo, setshowPaidInfo] = useState(false);
@@ -207,36 +211,40 @@ const changeprice = ()=>{
 
 const savepreorder = () =>{
     console.log(pre);
-    axios.post('http://familyuniformapp.medicalworld.com.mm/api/send/invoice_email',{
-            id: username.id,
-            name: username.name,
-            phone: username.phone,
-            address: username.address,
-            preorders: pre,
-    }).then(res=>
-    {
-      console.log(res.data['message']);
-      //Success Message in Sweetalert modal
+
+    // axios.post('http://familyuniformapp.medicalworld.com.mm/api/send/invoice_email',{
+    //         id: username.id,
+    //         name: username.name,
+    //         phone: username.phone,
+    //         address: username.address,
+    //         preorders: pre,
+    // }).then(res=>
+    // {
+    //   console.log(res.data['message']);
+    //   //Success Message in Sweetalert modal
     //   Swal.fire({
     //     title:  res.data['message'],
     //     text: "Thanks For Your Pre-Orders! Your will be delivered within four to six weeks!",
     //     type: 'success',    
     //   });
     
-    }
-    ).catch(err =>{
-        console.log('error');
-    });
-    const res = axios.post('http://medicalworldinvpos.kwintechnologykw09.com/api/ecommerce_preorder_store', {
+    // }
+    // ).catch(err =>{
+    //     console.log('error');
+    // });
+    // dispatch(resetPhoto())
+    const res = axios.post('http://localhost:8000/api/ecommerce_preorder_store', {
         id: username.id,
         name: username.name,
         phone: username.phone,
         address: username.address,
         orders: pre,
+        photo: photo,
       }).then(function (response) {
         alert('success store');
-        dispatch(resetOrder());
-        navigate('/order_list');
+        // dispatch(resetOrder());
+        // dispatch(resetPhoto());
+        // navigate('/order_list');
       }).catch(function (error) {
         alert('fail store');
       })
@@ -272,7 +280,7 @@ const savepreorder = () =>{
                     <div className='row m-3'>
                        <div className='col-md-6 form-group'>
                        <Lable>Payment Type</Lable>
-                       <Select1 className='form-control'>
+                       <Select1 className='form-control' value={paymenttype} onChange={onPaymentType}>
                        <Option>Select Payment Type</Option>
                         <Option value='1'>Prepaid Partial</Option>
                         <Option value='2'>Prepaid Full</Option>
