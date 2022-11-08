@@ -211,6 +211,7 @@ const changeprice = ()=>{
 
 const savepreorder = () =>{
     console.log(pre);
+
     // axios.post('http://familyuniformapp.medicalworld.com.mm/api/send/invoice_email',{
     //         id: username.id,
     //         name: username.name,

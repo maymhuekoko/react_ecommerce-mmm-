@@ -13,6 +13,51 @@ import AboutImgTest from '../slider-images/slider1.jpg'
 import sample from '../files/sample.mp4'
 import map from '../files/map.jpg'
 
+import aryu from '../files/p_logo/aryu_international_hospital.png'
+import asiaRoyal from '../files/p_logo/asia_royal.jpg'
+import grandHantha from '../files/p_logo/grand_hantha_international.png'
+import moh from '../files/p_logo/ministry_of_health.jpg'
+import pinlon from '../files/p_logo/pinlon_group_of_hospitality.png'
+import victoria from '../files/p_logo/victoria_hospital.png'
+import panhlaing from '../files/p_logo/punhlaing_hospital.jpg'
+import ssc from '../files/p_logo/ssc_hospital.png'
+import ami from '../files/p_logo/ami_life.jpg'
+import asiaRoyal2 from '../files/p_logo/asia_royal_2.jpg'
+import aungyadana from '../files/p_logo/aung_yadana_hospital.jpg'
+import city from '../files/p_logo/city_hospital.png'
+import dLux from '../files/p_logo/d_lux_dental_clinic.jpg'
+import dagonMedicare from '../files/p_logo/dagon_medicare_hospital.jpg'
+import hlaingTW from '../files/p_logo/hlaing_taw_win.jpg'
+import ingyinphyu from '../files/p_logo/ingyinphyu_dental_clinic.jpg'
+import sos from '../files/p_logo/international_sos.jpg'
+import eye from '../files/p_logo/international_specialist_eye_centre.png'
+import kankaw from '../files/p_logo/kankaw_hospital.jpg'
+import kembangan from '../files/p_logo/kembangan_general_hospital.jpg'
+import khaing from '../files/p_logo/khaing_yadanar_hospital.jpg'
+import mandalar from '../files/p_logo/mandalar_hospital.png'
+import minipal from '../files/p_logo/manipal_sml.jpg'
+import moeKaung from '../files/p_logo/moe_kaung_treasure.jpg'
+import osc from '../files/p_logo/osc_hospital.png'
+import shweLamin from '../files/p_logo/shwe_lamin_hospital.jpg'
+import shweYaung from '../files/p_logo/shwe_yaung_lin_hospital.jpg'
+import tawwin from '../files/p_logo/tawwin_malikha_hospital.jpg'
+import thuka from '../files/p_logo/thukha_kabar_hospital.png'
+import violin from '../files/p_logo/violin_health_beauty_clinic.jpg'
+// import  from '../files/p_logo/'
+// import  from '../files/p_logo/'
+// import  from '../files/p_logo/'
+// import  from '../files/p_logo/'
+// import  from '../files/p_logo/'
+// import  from '../files/p_logo/'
+// import  from '../files/p_logo/'
+// import  from '../files/p_logo/'
+// import  from '../files/p_logo/'
+// import  from '../files/p_logo/'
+// import  from '../files/p_logo/'
+// import  from '../files/p_logo/'
+// import  from '../files/p_logo/'
+// import  from '../files/p_logo/'
+
 const Div = styled.div`
     overflow: hidden;
 `
@@ -80,10 +125,17 @@ const SmallBox = styled.div`
     border-radius: 10px;
 `
 const SmallImgBox = styled.div`
-    width: 280px;
+    width: 230px;
     height: auto;
     min-height: 120px;
     margin-left: 20px;
+`
+const SmallImgBoxP = styled.div`
+    width: 150px;
+    height: auto;
+    min-height: 120px;
+    margin-left: 20px;
+    padding: 20px;
 `
 const Image = styled.img`
     width: 100%;
@@ -171,8 +223,26 @@ const PointerFive = styled.span`
     font-size: 18px;
     font-weight: bold;
 `
+const ShowP = styled.span`
+    color: white;
+    background-color: #32549b;
+    padding: 7px;
+    border-radius: 10px;
+    text-align:center;
+    width:100%;
+    cursor: pointer;
+`
 
 const About = () => {
+
+    const [partners, setPartners] = useState(false);
+
+    const ShowAllPartners = () => {
+        setPartners(true);
+    }
+    const HideAllPartners = () => {
+        setPartners(false);
+    }
 
     return (
 
@@ -195,7 +265,7 @@ const About = () => {
                 </Wrapper>
 
                 <Wrapper>
-                    <video src={sample} style={{ width: '60%', height: 'auto' }} controls />
+                    <video src={sample} style={{ width: '65%', height: 'auto',borderRadius: '10px' }} controls />
                 </Wrapper>
 
                 <Wrapper>
@@ -295,27 +365,124 @@ const About = () => {
                     {/* <img src={AboutImgTest} style={{ minWidth: '100%' }} /> */}
                     <DeepBox>
                         <Title style={{ color: '#212529' }}>Our Clients</Title>
-                        <Box>
-                            <SmallImgBox>
-                                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/brands/branded.png`} />
-                            </SmallImgBox>
-                            <SmallImgBox>
-                                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/brands/ecofamily.png`} />
-                            </SmallImgBox>
-                            <SmallImgBox>
-                                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/brands/family.png`} />
-                            </SmallImgBox>
-                            <SmallImgBox style={{ marginTop: '20px' }}>
-                                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/brands/oxypas.png`} />
-                            </SmallImgBox>
-                            <SmallImgBox style={{ marginTop: '20px' }}>
-                                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/brands/branded.png`} />
-                            </SmallImgBox>
-                            <SmallImgBox style={{ marginTop: '20px' }}>
-                                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/brands/branded.png`} />
-                            </SmallImgBox>
+                        <Box style={{ marginBotton: '20px' }}>
+                            <SmallImgBoxP>
+                                <Image src={aryu} />
+                            </SmallImgBoxP>
+                            <SmallImgBoxP>
+                                <Image src={asiaRoyal} />
+                            </SmallImgBoxP>
+                            <SmallImgBoxP>
+                                <Image src={grandHantha} />
+                            </SmallImgBoxP>
+                            <SmallImgBoxP>
+                                <Image src={moh} />
+                            </SmallImgBoxP>
+                            <SmallImgBoxP>
+                                <Image src={victoria} />
+                            </SmallImgBoxP>
+                            <SmallImgBoxP>
+                                <Image src={pinlon} />
+                            </SmallImgBoxP>
+                            {
+                                partners ?
+                                    <div>
+                                        <Box style={{ marginTop: '20px' }}>
+                                            <SmallImgBoxP>
+                                                <Image src={panhlaing} />
+                                            </SmallImgBoxP>
+                                            <SmallImgBoxP>
+                                                <Image src={ssc} />
+                                            </SmallImgBoxP>
+                                            <SmallImgBoxP>
+                                                <Image src={ami} />
+                                            </SmallImgBoxP>
+                                            <SmallImgBoxP>
+                                                <Image src={asiaRoyal2} />
+                                            </SmallImgBoxP>
+                                            <SmallImgBoxP>
+                                                <Image src={aungyadana} />
+                                            </SmallImgBoxP>
+                                            <SmallImgBoxP>
+                                                <Image src={city} />
+                                            </SmallImgBoxP>
+                                        </Box>
+                                        <Box style={{ marginTop: '20px' }}>
+                                            <SmallImgBoxP>
+                                                <Image src={dLux} />
+                                            </SmallImgBoxP>
+                                            <SmallImgBoxP>
+                                                <Image src={dagonMedicare} />
+                                            </SmallImgBoxP>
+                                            <SmallImgBoxP>
+                                                <Image src={hlaingTW} />
+                                            </SmallImgBoxP>
+                                            <SmallImgBoxP>
+                                                <Image src={ingyinphyu} />
+                                            </SmallImgBoxP>
+                                            <SmallImgBoxP>
+                                                <Image src={sos} />
+                                            </SmallImgBoxP>
+                                            <SmallImgBoxP>
+                                                <Image src={eye} />
+                                            </SmallImgBoxP>
+                                        </Box>
+                                        <Box style={{ marginTop: '20px' }}>
+                                            <SmallImgBoxP>
+                                                <Image src={kankaw} />
+                                            </SmallImgBoxP>
+                                            <SmallImgBoxP>
+                                                <Image src={kembangan} />
+                                            </SmallImgBoxP>
+                                            <SmallImgBoxP>
+                                                <Image src={khaing} />
+                                            </SmallImgBoxP>
+                                            <SmallImgBoxP>
+                                                <Image src={mandalar} />
+                                            </SmallImgBoxP>
+                                            <SmallImgBoxP>
+                                                <Image src={minipal} />
+                                            </SmallImgBoxP>
+                                            <SmallImgBoxP>
+                                                <Image src={moeKaung} />
+                                            </SmallImgBoxP>
+                                        </Box>
+                                        <Box style={{ marginTop: '20px' }}>
+                                            <SmallImgBoxP>
+                                                <Image src={osc} />
+                                            </SmallImgBoxP>
+                                            <SmallImgBoxP>
+                                                <Image src={shweLamin} />
+                                            </SmallImgBoxP>
+                                            <SmallImgBoxP>
+                                                <Image src={shweYaung} />
+                                            </SmallImgBoxP>
+                                            <SmallImgBoxP>
+                                                <Image src={tawwin} />
+                                            </SmallImgBoxP>
+                                            <SmallImgBoxP>
+                                                <Image src={thuka} />
+                                            </SmallImgBoxP>
+                                            <SmallImgBoxP>
+                                                <Image src={violin} />
+                                            </SmallImgBoxP>
+                                        </Box>
+                                    </div> : ''
+
+                            }
                         </Box>
+
                     </DeepBox>
+                    {
+                        partners ? 
+                        <div style={{ marginTop: '20px' }}>
+                        <ShowP onClick={HideAllPartners}>Hide Clients</ShowP>
+                        </div> : 
+                        <div style={{ marginTop: '20px' }}>
+                        <ShowP onClick={ShowAllPartners}>Show All Clients</ShowP>
+                        </div>
+                    }
+                    
                 </Wrapper>
 
                 <Wrapper>
@@ -324,11 +491,11 @@ const About = () => {
                         <Map>
                             <Burmar src={map} />
                         </Map>
-                        <PointerOne>First Sale Location <br/> Our First Upper Branch</PointerOne>
-                        <PointerTwo>Second Sale Location <br/> Our Second Upper Branch</PointerTwo>
-                        <PointerThree>Third Sale Location <br/> Our Third Upper Branch</PointerThree>
-                        <PointerFour>Fourth Sale Location <br/> Our Fourth Upper Branch</PointerFour>
-                        <PointerFive>Fifth Sale Location <br/> Our Fifth Upper Branch</PointerFive>
+                        <PointerOne>First Sale Location <br /> Our First Upper Branch</PointerOne>
+                        <PointerTwo>Second Sale Location <br /> Our Second Upper Branch</PointerTwo>
+                        <PointerThree>Third Sale Location <br /> Our Third Upper Branch</PointerThree>
+                        <PointerFour>Fourth Sale Location <br /> Our Fourth Upper Branch</PointerFour>
+                        <PointerFive>Fifth Sale Location <br /> Our Fifth Upper Branch</PointerFive>
                     </Location>
                 </Wrapper>
 
