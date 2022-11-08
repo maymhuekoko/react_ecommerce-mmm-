@@ -11,8 +11,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { resetProduct } from "../redux/cartRedux"
-import { blue } from '@mui/material/colors';
+import { addPhoto } from "../redux/designRedux"
+
 
 
 
@@ -60,24 +60,44 @@ const QRBox = styled.div`
 
 
 export default function BankInfoDialog(props) {
+  const dispatch = useDispatch(); 
+  const [file, setFile] = useState()
 
+
+
+   const savefilename = () =>{
+    let file = document.getElementById('myFile').files[0];
+
+    // MK
+
+    const reader = new FileReader();
+        reader.onload = function () {
+          file = reader.result;
+        }
+        console.log(file);
+        reader.readAsDataURL(file);
+        console.log(file);
+    // ====
+    dispatch(addPhoto(file));
+    document.getElementById('hidedialog').style.visibility = "hidden";
+   }
   return (
     <div>
 
-      <Dialog open={props.open} onClose={props.close} id="">
+      <Dialog open={props.open} onClose={props.close} id="hidedialog">
         <DialogTitle><b>User Paid Information</b></DialogTitle>
         <DialogContent>
           <DialogContentText>
             Paid Info
           </DialogContentText>
             <Form>
-              <Input type="file" id="name" name="" />
+              <Input type="file" id='myFile' />
               <Input type="text" id="phone" name="" placeholder="Remark" />
             </Form>
         </DialogContent>
         <DialogActions>
           <Button onClick={props.close}>Cancle</Button>
-          <Button>Save</Button>
+          <Button onClick={savefilename}>Save</Button>
         </DialogActions>
       </Dialog>
     </div>

@@ -23,9 +23,16 @@ const designSlice = createSlice({
             "filename": "vneck_female_sizechart.jpg",
            },
         ] ,
-        orders : []  
+        orders : [] ,
+        paymentscreenshot : null
     },
     reducers: {
+        addPhoto: (state, action) => {
+            state.paymentscreenshot  = action.payload;
+          },
+        resetPhoto: (state, action) => {
+            state.paymentscreenshot = null;
+        },
         addOrder: (state, action) => {
             state.orders.push(action.payload);
           },
@@ -42,5 +49,5 @@ const designSlice = createSlice({
     }
 })
 
-export const{addOrder,removeOrder,resetOrder} = designSlice.actions
+export const{addOrder,removeOrder,resetOrder,addPhoto,resetPhoto} = designSlice.actions
 export default designSlice.reducer;
