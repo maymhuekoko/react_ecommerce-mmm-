@@ -104,7 +104,7 @@ export default function CheckoutDialog(props) {
   const onRemarkChanged = (e) => setRemark(e.target.value);
   const orderSave = () => {
     // alert(paymentchannel);
-    const res = axios.post('http://medicalworldinvpos.kwintechnologykw09.com/api/ecommerce_order_store', {
+    const res = axios.post('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_store', {
       id: username.id,
       name: username.name,
       phone: username.phone,

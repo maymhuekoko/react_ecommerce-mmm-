@@ -217,6 +217,7 @@ const savepreorder = () =>{
             name: username.name,
             phone: username.phone,
             address: username.address,
+            email: username.email,
             preorders: pre
     }).then(response=>
     {
@@ -233,7 +234,7 @@ const savepreorder = () =>{
         console.log('error');
     });
     // dispatch(resetPhoto())
-    const res = axios.post('http://medicalworldinvpos.kwintechnologykw09.com/api/ecommerce_preorder_store', {
+    const res = axios.post('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_preorder_store', {
         id: username.id,
         name: username.name,
         phone: username.phone,

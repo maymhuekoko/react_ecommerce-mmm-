@@ -11,6 +11,7 @@ const userSlice = createSlice({
         name: '',
         phone: '',
         address: '',
+        email: '',
     },
     reducers: {
         loginStart: (state) => {
@@ -29,12 +30,14 @@ const userSlice = createSlice({
             state.name = action.payload.name;
             state.phone = action.payload.phone;
             state.address = action.payload.address;
+            state.email = action.payload.email;
         },
         LogoutProcess: (state) => {
             state.id = '';
             state.name = '';
             state.phone = '';
             state.address = '';
+            state.email = '';
         }
     }
 })
