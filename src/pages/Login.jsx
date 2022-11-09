@@ -101,7 +101,7 @@ const Login = () => {
                 username: username,
                 password: password
             }).then(function(response){
-                // console.log(response.data.status);
+                // console.log(response.data.user);
                 if(response.data.status != 200){
                     setErrmsg(' Missing Username Or Password! ');
                     errRef.current.focus();
@@ -119,6 +119,7 @@ const Login = () => {
                         name : response.data.user.name,
                         phone : response.data.user.phone,
                         address : response.data.user.address,
+                        email : response.data.user.email,
                     }))   
                     
                 }

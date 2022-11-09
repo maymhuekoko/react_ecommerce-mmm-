@@ -83,7 +83,8 @@ const Register = () => {
             phone: phone,
             address: address,
             username: username,
-            password: password
+            password: password,
+            email : email,
         }).then(function(response){
             alert(response.data.data)
             setShowDialog(true);
@@ -93,6 +94,7 @@ const Register = () => {
                 name : name,
                 phone : phone,
                 address : address,
+                email : email,
             })) 
             navigate('/');
         }).catch(function(error){

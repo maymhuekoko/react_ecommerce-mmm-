@@ -125,7 +125,7 @@ const OrderList = () => {
     },[]);
 
     const fetchOrderDetail = async () => {
-        await axios.get('http://medicalworldinvpos.kwintechnologykw09.com/api/ecommerce_order_detail/'+id)
+        await axios.get('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_detail/'+id)
         .then(res=>{
             setInputs({
                 id: res.data.orders.id,
