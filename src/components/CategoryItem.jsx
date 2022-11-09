@@ -24,7 +24,7 @@ display: flex;
 align-items: center;
 justify-content: center;
 flex-direction: column;
-margin-left: 230px;
+margin-left: 160px;
 margin-bottom: 30px;
 `
 const Title = styled.h1`
@@ -46,6 +46,7 @@ const CategoryItem = ({item}) => {
     <Container>
         <Link to={`/products/${item.id}/${item.category_name}`}>
         <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/brands/${item.photo_path}`}/>
+        {/* <Image src={`http://localhost:8000/ecommerce/brands/${item.photo_path}`}/>  */}
         <Info>
             <Button>Details</Button>
         </Info>
