@@ -57,9 +57,9 @@ const SmallImage = styled.img`
 `
 
 const SmallImageOne = styled.img`
-    min-width: 350px;
+    width: 250px;
     height: 50vh;
-    object-fit: cover;
+    object-fit: contain;
     ${mobile({ height: "50%" })}
 `
 
@@ -300,6 +300,7 @@ const Product = () => {
     useEffect(() => {
         const getProduct = () => {
             axios.get("http://familyuniformapp.medicalworld.com.mm/api/unitbyid_api/" + id)
+            // axios.get("http://localhost:8000/api/unitbyid_api/" + id)
                 .then((response) => {
                     setItem(response.data.item);
                     setDesign(response.data.item.item_name);
@@ -311,6 +312,7 @@ const Product = () => {
                     }
 
                     axios.post('http://familyuniformapp.medicalworld.com.mm/api/productlineitems_api', obj)
+                    // axios.post('http://localhost:8000/api/productlineitems_api', obj)
                         .then(res => {
                             setRelatedItems(res.data);
                             console.log(res.data);
@@ -488,7 +490,7 @@ const Product = () => {
                             <div>
                                 <div>
                                     <SmallImageOne src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/${it.photo_path}`} key={it.id} />
-
+                                    {/* <SmallImageOne src={`http://localhost:8000/ecommerce/items/${it.photo_path}`} key={it.id} /> */}
                                 </div>
                                 <div style={{textAlign: 'center'}}>
                                     <SmallImgName>{it.item_name}</SmallImgName>
