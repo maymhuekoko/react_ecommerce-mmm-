@@ -12,7 +12,6 @@ import Swal from 'sweetalert2'
 import BankInfoDialog from './BankInfoDialog'
 import PaidInfoDialog from './PaidInfoDialog'
 
-
 const Div = styled.div`
 margin-top: 30px;
  width : 80%;
@@ -206,8 +205,6 @@ const changeprice = ()=>{
         console.log('error');
     });
 }
-
-
 
 const savepreorder = () =>{
     console.log(pre);
