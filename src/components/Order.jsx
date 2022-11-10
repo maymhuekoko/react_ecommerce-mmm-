@@ -141,25 +141,33 @@ const Order = () => {
     const specification = () => {
      
         const val = document.getElementById('specs').value;
+
         let html = '';
         axios.get("http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_type")
                 .then((response) => {  
         if(val == 1){
+            document.getElementById('fab').disabled = true;
+            document.getElementById('col').removeAttribute('disabled');
             response.data.fabric.map((el)=>{
                 html += `<Option>`+el.fabric_name+`</Option>`;
              })
         }
         if(val == 2){
+            document.getElementById('col').disabled = true;
+            document.getElementById('siz').removeAttribute('disabled');
             response.data.color.map((el)=>{
                 html += `<Option>`+el.colour_name+`</Option>`;
              })
         }
         if(val == 3){
+            document.getElementById('siz').disabled = true;
+            document.getElementById('gen').removeAttribute('disabled');
             response.data.size.map((el)=>{
                 html += `<Option>`+el.size_name+`</Option>`;
              })
         }
         if(val == 4){
+            document.getElementById('gen').disabled = true;
             response.data.gender.map((el)=>{
                 html += `<Option>`+el.gender_name+`</Option>`;
              })
@@ -175,22 +183,49 @@ const Order = () => {
 
 
     const qtychange = () =>{
-       let testname = document.getElementById('item_name').innerHTML;
-        let testqty = document.getElementById('qty').value;
-        let testprice = document.getElementById('price').value;
-        setCount(++count);
-        let orderid  = count;
-        // alert(testname,testqty);
-        dispatch(addOrder({orderid,testname,testqty,testprice}));
-        document.getElementById('item_name').innerHTML = design_name;
-        document.getElementById('qty').value = '';
-        document.getElementById('price').value = '';
-        document.getElementById('types').innerHTML = '';
-        document.getElementById("specs").selectedIndex = "0";
+        if(document.getElementById('fab').disabled == false){
+            Swal.fire({
+                title:  "Warning!",
+                text: "You Need to Choose Fabric.",
+                type: 'error',    
+              });
+        }
+        if(document.getElementById('col').disabled == false){
+            Swal.fire({
+                title:  "Warning!",
+                text: "You Need to Choose Colour.",
+                type: 'error',    
+              });
+        }
+        if(document.getElementById('siz').disabled == false){
+            Swal.fire({
+                title:  "Warning!",
+                text: "You Need to Choose Size.",
+                type: 'error',    
+              });
+        }
+        if(document.getElementById('gen').disabled == false){
+            Swal.fire({
+                title:  "Warning!",
+                text: "You Need to Choose Gender.",
+                type: 'error',    
+              });
+        }
+    //    let testname = document.getElementById('item_name').innerHTML;
+    //     let testqty = document.getElementById('qty').value;
+    //     let testprice = document.getElementById('price').value;
+    //     setCount(++count);
+    //     let orderid  = count;
+    //     // alert(testname,testqty);
+    //     dispatch(addOrder({orderid,testname,testqty,testprice}));
+    //     document.getElementById('item_name').innerHTML = design_name;
+    //     document.getElementById('qty').value = '';
+    //     document.getElementById('price').value = '';
+    //     document.getElementById('types').innerHTML = '';
+    //     document.getElementById("specs").selectedIndex = "0";
     }
     const remove = (id) => {
-    dispatch(removeOrder({id}));
-   
+    dispatch(removeOrder({id}));  
 }
 
 const changeprice = ()=>{
@@ -342,10 +377,10 @@ const savepreorder = () =>{
                  <td>
                  <Select onChange={specification} id={'specs'}>
                      <Option value="0" hidden>Specs</Option>
-                     <Option value="1">Fabric</Option>
-                     <Option value="2">Color</Option>
-                     <Option value="3">Size</Option>
-                     <Option value="4">Gender</Option>
+                     <Option value="1" id="fab">Fabric</Option>
+                     <Option value="2" id="col" disabled>Color</Option>
+                     <Option value="3" id="siz" disabled>Size</Option>
+                     <Option value="4" id="gen" disabled>Gender</Option>
                  </Select>&nbsp;&nbsp;&nbsp;
                  <Select id={'types'}>
                      
