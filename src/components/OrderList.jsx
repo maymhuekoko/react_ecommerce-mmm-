@@ -145,7 +145,7 @@ const OrderList = () => {
 
     const onInvoiceClicked =(id) => {
         // 
-        axios.get('http://medicalworldinvpos.kwintechnologykw09.com/api/ecommerce_order_detail/'+id)
+        axios.get('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_detail/'+id)
         .then(res=>{
             console.log('hey');
             setName(res.data.orders.customer_name);
@@ -159,7 +159,7 @@ const OrderList = () => {
 
 
     const fetchOrderList = () => {
-        axios.get('http://medicalworldinvpos.kwintechnologykw09.com/api/ecommerce_order_index')
+        axios.get('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_index')
         .then(res=>{
             console.log(res.data.instock);
 

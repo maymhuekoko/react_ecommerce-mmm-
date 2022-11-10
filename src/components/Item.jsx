@@ -26,7 +26,7 @@ const MainContainer = styled.div`
 const Container = styled.div`
     flex: 1;
     margin: 5px;
-    min-width: 280px;
+    min-width: 225px;
     height: 350px;
     display: flex;
     align-items: center;

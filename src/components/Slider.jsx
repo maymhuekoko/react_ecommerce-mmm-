@@ -9,7 +9,7 @@ import { Navigate, useNavigate  } from 'react-router-dom';
 
 const Container = styled.div`
     width: 100%;
-    height: 70vh;
+    height: 83vh;
     display:flex;
     position: relative;
     overflow: hidden;

@@ -212,43 +212,44 @@ const changeprice = ()=>{
 const savepreorder = () =>{
     console.log(pre);
 
-    // axios.post('http://familyuniformapp.medicalworld.com.mm/api/send/invoice_email',{
-    //         id: username.id,
-    //         name: username.name,
-    //         phone: username.phone,
-    //         address: username.address,
-    //         preorders: pre,
-    // }).then(res=>
-    // {
-    //   console.log(res.data['message']);
-    //   //Success Message in Sweetalert modal
-    //   Swal.fire({
-    //     title:  res.data['message'],
-    //     text: "Thanks For Your Pre-Orders! Your will be delivered within four to six weeks!",
-    //     type: 'success',    
-    //   });
+    axios.post('http://familyuniformapp.medicalworld.com.mm/api/send/invoice_email',{
+            id: username.id,
+            name: username.name,
+            phone: username.phone,
+            address: username.address,
+            email: username.email,
+            preorders: pre
+    }).then(response=>
+    {
+      console.log(response.data['message']);
+      //Success Message in Sweetalert modal
+      Swal.fire({
+        title:  response.data['message'],
+        text: "Thanks For Your Pre-Orders! Your will be delivered within four to six weeks!",
+        type: 'success',    
+      });
     
-    // }
-    // ).catch(err =>{
-    //     console.log('error');
-    // });
+    }
+    ).catch(err =>{
+        console.log('error');
+    });
     // dispatch(resetPhoto())
-    const res = axios.post('http://localhost:8000/api/ecommerce_preorder_store', {
+    const res = axios.post('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_preorder_store', {
         id: username.id,
         name: username.name,
         phone: username.phone,
         address: username.address,
         orders: pre,
-        photo: photo,
+        // photo: photo,
       }).then(function (response) {
         alert('success store');
-        // dispatch(resetOrder());
+        dispatch(resetOrder());
         // dispatch(resetPhoto());
-        // navigate('/order_list');
+        navigate('/order_list');
       }).catch(function (error) {
         alert('fail store');
       })
-}
+}   
 
     
   return (
