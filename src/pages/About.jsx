@@ -373,10 +373,10 @@ const About = () => {
                                 <Image src={asiaRoyal} />
                             </SmallImgBoxP>
                             <SmallImgBoxP>
-                                <Image src={pinlon} />
+                                <Image src={ssc} />
                             </SmallImgBoxP>
                             <SmallImgBoxP>
-                                <Image src={ssc} />
+                                <Image src={pinlon} />
                             </SmallImgBoxP>
                             <SmallImgBoxP>
                                 <Image src={grandHantha} />
