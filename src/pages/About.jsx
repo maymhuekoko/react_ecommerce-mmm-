@@ -373,17 +373,18 @@ const About = () => {
                                 <Image src={asiaRoyal} />
                             </SmallImgBoxP>
                             <SmallImgBoxP>
+                                <Image src={ssc} />
+                            </SmallImgBoxP>
+                            <SmallImgBoxP>
+                                <Image src={pinlon} />
+                            </SmallImgBoxP>
+                            <SmallImgBoxP>
                                 <Image src={grandHantha} />
                             </SmallImgBoxP>
                             <SmallImgBoxP>
                                 <Image src={moh} />
                             </SmallImgBoxP>
-                            <SmallImgBoxP>
-                                <Image src={victoria} />
-                            </SmallImgBoxP>
-                            <SmallImgBoxP>
-                                <Image src={pinlon} />
-                            </SmallImgBoxP>
+                            
                             {
                                 partners ?
                                     <div>
@@ -392,7 +393,7 @@ const About = () => {
                                                 <Image src={panhlaing} />
                                             </SmallImgBoxP>
                                             <SmallImgBoxP>
-                                                <Image src={ssc} />
+                                                <Image src={victoria} />
                                             </SmallImgBoxP>
                                             <SmallImgBoxP>
                                                 <Image src={ami} />

@@ -28,26 +28,19 @@ const Div = styled.div`
 const CheckColor = (props) => {
   const design = useSelector(state=>state.design);
   const color = props.name;
-  // console.log(color);
-    console.log(design.colors[color]);
   const checkColor = design.colors[color];
+  
+  console.log(`Color Check ${checkColor}`);
     
   return (
     <div>
         <Dialog open={props.open} onClose={props.close}>
-        <DialogTitle  className='text-center'><Title>Check Color</Title></DialogTitle>
-
-        {/* <DialogContent>
-          <Img src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/cute1.png`} /> 
-        */}
+        <DialogTitle className='text-center'><Title>Check Color</Title></DialogTitle>
 
         <DialogContent >
-          {/* <Img src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/cute1.png`} /> */}
-          <Div style={{backgroundColor:checkColor}}>
-
-          </Div>
-
+          <Div style={{backgroundColor:checkColor}}></Div>
         </DialogContent>
+
         <DialogActions>
           <Button onClick={props.close} style={{backgroundColor: '#79a6fa', color: 'white'}}>Close</Button>
         </DialogActions>

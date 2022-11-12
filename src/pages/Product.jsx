@@ -123,22 +123,15 @@ const Filter = styled.div`
     align-items: center;
     margin-left: 10px;
 `
-
-
 const FilterTitle = styled.span`
     font-size: 20px;
     font-weight: 200;
 `
-
-
 const FilterColor = styled.select`
     margin-left: 10px;
     padding: 5px;
 `
-
 const FilterColorOption = styled.option``
-
-
 const FilterSize = styled.select`
     margin-left: 10px;
     padding: 5px;
@@ -253,8 +246,8 @@ const Product = () => {
     const [unitcode, setUnitCode] = useState('');
     const [unitimg, setUnitImg] = useState('default.png');
     const [quantity, setQuantity] = useState(1);
-    const [color, setColor] = useState("ar1");
-    const [fabric, setFabric] = useState("");
+    const [color, setColor] = useState();
+    const [fabric, setFabric] = useState('');
     const [size, setSize] = useState("xxlf");
     const [price, setPrice] = useState(0);
     const [stock, setStock] = useState(0);
@@ -267,7 +260,7 @@ const Product = () => {
 
     const colorFunction = (e) => {
         setColor(e.target.value);
-        setMainImg(e.target.value)
+        // setMainImg(e.target.value)
     }
 
     const uniqueColors = units.filter(element => {
@@ -340,6 +333,10 @@ const Product = () => {
             }
         })
     }, [color, fabric, size]);
+    console.log(color)
+    console.log(size)
+    console.log(fabric)
+
 
 
     const handleQuantity = (type) => {
@@ -373,8 +370,8 @@ const Product = () => {
         document.getElementById('main').src = hel;
     }
 
-    const [mainImg, setMainImg] = useState('ar1');
-    console.log(mainImg)
+    // const [mainImg, setMainImg] = useState('ar1');
+    // console.log(mainImg)
 
     return (
         <Container>
@@ -497,7 +494,6 @@ const Product = () => {
                                 </div>
                             </div>
                         ))}
-
 
                     </SmallImgContainerOne>
                     

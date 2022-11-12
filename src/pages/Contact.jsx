@@ -96,10 +96,6 @@ const Contact = () => {
         e.preventDefault();
         axios.post('http://familyuniformapp.medicalworld.com.mm/api/contact_message', data)
 
-        console.log(data);
-
-        // axios.post('http://medicalworldinvpos.kwintechnologykw09.com/api/send_message', data)
-
         emailjs.sendForm('service_79e361n', 'template_pt919ms', e.target, 'plkqX8v0BRW5x7pd8')
         .then((result) => {
             alert('Email sent successfully');
