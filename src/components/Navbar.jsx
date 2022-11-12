@@ -206,7 +206,15 @@ const Navbar = () => {
                         <Link to="/about-us" style={link}>
                             <MenuItem>AboutUs</MenuItem>
                         </Link>
-                        {isUser ? (' ') : (
+                        <Link to="/preorder" style={link}>
+                            <MenuItem>PreOrder</MenuItem>
+                        </Link>
+                        <Link to="/contact-us" style={link}>
+                            <MenuItem>ContactUs</MenuItem>
+                        </Link>
+                        {isUser ? (<Link to="/order_list" style={link}>
+                                <MenuItem>OrderList</MenuItem>
+                            </Link>) : (
                             <Link to="/register" style={link}>
                                 <MenuItem>Register</MenuItem>
                             </Link>)}
@@ -214,14 +222,8 @@ const Navbar = () => {
                             <Link to="/login" style={link}>
                                 <MenuItem>SignIn</MenuItem>
                             </Link>)}
-                        {isUser ? (
-                            <Link to="/order_list" style={link}>
-                                <MenuItem>Order List</MenuItem>
-                            </Link>
-                        ) : ('')}
-                        <Link to="/contact-us" style={link}>
-                            <MenuItem>ContactUs</MenuItem>
-                        </Link>
+                       
+                        
 
                     </Center>
 

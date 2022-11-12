@@ -132,6 +132,7 @@ const Order = () => {
     const [gendername, setGenderName] = useState('');
     const [fabricname, setFabricName] = useState('');
     const [colourname, setColourName] = useState('');
+    const [sizename, setSizeName] = useState('');
   
     const bankInfo = () => {
       setshowBankInfo(true);
@@ -141,123 +142,142 @@ const Order = () => {
       setshowPaidInfo(true);
     }
     
-    const specification = () => {
-        //   alert(design_name);
-        const val = document.getElementById('specs').value;
+    // const specification = () => {
+    //     //   alert(design_name);
+    //     const val = document.getElementById('specs').value;
 
+    //     let html = '';
+    //     if(val == 4){
+    //     // axios.get("http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_type")
+    //     axios.get('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_type/'+design_name)
+    //             .then((response) => {  
+    //                 console.log(response.data.gender);
+    //                     document.getElementById('gen').disabled = true;
+    //                     document.getElementById('fab').removeAttribute('disabled');
+    //                     Object.keys(response.data.gender).map(key => {
+    //                         html += `<Option>`+ response.data.gender[key]+`</Option>`;
+    //                      })
+                     
+    //                 document.getElementById('types').innerHTML = html;
+    //     })
+    //    }   
+    //    if(val == 1){
+    //     // axios.get("http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_type")
+    //     axios.get('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_type/'+design_name+'/'+gendername)
+    //             .then((response) => {  
+    //                 console.log(response.data.fabric);
+    //                 document.getElementById('fab').disabled = true;
+    //                 document.getElementById('col').removeAttribute('disabled');
+    //                     Object.keys(response.data.fabric).map(key => {
+    //                         html += `<Option>`+ response.data.fabric[key]+`</Option>`;
+    //                      })
+                     
+    //                 document.getElementById('types').innerHTML = html;
+    //     })
+    //    } 
+    //    if(val == 2){
+    //     // alert(fabricname);
+    //     // axios.get("http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_type")
+    //     axios.get('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_type/'+design_name+'/'+gendername+'/'+fabricname)
+    //             .then((response) => {  
+    //                 console.log(response.data.colour);
+    //                 document.getElementById('col').disabled = true;
+    //                 document.getElementById('siz').removeAttribute('disabled');
+    //                     Object.keys(response.data.colour).map(key => {
+    //                         html += `<Option>`+ response.data.colour[key]+`</Option>`;
+    //                      })
+                     
+    //                 document.getElementById('types').innerHTML = html;
+    //     })
+    //    } 
+    //    if(val == 3){
+    //     alert(colourname);
+    //     // axios.get("http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_type")
+    //     axios.get('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_type/'+design_name+'/'+gendername+'/'+fabricname+'/'+colourname)
+    //             .then((response) => {  
+    //                 console.log(response.data.size);
+    //                 document.getElementById('siz').disabled = true;
+    //                     Object.keys(response.data.size).map(key => {
+    //                         html += `<Option>`+ response.data.size[key]+`</Option>`;
+    //                      })
+                     
+    //                 document.getElementById('types').innerHTML = html;
+    //     })
+    //    } 
+
+       
+    // }
+
+    const choosegen = (val) => {
+        if(val == 1){
+            const spec = 'm';
+            document.getElementById('gen_name').innerHTML = spec;
+        }
+        if(val == 2){
+            const spec = 'f';
+            document.getElementById('gen_name').innerHTML = spec;
+        }
+        if(val == 3){
+            const spec = 'un';
+            document.getElementById('gen_name').innerHTML = spec;
+        }
+        const gname = document.getElementById('gen_name').innerHTML;
+        let html='';
+        setGenderName(gname);
+        // alert(document.getElementById('item_name').innerHTML+' '+document.getElementById('gen_name').innerHTML);
+        axios.get('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_type/'+design_name+'/'+gname)
+                    .then((response) => {  
+                        console.log(response.data.fabric);
+                            Object.keys(response.data.fabric).map(key => {
+                                html += `<Option>`+ response.data.fabric[key]+`</Option>`;
+                             })
+                         
+                        document.getElementById('types').innerHTML = html;
+            })
+    }
+    
+    const additem = () =>{
+        const spec = document.getElementById('types').value;
+        document.getElementById('fab_name').innerHTML = ' '+spec;
+        setFabricName(spec);
         let html = '';
-        if(val == 4){
-        // axios.get("http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_type")
-        axios.get('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_type/'+design_name)
-                .then((response) => {  
-                    console.log(response.data.gender);
-                        document.getElementById('gen').disabled = true;
-                        document.getElementById('fab').removeAttribute('disabled');
-                        Object.keys(response.data.gender).map(key => {
-                            html += `<Option>`+ response.data.gender[key]+`</Option>`;
-                         })
-                     
-                    document.getElementById('types').innerHTML = html;
-        })
-       }   
-       if(val == 1){
-        // axios.get("http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_type")
-        axios.get('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_type/'+design_name+'/'+gendername)
-                .then((response) => {  
-                    console.log(response.data.fabric);
-                    document.getElementById('fab').disabled = true;
-                    document.getElementById('col').removeAttribute('disabled');
-                        Object.keys(response.data.fabric).map(key => {
-                            html += `<Option>`+ response.data.fabric[key]+`</Option>`;
-                         })
-                     
-                    document.getElementById('types').innerHTML = html;
-        })
-       } 
-       if(val == 2){
-        // alert(fabricname);
-        // axios.get("http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_type")
-        axios.get('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_type/'+design_name+'/'+gendername+'/'+fabricname)
+        axios.get('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_type/'+design_name+'/'+gendername+'/'+spec)
                 .then((response) => {  
                     console.log(response.data.colour);
-                    document.getElementById('col').disabled = true;
-                    document.getElementById('siz').removeAttribute('disabled');
                         Object.keys(response.data.colour).map(key => {
                             html += `<Option>`+ response.data.colour[key]+`</Option>`;
                          })
                      
-                    document.getElementById('types').innerHTML = html;
+                    document.getElementById('types1').innerHTML = html;
         })
-       } 
-       if(val == 3){
-        alert(colourname);
-        // axios.get("http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_type")
-        axios.get('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_type/'+design_name+'/'+gendername+'/'+fabricname+'/'+colourname)
+        // alert(document.getElementById('item_name').innerHTML+' '+document.getElementById('gen_name').innerHTML+' '+document.getElementById('fab_name').innerHTML);
+    }
+    const additem1 = () =>{
+        const spec = document.getElementById('types1').value;
+        document.getElementById('col_name').innerHTML = spec;
+        setColourName(spec);
+        let html = '';
+        axios.get('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_type/'+design_name+'/'+gendername+'/'+fabricname+'/'+spec)
                 .then((response) => {  
                     console.log(response.data.size);
-                    document.getElementById('siz').disabled = true;
                         Object.keys(response.data.size).map(key => {
                             html += `<Option>`+ response.data.size[key]+`</Option>`;
                          })
                      
-                    document.getElementById('types').innerHTML = html;
+                    document.getElementById('types2').innerHTML = html;
         })
-       } 
-        // if(val == 3){
-        //     document.getElementById('siz').disabled = true;
-        //     response.data.size.map((el)=>{
-        //         html += `<Option>`+el.size_name+`</Option>`;
-        //      })
-        // }
-       
+        // alert(document.getElementById('item_name').innerHTML+' '+document.getElementById('gen_name').innerHTML+' '+document.getElementById('fab_name').innerHTML);
     }
 
-    const additem = () =>{
-        const spec = document.getElementById('types').value;
-        document.getElementById('item_name').append(' '+spec);
-        if(document.getElementById('fab').disabled == false){
-            setGenderName(spec);
-        }
-        if(document.getElementById('col').disabled == false){
-            setFabricName(spec);
-        }
-        if(document.getElementById('siz').disabled == false){
-            setColourName(spec);
-        }
+    const additem2 = () =>{
+        const spec = document.getElementById('types2').value;
+        document.getElementById('siz_name').innerHTML = spec;
+        setSizeName(spec);
     }
 
 
     const qtychange = () =>{
-        if(document.getElementById('fab').disabled == false){
-            Swal.fire({
-                title:  "Warning!",
-                text: "You Need to Choose Fabric.",
-                type: 'error',    
-              });
-        }
-        if(document.getElementById('col').disabled == false){
-            Swal.fire({
-                title:  "Warning!",
-                text: "You Need to Choose Colour.",
-                type: 'error',    
-              });
-        }
-        if(document.getElementById('siz').disabled == false){
-            Swal.fire({
-                title:  "Warning!",
-                text: "You Need to Choose Size.",
-                type: 'error',    
-              });
-        }
-        if(document.getElementById('gen').disabled == false){
-            Swal.fire({
-                title:  "Warning!",
-                text: "You Need to Choose Gender.",
-                type: 'error',    
-              });
-        }
-    if(document.getElementById('fab').disabled == true && document.getElementById('col').disabled == true && document.getElementById('siz').disabled == true && document.getElementById('gen').disabled == true){
-       let testname = document.getElementById('item_name').innerHTML;
+       let testname = design_name+' '+gendername+' '+fabricname+' '+colourname+' '+sizename;
         let testqty = document.getElementById('qty').value;
         let testprice = document.getElementById('price').value;
         setCount(++count);
@@ -265,12 +285,18 @@ const Order = () => {
         // alert(testname,testqty);
         dispatch(addOrder({orderid,testname,testqty,testprice}));
         document.getElementById('item_name').innerHTML = design_name;
+        document.getElementById('gen_name').innerHTML = '';
+        document.getElementById('fab_name').innerHTML = '';
+        document.getElementById('col_name').innerHTML = '';
+        document.getElementById('siz_name').innerHTML = '';
         document.getElementById('qty').value = '';
         document.getElementById('price').value = '';
         document.getElementById('types').innerHTML = '';
-        document.getElementById("specs").selectedIndex = "0";
-        document.getElementById('gen').disabled = false;
-        }
+        document.getElementById('types1').innerHTML = '';
+        document.getElementById('types2').innerHTML = '';
+        document.getElementById('r1').checked = false;
+        document.getElementById('r2').checked = false;
+        document.getElementById('r3').checked = false;
 
     }
     const remove = (id) => {
@@ -278,7 +304,36 @@ const Order = () => {
 }
 
 const changeprice = ()=>{
-    const counting =  document.getElementById('item_name').innerHTML;
+    if(document.getElementById('gen_name').innerHTML == ''){
+        Swal.fire({
+        title:  "Warning!",
+        text: "You Need to Choose Gender.",
+        type: 'error',    
+        });
+    }
+    else if(document.getElementById('fab_name').innerHTML == ''){
+        Swal.fire({
+        title:  "Warning!",
+        text: "You Need to Choose Fabric.",
+        type: 'error',    
+        });
+    }
+    else if(document.getElementById('col_name').innerHTML == ''){
+        Swal.fire({
+        title:  "Warning!",
+        text: "You Need to Choose Colour.",
+        type: 'error',    
+        });
+    }
+    else if(document.getElementById('siz_name').innerHTML == ''){
+        Swal.fire({
+        title:  "Warning!",
+        text: "You Need to Choose Size.",
+        type: 'error',    
+        });
+    }
+    else{
+        const counting =  design_name+' '+gendername+' '+fabricname+' '+colourname+' '+sizename;
     axios.post('http://familyuniformapp.medicalworld.com.mm/api/showprice',{
            unit: counting       
     }).then(res=>
@@ -289,6 +344,9 @@ const changeprice = ()=>{
     ).catch(err =>{
         console.log('error');
     });
+    }
+    
+
 }
 
 
@@ -436,19 +494,40 @@ const savepreorder = () =>{
                     <tbody id="addrow">
      
                 <tr className='text-center' id="defaultrow">
-                 <td id='item_name'>{design_name}</td>
                  <td>
-                 <Select onChange={specification} id={'specs'}>
+                    <span id='item_name'>{design_name}</span>&nbsp;<span id="gen_name"></span>&nbsp;<span id="fab_name"></span>
+                    &nbsp;<span id="col_name"></span>&nbsp;<span id="siz_name"></span>
+                 </td>
+                 <td>
+                 
+                    <Input  type="radio" name="genderdata" id='r1' onClick={()=>choosegen(1)}></Input>
+                    <Lable className='px-2'>Male</Lable>
+                    <Input  type="radio" name="genderdata" id='r2' onClick={()=>choosegen(2)}></Input>
+                    <Lable className='px-2'>Female</Lable>
+                    <Input  type="radio" name="genderdata" id='r3' onClick={()=>choosegen(3)}></Input>
+                    <Lable className='px-2'>Unisex</Lable><br></br><br></br>
+                   
+                 {/* <Select onChange={specification} id={'specs'}>
                      <Option value="0" hidden>Specs</Option>
                      <Option value="4" id="gen">Gender</Option>
                      <Option value="1" id="fab" disabled>Fabric</Option>
                      <Option value="2" id="col" disabled>Color</Option>
-                     <Option value="3" id="siz" disabled>Size</Option>
-                 </Select>&nbsp;&nbsp;&nbsp;
-                 <Select id={'types'}>
-                     
-                 </Select>&nbsp;&nbsp;&nbsp;
-                 <Btn onClick={additem}><Add/></Btn>
+                     <Option value="3" id="siz" disabled>Size</Option> 
+                 </Select>&nbsp;&nbsp;&nbsp;*/}
+                    <Lable className='px-2'>Fabric</Lable>
+                    <Select id={'types'}> 
+                     </Select>&nbsp;&nbsp;&nbsp;
+                     <Btn onClick={additem}><Add/></Btn><br></br><br></br>
+                     <Lable className='px-2'>Color</Lable>
+                    <Select id={'types1'}> 
+                     </Select>&nbsp;&nbsp;&nbsp;
+                     <Btn onClick={additem1}><Add/></Btn><br></br><br></br>
+                     <Lable className='px-2'>Size</Lable>
+                    <Select id={'types2'}> 
+                     </Select>&nbsp;&nbsp;&nbsp;
+                     <Btn onClick={additem2}><Add/></Btn><br></br><br></br>
+              
+                  
                  </td>
                  <td><Qty  id={"qty"} placeholder="0" onKeyUp={changeprice} /></td>
                  <td><Qty  id={"price"} placeholder="0" readOnly/></td>

@@ -189,7 +189,7 @@ const ColorNav = () => {
                 </Link>
                 {isUser ? (
                 <Link to="/order_list" style={link}>
-                <MenuItem style={{color: '#ffffff'}}>Order List</MenuItem>
+                <MenuItem style={{color: '#ffffff'}}>OrderList</MenuItem>
                 </Link>
                 ):('')}
                 {isUser ? (' '):(
@@ -200,6 +200,9 @@ const ColorNav = () => {
                 <Link to="/login" style={link1}>
                 <MenuItem>SignIn</MenuItem>
                 </Link> )}
+                <Link to="/preorder" style={link1}>
+                <MenuItem>PreOrder</MenuItem>
+                </Link>
                 <Link to="/contact-us" style={link1}>
                 <MenuItem>ContactUs</MenuItem>
                 </Link>
