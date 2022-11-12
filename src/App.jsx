@@ -8,6 +8,7 @@ import Register from "./pages/Register";
 import OrderDetail from "./components/OrderDetail";
 import OrderList from "./components/OrderList";
 import Order from "./components/Order";
+import PreOrder from "./components/PreOrder";
 import { useSelector } from "react-redux";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
@@ -35,6 +36,7 @@ const App = () => {
         <Route path="/register" element={user ? <Navigate to="/"/> : <Register/>}/>
         <Route path="/order_detail/:id" element={<OrderDetail/>}/>
         <Route path="/order_list" element={<OrderList/>}/>
+        <Route path="/preorder" element={<PreOrder/>}/>
         <Route path="/contact-us" element={<Contact/>}/>
         <Route path="/about-us" element={<About/>}/>
       </Routes>
