@@ -10,6 +10,7 @@ import {LogoutProcess} from "../redux/userRedux"
 import {  useDispatch,useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 import {FaBars} from 'react-icons/fa'
+import PreDialog from '../components/PreDialog'
 
 const Container = styled.div`
     height: ;
@@ -123,6 +124,10 @@ const NavbarDropdown = styled.div`
     }
   `;
 
+const A = styled.a`
+
+`;
+
 const NavbarDropdownContent = styled.div`
     display: none;
     position: absolute;
@@ -139,6 +144,7 @@ const ColorNav = () => {
     const username = useSelector(state=>state.user.name);
     const [isUser, setIsUser] = useState(false);
     const dispatch = useDispatch();
+    const [showDialog, setShowDialog] = useState(false);
 
     useEffect(()=>{
         if(username != ''){
@@ -149,6 +155,10 @@ const ColorNav = () => {
     const logout = () =>{
         dispatch(LogoutProcess());
         setIsUser(false);
+    }
+
+    const showPreorder = () =>{
+        setShowDialog(true);
     }
 
     const link = {
@@ -200,9 +210,9 @@ const ColorNav = () => {
                 <Link to="/login" style={link1}>
                 <MenuItem>SignIn</MenuItem>
                 </Link> )}
-                <Link to="/preorder" style={link1}>
-                <MenuItem>PreOrder</MenuItem>
-                </Link>
+                <A onClick={showPreorder} style={link1}>
+                    <MenuItem>PreOrder</MenuItem>
+                </A>
                 <Link to="/contact-us" style={link1}>
                 <MenuItem>ContactUs</MenuItem>
                 </Link>
@@ -229,6 +239,7 @@ const ColorNav = () => {
                 </Link>
             </RightOne>
         </WrapperOne>
+        <PreDialog open={showDialog} close={()=>setShowDialog(false)}/>
     </Container>
   )
 }
