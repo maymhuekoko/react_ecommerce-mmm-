@@ -22,11 +22,11 @@ const MainContainer = styled.div`
     display: flex;
     flex-direction: column;
 `
-
+// min-width: 225px;
 const Container = styled.div`
     flex: 1;
     margin: 5px;
-    min-width: 225px;
+    width: 16%;
     height: 350px;
     display: flex;
     align-items: center;
@@ -47,10 +47,9 @@ const Circle = styled.div`
     position: absolute;
 `
 const Image = styled.img`
-    height: 75%;
+    width: 100%;
     z-index:2;
 `
-
 const Icon = styled.div`
     width: 40px;
     height: 40px;
@@ -71,10 +70,9 @@ const Icon = styled.div`
 const ProductLineTitle = styled.h2`
     font-weight: bold;
     font-size:20px;
-    margin-left:50px;
+    text-align:center;
     position: absolute;
-bottom: 0;
-    
+    bottom: 0;    
 `
 
 const Item = ({item}) => {
