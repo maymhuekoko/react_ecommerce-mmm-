@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 import { FaBars } from 'react-icons/fa'
 import ColorNav from './ColorNav'
+import PreDialog from '../components/PreDialog'
 
 const Container = styled.div`
     transition: 1s ease;
@@ -111,6 +112,10 @@ const MenuItem = styled.div`
     ${mobile({ fontSize: "12px" })}
 `
 
+const A = styled.a`
+
+`
+
 const NavbarDropdown = styled.div`
     position: relative;
     display: inline-block;
@@ -138,6 +143,7 @@ const Navbar = () => {
     const [isScroll, setIsScroll] = useState(false);
     const [isUser, setIsUser] = useState(false);
     const dispatch = useDispatch();
+    const [showDialog, setShowDialog] = useState(false);
 
     window.onscroll = function () {
         if (document.documentElement.scrollTop > 100) {
@@ -162,6 +168,10 @@ const Navbar = () => {
     const logout = () => {
         dispatch(LogoutProcess());
         setIsUser(false);
+    }
+
+    const showPreorder = () =>{
+        setShowDialog(true);
     }
 
     const link = {
@@ -206,9 +216,9 @@ const Navbar = () => {
                         <Link to="/about-us" style={link}>
                             <MenuItem>AboutUs</MenuItem>
                         </Link>
-                        <Link to="/preorder" style={link}>
+                        <A onClick={showPreorder} style={link}>
                             <MenuItem>PreOrder</MenuItem>
-                        </Link>
+                        </A>
                         <Link to="/contact-us" style={link}>
                             <MenuItem>ContactUs</MenuItem>
                         </Link>
@@ -250,7 +260,7 @@ const Navbar = () => {
                     </Right>
                 </Wrapper>
             )}
-
+        <PreDialog open={showDialog} close={()=>setShowDialog(false)}/>
         </Container>
     )
 }

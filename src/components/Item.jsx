@@ -26,7 +26,7 @@ const MainContainer = styled.div`
 const Container = styled.div`
     flex: 1;
     margin: 5px;
-    min-width: 225px;
+    width: 16%;
     height: 350px;
     display: flex;
     align-items: center;
@@ -47,7 +47,7 @@ const Circle = styled.div`
     position: absolute;
 `
 const Image = styled.img`
-    height: 75%;
+    width: 100%;
     z-index:2;
 `
 

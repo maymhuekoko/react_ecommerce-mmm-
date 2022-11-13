@@ -276,6 +276,13 @@ const Order = () => {
 
 
     const qtychange = () =>{
+        if(document.getElementById('qty').value == ''){
+            Swal.fire({
+                title:  "Warning!",
+                text: "Please Enter Quantity.",
+                type: 'error',    
+                });
+        }else{
        let testname = design_name+' '+gendername+' '+fabricname+' '+colourname+' '+sizename;
         let testqty = document.getElementById('qty').value;
         let testprice = document.getElementById('price').value;
@@ -296,7 +303,7 @@ const Order = () => {
         document.getElementById('r1').checked = false;
         document.getElementById('r2').checked = false;
         document.getElementById('r3').checked = false;
-
+        }
     }
     const remove = (id) => {
     dispatch(removeOrder({id}));  
@@ -309,6 +316,7 @@ const changeprice = ()=>{
         text: "You Need to Choose Gender.",
         type: 'error',    
         });
+        document.getElementById('qty').value = '';
     }
     else if(document.getElementById('fab_name').innerHTML == ''){
         Swal.fire({
@@ -316,6 +324,7 @@ const changeprice = ()=>{
         text: "You Need to Choose Fabric.",
         type: 'error',    
         });
+        document.getElementById('qty').value = '';
     }
     else if(document.getElementById('col_name').innerHTML == ''){
         Swal.fire({
@@ -323,6 +332,7 @@ const changeprice = ()=>{
         text: "You Need to Choose Colour.",
         type: 'error',    
         });
+        document.getElementById('qty').value = '';
     }
     else if(document.getElementById('siz_name').innerHTML == ''){
         Swal.fire({
@@ -330,6 +340,7 @@ const changeprice = ()=>{
         text: "You Need to Choose Size.",
         type: 'error',    
         });
+        document.getElementById('qty').value = '';
     }
     else{
         const counting =  design_name+' '+gendername+' '+fabricname+' '+colourname+' '+sizename;
