@@ -2,6 +2,7 @@ import { FavoriteBorderOutlined, SearchOutlined, ShoppingCartOutlined } from '@m
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
+import { useSelector} from 'react-redux'
 
 const Info = styled.div`
     opacity: 0;
@@ -26,7 +27,7 @@ const MainContainer = styled.div`
 const Container = styled.div`
     flex: 1;
     margin: 5px;
-    min-width: 280px;
+    width: 16%;
     height: 350px;
     display: flex;
     align-items: center;
@@ -47,7 +48,7 @@ const Circle = styled.div`
     position: absolute;
 `
 const Image = styled.img`
-    height: 75%;
+    width: 100%;
     z-index:2;
 `
 
@@ -78,12 +79,12 @@ bottom: 0;
 `
 
 const Item = ({item}) => {
-    
+    const url= useSelector(state => state.user.url);
   return (
    
     <Container>
         <Circle/>
-        <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/${item.photo_path}`}/>
+        <Image src={url+`/ecommerce/items/${item.photo_path}`}/>
         <Info>
             
             <Icon>

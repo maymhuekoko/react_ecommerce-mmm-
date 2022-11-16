@@ -10,6 +10,7 @@ import {LogoutProcess} from "../redux/userRedux"
 import {  useDispatch,useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 import {FaBars} from 'react-icons/fa'
+import PreDialog from '../components/PreDialog'
 
 const Container = styled.div`
     height: ;
@@ -34,8 +35,7 @@ const WrapperOne = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background-color: rgba(2,127,157,1);
-
+    background-color: #32549b;
     ${mobile({padding: "10px 0px"})}
 `
 
@@ -124,6 +124,10 @@ const NavbarDropdown = styled.div`
     }
   `;
 
+const A = styled.a`
+
+`;
+
 const NavbarDropdownContent = styled.div`
     display: none;
     position: absolute;
@@ -140,6 +144,7 @@ const ColorNav = () => {
     const username = useSelector(state=>state.user.name);
     const [isUser, setIsUser] = useState(false);
     const dispatch = useDispatch();
+    const [showDialog, setShowDialog] = useState(false);
 
     useEffect(()=>{
         if(username != ''){
@@ -150,6 +155,10 @@ const ColorNav = () => {
     const logout = () =>{
         dispatch(LogoutProcess());
         setIsUser(false);
+    }
+
+    const showPreorder = () =>{
+        setShowDialog(true);
     }
 
     const link = {
@@ -188,7 +197,11 @@ const ColorNav = () => {
                 <Link to="/about-us" style={link1}>
                 <MenuItem>AboutUs</MenuItem>
                 </Link>
-               
+                {isUser ? (
+                <Link to="/order_list" style={link}>
+                <MenuItem style={{color: '#ffffff'}}>OrderList</MenuItem>
+                </Link>
+                ):('')}
                 {isUser ? (' '):(
                 <Link to="/register" style={link1}>
                 <MenuItem>Register</MenuItem>
@@ -197,6 +210,9 @@ const ColorNav = () => {
                 <Link to="/login" style={link1}>
                 <MenuItem>SignIn</MenuItem>
                 </Link> )}
+                <A onClick={showPreorder} style={link1}>
+                    <MenuItem>PreOrder</MenuItem>
+                </A>
                 <Link to="/contact-us" style={link1}>
                 <MenuItem>ContactUs</MenuItem>
                 </Link>
@@ -211,8 +227,9 @@ const ColorNav = () => {
                 <MenuItem>SignIn</MenuItem>
                 </Link> )}
                 <Link to="/cart" style={link1}>
-                <MenuItem>   
-               <ShoppingCartIcon/>Cart
+                <MenuItem> 
+                <div className="bg-dark badge badge-pill badge-red">1</div>  
+                <ShoppingCartIcon/>Cart
                 </MenuItem>
                 </Link>
                 <Link to="/serach">
@@ -222,6 +239,7 @@ const ColorNav = () => {
                 </Link>
             </RightOne>
         </WrapperOne>
+        <PreDialog open={showDialog} close={()=>setShowDialog(false)}/>
     </Container>
   )
 }

@@ -8,7 +8,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import axios from 'axios';
 import ColorNav from '../components/ColorNav';
 import Footer from '../components/Footer';
-import Newsletter from '../components/Newsletter';
+import emailjs from '@emailjs/browser'; 
+import { useSelector} from 'react-redux'
 
 const Div = styled.div`
     margin-top: 65px;
@@ -25,8 +26,7 @@ const Wrapper = styled.div`
     flex-direction: column;
     ${mobile({padding: '50'})}
 `
-const Title = styled.h1`
-    font-size: 50px;
+const Title = styled.h2`
     margin-bottom: 20px;
     text-align: center;
 `
@@ -48,33 +48,68 @@ const Form = styled.form`
 const Input = styled.input`
     flex: 1;
     min-width: 40%;
+    min-height: 30px;
     margin: 10px 0px;
-    padding: 10px;
+    padding: 5px;
 `
 const Message = styled.textarea`
     flex: 1;
     min-width: 40%;
-    min-height: 150px;
+    min-height: 130px;
     margin: 10px 0px;
-    padding: 10px;
+    padding: 5px;
+`
+const Check = styled.input`
+    display: inline-block;
+    width: 18px;
+    height: 18px;
+    margin-top: 20px;
+    margin-right: 10px;
 `
 const Button = styled.button`
     width: 100%;
-    height: 70px;
+    height: 40px;
     border: none;
-    padding: 15px 20px;
-    background-color: teal;
+    background-color: #32549b;
     color: white;
     cursor: pointer;
     margin-top: 20px;
-    &:disabled{
-        color: green;
-        cursor: not-allowed;
-    }
 `
 
 const Contact = () => {
 
+    const [name, setName] = useState('');
+    const [email, setEmail] = useState('');
+    const [message, setMessage] = useState('');
+    const [subscribe, setSubscribe] = useState('');
+    const url= useSelector(state => state.user.url);
+
+    const didSubscribe = subscribe == 'checked' ? '1' : '0';
+
+    const data = {
+        name: name,
+        email :email,
+        message: message,
+        subscribe_flag: didSubscribe
+    }
+
+
+    const SendMessage = (e) => {
+        e.preventDefault();
+        axios.post(url+'/api/contact_message', data)
+
+        emailjs.sendForm('service_79e361n', 'template_pt919ms', e.target, 'plkqX8v0BRW5x7pd8')
+        .then((result) => {
+            alert('Email sent successfully');
+            setName('');
+            setEmail('');
+            setMessage('');
+            setSubscribe('');
+        }, (error) => {
+            alert('Fail to send email');
+        });
+    }
+ 
     return (
         
         <div>
@@ -84,18 +119,19 @@ const Contact = () => {
             <Div>
                 <Wrapper>
                     <Title>Contact Us</Title>
-                    <Description>You are free to ask anything</Description>
-                    <Form>
-                        <Input type="text"  placeholder="User Name"/>
-                        <Input type="text" placeholder="Email"/>
-                        <Message placeholder='Write Your Message'/>
+                    <Description>Feels free to ask anything...</Description>
+                    <Form onSubmit={SendMessage}>
+                        <Input type="text" name='name' placeholder="Name" value={name} onChange={(e)=>setName(e.target.value)}/>
+                        <Input type="text" name='email' placeholder="Email" value={email} onChange={(e)=>setEmail(e.target.value)}/>
+                        <Message name='message' placeholder='Message' value={message} onChange={(e)=>setMessage(e.target.value)}/>
+                        <div>
+                            <Check id="check" type="checkbox" onChange={(e)=>setSubscribe('checked')} style={{display: 'inline-block'}}/>
+                            <label for="check" style={{cursor: 'pointer'}}>Subscribe for Update News</label>
+                        </div>
                         <Button>Send Message</Button>
                     </Form>
                 </Wrapper>
             </Div>
-            <div>
-                <Newsletter/>
-            </div>
             <div>
                 <Footer/>
             </div>

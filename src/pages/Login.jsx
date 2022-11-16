@@ -48,7 +48,7 @@ const Button = styled.button`
     width: 40%;
     border: none;
     padding: 15px 20px;
-    background-color: teal;
+    background-color: #32549b;
     color: white;
     cursor: pointer;
     margin-bottom: 10px;
@@ -78,6 +78,7 @@ const Login = () => {
     const [errmsg,setErrmsg] = useState("");
     const [successmsg,setSuccessmsg] = useState(false);
     const dispatch = useDispatch();
+    const url= useSelector(state => state.user.url);
     
 
     const background = {
@@ -97,11 +98,11 @@ const Login = () => {
     const handleClick = (e) => {
         e.preventDefault();
     
-            const response = axios.post('http://medicalworldinvpos.kwintechnologykw09.com/api/Login',{
+            const response = axios.post(url+'/api/Login',{
                 username: username,
                 password: password
             }).then(function(response){
-                // console.log(response.data.status);
+                // console.log(response.data.user);
                 if(response.data.status != 200){
                     setErrmsg(' Missing Username Or Password! ');
                     errRef.current.focus();
@@ -113,11 +114,13 @@ const Login = () => {
                     setUsername('');
                     setPassword('');
                     setSuccessmsg(true);
-
+                    
                     dispatch(setUserInfo({
+                        id : response.data.user.id,
                         name : response.data.user.name,
                         phone : response.data.user.phone,
                         address : response.data.user.address,
+                        email : response.data.user.email,
                     }))   
                     
                 }

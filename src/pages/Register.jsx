@@ -7,6 +7,8 @@ import {mobile} from "../responsive"
 import { useDispatch,useSelector } from 'react-redux'
 import { setUserInfo } from "../redux/userRedux"
 import Navbar from '../components/Navbar'
+import ColorNav from '../components/ColorNav'
+import Footer from '../components/Footer'
 
 const Container = styled.div`
     width: 100vw;
@@ -44,7 +46,7 @@ const Button = styled.button`
     width: 30%;
     border: none;
     padding: 15px 20px;
-    background-color: teal;
+    background-color: #32549b;
     color: white;
     cursor: pointer;
     
@@ -60,6 +62,7 @@ const Register = () => {
     const [password,setPassword] = useState('');
     const [onoff,setOnOff] = useState(false);
     const [showDialog, setShowDialog] = useState(false);
+    const url= useSelector(state => state.user.url);
 
     const dialogRef = useRef(null);
     const navigate = useNavigate();
@@ -74,15 +77,26 @@ const Register = () => {
     const onPasswordChanged = (e) => setPassword(e.target.value);
 
     const onRegisterClicked =() => {  
-        const res = axios.post('http://medicalworldinvpos.kwintechnologykw09.com/api/website_user_store',{
+
+        const res = axios.post(url+'/api/website_user_store',{
+
             name: name,
             phone: phone,
             address: address,
             username: username,
-            password: password
+            password: password,
+            email : email,
         }).then(function(response){
+            alert(response.data.data)
             setShowDialog(true);
-            dispatch(setUserInfo(name,phone,email,address));
+            // dispatch(setUserInfo(response.data.id,name,phone,email,address));
+            dispatch(setUserInfo({
+                id : response.data.data,
+                name : name,
+                phone : phone,
+                address : address,
+                email : email,
+            })) 
             navigate('/');
         }).catch(function(error){
             console.log(error);
@@ -91,6 +105,8 @@ const Register = () => {
     }
 
   return (
+    <div>
+    <ColorNav/>
     <Container>
         <Wrapper>
         <Title>CREATE AN ACCOUNT</Title>
@@ -111,6 +127,8 @@ const Register = () => {
         </Wrapper>
        <AlertDialog open={showDialog} close={()=>setShowDialog(false)} title="User Registration" content="Your user account has been successfully registered! Enjoy Shoppping!"/>
     </Container>
+    <Footer/>
+    </div>
   )
 }
 

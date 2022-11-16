@@ -1,10 +1,11 @@
 import { FavoriteBorderOutlined, SearchOutlined, ShoppingCartOutlined } from '@mui/icons-material'
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import React,{ useEffect, useState }  from 'react'
+import React, { useEffect, useState } from 'react'
 import useCollapse from 'react-collapsed';
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import axios from 'axios'
+import { useSelector} from 'react-redux'
 
 const Info = styled.div`
     opacity: 0;
@@ -29,7 +30,7 @@ const MainContainer = styled.div`
 const Container = styled.div`
     flex: 1;
     margin: 5px;
-    width: 1300px;
+    width: 1070px;
     height: 500px;
     display: flex;
     align-items: center;
@@ -71,8 +72,6 @@ const Icon = styled.div`
     transform: scale(1.1);
     }
 `
-
-
 const ProductLineTitle = styled.h2`
     font-weight: bold;
     font-size:30px;
@@ -81,95 +80,111 @@ const ProductLineTitle = styled.h2`
     bottom: 10%;
     
 `
-
 const Button = styled.button`
-margin-left:50px;
-position: absolute;
-bottom: 3%; 
+    margin-left:50px;
+    position: absolute;
+    bottom: 3%; 
 `
 
 const ImgContainer = styled.div`
-    flex: 1;
-
+    max-height: 350px;
 `
 const SmallImgContainer = styled.div`
-   flex: 1;
    
 `
 const SmallImage = styled.img`
-    width: 430px;
-    height: 45vh;
+    width: 250px;
+    max-height: 250pz;
     margin-top: 25px;
     object-fit: contain;
-
+  
+`
+const SmallImgName = styled.span`
+    font-size: 20px;'
+    color: #111111;
 `
 
-const Product = ({item}) => {
-    const { getCollapseProps, getToggleProps } = useCollapse();
-    const [items,setItems] =  useState([]);
+const Wrapper = styled.div`
+    padding: 50px;
+    display: flex;
     
-    const collapse = () =>{
-        // alert('hello');
-        const obj = {'category_id':item.category_id,'subcategory_id':item.id}
-        axios.post('http://medicalworldinvpos.kwintechnologykw09.com/api/productlineitems_api',obj)
-        .then(res=>{
-            
-            setItems(res.data);
-            console.log(res.data[0]);
-        }).catch(err=>{
-            console.log(err);
-        })
+`
+
+const SmallImgContainerOne = styled.div`
+    max-width: 70vw;
+    display: flex;
+    overflow-y: hidden; 
+    overflow-x: scroll;
+    min-width: 350px;
+    object-fit: cover;
+   
+`
+const Divh = styled.div`
+&:hover ${Info}{
+    opacity: 1;
+}
+`
+
+const Product = ({ item }, props) => {
+
+    const { getCollapseProps, getToggleProps } = useCollapse();
+    const [items, setItems] = useState([{}]);
+    const url= useSelector(state => state.user.url);
+
+    const collapse = () => {
+        const obj = { 'category_id': item.category_id, 'subcategory_id': item.id }
+        axios.post(url+'/api/productlineitems_api', obj)
+            .then(res => {
+
+                setItems(res.data);
+                console.log(res.data[0]);
+            }).catch(err => {
+                console.log(err);
+            })
     };
 
-  return (
-    
-    <div className="collapsible" onClick={collapse}>
-        <Container className="header" {...getToggleProps()}>
-        <Circle/>
-        <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/product_lines/${item.photo_path}`} />
-        <Info>
-            
-            <Icon>
-               <ShoppingCartOutlined/>          
-            </Icon>
+    return (
+        <div className="collapsible" onClick={collapse}>
 
-            <Icon>
-                <Link to={`/product/${item.id}`}>
-                    <SearchOutlined/>
-                </Link>
-                
-            </Icon>
+            <Container className="header" {...getToggleProps()}>
+                <Circle />
+                <Image src={url+`/ecommerce/product_lines/${item.photo_path}`} />
+                <Info>
+                    <Icon><ShoppingCartOutlined /></Icon>
+                    <Icon><Link to={`/product/${item.id}`}><SearchOutlined /></Link></Icon>
+                    <Icon><FavoriteBorderOutlined /></Icon>
+                </Info>
+                <ProductLineTitle >{item.name}</ProductLineTitle>
+                <Button>SHOP NOW</Button>
+            </Container>  
 
-            <Icon>
-                <FavoriteBorderOutlined/>
+            <Wrapper {...getCollapseProps()}>
+                <ImgContainer>
+                    <SmallImgContainerOne>
+                        {items.map((it) => (
+                            // .slice(0, 6)
+                            <div style={{ display: 'inline-block' }}>
+                                <div style={{ display: 'flex', flexDirection: 'column' }}>
+                                    <div style={{ display: 'inline-block' }}>
+                                        
+                                        <Link to={`/product/${it.id}`}><SmallImage src={url+`/ecommerce/items/${it.photo_path}`} key={it.id} />
 
-            </Icon>
-            
-        </Info>
-        <ProductLineTitle >{item.name}</ProductLineTitle>
-        
-        <Button>SHOP NOW</Button>
-        </Container>
-       
-        <ImgContainer {...getCollapseProps()}>
-            <SmallImgContainer className="content">
+                                        </Link>
+                                       
+                                    </div>
+                                    <div style={{ textAlign: 'center', maxWidth: '250px', display: 'inline-block' }}>
+                                        <span>{it.item_name}</span>
+                                    </div>
+                                </div>
+                            </div>
+                        ))}
+                    </SmallImgContainerOne>
+                </ImgContainer>
+            </Wrapper>
 
-            {items.slice(0,6).map((it)=> (
-            <SmallImage src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/items/${it.photo_path}`} key={it.id}/>
-            ))} 
-    
-            </SmallImgContainer>
-           
-               {/* <h1>{items}</h1> */}
-        </ImgContainer>
-        
-       
+        </div>
 
-        
-    </div>
-    
-    
-  )
+    )
 }
 
 export default Product

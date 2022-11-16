@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import CategoryItem from './CategoryItem';
 import {mobile} from "../responsive";
 import axios from 'axios';
+import { useSelector} from 'react-redux'
 
 const MainContainer = styled.div`
 display: flex;
@@ -17,6 +18,7 @@ const Container = styled.div`
 `
 
 const SectionTitle = styled.h2`
+    margin-top: 20px;
     font-weight: bold;
     font-size:30px;
     margin-left: 20px;
@@ -26,22 +28,20 @@ const SectionTitle = styled.h2`
 const Categories = () => {
 
   const [categories,setCategories] = useState([]);
+  const url= useSelector(state => state.user.url);
 
   useEffect(()=>{
     const getCategories = async () =>{
       try{
-        const res = await axios.get("http://medicalworldinvpos.kwintechnologykw09.com/api/category_api",{
-          headers: {
-            'Access-Control-Allow-Origin' : '*',
-          }
-        });
+        const res = await axios.get(url+"/api/category_api");
+        // const res = await axios.get("http://localhost:8000/api/category_api");
         console.log(res.data);
         setCategories(res.data);
         
       }catch(err){}
     };
     getCategories();
-  });
+  },[]);
 
   return (
     <MainContainer>

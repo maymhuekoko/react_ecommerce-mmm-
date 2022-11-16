@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import ColorNav from './ColorNav';
 import Footer from './Footer';
+import { useSelector} from 'react-redux'
 
 const Div = styled.div`
     margin-top: 65px;
@@ -116,7 +117,8 @@ const P = styled.p`
 const OrderList = () => {
 
     const [ inputs, setInputs ] = useState({});
-    const [ oinputs, setOInputs ] = useState({});
+    const [ oinputs, setOInputs ] = useState([]);
+    const url= useSelector(state => state.user.url);
 
     const {id} = useParams();
 
@@ -124,11 +126,9 @@ const OrderList = () => {
         fetchOrderDetail()
     },[]);
 
-    const fetchOrderDetail = () => {
-        axios.get('http://medicalworldinvpos.kwintechnologykw09.com/api/ecommerce_order_detail/'+id)
+    const fetchOrderDetail = async () => {
+        await axios.get(url+'/api/ecommerce_order_detail/'+id)
         .then(res=>{
-            // console.log(res.data.orders);
-            console.log(res.data.counting_units);
             setInputs({
                 id: res.data.orders.id,
                 order_code: res.data.orders.order_code,
@@ -146,8 +146,6 @@ const OrderList = () => {
             setOInputs(res.data.counting_units);
         });
     }
-
-    const results = [];
 
     return (
 
@@ -204,41 +202,21 @@ const OrderList = () => {
                     <Th>Item Name</Th>
                     <Th>Item Quantity</Th>
                     <Th>Item Price</Th>
-                    <Th>Item ??</Th>
+                    <Th>Item Purchase Price</Th>
                 </Tr>
-                {/* { 
-                    oinputs.ForEach(oinput => {
-                    results.push(
+                {
+                    oinputs.map((oinput) => (
                         <Tr key={oinput.id}>
                             <Td>{oinput.id}</Td>
-                            <Td>dofufjkf</Td>
-                            <Td>22</Td>
-                            <Td>dkifiee</Td>
-                            <Td>kd?? ???</Td>
-                            <Td>kd?? ???</Td>
-                        </Tr>
-                    )
-                })
-                } */}
-                {/* {
-                    oinputs.map((oinput, index) => (
-                        <Tr key={oinput.id}>
-                            <Td>{oinput.id}</Td>
-                            <Td>dofufjkf</Td>
-                            <Td>22</Td>
-                            <Td>dkifiee</Td>
-                            <Td>kd?? ???</Td>
-                            <Td>kd?? ???</Td>
+                            <Td>{oinput.item_id}</Td>
+                            <Td>{oinput.unit_name}</Td>
+                            <Td>{oinput.current_quantity}</Td>
+                            <Td>{oinput.order_price}</Td>
+                            <Td>{oinput.purchase_price}</Td>
                         </Tr>
                     ))
-                } */}
-                <Tr>
-                    <Td>iekdfiif</Td>
-                    <Td>dofufjkf</Td>
-                    <Td>22</Td>
-                    <Td>dkifiee</Td>
-                    <Td>kd?? ???</Td>
-                </Tr>
+                }
+                
             </Table> 
         </Wrapper>
         </Div>

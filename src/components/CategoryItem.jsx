@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import {mobile} from "../responsive"
+import { useSelector} from 'react-redux'
 
 const Container = styled.div`
 flex: 1;
@@ -15,7 +16,6 @@ const Image = styled.img`
     object-fit: contain;
     background-color: #fcf5f5;
     ${mobile({height: "30vh"})}
-    
 `
 const Info = styled.div`
 position: absolute;
@@ -25,7 +25,7 @@ display: flex;
 align-items: center;
 justify-content: center;
 flex-direction: column;
-margin-left: 230px;
+margin-left: 160px;
 margin-bottom: 30px;
 `
 const Title = styled.h1`
@@ -43,10 +43,12 @@ const Button = styled.button`
 `
 
 const CategoryItem = ({item}) => {
+    const url= useSelector(state => state.user.url);
   return (
     <Container>
         <Link to={`/products/${item.id}/${item.category_name}`}>
-        <Image src={`http://medicalworldinvpos.kwintechnologykw09.com/ecommerce/brands/${item.photo_path}`}/>
+        <Image src={url+`/ecommerce/brands/${item.photo_path}`}/>
+        {/* <Image src={`http://localhost:8000/ecommerce/brands/${item.photo_path}`}/>  */}
         <Info>
             <Button>Details</Button>
         </Info>
