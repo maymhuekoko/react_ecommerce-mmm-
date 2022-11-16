@@ -62,6 +62,7 @@ const Register = () => {
     const [password,setPassword] = useState('');
     const [onoff,setOnOff] = useState(false);
     const [showDialog, setShowDialog] = useState(false);
+    const url= useSelector(state => state.user.url);
 
     const dialogRef = useRef(null);
     const navigate = useNavigate();
@@ -77,7 +78,7 @@ const Register = () => {
 
     const onRegisterClicked =() => {  
 
-        const res = axios.post('http://familyuniformapp.medicalworld.com.mm/api/website_user_store',{
+        const res = axios.post(url+'/api/website_user_store',{
 
             name: name,
             phone: phone,

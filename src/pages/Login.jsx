@@ -78,6 +78,7 @@ const Login = () => {
     const [errmsg,setErrmsg] = useState("");
     const [successmsg,setSuccessmsg] = useState(false);
     const dispatch = useDispatch();
+    const url= useSelector(state => state.user.url);
     
 
     const background = {
@@ -97,7 +98,7 @@ const Login = () => {
     const handleClick = (e) => {
         e.preventDefault();
     
-            const response = axios.post('http://familyuniformapp.medicalworld.com.mm/api/Login',{
+            const response = axios.post(url+'/api/Login',{
                 username: username,
                 password: password
             }).then(function(response){

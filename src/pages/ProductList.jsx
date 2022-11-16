@@ -5,12 +5,21 @@ import Footer from '../components/Footer'
 import ColorNav from '../components/ColorNav'
 import Slider from '../components/Slider'
 import Products from '../components/Products'
+import ItemOne from '../components/ItemOne'
 import SearchIcon from '@mui/icons-material/Search';
 import { mobile } from "../responsive"
+import axios from 'axios'
+import { useSelector } from 'react-redux'
 
 const Container = styled.div`
 margin: 20px;
 `
+const ContainerOne = styled.div`
+flex:1;
+flex-direction:row;
+padding:20px;
+`
+
 const Title = styled.h2`
   margin: 20px;
   margin-top: 80px;
@@ -102,7 +111,28 @@ const ProductList = () => {
   // const cat_name = location.pathname.split("/")[3];
   const [filters, setFilters] = useState({});
   const [sort, setSort] = useState("newest");
+  const [search,setSearch] = useState('');
+  const [click,setClick] = useState(false);
+  const [items, setItems] = useState([]);
+  const url= useSelector(state => state.user.url);
 
+  const family = () => {
+    setClick(false);
+  }
+  
+  const SearchItems = () => {
+    setClick(true);
+    axios.post(url+'/api/searchitem',{
+      item: search      
+    }).then(res=>
+    {
+    alert('success');
+    setItems(res.data);
+   }
+).catch(err =>{
+   console.log('error');
+});
+  }
 
   const handleFilters = (e) => {
     setFilters(() => e.target.value)
@@ -124,8 +154,8 @@ const ProductList = () => {
         {/* <Slider/> */}
 
         <Title>Product Line
-          <Btn><A><SearchIcon /></A></Btn>
-          <Input placeholder='Search Items.........'></Input>
+          <Btn onClick={SearchItems}><A><SearchIcon /></A></Btn>
+          <Input placeholder='Search Items.........' onChange={(e)=>setSearch(e.target.value)}></Input>
         </Title>
 
         <FilterContainer>
@@ -144,26 +174,6 @@ const ProductList = () => {
               <Option value="male">Male</Option>
               <Option value="female">Female</Option>
             </Select>
-
-          {/* <Select name="color" onChange={handleFilters}>
-              <Option disabled>Pant</Option>
-              <Option>Normal</Option>
-              <Option>black</Option>
-              <Option>red</Option>
-              <Option>blue</Option>
-              <Option>yellow</Option>
-              <Option>gray</Option>
-          </Select>
-
-          <Select name="size" onChange={handleFilters}>
-              <Option disabled>Size</Option>
-              <Option>XS</Option>
-              <Option>S</Option>
-              <Option>M</Option>
-              <Option>L</Option>
-              <Option>XL</Option>
-          </Select> */}
-
 
           </Filter>
 
@@ -185,40 +195,48 @@ const ProductList = () => {
             <Div>
               <FilterTextOne>Brands</FilterTextOne>
               <DivOne>
-                <Link className='text-decoration-none text-white' to='/products/1/family%20hospital'>Family Hospital</Link><br></br>
+                <Link className='text-decoration-none text-white' to='/products/1/family%20hospital' onClick={family}>Family Hospital</Link><br></br>
               </DivOne>
               <DivOne>
-                <Link className='text-decoration-none text-white' to='/products/2/branded'>Branded</Link><br></br>
+                <Link className='text-decoration-none text-white' to='/products/2/branded' onClick={family}>Branded</Link><br></br>
               </DivOne>
               <DivOne>
-                <Link className='text-decoration-none text-white' to='/products/3/ecofamily'>Eco Family</Link><br></br>
+                <Link className='text-decoration-none text-white' to='/products/3/ecofamily' onClick={family}>Eco Family</Link><br></br>
               </DivOne>
               <DivOne>
-                <Link className='text-decoration-none text-white' to='/'>Oxypas</Link><br></br>
+                <Link className='text-decoration-none text-white' to='/' onClick={family}>Oxypas</Link><br></br>
               </DivOne>
               <DivOne>
-                <Link className='text-decoration-none text-white' to='/'>Unionmicroclean</Link><br></br>
+                <Link className='text-decoration-none text-white' to='/' onClick={family}>Unionmicroclean</Link><br></br>
               </DivOne>
               <DivOne>
-                <Link className='text-decoration-none text-white' to='/'>Littman</Link><br></br>
+                <Link className='text-decoration-none text-white' to='/' onClick={family}>Littman</Link><br></br>
               </DivOne>
               <DivOne>
-                <Link className='text-decoration-none text-white' to='/'>Protech Masks</Link><br></br>
+                <Link className='text-decoration-none text-white' to='/' onClick={family}>Protech Masks</Link><br></br>
               </DivOne>
               <DivOne>
-                <Link className='text-decoration-none text-white' to='/'>Polo Club</Link><br></br>
+                <Link className='text-decoration-none text-white' to='/' onClick={family}>Polo Club</Link><br></br>
               </DivOne>
               <DivOne>
-                <Link className='text-decoration-none text-white' to='/'>Factory Textile</Link><br></br>
+                <Link className='text-decoration-none text-white' to='/' onClick={family}>Factory Textile</Link><br></br>
               </DivOne>
               <DivOne>
-                <Link className='text-decoration-none text-white' to='/'>Factory Material</Link><br></br>
+                <Link className='text-decoration-none text-white' to='/' onClick={family}>Factory Material</Link><br></br>
               </DivOne>
 
             </Div>
           </div>
           <div className='col-md-10'>
-            <Products cat={cat} filters={filters} sort={sort} />
+            {
+              click == true ? <ContainerOne>
+              {items.map(item => (
+                <ItemOne item={item} key={item.id} />
+              ))}
+            </ContainerOne> :
+              <Products cat={cat} filters={filters} sort={sort} />
+            }
+            
           </div>
         </div>
       </Container>

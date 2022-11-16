@@ -12,7 +12,7 @@ import Newsletter from '../components/Newsletter';
 import AboutImgTest from '../slider-images/slider1.jpg'
 import sample from '../files/sample.mp4'
 import map from '../files/map.jpg'
-
+import { useSelector} from 'react-redux'
 import aryu from '../files/p_logo/aryu_international_hospital.png'
 import asiaRoyal from '../files/p_logo/asia_royal.jpg'
 import grandHantha from '../files/p_logo/grand_hantha_international.png'
@@ -43,20 +43,7 @@ import shweYaung from '../files/p_logo/shwe_yaung_lin_hospital.jpg'
 import tawwin from '../files/p_logo/tawwin_malikha_hospital.jpg'
 import thuka from '../files/p_logo/thukha_kabar_hospital.png'
 import violin from '../files/p_logo/violin_health_beauty_clinic.jpg'
-// import  from '../files/p_logo/'
-// import  from '../files/p_logo/'
-// import  from '../files/p_logo/'
-// import  from '../files/p_logo/'
-// import  from '../files/p_logo/'
-// import  from '../files/p_logo/'
-// import  from '../files/p_logo/'
-// import  from '../files/p_logo/'
-// import  from '../files/p_logo/'
-// import  from '../files/p_logo/'
-// import  from '../files/p_logo/'
-// import  from '../files/p_logo/'
-// import  from '../files/p_logo/'
-// import  from '../files/p_logo/'
+
 
 const Div = styled.div`
     overflow: hidden;
@@ -236,6 +223,7 @@ const ShowP = styled.span`
 const About = () => {
 
     const [partners, setPartners] = useState(false);
+    const url= useSelector(state => state.user.url);
 
     const ShowAllPartners = () => {
         setPartners(true);
@@ -297,16 +285,16 @@ const About = () => {
                         <Title style={{ color: '#212529' }}>Our Brands</Title>
                         <Box>
                             <SmallImgBox>
-                                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/brands/branded.png`} />
+                                <Image src={url+`/ecommerce/brands/branded.png`} />
                             </SmallImgBox>
                             <SmallImgBox>
-                                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/brands/ecofamily.png`} />
+                                <Image src={url+`/ecommerce/brands/ecofamily.png`} />
                             </SmallImgBox>
                             <SmallImgBox>
-                                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/brands/family.png`} />
+                                <Image src={url+`/ecommerce/brands/family.png`} />
                             </SmallImgBox>
                             <SmallImgBox>
-                                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/brands/oxypas.png`} />
+                                <Image src={url+`/ecommerce/brands/oxypas.png`} />
                             </SmallImgBox>
                         </Box>
                     </DeepBox>
@@ -314,19 +302,19 @@ const About = () => {
                         <Title style={{ color: '#212529' }}>Our Products</Title>
                         <Box>
                             <SmallImgBox style={{ paddingBottom: '30px', }}>
-                                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/product_lines/medical_scrub.png`} />
+                                <Image src={url+`/ecommerce/product_lines/medical_scrub.png`} />
                                 <span style={{ display: 'block', textAlign: 'center' }}>Default</span>
                             </SmallImgBox>
                             <SmallImgBox style={{ paddingBottom: '30px', }}>
-                                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/product_lines/doctor_coat.png`} />
+                                <Image src={url+`/ecommerce/product_lines/doctor_coat.png`} />
                                 <span style={{ display: 'block', textAlign: 'center' }}>Doctor Coat</span>
                             </SmallImgBox>
                             <SmallImgBox style={{ paddingBottom: '30px', }}>
-                                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/product_lines/gown.png`} />
+                                <Image src={url+`/ecommerce/product_lines/gown.png`} />
                                 <span style={{ display: 'block', textAlign: 'center' }}>Gown</span>
                             </SmallImgBox>
                             <SmallImgBox style={{ paddingLeft: '30px', }}>
-                                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/product_lines/pants.png`} />
+                                <Image src={url+`/ecommerce/product_lines/pants.png`} />
                                 <span style={{ display: 'block', textAlign: 'center' }}>Pants</span>
                             </SmallImgBox>
                         </Box>
@@ -338,10 +326,10 @@ const About = () => {
                     <FPBox>
                         <Left>
                             <SmallImgBox>
-                                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/brands/branded.png`} />
+                                <Image src={url+`/ecommerce/brands/branded.png`} />
                             </SmallImgBox>
                             <SmallImgBox style={{ marginTop: '10px' }}>
-                                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/brands/ecofamily.png`} />
+                                <Image src={url+`/ecommerce/brands/ecofamily.png`} />
                             </SmallImgBox>
                         </Left>
                         <Center>
@@ -352,10 +340,10 @@ const About = () => {
                         </Center>
                         <Right>
                             <SmallImgBox>
-                                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/brands/branded.png`} />
+                                <Image src={url+`/ecommerce/brands/branded.png`} />
                             </SmallImgBox>
                             <SmallImgBox style={{ marginTop: '10px' }}>
-                                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/brands/ecofamily.png`} />
+                                <Image src={url+`/ecommerce/brands/ecofamily.png`} />
                             </SmallImgBox>
                         </Right>
                     </FPBox>

@@ -67,6 +67,7 @@ const Td = styled.td`
 
 export default function InvoiceDialog(props) {
    let total_amount= 0;
+   const url= useSelector(state => state.user.url);
   return (
     <div>
 
@@ -76,7 +77,7 @@ export default function InvoiceDialog(props) {
 
 <Div className="col-12 text-center">
     <Div>
-        <Img src="http://medicalworldinvpos.kwintechnologykw09.com/image/medicalWorld.png"/>
+        <Img src={url+"/image/medicalWorld.png"}/>
     </Div>
 
     <Div>

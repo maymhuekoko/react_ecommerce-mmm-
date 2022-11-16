@@ -11,10 +11,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useState, useEffect } from 'react'
 import { Navigate, useNavigate } from 'react-router-dom'
 import axios from 'axios'
-import { addPhoto } from "../redux/designRedux"
-
-
-
+import Swal from 'sweetalert2'
 
 const Form = styled.form`
     display: flex;
@@ -61,24 +58,37 @@ const QRBox = styled.div`
 
 export default function BankInfoDialog(props) {
   const dispatch = useDispatch(); 
-  const [file, setFile] = useState()
+  const [file, setFile] = useState(null);
+  const [remark, setRemark] = useState('');
 
-
+  const onFileChange = (event) => {  
+    // Update the state
+    setFile(event.target.files[0]);
+   
+  };
 
    const savefilename = () =>{
-    let file = document.getElementById('myFile').files[0];
-
-    // MK
-
-    const reader = new FileReader();
-        reader.onload = function () {
-          file = reader.result;
+    // alert(file.name);
+    let formdata={
+      file:file,
+      remark:remark,    
+    }
+    axios.post('http://localhost:8000/api/storescreenshot', formdata,
+    {
+        headers: {
+        'Content-Type': 'multipart/form-data'
+    }
+    }).then(res=>
+        {
+          Swal.fire({
+            title:  "Success!",
+            text: "Your Payment Screenshot is sent.",
+            type: 'success',    
+            });
         }
-        console.log(file);
-        reader.readAsDataURL(file);
-        console.log(file);
-    // ====
-    dispatch(addPhoto(file));
+        ).catch(err =>{
+          console.log('error');
+        });
     document.getElementById('hidedialog').style.visibility = "hidden";
    }
   return (
@@ -91,8 +101,8 @@ export default function BankInfoDialog(props) {
             Paid Info
           </DialogContentText>
             <Form>
-              <Input type="file" id='myFile' />
-              <Input type="text" id="phone" name="" placeholder="Remark" />
+              <Input type="file" id='myFile' onChange={onFileChange}/>
+              <Input type="text" id="remark" name="" placeholder="Remark" onChange={(e)=>setRemark(e.target.value)}/>
             </Form>
         </DialogContent>
         <DialogActions>

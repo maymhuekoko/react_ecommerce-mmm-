@@ -27,8 +27,8 @@ const MainContainer = styled.div`
 const Container = styled.div`
     flex: 1;
     margin: 5px;
-    width: 16%;
-    height: 350px;
+    width: 360px;
+    height: 550px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -50,6 +50,7 @@ const Circle = styled.div`
 const Image = styled.img`
     width: 100%;
     z-index:2;
+    object-fit:contain;
 `
 
 const Icon = styled.div`
@@ -78,11 +79,10 @@ bottom: 0;
     
 `
 
-const Item = ({item}) => {
+const ItemOne = ({item}) => {
     const url= useSelector(state => state.user.url);
   return (
-   
-    <Container>
+    <Container className='col-6'>
         <Circle/>
         <Image src={url+`/ecommerce/items/${item.photo_path}`}/>
         <Info>
@@ -111,4 +111,4 @@ const Item = ({item}) => {
   )
 }
 
-export default Item
+export default ItemOne

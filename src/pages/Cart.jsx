@@ -11,6 +11,7 @@ import { useDispatch,useSelector } from 'react-redux'
 import axios from 'axios'
 import CheckoutDialog from '../components/CheckoutDialog'
 import { Link } from 'react-router-dom'
+import Swal from 'sweetalert2'
 
 const Container = styled.div``
 const Wrapper = styled.div`
@@ -168,12 +169,22 @@ const Cart = () => {
     const[deliveryfee,setDeliveryFee] = useState(0);
     const[discount,setDiscount] = useState(0);
     const [showDialog, setShowDialog] = useState(false);
+    const url= useSelector(state => state.user.url);
+    const username = useSelector(state => state.user);
 
     const dispatch = useDispatch();
 
     const onCheckOutClicked =() => {
-        setShowDialog(true);
-
+        if(username.name == ''){
+            Swal.fire({
+                title:  'Warning!',
+                text: "You need to make register or sign in first.",
+                type: 'success',    
+              });
+        }else{
+            setShowDialog(true);
+        }
+        
     }
 
     const handleQuantityInc = (id) =>{   
@@ -244,7 +255,7 @@ const Cart = () => {
                     {cart.products.map((product)=>(
                         <Product>
                         <ProductDetail>
-                            <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/family_cute_front.png`}/>
+                            <Image src={url+`/ecommerce/items/family_cute_front.png`}/>
                             <Details>
                                 <ProductName><b>Product: </b> {product.unitname}</ProductName>
                                 <ProductId><b>ID: </b> {product.unitcode}</ProductId>
