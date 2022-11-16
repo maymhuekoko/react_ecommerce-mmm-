@@ -66,11 +66,7 @@ export default function CheckoutDialog(props) {
   useEffect(() => {
     const getTownships = async () => {
       try {
-        const res = await axios.get("http://familyuniformapp.medicalworld.com.mm/api/township", {
-          headers: {
-            'Access-Control-Allow-Origin': '*',
-          }
-        });
+        const res = await axios.get("http://familyuniformapp.medicalworld.com.mm/api/township");
         console.log(res.data);
         setTownships(res.data);
 

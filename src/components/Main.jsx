@@ -7,6 +7,7 @@ import Products from '../components/Products'
 import Slider from '../components/Slider'
 import { ChatBot } from './ChatBot'
 import SeasonalDiscountNews from './SeasonalDiscountNews'
+import FacebookNewsFeed from '../components/FacebookNewsFeed'
 
 const Main = () => {
     
@@ -20,6 +21,7 @@ const Main = () => {
         <HomeItems title="Promotion Items" url="promotionitem_api"/>
         <HomeItems title="Hot Sale Items" url="hotsaleitem_api"/>
         {/* <SeasonalDiscountNews/> */}
+        <FacebookNewsFeed/>
     </div>
   )
 }

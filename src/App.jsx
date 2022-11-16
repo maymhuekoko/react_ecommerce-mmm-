@@ -12,6 +12,9 @@ import PreOrder from "./components/PreOrder";
 import { useSelector } from "react-redux";
 import About from "./pages/About";
 import Contact from "./pages/Contact";
+import Profile from "./pages/Profile";
+
+
 import {
   BrowserRouter as Router,
   Route,
@@ -39,6 +42,7 @@ const App = () => {
         <Route path="/order_list" element={<OrderList/>}/>
         <Route path="/contact-us" element={<Contact/>}/>
         <Route path="/about-us" element={<About/>}/>
+        <Route path="/user-profile" element={<Profile/>}/>
       </Routes>
       {/* hello maymyat */}
     </Router>
