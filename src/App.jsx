@@ -32,11 +32,11 @@ const App = () => {
         <Route path="/product/:id" element={<Product/>}/>
         <Route path="/cart" element={<Cart/>}/>
         <Route path="/order/:name" element={<Order/>}/>
+        <Route path="/preorder/:id" element={<PreOrder/>}/>
         <Route path="/login" element={user ? <Navigate to="/"/> : <Login/>}/>
         <Route path="/register" element={user ? <Navigate to="/"/> : <Register/>}/>
         <Route path="/order_detail/:id" element={<OrderDetail/>}/>
         <Route path="/order_list" element={<OrderList/>}/>
-        <Route path="/preorder" element={<PreOrder/>}/>
         <Route path="/contact-us" element={<Contact/>}/>
         <Route path="/about-us" element={<About/>}/>
       </Routes>
