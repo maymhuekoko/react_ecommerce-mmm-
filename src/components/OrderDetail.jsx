@@ -7,6 +7,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import ColorNav from './ColorNav';
 import Footer from './Footer';
+import { useSelector} from 'react-redux'
 
 const Div = styled.div`
     margin-top: 65px;
@@ -117,6 +118,7 @@ const OrderList = () => {
 
     const [ inputs, setInputs ] = useState({});
     const [ oinputs, setOInputs ] = useState([]);
+    const url= useSelector(state => state.user.url);
 
     const {id} = useParams();
 
@@ -125,7 +127,7 @@ const OrderList = () => {
     },[]);
 
     const fetchOrderDetail = async () => {
-        await axios.get('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_detail/'+id)
+        await axios.get(url+'/api/ecommerce_order_detail/'+id)
         .then(res=>{
             setInputs({
                 id: res.data.orders.id,

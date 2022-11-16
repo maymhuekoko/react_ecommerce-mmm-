@@ -15,6 +15,8 @@ import { resetProduct } from "../redux/cartRedux"
 import BankInfoDialog from './BankInfoDialog'
 import PaidInfoDialog from './PaidInfoDialog'
 
+
+
 const Form = styled.form`
     display: flex;
     flex-direction: column;
@@ -62,11 +64,12 @@ export default function CheckoutDialog(props) {
   const navigate = useNavigate();
 
   const [townships, setTownships] = useState([]);
+  const url= useSelector(state => state.user.url);
 
   useEffect(() => {
     const getTownships = async () => {
       try {
-        const res = await axios.get("http://familyuniformapp.medicalworld.com.mm/api/township", {
+        const res = await axios.get(url+"/api/township", {
           headers: {
             'Access-Control-Allow-Origin': '*',
           }
@@ -91,7 +94,7 @@ export default function CheckoutDialog(props) {
 
   const onTownshipChanged = (e) => {
     setTownship(e.target.value);
-    const res = axios.get('http://familyuniformapp.medicalworld.com.mm/api/township_charges/' + e.target.value).then(function (response) {
+    const res = axios.get(url+'/api/township_charges/' + e.target.value).then(function (response) {
       console.log(response.data);
       setCharges(response.data.charges);
     }).catch(function (error) {
@@ -104,7 +107,7 @@ export default function CheckoutDialog(props) {
   const onRemarkChanged = (e) => setRemark(e.target.value);
   const orderSave = () => {
     // alert(paymentchannel);
-    const res = axios.post('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_store', {
+    const res = axios.post(url+'/api/ecommerce_order_store', {
       id: username.id,
       name: username.name,
       phone: username.phone,

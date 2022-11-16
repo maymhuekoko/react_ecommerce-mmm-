@@ -2,6 +2,7 @@ import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import {mobile} from "../responsive"
+import { useSelector} from 'react-redux'
 
 const Container = styled.div`
 flex: 1;
@@ -42,10 +43,11 @@ const Button = styled.button`
 `
 
 const CategoryItem = ({item}) => {
+    const url= useSelector(state => state.user.url);
   return (
     <Container>
         <Link to={`/products/${item.id}/${item.category_name}`}>
-        <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/brands/${item.photo_path}`}/>
+        <Image src={url+`/ecommerce/brands/${item.photo_path}`}/>
         {/* <Image src={`http://localhost:8000/ecommerce/brands/${item.photo_path}`}/>  */}
         <Info>
             <Button>Details</Button>
