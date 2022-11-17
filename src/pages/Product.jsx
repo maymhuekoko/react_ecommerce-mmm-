@@ -225,6 +225,10 @@ const SmallImgName = styled.div`
     color: #111111;
 `
 
+const Opt = styled.option`
+
+`
+
 
 const Product = () => {
 
@@ -494,7 +498,7 @@ const Product = () => {
                             <DivF>
                                 <div>
                                     <FilterFabric onChange={(e) => ChangeFabric(e.target.value)} id="fabric">
-                                        
+                                        <Opt>Choose Fabric</Opt>
                                     </FilterFabric>
                                 </div>
                                 {/* <div>
@@ -507,7 +511,7 @@ const Product = () => {
                             <DivF>
                                 <div>
                                     <FilterColor onChange={(e) => ChangeColor(e.target.value)} id="color">
-                                       
+                                    <Opt>Choose Color</Opt>
                                     </FilterColor>
                                 </div>
                                 <div>
@@ -521,7 +525,7 @@ const Product = () => {
                             <DivF>
                                 <div>
                                     <FilterSize onChange={(e) => ChangeSize(e.target.value)} id="size">
-                                      
+                                    <Opt>Choose Size</Opt>
                                     </FilterSize>
                                 </div>
                                 <div>

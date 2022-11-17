@@ -206,10 +206,10 @@ const ColorNav = () => {
                 <Link to="/register" style={link1}>
                 <MenuItem>Register</MenuItem>
                 </Link>)}
-                {isUser ? (' '):(
+                {/* {isUser ? (' '):(
                 <Link to="/login" style={link1}>
                 <MenuItem>SignIn</MenuItem>
-                </Link> )}
+                </Link> )} */}
                 <A onClick={showPreorder} style={link1}>
                     <MenuItem>PreOrder</MenuItem>
                 </A>
