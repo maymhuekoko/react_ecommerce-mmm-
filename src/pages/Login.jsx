@@ -134,6 +134,9 @@ const Login = () => {
         
         // login(dispatch,{username,password});
     }
+    const createAcc = ()=>{
+        navigate('/register');
+    }
   return (
     <>
     { successmsg ? (
@@ -152,7 +155,7 @@ const Login = () => {
             {error && <Error>Incorrect Username and Password...</Error>} */}
             <Button onClick={handleClick}>LOG IN</Button>
             <Link>DO YOU REMEMBER THE PASSWORD?</Link>
-            <Link>CREATE NEW ACCOUNT</Link>
+            <Link onClick={createAcc}>CREATE NEW ACCOUNT</Link>
         </Form>
         </Wrapper>
     </Container>
