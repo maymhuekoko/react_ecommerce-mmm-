@@ -8,16 +8,17 @@ import AuthContext from '../redux/AuthProvider'
 import axios from 'axios'
 import { red } from '@mui/material/colors'
 import {
-    Navigate,
+    useNavigate,useLocation
   } from "react-router-dom";
 import ColorNav from '../components/ColorNav'
 import Footer from '../components/Footer'
+
+// url("https://images.pexels.com/photos/6984650/pexels-photo-6984650.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940") center;
 
 const Container = styled.div`
     width: 100vw;
     height: 100vh;
     background: linear-gradient(rgba(255,255,255,0.5),rgba(255,255,255,0.5)),
-    url("https://images.pexels.com/photos/6984650/pexels-photo-6984650.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940") center;
     background-size: cover;
     display: flex;
     align-items: center;
@@ -76,9 +77,11 @@ const Login = () => {
     const [username,setUsername] = useState("");
     const [password,setPassword] = useState("");
     const [errmsg,setErrmsg] = useState("");
+    const [navi,setNavi] = useState("");
     const [successmsg,setSuccessmsg] = useState(false);
     const dispatch = useDispatch();
     const url= useSelector(state => state.user.url);
+    const navigate = useNavigate();
     
 
     const background = {
@@ -114,7 +117,7 @@ const Login = () => {
                     setUsername('');
                     setPassword('');
                     setSuccessmsg(true);
-                    
+                    navigate(-1);
                     dispatch(setUserInfo({
                         id : response.data.user.id,
                         name : response.data.user.name,
@@ -134,7 +137,7 @@ const Login = () => {
   return (
     <>
     { successmsg ? (
-      <Navigate to="/" />
+      ''
     ) : (
         <>
     <ColorNav/>

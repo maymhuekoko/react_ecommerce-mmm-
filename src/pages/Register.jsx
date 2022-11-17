@@ -1,6 +1,6 @@
 import axios from 'axios'
 import React, { useRef, useState } from 'react'
-import { Navigate, useNavigate } from 'react-router-dom'
+import { Navigate, useNavigate,useLocation } from 'react-router-dom'
 import styled from 'styled-components'
 import AlertDialog from '../components/AlertDialog'
 import {mobile} from "../responsive"
@@ -97,7 +97,7 @@ const Register = () => {
                 address : address,
                 email : email,
             })) 
-            navigate('/');
+            navigate(-1);
         }).catch(function(error){
             console.log(error);
         })
