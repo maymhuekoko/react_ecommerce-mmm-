@@ -60,6 +60,7 @@ export default function BankInfoDialog(props) {
   const dispatch = useDispatch(); 
   const [file, setFile] = useState(null);
   const [remark, setRemark] = useState('');
+  const url= useSelector(state => state.user.url);
 
   const onFileChange = (event) => {  
     // Update the state
@@ -73,7 +74,7 @@ export default function BankInfoDialog(props) {
       file:file,
       remark:remark,    
     }
-    axios.post('http://localhost:8000/api/storescreenshot', formdata,
+    axios.post(url+'/api/storescreenshot', formdata,
     {
         headers: {
         'Content-Type': 'multipart/form-data'
