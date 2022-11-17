@@ -23,7 +23,7 @@ const MainContainer = styled.div`
     display: flex;
     flex-direction: column;
 `
-
+// min-width: 225px;
 const Container = styled.div`
     flex: 1;
     margin: 5px;
@@ -51,7 +51,6 @@ const Image = styled.img`
     width: 100%;
     z-index:2;
 `
-
 const Icon = styled.div`
     width: 40px;
     height: 40px;
@@ -72,10 +71,9 @@ const Icon = styled.div`
 const ProductLineTitle = styled.h2`
     font-weight: bold;
     font-size:20px;
-    margin-left:50px;
+    text-align:center;
     position: absolute;
-bottom: 0;
-    
+    bottom: 0;    
 `
 
 const Item = ({item}) => {
@@ -105,6 +103,7 @@ const Item = ({item}) => {
             
         </Info>
         <ProductLineTitle>{item.item_name}</ProductLineTitle>
+        <ProductLineTitle>{item.discount_price}</ProductLineTitle>
     </Container>
     
     

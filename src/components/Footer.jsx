@@ -1,5 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
+import { Link } from 'react-router-dom'
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import TwitterIcon from '@mui/icons-material/Twitter';
@@ -52,9 +53,9 @@ const Title = styled.h3`
 `
 
 const List = styled.ul`
-    margin: 0;
-    padding: 0;
     list-style: none;
+    margin: 0px;
+    padding: 0px;
     display: flex;
     flex-wrap: wrap;
 `
@@ -62,6 +63,7 @@ const List = styled.ul`
 const ListItem = styled.li`
     width: 50%;
     margin-bottom: 10px;
+    text-align: left;
 `
 
 const Right = styled.div`
@@ -91,7 +93,7 @@ const Footer = () => {
                 </Description>
                 <SocialContainer>
                     <SocialIcon bgc="3B5999">
-                        <a href='#' style={{ color: 'white' }}><FacebookIcon /></a>
+                        <a href='https://www.facebook.com/FamilyHospitalUniform' style={{ color: 'white' }}><FacebookIcon /></a>
                     </SocialIcon>
                     <SocialIcon bgc="E4405F">
                         <a href='#' style={{ color: 'white' }}><InstagramIcon /></a>
@@ -111,19 +113,15 @@ const Footer = () => {
             <Center>
                 <Title>Useful Links</Title>
                 <List>
-                    <ListItem>Home</ListItem>
-                    <ListItem>Cart</ListItem>
-                    <ListItem>Man Fashion</ListItem>
-                    <ListItem>Woman Fashion</ListItem>
-                    <ListItem>Accessories</ListItem>
-                    <ListItem>My Account</ListItem>
-                    <ListItem>Order Tracking</ListItem>
-                    <ListItem>WishList</ListItem>
-                    <ListItem>Terms</ListItem>
-                    <ListItem>Conditions</ListItem>
+                    <ListItem><Link to="/" style={{textDecoration: 'none', color: '#32549b'}}>Home</Link></ListItem>
+                    <ListItem><Link to="/about-us" style={{textDecoration: 'none', color: '#32549b'}}>About Us</Link></ListItem>
+                    <ListItem><Link to="/contact-us" style={{textDecoration: 'none', color: '#32549b'}}>Contact Us</Link></ListItem>
+                    <ListItem><Link to="/login" style={{textDecoration: 'none', color: '#32549b'}}>Login</Link></ListItem>
+                    <ListItem><Link to="/register" style={{textDecoration: 'none', color: '#32549b'}}>Regitster</Link></ListItem>
+                    <ListItem><Link to="/cart" style={{textDecoration: 'none', color: '#32549b'}}>My Cart</Link></ListItem>
+                    <ListItem><Link to="/user-profile" style={{textDecoration: 'none', color: '#32549b'}}>My Account</Link></ListItem>
                 </List>
             </Center>
-
             <Right>
                 <Title>Contact</Title>
                 <ContactItem>

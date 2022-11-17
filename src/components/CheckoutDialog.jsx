@@ -69,11 +69,13 @@ export default function CheckoutDialog(props) {
   useEffect(() => {
     const getTownships = async () => {
       try {
+
         const res = await axios.get(url+"/api/township", {
           headers: {
             'Access-Control-Allow-Origin': '*',
           }
         });
+
         console.log(res.data);
         setTownships(res.data);
 
