@@ -8,7 +8,7 @@ import AuthContext from '../redux/AuthProvider'
 import axios from 'axios'
 import { red } from '@mui/material/colors'
 import {
-    Navigate,
+    useNavigate,useLocation
   } from "react-router-dom";
 import ColorNav from '../components/ColorNav'
 import Footer from '../components/Footer'
@@ -76,9 +76,11 @@ const Login = () => {
     const [username,setUsername] = useState("");
     const [password,setPassword] = useState("");
     const [errmsg,setErrmsg] = useState("");
+    const [navi,setNavi] = useState("");
     const [successmsg,setSuccessmsg] = useState(false);
     const dispatch = useDispatch();
     const url= useSelector(state => state.user.url);
+    const navigate = useNavigate();
     
 
     const background = {
@@ -114,7 +116,7 @@ const Login = () => {
                     setUsername('');
                     setPassword('');
                     setSuccessmsg(true);
-                    
+                    navigate(-1);
                     dispatch(setUserInfo({
                         id : response.data.user.id,
                         name : response.data.user.name,
@@ -134,7 +136,7 @@ const Login = () => {
   return (
     <>
     { successmsg ? (
-      <Navigate to="/" />
+      ''
     ) : (
         <>
     <ColorNav/>
