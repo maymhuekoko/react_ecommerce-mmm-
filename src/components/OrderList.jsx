@@ -2,7 +2,7 @@
 import React  from 'react';
 import styled from 'styled-components';
 import {mobile} from "../responsive";
-import { Link } from 'react-router-dom';
+import { Navigate, useNavigate,Link } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { useSelector} from 'react-redux';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -138,6 +138,7 @@ const OrderList = () => {
     const [showDialog, setShowDialog] = useState(false);
 
     const username = useSelector(state=>state.user);
+    const url= useSelector(state => state.user.url);
 
     useEffect(() =>{
         fetchOrderList();
@@ -145,21 +146,25 @@ const OrderList = () => {
 
     const onInvoiceClicked =(id) => {
         // 
-        axios.get('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_detail/'+id)
+        axios.get(url+'/api/ecommerce_order_detail/'+id)
         .then(res=>{
-            console.log('hey');
+            console.log(res.data.counting_units);
             setName(res.data.orders.customer_name);
-           setPhone(res.data.orders.customer_phone);
-           setAddress(res.data.orders.deliver_address);
-           setCountingUnit(res.data.counting_units);
+            setPhone(res.data.orders.customer_phone);
+            setAddress(res.data.orders.deliver_address);
+            setCountingUnit(res.data.counting_units);
         })
         setShowDialog(true);
     }
+    
+    const navigate = useNavigate();
 
-
+    const orderDetail = (id) =>{
+        navigate("/order_detail/"+id);
+    }
 
     const fetchOrderList = () => {
-        axios.get('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_index')
+        axios.get(url+'/api/ecommerce_order_index')
         .then(res=>{
             console.log(res.data.instock);
 
@@ -226,9 +231,9 @@ const OrderList = () => {
                             <Td>{order.total_quantity}</Td>
                             <Td>{order.total_amount}</Td>
                             <Td>
-                            <Link to={{ pathname:'/order_detail/'+order.id }}>
-                                <TableButton>Order Detail</TableButton>
-                            </Link>   
+                            {/* <Link to={'/order_detail/'+order.id}> */}
+                                <TableButton onClick={()=>orderDetail(order.id)}>Order Detail</TableButton>
+                            {/* </Link>    */}
                             <TableButton1 onClick={()=>onInvoiceClicked(order.id)}>Invoice</TableButton1>    
                             </Td>
                         </Tr>

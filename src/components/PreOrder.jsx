@@ -161,12 +161,13 @@ const Order = () => {
     const [fabricname, setFabricName] = useState('');
     const [colourname, setColourName] = useState('');
     const [sizename, setSizeName] = useState('');
+    const url= useSelector(state => state.user.url);
 
     if(design_id == 1){
         const getDesigns = async () =>{
             try{
             let html = '';
-            const res = await axios.get("http://familyuniformapp.medicalworld.com.mm/api/design_api/"+design_id);
+            const res = await axios.get(url+"/api/design_api/"+design_id);
             console.log(res.data.design);
             Object.keys(res.data.design).map(key => {
                 html += `<Option>`+ res.data.design[key]+`</Option>`;
@@ -182,7 +183,7 @@ const Order = () => {
         const getDesigns = async () =>{
             try{
             let html = '';
-            const res = await axios.get("http://familyuniformapp.medicalworld.com.mm/api/design_api/"+design_id);
+            const res = await axios.get(url+"/api/design_api/"+design_id);
             console.log(res.data.design);
             Object.keys(res.data.design).map(key => {
                 html += `<Option>`+ res.data.design[key]+`</Option>`;
@@ -198,7 +199,7 @@ const Order = () => {
         const getDesigns = async () =>{
             try{
             let html = '';
-            const res = await axios.get("http://familyuniformapp.medicalworld.com.mm/api/design_api/"+design_id);
+            const res = await axios.get(url+"/api/design_api/"+design_id);
             console.log(res.data.design);
             Object.keys(res.data.design).map(key => {
                 html += `<Option>`+ res.data.design[key]+`</Option>`;
@@ -221,6 +222,7 @@ const Order = () => {
 
 
     const choosegen = (val) => {
+        let html='';let genn;
         if(val == 1){
             const spec = 'm';
             document.getElementById('gen_name').innerHTML = spec;
@@ -234,17 +236,25 @@ const Order = () => {
             document.getElementById('gen_name').innerHTML = spec;
         }
         const gname = document.getElementById('gen_name').innerHTML;
-        let html='';
+
         setGenderName(gname);
         // alert(document.getElementById('item_name').innerHTML+' '+document.getElementById('gen_name').innerHTML);
-        axios.get('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_type/'+design_name+'/'+gname)
+        axios.get(url+'/api/ecommerce_order_type/'+design_name+'/'+gname)
                     .then((response) => {  
                         console.log(response.data.fabric);
+                        if(response.data.fabric.length == 0){
+                            Swal.fire({
+                                title:  "Warning!",
+                                text: "This Design has no for "+genn+'.',
+                                type: 'error',    
+                                });
+                        }else{
                             Object.keys(response.data.fabric).map(key => {
                                 html += `<Option>`+ response.data.fabric[key]+`</Option>`;
                              })
                          
                         document.getElementById('types').innerHTML = html;
+                 }
             })
     }
 
@@ -259,7 +269,7 @@ const Order = () => {
         document.getElementById('fab_name').innerHTML = ' '+spec;
         setFabricName(spec);
         let html = '';
-        axios.get('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_type/'+design_name+'/'+gendername+'/'+spec)
+        axios.get(url+'/api/ecommerce_order_type/'+design_name+'/'+gendername+'/'+spec)
                 .then((response) => {  
                     console.log(response.data.colour);
                         Object.keys(response.data.colour).map(key => {
@@ -275,7 +285,7 @@ const Order = () => {
         document.getElementById('col_name').innerHTML = spec;
         setColourName(spec);
         let html = '';
-        axios.get('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_type/'+design_name+'/'+gendername+'/'+fabricname+'/'+spec)
+        axios.get(url+'/api/ecommerce_order_type/'+design_name+'/'+gendername+'/'+fabricname+'/'+spec)
                 .then((response) => {  
                     console.log(response.data.size);
                         Object.keys(response.data.size).map(key => {
@@ -371,7 +381,7 @@ const changeprice = ()=>{
     }
     else{
         const counting =  design_name+' '+gendername+' '+fabricname+' '+colourname+' '+sizename;
-    axios.post('http://familyuniformapp.medicalworld.com.mm/api/showprice',{
+    axios.post(url+'/api/showprice',{
            unit: counting       
     }).then(res=>
     {
@@ -393,14 +403,21 @@ const savepreorder = () =>{
         tot_qty += parseInt(el.testqty);
     })
     console.log(tot_qty);
-    if(tot_qty < 30 ){
+    if(username.name == ''){
+        Swal.fire({
+            title:  'Warning!',
+            text: "You need to make register or sign in first.",
+            type: 'success',    
+          });
+    }
+    else if(tot_qty < 30 ){
         Swal.fire({
             title:  'Warning!',
             text: "Minimun Order Quantity must be 30.",
             type: 'success',    
           });
     }else{
-    axios.post('http://familyuniformapp.medicalworld.com.mm/api/send/invoice_email',{
+    axios.post(url+'/api/send/invoice_email',{
     id: username.id,
     name: username.name,
     phone: username.phone,
@@ -422,7 +439,7 @@ const savepreorder = () =>{
         console.log('error');
     });
     // dispatch(resetPhoto())
-    const res = axios.post('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_preorder_store', {
+    const res = axios.post(url+'/api/ecommerce_preorder_store', {
         id: username.id,
         name: username.name,
         phone: username.phone,
@@ -507,13 +524,13 @@ const savepreorder = () =>{
                     
                 {
                     design_id == 1 ? <MainText>
-                    <Left> <Text1>Familyarrow Brand : 40 designs</Text1></Left>
+                    <Left> <Text1>Familyarrow Brand</Text1></Left>
                     <Right> <Text1>Price Range : 22000 - 25500</Text1></Right>
                 </MainText>  :  design_id == 2 ? <MainText>
-                    <Left> <Text1>Branded Brand : 2 designs</Text1></Left>
+                    <Left> <Text1>Branded Brand</Text1></Left>
                     <Right> <Text1>Price Range : 30000 - 65000</Text1></Right>
                 </MainText> : <MainText>
-                    <Left> <Text1>Eco Family Brand : 4 designs</Text1></Left>
+                    <Left> <Text1>Eco Family Brand</Text1></Left>
                     <Right> <Text1>Price Range : 18000 - 20000</Text1></Right>
                 </MainText>
                 }

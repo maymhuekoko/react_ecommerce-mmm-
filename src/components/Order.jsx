@@ -7,7 +7,7 @@ import { Add,Remove, SettingsEthernet } from '@mui/icons-material'
 import axios from 'axios'
 import { useLocation ,useNavigate} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { addOrder,removeOrder,resetOrder,resetPhoto } from "../redux/designRedux"
+import { addOrder,removeOrder,resetOrder } from "../redux/designRedux"
 import Swal from 'sweetalert2'
 import BankInfoDialog from './BankInfoDialog'
 import PaidInfoDialog from './PaidInfoDialog'
@@ -132,6 +132,7 @@ const Order = () => {
     const [fabricname, setFabricName] = useState('');
     const [colourname, setColourName] = useState('');
     const [sizename, setSizeName] = useState('');
+    const url= useSelector(state => state.user.url);
   
     const bankInfo = () => {
       setshowBankInfo(true);
@@ -140,72 +141,7 @@ const Order = () => {
     const paidInfo = () => {
       setshowPaidInfo(true);
     }
-    
-    // const specification = () => {
-    //     //   alert(design_name);
-    //     const val = document.getElementById('specs').value;
 
-    //     let html = '';
-    //     if(val == 4){
-    //     // axios.get("http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_type")
-    //     axios.get('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_type/'+design_name)
-    //             .then((response) => {  
-    //                 console.log(response.data.gender);
-    //                     document.getElementById('gen').disabled = true;
-    //                     document.getElementById('fab').removeAttribute('disabled');
-    //                     Object.keys(response.data.gender).map(key => {
-    //                         html += `<Option>`+ response.data.gender[key]+`</Option>`;
-    //                      })
-                     
-    //                 document.getElementById('types').innerHTML = html;
-    //     })
-    //    }   
-    //    if(val == 1){
-    //     // axios.get("http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_type")
-    //     axios.get('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_type/'+design_name+'/'+gendername)
-    //             .then((response) => {  
-    //                 console.log(response.data.fabric);
-    //                 document.getElementById('fab').disabled = true;
-    //                 document.getElementById('col').removeAttribute('disabled');
-    //                     Object.keys(response.data.fabric).map(key => {
-    //                         html += `<Option>`+ response.data.fabric[key]+`</Option>`;
-    //                      })
-                     
-    //                 document.getElementById('types').innerHTML = html;
-    //     })
-    //    } 
-    //    if(val == 2){
-    //     // alert(fabricname);
-    //     // axios.get("http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_type")
-    //     axios.get('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_type/'+design_name+'/'+gendername+'/'+fabricname)
-    //             .then((response) => {  
-    //                 console.log(response.data.colour);
-    //                 document.getElementById('col').disabled = true;
-    //                 document.getElementById('siz').removeAttribute('disabled');
-    //                     Object.keys(response.data.colour).map(key => {
-    //                         html += `<Option>`+ response.data.colour[key]+`</Option>`;
-    //                      })
-                     
-    //                 document.getElementById('types').innerHTML = html;
-    //     })
-    //    } 
-    //    if(val == 3){
-    //     alert(colourname);
-    //     // axios.get("http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_type")
-    //     axios.get('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_type/'+design_name+'/'+gendername+'/'+fabricname+'/'+colourname)
-    //             .then((response) => {  
-    //                 console.log(response.data.size);
-    //                 document.getElementById('siz').disabled = true;
-    //                     Object.keys(response.data.size).map(key => {
-    //                         html += `<Option>`+ response.data.size[key]+`</Option>`;
-    //                      })
-                     
-    //                 document.getElementById('types').innerHTML = html;
-    //     })
-    //    } 
-
-       
-    // }
 
     const choosegen = (val) => {
         if(val == 1){
@@ -224,7 +160,7 @@ const Order = () => {
         let html='';
         setGenderName(gname);
         // alert(document.getElementById('item_name').innerHTML+' '+document.getElementById('gen_name').innerHTML);
-        axios.get('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_type/'+design_name+'/'+gname)
+        axios.get(url+'/api/ecommerce_order_type/'+design_name+'/'+gname)
                     .then((response) => {  
                         console.log(response.data.fabric);
                             Object.keys(response.data.fabric).map(key => {
@@ -240,7 +176,7 @@ const Order = () => {
         document.getElementById('fab_name').innerHTML = ' '+spec;
         setFabricName(spec);
         let html = '';
-        axios.get('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_type/'+design_name+'/'+gendername+'/'+spec)
+        axios.get(url+'/api/ecommerce_order_type/'+design_name+'/'+gendername+'/'+spec)
                 .then((response) => {  
                     console.log(response.data.colour);
                         Object.keys(response.data.colour).map(key => {
@@ -256,7 +192,7 @@ const Order = () => {
         document.getElementById('col_name').innerHTML = spec;
         setColourName(spec);
         let html = '';
-        axios.get('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_order_type/'+design_name+'/'+gendername+'/'+fabricname+'/'+spec)
+        axios.get(url+'/api/ecommerce_order_type/'+design_name+'/'+gendername+'/'+fabricname+'/'+spec)
                 .then((response) => {  
                     console.log(response.data.size);
                         Object.keys(response.data.size).map(key => {
@@ -344,7 +280,7 @@ const changeprice = ()=>{
     }
     else{
         const counting =  design_name+' '+gendername+' '+fabricname+' '+colourname+' '+sizename;
-    axios.post('http://familyuniformapp.medicalworld.com.mm/api/showprice',{
+    axios.post(url+'/api/showprice',{
            unit: counting       
     }).then(res=>
     {
@@ -360,20 +296,27 @@ const changeprice = ()=>{
 }
 
 const savepreorder = () =>{
-    
+
     let tot_qty = 0;
     pre.map((el) => {
         tot_qty += parseInt(el.testqty);
     })
     console.log(tot_qty);
-    if(tot_qty <= 30 ){
+    if(username.name == ''){
+        Swal.fire({
+            title:  'Warning!',
+            text: "You need to make register or sign in first.",
+            type: 'success',    
+          });
+    }
+    else if(tot_qty < 30 ){
         Swal.fire({
             title:  'Warning!',
             text: "Minimun Order Quantity must be 30.",
             type: 'success',    
           });
     }else{
-    axios.post('http://familyuniformapp.medicalworld.com.mm/api/send/invoice_email',{
+    axios.post(url+'/api/send/invoice_email',{
     id: username.id,
     name: username.name,
     phone: username.phone,
@@ -394,18 +337,16 @@ const savepreorder = () =>{
     ).catch(err =>{
         console.log('error');
     });
-    // dispatch(resetPhoto())
-    const res = axios.post('http://familyuniformapp.medicalworld.com.mm/api/ecommerce_preorder_store', {
+    
+    const res = axios.post(url+'/api/ecommerce_preorder_store', {
         id: username.id,
         name: username.name,
         phone: username.phone,
         address: username.address,
         orders: pre,
-        // photo: photo,
       }).then(function (response) {
         alert('success store');
         dispatch(resetOrder());
-        // dispatch(resetPhoto());
         navigate('/order_list');
       }).catch(function (error) {
         alert('fail store');

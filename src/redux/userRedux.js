@@ -12,6 +12,8 @@ const userSlice = createSlice({
         phone: '',
         address: '',
         email: '',
+        url: 'http://familyuniformapp.medicalworld.com.mm',
+        // url: 'http://localhost:8000',
     },
     reducers: {
         loginStart: (state) => {

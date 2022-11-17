@@ -5,6 +5,7 @@ import useCollapse from 'react-collapsed';
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
 import axios from 'axios'
+import { useSelector} from 'react-redux'
 
 const Info = styled.div`
     opacity: 0;
@@ -96,6 +97,7 @@ const SmallImage = styled.img`
     max-height: 250pz;
     margin-top: 25px;
     object-fit: contain;
+  
 `
 const SmallImgName = styled.span`
     font-size: 20px;'
@@ -105,6 +107,7 @@ const SmallImgName = styled.span`
 const Wrapper = styled.div`
     padding: 50px;
     display: flex;
+    
 `
 
 const SmallImgContainerOne = styled.div`
@@ -114,16 +117,23 @@ const SmallImgContainerOne = styled.div`
     overflow-x: scroll;
     min-width: 350px;
     object-fit: cover;
+   
+`
+const Divh = styled.div`
+&:hover ${Info}{
+    opacity: 1;
+}
 `
 
 const Product = ({ item }, props) => {
 
     const { getCollapseProps, getToggleProps } = useCollapse();
     const [items, setItems] = useState([{}]);
+    const url= useSelector(state => state.user.url);
 
     const collapse = () => {
         const obj = { 'category_id': item.category_id, 'subcategory_id': item.id }
-        axios.post('http://familyuniformapp.medicalworld.com.mm/api/productlineitems_api', obj)
+        axios.post(url+'/api/productlineitems_api', obj)
             .then(res => {
 
                 setItems(res.data);
@@ -138,7 +148,7 @@ const Product = ({ item }, props) => {
 
             <Container className="header" {...getToggleProps()}>
                 <Circle />
-                <Image src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/product_lines/${item.photo_path}`} />
+                <Image src={url+`/ecommerce/product_lines/${item.photo_path}`} />
                 <Info>
                     <Icon><ShoppingCartOutlined /></Icon>
                     <Icon><Link to={`/product/${item.id}`}><SearchOutlined /></Link></Icon>
@@ -146,26 +156,7 @@ const Product = ({ item }, props) => {
                 </Info>
                 <ProductLineTitle >{item.name}</ProductLineTitle>
                 <Button>SHOP NOW</Button>
-            </Container>
-
-            {/* <ImgContainer {...getCollapseProps()}>
-                <SmallImgContainer className="content">
-                    
-                    {items.map((it) => (
-                        // .slice(0, 6)
-                        <div style={{ display: 'inline-block' }}>
-                            <div style={{ display: 'flex', flexDirection: 'column' }}>
-                                <div style={{ display: 'inline-block' }}>
-                                    <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/${it.photo_path}`} key={it.id} />
-                                </div>
-                                <div style={{ textAlign: 'center', maxWidth: '250px', display: 'inline-block' }}>
-                                    <span>{it.item_name}</span>
-                                </div>
-                            </div>
-                        </div>
-                    ))}
-                </SmallImgContainer>
-            </ImgContainer> */}
+            </Container>  
 
             <Wrapper {...getCollapseProps()}>
                 <ImgContainer>
@@ -175,7 +166,11 @@ const Product = ({ item }, props) => {
                             <div style={{ display: 'inline-block' }}>
                                 <div style={{ display: 'flex', flexDirection: 'column' }}>
                                     <div style={{ display: 'inline-block' }}>
-                                        <Link to={`/product/${it.id}`}><SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/${it.photo_path}`} key={it.id} /></Link>
+                                        
+                                        <Link to={`/product/${it.id}`}><SmallImage src={url+`/ecommerce/items/${it.photo_path}`} key={it.id} />
+
+                                        </Link>
+                                       
                                     </div>
                                     <div style={{ textAlign: 'center', maxWidth: '250px', display: 'inline-block' }}>
                                         <span>{it.item_name}</span>

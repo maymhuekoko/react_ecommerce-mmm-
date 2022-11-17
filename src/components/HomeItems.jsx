@@ -4,6 +4,7 @@ import CategoryItem from './CategoryItem';
 import { mobile } from "../responsive";
 import axios from 'axios';
 import Item from './Item';
+import { useSelector} from 'react-redux'
 
 const MainContainer = styled.div`
   display: flex;
@@ -27,12 +28,13 @@ const SectionTitle = styled.h2`
 const HomeItems = ({ title, url }) => {
 
   const [items, setItems] = useState([]);
+  const url1= useSelector(state => state.user.url);
 
   useEffect(() => {
     const getItems = async () => {
       try {
         // const res = await axios.get("http://localhost:8000/api/" + url,);
-        const res = await axios.get("http://familyuniformapp.medicalworld.com.mm/api/" + url,);
+        const res = await axios.get(url1+"/api/" + url,);
         console.log(res.data);
         setItems(res.data);
       } catch (err) { }

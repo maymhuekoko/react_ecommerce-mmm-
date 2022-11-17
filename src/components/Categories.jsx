@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import CategoryItem from './CategoryItem';
 import {mobile} from "../responsive";
 import axios from 'axios';
+import { useSelector} from 'react-redux'
 
 const MainContainer = styled.div`
 display: flex;
@@ -27,11 +28,12 @@ const SectionTitle = styled.h2`
 const Categories = () => {
 
   const [categories,setCategories] = useState([]);
+  const url= useSelector(state => state.user.url);
 
   useEffect(()=>{
     const getCategories = async () =>{
       try{
-        const res = await axios.get("http://familyuniformapp.medicalworld.com.mm/api/category_api");
+        const res = await axios.get(url+"/api/category_api");
         // const res = await axios.get("http://localhost:8000/api/category_api");
         console.log(res.data);
         setCategories(res.data);
