@@ -102,20 +102,23 @@ export default function InvoiceDialog(props) {
                     <Th>Size</Th>
                     <Th>Qty</Th>
                     <Th>Price</Th>
-                    <Th>Total</Th>
+                    {/* <Th>Total</Th> */}
                 </Tr>
                 {
                     props.unit.map((unit, index) => (
-                        <Tr>
-                        <Td>{++index}</Td>
-                        <Td>{unit.unit_name}</Td>
-                        <Td>{unit.colour_id}</Td>
-                        <Td>{unit.size_id}</Td>
-                        <Td>{unit.current_quantity}</Td>
-                        <Td>{unit.order_price}</Td>
-                        <Td>{unit.current_quantity * unit.order_price}</Td>
-                        <Td hidden>{total_amount += unit.current_quantity * unit.order_price}</Td>
-                    </Tr>
+                        props.ecounting.map((ec, i) => (
+                            unit.id == ec.counting_unit_id ?
+                        <Tr key={unit.id}>
+                            <Td>{++index}</Td>
+                            <Td>{unit.unit_name}</Td>
+                            <Td>{props.color[i]}</Td>
+                            <Td>{props.size[i]}</Td>
+                            <Td>{ec.quantity}</Td>
+                            <Td>{ec.price}</Td>
+                            <Td hidden>{total_amount += ec.quantity * ec.price}</Td>
+                        </Tr> : null
+                    ))
+                
                     ))
                 }
                 

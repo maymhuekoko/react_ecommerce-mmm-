@@ -15,9 +15,8 @@ const Container = styled.div`
 margin: 20px;
 `
 const ContainerOne = styled.div`
-flex:1;
-flex-direction:row;
 padding:20px;
+justify-content: space-between;
 `
 
 const Title = styled.h2`
@@ -229,11 +228,21 @@ const ProductList = () => {
           </div>
           <div className='col-md-10'>
             {
-              click == true ? <ContainerOne>
+              click == true ? 
+                <ContainerOne>
+                  <div className='row'>
               {items.map(item => (
+                
+                <div className='col-md-4'>
                 <ItemOne item={item} key={item.id} />
+                </div>
+               
               ))}
-            </ContainerOne> :
+               </div>
+               <br></br>
+            </ContainerOne>
+
+               :
               <Products cat={cat} filters={filters} sort={sort} />
             }
             

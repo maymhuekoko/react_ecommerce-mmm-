@@ -23,24 +23,10 @@ const designSlice = createSlice({
             'ar96': '#0a3e38', 'ar98': '#0b7694', 
             'ar101': '#78eee0', 'ar106': '#544444',
         },
-        sizes: [
-            {
-                "design_type": "vneck",
-                "gender_type": "m",
-                "filename": "vneck_male_sizechart.PNG",
-            },
-            {
-                "design_type": "vneck",
-                "gender_type": "f",
-                "filename": "vneck_female_sizechart.jpg",
-            },
-            {
-                "design_type": "v2",
-                "gender_type": "f",
-                "filename": "vneck_female_sizechart.jpg",
-            },
-        ],
         orders: [],
+        edit_testname: '',
+        edit_testqty: '',
+        edit_testprice: '',
     },
     reducers: {
         addOrder: (state, action) => {
@@ -53,11 +39,21 @@ const designSlice = createSlice({
                 }
             }
         },
+        editOrder: (state,action) => {
+            for (var i = 0; i < state.orders.length; i++) {
+                if (state.orders[i].orderid === action.payload.id) {
+                    state.edit_testname = state.orders[i].testname;
+                    state.edit_testqty = state.orders[i].testqty;
+                    state.edit_testprice = state.orders[i].testprice;
+                    state.orders.splice(i, 1);
+                }
+            }
+        },
         resetOrder: (state) => {
             state.orders.length = 0;
         }
     }
 })
 
-export const { addOrder, removeOrder, resetOrder, addPhoto, resetPhoto } = designSlice.actions
+export const { addOrder, removeOrder, resetOrder, editOrder } = designSlice.actions
 export default designSlice.reducer;

@@ -112,8 +112,6 @@ const Item = ({item, title}) => {
             }
         </div>
             
-        
-        
     </Container>
     
     
