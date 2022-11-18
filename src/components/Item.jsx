@@ -103,7 +103,7 @@ const Item = ({item}) => {
             
         </Info>
         <ProductLineTitle>{item.item_name}</ProductLineTitle>
-        <ProductLineTitle>{item.discount_price}</ProductLineTitle>
+        {/* <ProductLineTitle>{item.discount_price}</ProductLineTitle> */}
     </Container>
     
     

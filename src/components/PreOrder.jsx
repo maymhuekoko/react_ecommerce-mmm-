@@ -7,7 +7,7 @@ import { Add,Remove, SettingsEthernet } from '@mui/icons-material'
 import axios from 'axios'
 import { useLocation ,useNavigate} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { addOrder,removeOrder,resetOrder,resetPhoto } from "../redux/designRedux"
+import { addOrder,removeOrder,resetOrder,editOrder } from "../redux/designRedux"
 import Swal from 'sweetalert2'
 import BankInfoDialog from './BankInfoDialog'
 import PaidInfoDialog from './PaidInfoDialog'
@@ -87,6 +87,17 @@ height: 30px;
 margin-top: 3px;
 color: white; 
 `
+
+const Edit = styled.button`
+background-color: #e69b00;
+border : none;
+border-radius: 20px;
+width: 70px;
+height: 30px;
+margin-top: 3px;
+color: white; 
+`
+
 const Save = styled.button`
 background-color: #32549b;
 border : none;
@@ -147,6 +158,9 @@ const Order = () => {
     const photo = useSelector(state=>state.design.paymentscreenshot);
     console.log( useSelector(state=>state.design.paymentscreenshot));
     const username = useSelector(state => state.user);
+    const edittestname = useSelector(state=>state.design.edit_testname);
+    const edittestqty = useSelector(state=>state.design.edit_testqty);
+    const edittestprice = useSelector(state=>state.design.edit_testprice);
     const navigate = useNavigate();
     const current = new Date();
     const date = `${current.getMonth()+1}/${current.getDate()}/${current.getFullYear()}`;
@@ -226,14 +240,17 @@ const Order = () => {
         if(val == 1){
             const spec = 'm';
             document.getElementById('gen_name').innerHTML = spec;
+            genn = 'male';
         }
         if(val == 2){
             const spec = 'f';
             document.getElementById('gen_name').innerHTML = spec;
+            genn = 'female';
         }
         if(val == 3){
             const spec = 'un';
             document.getElementById('gen_name').innerHTML = spec;
+            genn = 'unisex';
         }
         const gname = document.getElementById('gen_name').innerHTML;
 
@@ -317,7 +334,7 @@ const Order = () => {
         let testprice = document.getElementById('price').value;
         setCount(++count);
         let orderid  = count;
-        // alert(testname,testqty);
+        alert(testname,testqty);
         dispatch(addOrder({orderid,testname,testqty,testprice}));
         document.getElementById('item_name').innerHTML = design_name;
         document.getElementById('gen_name').innerHTML = '';
@@ -458,6 +475,19 @@ const savepreorder = () =>{
     }
 
 }   
+
+const edit = (id) => {
+    dispatch(editOrder({id}));
+    const fullname = edittestname.split(" ");
+    document.getElementById('item_name').innerHTML = design_name;
+    document.getElementById('gen_name').innerHTML = fullname[1];
+    document.getElementById('fab_name').innerHTML = fullname[2];
+    document.getElementById('col_name').innerHTML = fullname[3];
+    document.getElementById('siz_name').innerHTML = fullname[4];
+    document.getElementById('qty').value = edittestqty;
+    document.getElementById('price').value = edittestprice;
+   
+}
 
     
   return (
@@ -606,7 +636,7 @@ const savepreorder = () =>{
                     <Text>Your Preorder Items</Text>
                 <div className='mt-4 mb-5' id="preorders">
                     <div className='row mt-2 text-center'>
-                        <div className='offset-md-1 col-md-3'>
+                        <div className='col-md-3'>
                             <span>Item Name</span>
                         </div>
                         <div className='col-md-2'>
@@ -618,13 +648,13 @@ const savepreorder = () =>{
                         <div className='col-md-2'>
                             <span>Total</span>
                         </div>
-                        <div className='col-md-2'>
+                        <div className='col-md-3'>
                             <span>Action</span>
                         </div>
                     </div>
                     {pre.map((p)=>(
                         <div className='row mt-2 text-center'>
-                        <div className='offset-md-1 col-md-3'>
+                        <div className='col-md-3'>
                             <span>{p.testname}</span>
                         </div>
                         <div className='col-md-2'>
@@ -636,8 +666,9 @@ const savepreorder = () =>{
                         <div className='col-md-2'>
                             <span>{p.testqty * p.testprice}</span>
                         </div>
-                        <div className='col-md-2'>
-                            <span><Cancel onClick={() => remove(p.orderid)}>Cancel</Cancel></span>
+                        <div className='col-md-3'>
+                            <span><Cancel onClick={() => remove(p.orderid)}>Cancel</Cancel></span>&nbsp;&nbsp;
+                            <span><Edit onClick={() => edit(p.orderid)}>Edit</Edit></span>
                         </div>
                     </div>
                     ))}

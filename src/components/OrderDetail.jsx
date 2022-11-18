@@ -118,6 +118,9 @@ const OrderList = () => {
 
     const [ inputs, setInputs ] = useState({});
     const [ oinputs, setOInputs ] = useState([]);
+    const [ecounting, setEcounting] = useState([]);
+    const [color, setColor] = useState([]);
+    const [size, setSize] = useState([]);
     const url= useSelector(state => state.user.url);
 
     const {id} = useParams();
@@ -144,6 +147,9 @@ const OrderList = () => {
                 delivery_fee: res.data.orders.delivery_fee,
             });
             setOInputs(res.data.counting_units);
+            setEcounting(res.data.units);
+            setColor(res.data.color);
+            setSize(res.data.size);
         });
     }
 
@@ -197,25 +203,29 @@ const OrderList = () => {
             </BigBox>
             <Table>
                 <Tr>
-                    <Th>Item Id</Th>
-                    <Th>Item No</Th>
+                    <Th>No</Th>
                     <Th>Item Name</Th>
-                    <Th>Item Quantity</Th>
-                    <Th>Item Price</Th>
-                    <Th>Item Purchase Price</Th>
+                    <Th>Color</Th>
+                    <Th>Size</Th>
+                    <Th>Qty</Th>
+                    <Th>Price</Th>
                 </Tr>
                 {
-                    oinputs.map((oinput) => (
+                    oinputs.map((oinput, index) => (
+                        ecounting.map((ec, i) => (
+                            oinput.id == ec.counting_unit_id ?
                         <Tr key={oinput.id}>
-                            <Td>{oinput.id}</Td>
-                            <Td>{oinput.item_id}</Td>
+                            <Td>{++index}</Td>
                             <Td>{oinput.unit_name}</Td>
-                            <Td>{oinput.current_quantity}</Td>
-                            <Td>{oinput.order_price}</Td>
-                            <Td>{oinput.purchase_price}</Td>
-                        </Tr>
+                            <Td>{color[i]}</Td>
+                            <Td>{size[i]}</Td>
+                            <Td>{ec.quantity}</Td>
+                            <Td>{ec.price}</Td>
+                        </Tr> : null
+                    ))
                     ))
                 }
+                
                 
             </Table> 
         </Wrapper>
