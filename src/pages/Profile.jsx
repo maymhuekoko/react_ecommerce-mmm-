@@ -101,7 +101,7 @@ const Profile = () => {
                             <label>User Address</label>
                             <Message name='message' placeholder='' value={username.address} className='w-100'/>
                         </div>
-                        <Button>Update Profile</Button>
+                        {/* <Button>Update Profile</Button> */}
                     </Form>
                 </Wrapper>
             </Div>

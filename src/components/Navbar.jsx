@@ -194,7 +194,7 @@ const Navbar = () => {
                     <Left>
                         <Language style={link}><LocationOnIcon />Yangon</Language>
 
-                        <Language style={link}><PhoneInTalkIcon />+95 9778654565</Language>
+                        <Language style={link}><PhoneInTalkIcon />+95 9448833467</Language>
 
                         <NavbarDropdown>
                             <Language style={link}>English</Language>
@@ -207,7 +207,6 @@ const Navbar = () => {
                                 <SearchIcon style={{color:"gray",fonSize: 10}}/>
                             </SearchContainer> */}
                     </Left>
-                    {/* Phyo */}
                     <Center>
                         <Logo>Medical World</Logo>
                         <Link to="/" style={link}>
@@ -249,7 +248,7 @@ const Navbar = () => {
                         }
                         <Link to="/cart" style={link}>
                             <MenuItem>
-                                <ShoppingCartIcon />Cart
+                                <ShoppingCartIcon />
                             </MenuItem>
                         </Link>
                         <Link to="/serach">

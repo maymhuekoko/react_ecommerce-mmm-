@@ -32,9 +32,9 @@ const Container = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-direction: column;
     background-color: #f5fbfd;
     position: relative;
-
     &:hover ${Info}{
         opacity: 1;
     }
@@ -72,11 +72,16 @@ const ProductLineTitle = styled.h2`
     font-weight: bold;
     font-size:20px;
     text-align:center;
-    position: absolute;
-    bottom: 0;    
+    padding-top: 10px;
 `
 
-const Item = ({item}) => {
+const ProductLinePromo = styled.h2`
+    font-weight: bold;
+    font-size:20px;
+    text-align:center;
+`
+
+const Item = ({item, title}) => {
     const url= useSelector(state => state.user.url);
   return (
    
@@ -93,17 +98,20 @@ const Item = ({item}) => {
                 <Link to={`/product/${item.id}`}>
                     <SearchOutlined/>
                 </Link>
-                
             </Icon>
 
             <Icon>
                 <FavoriteBorderOutlined/>
-
             </Icon>
-            
         </Info>
         <ProductLineTitle>{item.item_name}</ProductLineTitle>
-        {/* <ProductLineTitle>{item.discount_price}</ProductLineTitle> */}
+        {/* Phyo */}
+        <div>
+            {
+                title == 'Promotion Items' ? <ProductLinePromo>{item.discount_price}% discount</ProductLinePromo> : ''
+            }
+        </div>
+            
     </Container>
     
     

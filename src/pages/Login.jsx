@@ -10,6 +10,7 @@ import { red } from '@mui/material/colors'
 import {
     useNavigate,useLocation
   } from "react-router-dom";
+import { Link } from 'react-router-dom'
 import ColorNav from '../components/ColorNav'
 import Footer from '../components/Footer'
 
@@ -57,13 +58,6 @@ const Button = styled.button`
         color: green;
         cursor: not-allowed;
     }
-`
-
-const Link = styled.a`
-    margin: 5px 0px;
-    font-size: 14px;
-    text-decoration: underline;
-    cursor: pointer;
 `
 
 const Error = styled.span`

@@ -47,7 +47,7 @@ const HomeItems = ({ title, url }) => {
       <SectionTitle>{title}</SectionTitle>
       <Container>
         {items.map(item => (
-          <Item item={item} key={item.id} />
+          <Item item={item} key={item.id} title={title} />
         ))}
       </Container>
     </MainContainer>

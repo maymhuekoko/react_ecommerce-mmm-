@@ -100,7 +100,6 @@ const ItemOne = ({item}) => {
 
             <Icon>
                 <FavoriteBorderOutlined/>
-
             </Icon>
             
         </Info>
