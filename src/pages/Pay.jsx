@@ -2,12 +2,14 @@ import React from 'react'
 import StripeCheckout from 'react-stripe-checkout'
 import {useState,useEffect} from "react"
 import axios from 'axios'
+import { useSelector} from 'react-redux'
 
 const KEY="pk_test_51LLW5lANJYoHXqcG0iFDdeP2FlV6XBElZg7J0TLlbZKrdpdcA5aAEBqVPWYo2juFuqWZ3gbxEaeWnWh5p9J46vcC005CtZVT4D"
 
 const Pay = () => {
 
     const [stripeToken,setStripeToken] = useState(null);
+    const url= useSelector(state => state.user.url);
 
     const onToken = (token) => {
         console.log(token);
@@ -42,7 +44,7 @@ const Pay = () => {
     >
         <StripeCheckout
             name="kwintech"
-            image="http://familyuniformapp.medicalworld.com.mm/files/attachments/medical_world_logo.jpg"
+            image={url+"/files/attachments/medical_world_logo.jpg"}
             billingAddress
             shippingAddress
             description="Your total is @20"

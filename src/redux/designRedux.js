@@ -41,15 +41,8 @@ const designSlice = createSlice({
             },
         ],
         orders: [],
-        paymentscreenshot: null
     },
     reducers: {
-        addPhoto: (state, action) => {
-            state.paymentscreenshot = action.payload;
-        },
-        resetPhoto: (state, action) => {
-            state.paymentscreenshot = null;
-        },
         addOrder: (state, action) => {
             state.orders.push(action.payload);
         },

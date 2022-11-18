@@ -10,6 +10,7 @@ import Newsletter from '../components/Newsletter'
 import { publicRequest } from '../requestMethod'
 import { mobile } from "../responsive"
 import { addProduct } from "../redux/cartRedux"
+import { addOrder} from "../redux/designRedux"
 import { } from "../redux/designRedux"
 import { useSelector, useDispatch } from 'react-redux'
 import axios from 'axios'
@@ -18,6 +19,8 @@ import CheckColor from '../components/CheckColor'
 import CheckSize from '../components/CheckSize'
 import CheckFabric from '../components/CheckFabric'
 import sample from '../files/sample.pdf'
+import Swal from 'sweetalert2'
+import InstockDialog from '../components/InstockDialog'
 
 const Container = styled.div``
 const Wrapper = styled.div`
@@ -40,6 +43,12 @@ const SmallImgContainerOne = styled.div`
     display: flex;
     overflow-y: hidden; 
     overflow-x: scroll; 
+`
+
+const Input = styled.input`
+`
+const Lable = styled.label`
+    font-size : 18px;
 `
 
 const MainImage = styled.img`
@@ -216,6 +225,10 @@ const SmallImgName = styled.div`
     color: #111111;
 `
 
+const Opt = styled.option`
+
+`
+
 
 const Product = () => {
 
@@ -223,6 +236,7 @@ const Product = () => {
     const [checkSize, setCheckSize] = useState(false);
     const [checkFabric, setCheckFabric] = useState(false);
     const dispatch = useDispatch();
+    const url= useSelector(state => state.user.url);
 
     const cheColor = () => {
         setCheckColor(true);
@@ -246,53 +260,19 @@ const Product = () => {
     const [unitcode, setUnitCode] = useState('');
     const [unitimg, setUnitImg] = useState('default.png');
     const [quantity, setQuantity] = useState(1);
+    const [gendername, setGenderName] = useState('');
     const [color, setColor] = useState();
     const [fabric, setFabric] = useState('');
     const [size, setSize] = useState("xxlf");
     const [price, setPrice] = useState(0);
     const [stock, setStock] = useState(0);
-
     const [design, setDesign] = useState('');
+    const [isInstock, setIsInstock] = useState(false);
 
-    const uniqueColor = [];
-    const uniqueSize = [];
-    const uniqueFabric = [];
-
-    const colorFunction = (e) => {
-        setColor(e.target.value);
-        // setMainImg(e.target.value)
-    }
-
-    const uniqueColors = units.filter(element => {
-        const isDuplicate = uniqueColor.includes(element.colour_name);
-        if (!isDuplicate) {
-            uniqueColor.push(element.colour_name)
-            return true;
-        }
-        return false;
-    })
-
-    const uniqueSizes = units.filter(element => {
-        const isDuplicate = uniqueSize.includes(element.size_name);
-        if (!isDuplicate) {
-            uniqueSize.push(element.size_name)
-            return true;
-        }
-        return false;
-    })
-
-    const uniqueFabrics = units.filter(element => {
-        const isDuplicate = uniqueFabric.includes(element.fabric_name);
-        if (!isDuplicate) {
-            uniqueFabric.push(element.fabric_name)
-            return true;
-        }
-        return false;
-    })
     
     useEffect(() => {
         const getProduct = () => {
-            axios.get("http://familyuniformapp.medicalworld.com.mm/api/unitbyid_api/" + id)
+            axios.get(url+"/api/unitbyid_api/" + id)
             // axios.get("http://localhost:8000/api/unitbyid_api/" + id)
                 .then((response) => {
                     setItem(response.data.item);
@@ -304,7 +284,7 @@ const Product = () => {
                         'subcategory_id': response.data.item.sub_category_id
                     }
 
-                    axios.post('http://familyuniformapp.medicalworld.com.mm/api/productlineitems_api', obj)
+                    axios.post(url+'/api/productlineitems_api', obj)
                     // axios.post('http://localhost:8000/api/productlineitems_api', obj)
                         .then(res => {
                             setRelatedItems(res.data);
@@ -324,8 +304,8 @@ const Product = () => {
         // customer change specification
         units.map((unit) => {
             if (unit.size_name == size && unit.colour_name == color && unit.fabric_name == fabric) {
-                setPrice(unit.order_price);
-                setStock(unit.current_quantity);
+                // setPrice(unit.order_price);
+                // setStock(unit.current_quantity);
                 setUnitId(unit.id);
                 setUnitName(unit.unit_name);
                 setUnitCode(unit.unit_code);
@@ -333,11 +313,9 @@ const Product = () => {
             }
         })
     }, [color, fabric, size]);
-    console.log(color)
-    console.log(size)
-    console.log(fabric)
-
-
+    // console.log(color)
+    // console.log(size)
+    // console.log(fabric)
 
     const handleQuantity = (type) => {
         if (type === "dec") {
@@ -353,13 +331,26 @@ const Product = () => {
     const [isClickCart, setisClickCart] = useState(false);
 
     const handleClick = () => {
+        if(stock == 0){
+            setIsInstock(true);
+            let testname = item.item_name+' '+gendername+' '+fabric+' '+color+' '+size;
+            let testqty = quantity;
+            let testprice = price;
+            let orderid  = unitid;
+            // alert(testname,testqty);
+            dispatch(addOrder({orderid,testname,testqty,testprice}));
+        }else{
+            dispatch(addProduct({ unitid, unitname, unitcode, unitimg, color, size, fabric, quantity, price }));
+            Swal.fire({
+                title:  "Success!",
+                text: "Successfully Add to Cart.",
+                type: 'success',    
+                });
+        }
 
-        dispatch(addProduct({ unitid, unitname, unitcode, unitimg, color, size, fabric, quantity, price }));
-
-        document.getElementById("success").innerHTML = 'Success';
-
-        setBututBackColor('#027f9d');
-        setBututColor('white');
+        // document.getElementById("success").innerHTML = 'Success';
+        // setBututBackColor('#027f9d');
+        // setBututColor('white');
 
     }
 
@@ -370,8 +361,91 @@ const Product = () => {
         document.getElementById('main').src = hel;
     }
 
-    // const [mainImg, setMainImg] = useState('ar1');
-    // console.log(mainImg)
+    const choosegen = (val) => {
+        let gen;let gname;let html = '';
+    if(val == 1){
+       setGenderName('m');
+       gname = 'm';
+       gen = 'male';
+    }
+    if(val == 2){
+        setGenderName('f');
+        gname = 'f';
+        gen = 'female';
+    }
+    if(val == 3){
+        setGenderName('un');
+        gname = 'un';
+        gen = 'unisex';
+    }
+
+    axios.get(url+'/api/ecommerce_order_type/'+item.item_name+'/'+gname)
+                .then((response) => {  
+                    console.log(response.data.fabric.length);
+                    if(response.data.fabric.length == 0){
+                        Swal.fire({
+                            title:  "Warning!",
+                            text: "This Design has no for "+gen+'.',
+                            type: 'error',    
+                            });
+                    }else{
+                        html += `<Option>Choose Fabric</Option>`;
+                        Object.keys(response.data.fabric).map(key => {
+                            html += `<Option>`+ response.data.fabric[key]+`</Option>`;
+                            })
+                        
+                    document.getElementById('fabric').innerHTML = html;
+                    }
+        })
+    }
+
+    const ChangeFabric = (val) =>{
+        setFabric(val);
+        let html = '';
+        axios.get(url+'/api/ecommerce_order_type/'+item.item_name+'/'+gendername+'/'+val)
+                .then((response) => {  
+                    console.log(response.data.colour);
+                    html += `<Option>Choose Colour</Option>`;
+                        Object.keys(response.data.colour).map(key => {
+                            html += `<Option>`+ response.data.colour[key]+`</Option>`;
+                         })  
+                    document.getElementById('color').innerHTML = html;
+        })
+    }
+
+    const ChangeColor = (val) =>{
+        setColor(val);
+        let html = '';
+        axios.get(url+'/api/ecommerce_order_type/'+item.item_name+'/'+gendername+'/'+fabric+'/'+val)
+                .then((response) => {  
+                    console.log(response.data.size);
+                    html += `<Option>Choose Size</Option>`;
+                        Object.keys(response.data.size).map(key => {
+                            html += `<Option>`+ response.data.size[key]+`</Option>`;
+                         })
+                     
+                    document.getElementById('size').innerHTML = html;
+        })
+    }
+
+    const ChangeSize = (val) =>{
+        setSize(val);
+
+        const counting =  item.item_name+' '+gendername+' '+fabric+' '+color+' '+val;
+        axios.post(url+'/api/showprice',{
+               unit: counting       
+        }).then(res=>
+        {
+            alert('success');
+            document.getElementById('price').innerHTML = res.data.data+` MMK`;
+            document.getElementById('stock').innerHTML = res.data.stock+` PCS`;
+            setPrice(res.data.data);
+            setStock(res.data.stock);
+        }
+        ).catch(err =>{
+            console.log('error');
+        });
+    }
 
     return (
         <Container>
@@ -382,12 +456,12 @@ const Product = () => {
                 <ImgContainer>
 
 
-                    <MainImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/${item.photo_path}`} id='main' />
+                    <MainImage src={url+`/ecommerce/items/${item.photo_path}`} id='main' />
 
                     <SmallImgContainer>
-                        <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/${item.photo_path?.replace("front", "left")}`} onClick={change_photo} id='' />
-                        <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/${item.photo_path?.replace("front", "right")}`} onClick={change_photo} id='' />
-                        <SmallImage src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/${item.photo_path?.replace("front", "body")}`} onClick={change_photo} id='hel' />
+                        <SmallImage src={url+`/ecommerce/items/${item.photo_path?.replace("front", "left")}`} onClick={change_photo} id='' />
+                        <SmallImage src={url+`/ecommerce/items/${item.photo_path?.replace("front", "right")}`} onClick={change_photo} id='' />
+                        <SmallImage src={url+`/ecommerce/items/${item.photo_path?.replace("front", "body")}`} onClick={change_photo} id='hel' />
 
                     </SmallImgContainer>
 
@@ -400,20 +474,44 @@ const Product = () => {
                     <Link to={'/order/'+item.item_name}><Button>Make Order</Button></Link>
                     <RowContainer>
                         <PriceLabel>Price: </PriceLabel>
-                        <Price>$ {price}</Price>
+                        <Price id='price'> &nbsp;MMK</Price>
                         <StockLabel>Stock: </StockLabel>
-                        <Stock>{stock} pcs</Stock>
+                        <Stock id='stock'> &nbsp;PCS</Stock>
                     </RowContainer>
-
                     <FilterContainer>
+                    <Filter className='float-left'>
+                            <FilterTitle>Gender</FilterTitle>
+                            <DivF>
+                            <Input  type="radio" name="genderdata" id='r1' onClick={()=>choosegen(1)}></Input>
+                            <Lable className='mt-2 px-2'>Male</Lable>
+                            <Input  type="radio" name="genderdata" id='r2' onClick={()=>choosegen(2)}></Input>
+                            <Lable className='mt-2 px-2'>Female</Lable>
+                            <Input  type="radio" name="genderdata" id='r3' onClick={()=>choosegen(3)}></Input>
+                            <Lable className='mt-2 px-2'>Uni</Lable><br></br><br></br>
+                            </DivF>
+                    </Filter>
+                    </FilterContainer>
+                    
+                    <FilterContainer>
+                    <Filter>
+                            <FilterTitle>Fabric</FilterTitle>
+                            <DivF>
+                                <div>
+                                    <FilterFabric onChange={(e) => ChangeFabric(e.target.value)} id="fabric">
+                                        <Opt>Choose Fabric</Opt>
+                                    </FilterFabric>
+                                </div>
+                                {/* <div>
+                                    <Check onClick={cheFabric} style={{ display: 'inline-block' }}>Check</Check>
+                                </div> */}
+                            </DivF>
+                        </Filter>
                         <Filter>
                             <FilterTitle>Color</FilterTitle>
                             <DivF>
                                 <div>
-                                    <FilterColor onChange={colorFunction}>
-                                        {uniqueColors.map((unit) => (
-                                            <FilterColorOption key={unit.id} value={unit.colour_name}>{unit.colour_name}</FilterColorOption>
-                                        ))}
+                                    <FilterColor onChange={(e) => ChangeColor(e.target.value)} id="color">
+                                    <Opt>Choose Color</Opt>
                                     </FilterColor>
                                 </div>
                                 <div>
@@ -426,32 +524,13 @@ const Product = () => {
                             <FilterTitle>Size</FilterTitle>
                             <DivF>
                                 <div>
-                                    <FilterSize onChange={(e) => setSize(e.target.value)}>
-                                        {uniqueSizes.map((unit) => (
-                                            <FilterSizeOption key={unit.id} value={unit.size_name}>
-                                                {unit.size_name.replace('xxxxx', '5x').replace('xxxx', '4x').replace('xxx', '3x').replace('xx', '2x')}
-                                            </FilterSizeOption>
-                                        ))}
+                                    <FilterSize onChange={(e) => ChangeSize(e.target.value)} id="size">
+                                    <Opt>Choose Size</Opt>
                                     </FilterSize>
                                 </div>
                                 <div>
                                     <Check onClick={cheSize} style={{ display: 'inline-block' }}>Check</Check>
                                 </div>
-                            </DivF>
-                        </Filter>
-                        <Filter>
-                            <FilterTitle>Fabric</FilterTitle>
-                            <DivF>
-                                <div>
-                                    <FilterFabric onChange={(e) => setFabric(e.target.value)}>
-                                        {uniqueFabrics.map((unit) => (
-                                            <FilterFabricOption key={unit.id} value={unit.fabric_name}>{unit.fabric_name}</FilterFabricOption>
-                                        ))}
-                                    </FilterFabric>
-                                </div>
-                                {/* <div>
-                                    <Check onClick={cheFabric} style={{ display: 'inline-block' }}>Check</Check>
-                                </div> */}
                             </DivF>
                         </Filter>
                     </FilterContainer>
@@ -462,7 +541,7 @@ const Product = () => {
                             <Amount>{quantity}</Amount>
                             <Add onClick={() => handleQuantity("inc")} />
                         </AmountContainer>
-                        <Button id='succ' onClick={handleClick} style={{ backgroundColor: butBackColor, color: butColor }}>Add to Cart</Button>
+                        <Button  onClick={handleClick} style={{ backgroundColor: butBackColor, color: butColor }}>Add to Cart</Button>
                     </AddContainer>
 
                     <AddContainer>
@@ -486,7 +565,7 @@ const Product = () => {
                         {relateditems.map((it) => (
                             <div>
                                 <div>
-                                    <SmallImageOne src={`http://familyuniformapp.medicalworld.com.mm/ecommerce/items/${it.photo_path}`} key={it.id} />
+                                    <Link to={`/product/${it.id}`}><SmallImageOne src={url+`/ecommerce/items/${it.photo_path}`} key={it.id} /></Link>
                                     {/* <SmallImageOne src={`http://localhost:8000/ecommerce/items/${it.photo_path}`} key={it.id} /> */}
                                 </div>
                                 <div style={{textAlign: 'center'}}>
@@ -505,7 +584,8 @@ const Product = () => {
 
             <CheckColor name={color} open={checkColor} close={() => setCheckColor(false)}/>
             <CheckSize gender={size} type={design} open={checkSize} close={() => setCheckSize(false)} />
-
+            
+            <InstockDialog open={isInstock} close={()=>setIsInstock(false)}/>
             {/* <CheckFabric open={checkFabric} close={() => setCheckFabric(false)} /> */}
         </Container>
     )

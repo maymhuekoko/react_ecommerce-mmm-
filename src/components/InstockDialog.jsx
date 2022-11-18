@@ -3,9 +3,10 @@ import Button from '@mui/material/Button';
 import Dialog from '@mui/material/Dialog';
 import DialogActions from '@mui/material/DialogActions';
 import DialogContent from '@mui/material/DialogContent';
-// import DialogTitle from '@mui/material/DialogTitle';
+import DialogContentText from '@mui/material/DialogContentText';
 import styled from 'styled-components';
 import { useSelector} from 'react-redux'
+import { useNavigate} from 'react-router-dom'
 
 const Title = styled.h1`
     font-size: 24px;
@@ -21,30 +22,26 @@ const Img = styled.img`
     height: auto;
 `
 
-const CheckSize = (props) => {
-   const gen = props.gender.slice(-1);
-   const deg = props.type;
-   console.log(gen,deg);
-   const url= useSelector(state => state.user.url);
+const InstockDialog = (props) => {
+    const navigate = useNavigate();
+    const makepreorder = () =>{
+        navigate('/order/v2');
+    }
   return (
     <div>
         <Dialog open={props.open} onClose={props.close}>
-        <DialogTitle  className='text-center'><Title>Check Size</Title></DialogTitle>
+        <DialogTitle  className='text-center'><Title>NoInstock!</Title></DialogTitle>
         <DialogContent>
-          
-        {gen == 'm' ? (
-        <Img src={url+`/ecommerce/sizechart/`+deg+`_male_sizechart.jpg`} />
-      ) : (
-        <Img src={url+`/ecommerce/sizechart/`+deg+`_female_sizechart.jpg`} />
-      )}
-
+        <DialogContentText className='text-center'><b>If you want to make preorder,please click  the Preorder button.</b></DialogContentText>
+        
         </DialogContent>
         <DialogActions>
-          <Button onClick={props.close} style={{backgroundColor: '#79a6fa', color: 'white'}}>Close</Button>
+        <Button onClick={props.close} style={{backgroundColor: 'red', color: 'white'}}>Close</Button>
+        <Button onClick={makepreorder} style={{backgroundColor: '#79a6fa', color: 'white'}}>Preorder</Button>
         </DialogActions>
       </Dialog>
     </div>
   )
 }
 
-export default CheckSize;
+export default InstockDialog;

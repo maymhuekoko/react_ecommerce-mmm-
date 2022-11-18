@@ -9,6 +9,7 @@ import axios from 'axios';
 import ColorNav from '../components/ColorNav';
 import Footer from '../components/Footer';
 import emailjs from '@emailjs/browser'; 
+import { useSelector} from 'react-redux'
 
 const Div = styled.div`
     margin-top: 65px;
@@ -81,6 +82,7 @@ const Contact = () => {
     const [email, setEmail] = useState('');
     const [message, setMessage] = useState('');
     const [subscribe, setSubscribe] = useState('');
+    const url= useSelector(state => state.user.url);
 
     const didSubscribe = subscribe == 'checked' ? '1' : '0';
 
@@ -94,7 +96,7 @@ const Contact = () => {
 
     const SendMessage = (e) => {
         e.preventDefault();
-        axios.post('http://familyuniformapp.medicalworld.com.mm/api/contact_message', data)
+        axios.post(url+'/api/contact_message', data)
 
         emailjs.sendForm('service_79e361n', 'template_pt919ms', e.target, 'plkqX8v0BRW5x7pd8')
         .then((result) => {

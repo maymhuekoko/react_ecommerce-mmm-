@@ -23,12 +23,12 @@ const MainContainer = styled.div`
     display: flex;
     flex-direction: column;
 `
-// min-width: 225px;
+
 const Container = styled.div`
     flex: 1;
     margin: 5px;
-    width: 16%;
-    height: 350px;
+    width: 360px;
+    height: 550px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -50,7 +50,9 @@ const Circle = styled.div`
 const Image = styled.img`
     width: 100%;
     z-index:2;
+    object-fit:contain;
 `
+
 const Icon = styled.div`
     width: 40px;
     height: 40px;
@@ -71,16 +73,16 @@ const Icon = styled.div`
 const ProductLineTitle = styled.h2`
     font-weight: bold;
     font-size:20px;
-    text-align:center;
+    margin-left:50px;
     position: absolute;
-    bottom: 0;    
+bottom: 0;
+    
 `
 
-const Item = ({item}) => {
+const ItemOne = ({item}) => {
     const url= useSelector(state => state.user.url);
   return (
-   
-    <Container>
+    <Container className='col-6'>
         <Circle/>
         <Image src={url+`/ecommerce/items/${item.photo_path}`}/>
         <Info>
@@ -103,11 +105,10 @@ const Item = ({item}) => {
             
         </Info>
         <ProductLineTitle>{item.item_name}</ProductLineTitle>
-        <ProductLineTitle>{item.discount_price}</ProductLineTitle>
     </Container>
     
     
   )
 }
 
-export default Item
+export default ItemOne

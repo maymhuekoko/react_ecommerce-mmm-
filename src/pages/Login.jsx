@@ -8,7 +8,7 @@ import AuthContext from '../redux/AuthProvider'
 import axios from 'axios'
 import { red } from '@mui/material/colors'
 import {
-    Navigate,
+    useNavigate,useLocation
   } from "react-router-dom";
 import { Link } from 'react-router-dom'
 import ColorNav from '../components/ColorNav'
@@ -71,8 +71,11 @@ const Login = () => {
     const [username,setUsername] = useState("");
     const [password,setPassword] = useState("");
     const [errmsg,setErrmsg] = useState("");
+    const [navi,setNavi] = useState("");
     const [successmsg,setSuccessmsg] = useState(false);
     const dispatch = useDispatch();
+    const url= useSelector(state => state.user.url);
+    const navigate = useNavigate();
     
 
     const background = {
@@ -92,7 +95,7 @@ const Login = () => {
     const handleClick = (e) => {
         e.preventDefault();
     
-            const response = axios.post('http://familyuniformapp.medicalworld.com.mm/api/Login',{
+            const response = axios.post(url+'/api/Login',{
                 username: username,
                 password: password
             }).then(function(response){
@@ -108,7 +111,7 @@ const Login = () => {
                     setUsername('');
                     setPassword('');
                     setSuccessmsg(true);
-                    
+                    navigate(-1);
                     dispatch(setUserInfo({
                         id : response.data.user.id,
                         name : response.data.user.name,
@@ -125,10 +128,13 @@ const Login = () => {
         
         // login(dispatch,{username,password});
     }
+    const createAcc = ()=>{
+        navigate('/register');
+    }
   return (
     <>
     { successmsg ? (
-      <Navigate to="/" />
+      ''
     ) : (
         <>
     <ColorNav/>
@@ -143,7 +149,11 @@ const Login = () => {
             {error && <Error>Incorrect Username and Password...</Error>} */}
             <Button onClick={handleClick}>LOG IN</Button>
             <Link>DO YOU REMEMBER THE PASSWORD?</Link>
+<<<<<<< HEAD
             <Link to="/register">CREATE NEW ACCOUNT</Link>
+=======
+            <Link onClick={createAcc}>CREATE NEW ACCOUNT</Link>
+>>>>>>> 6194f79b29a61ac836a1555022b0da73430cd714
         </Form>
         </Wrapper>
     </Container>

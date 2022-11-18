@@ -228,10 +228,10 @@ const Navbar = () => {
                             <Link to="/register" style={link}>
                                 <MenuItem>Register</MenuItem>
                             </Link>)}
-                        {isUser ? (' ') : (
+                        {/* {isUser ? (' ') : (
                             <Link to="/login" style={link}>
                                 <MenuItem>SignIn</MenuItem>
-                            </Link>)}
+                            </Link>)} */}
                        
                         
 
