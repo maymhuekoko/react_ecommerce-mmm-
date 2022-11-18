@@ -10,6 +10,7 @@ import { red } from '@mui/material/colors'
 import {
     Navigate,
   } from "react-router-dom";
+import { Link } from 'react-router-dom'
 import ColorNav from '../components/ColorNav'
 import Footer from '../components/Footer'
 
@@ -57,13 +58,6 @@ const Button = styled.button`
         color: green;
         cursor: not-allowed;
     }
-`
-
-const Link = styled.a`
-    margin: 5px 0px;
-    font-size: 14px;
-    text-decoration: underline;
-    cursor: pointer;
 `
 
 const Error = styled.span`
@@ -149,7 +143,7 @@ const Login = () => {
             {error && <Error>Incorrect Username and Password...</Error>} */}
             <Button onClick={handleClick}>LOG IN</Button>
             <Link>DO YOU REMEMBER THE PASSWORD?</Link>
-            <Link>CREATE NEW ACCOUNT</Link>
+            <Link to="/register">CREATE NEW ACCOUNT</Link>
         </Form>
         </Wrapper>
     </Container>
