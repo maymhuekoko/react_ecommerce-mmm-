@@ -33,7 +33,7 @@ const FacebookNewsFeed = () => {
                 </div>
                 <div className="card-body">
                     <h5 className="card-title">Apple</h5>
-                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <p className="card-text">This design was launched in 2018 in the market. Available for both Male and Female Pattern differently</p>
                     <a href="https://www.facebook.com/FamilyHospitalUniform/" className="btn btn-primary">See In Facebook</a>
                 </div>
             </div>
@@ -43,7 +43,7 @@ const FacebookNewsFeed = () => {
                 </div>
                 <div className="card-body">
                     <h5 className="card-title">Cute</h5>
-                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <p className="card-text">This design was launched in 2018 in the market. Available for both Male and Female Pattern differently</p>
                     <a href="https://www.facebook.com/FamilyHospitalUniform/" className="btn btn-primary">See In Facebook</a>
                 </div>
             </div>
@@ -53,7 +53,7 @@ const FacebookNewsFeed = () => {
                 </div>
                 <div className="card-body">
                     <h5 className="card-title">Smile</h5>
-                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <p className="card-text">This design was launched in 2018 in the market. Available for both Male and Female Pattern differently</p>
                     <a href="https://www.facebook.com/FamilyHospitalUniform/" className="btn btn-primary">See In Facebook</a>
                 </div>
             </div>
@@ -63,7 +63,7 @@ const FacebookNewsFeed = () => {
                 </div>
                 <div className="card-body">
                     <h5 className="card-title">Sweet</h5>
-                    <p className="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <p className="card-text">This design was launched in 2018 in the market. Available for both Male and Female Pattern differently</p>
                     <a href="https://www.facebook.com/FamilyHospitalUniform/" className="btn btn-primary">See In Facebook</a>
                 </div>
             </div>

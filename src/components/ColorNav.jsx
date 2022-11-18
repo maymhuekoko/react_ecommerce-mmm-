@@ -228,8 +228,8 @@ const ColorNav = () => {
                 </Link> )}
                 <Link to="/cart" style={link1}>
                 <MenuItem> 
-                <div className="bg-dark badge badge-pill badge-red">1</div>  
-                <ShoppingCartIcon/>Cart
+                {/* <div className="bg-dark badge badge-pill badge-red">1</div> */}
+                <ShoppingCartIcon/>
                 </MenuItem>
                 </Link>
                 <Link to="/serach">

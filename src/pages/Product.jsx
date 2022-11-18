@@ -66,8 +66,10 @@ const SmallImage = styled.img`
 `
 
 const SmallImageOne = styled.img`
-    width: 250px;
-    height: 50vh;
+    width: 100%;
+    min-width: 250px;
+    min-height: 250px;
+    max-height: 250px;
     object-fit: contain;
     ${mobile({ height: "50%" })}
 `
@@ -243,7 +245,6 @@ const Product = () => {
     }
     const cheSize = () => {
         setCheckSize(true);
-        
     }
     const cheFabric = () => {
         setCheckFabric(true);
@@ -455,14 +456,12 @@ const Product = () => {
             <Wrapper style={{ marginTop: '100px' }}>
                 <ImgContainer>
 
-
                     <MainImage src={url+`/ecommerce/items/${item.photo_path}`} id='main' />
 
                     <SmallImgContainer>
                         <SmallImage src={url+`/ecommerce/items/${item.photo_path?.replace("front", "left")}`} onClick={change_photo} id='' />
                         <SmallImage src={url+`/ecommerce/items/${item.photo_path?.replace("front", "right")}`} onClick={change_photo} id='' />
                         <SmallImage src={url+`/ecommerce/items/${item.photo_path?.replace("front", "body")}`} onClick={change_photo} id='hel' />
-
                     </SmallImgContainer>
 
                 </ImgContainer>

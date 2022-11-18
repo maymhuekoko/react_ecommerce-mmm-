@@ -149,11 +149,7 @@ const Login = () => {
             {error && <Error>Incorrect Username and Password...</Error>} */}
             <Button onClick={handleClick}>LOG IN</Button>
             <Link>DO YOU REMEMBER THE PASSWORD?</Link>
-<<<<<<< HEAD
-            <Link to="/register">CREATE NEW ACCOUNT</Link>
-=======
             <Link onClick={createAcc}>CREATE NEW ACCOUNT</Link>
->>>>>>> 6194f79b29a61ac836a1555022b0da73430cd714
         </Form>
         </Wrapper>
     </Container>
