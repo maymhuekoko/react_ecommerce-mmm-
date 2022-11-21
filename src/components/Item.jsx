@@ -2,7 +2,10 @@ import { FavoriteBorderOutlined, SearchOutlined, ShoppingCartOutlined } from '@m
 import React from 'react'
 import { Link } from 'react-router-dom'
 import styled from 'styled-components'
-import { useSelector} from 'react-redux'
+import { useSelector } from 'react-redux'
+import { useState, useEffect } from 'react'
+import axios from 'axios'
+
 
 const Info = styled.div`
     opacity: 0;
@@ -76,46 +79,139 @@ const ProductLineTitle = styled.h2`
 `
 
 const ProductLinePromo = styled.h2`
-    font-weight: bold;
+    font-weight: normal;
     font-size:20px;
     text-align:center;
 `
 
-const Item = ({item, title}) => {
-    const url= useSelector(state => state.user.url);
-  return (
-   
-    <Container>
-        <Circle/>
-        <Image src={url+`/ecommerce/items/${item.photo_path}`}/>
-        <Info>
-            
-            <Icon>
-               <ShoppingCartOutlined/>          
-            </Icon>
+const Span = styled.span`
+text-decoration: line-through;
+`
 
-            <Icon>
-                <Link to={`/product/${item.id}`}>
-                    <SearchOutlined/>
-                </Link>
-            </Icon>
+const Warm = styled.span`
+`
+const Date = styled.span`
+`
 
-            <Icon>
-                <FavoriteBorderOutlined/>
-            </Icon>
-        </Info>
-        <ProductLineTitle>{item.item_name}</ProductLineTitle>
-        {/* Phyo */}
-        <div>
+const Item = ({ item, title }) => {
+    const url = useSelector(state => state.user.url);
+
+    const [orderprice, setOrderPrice] = useState();
+    const [promoprice, setPromoPrice] = useState();
+
+    useEffect(() => {
+        fetchOrderPrice()
+    }, []);
+
+    const fetchOrderPrice = async () => {
+        await axios.get(`http://localhost:8000/api/orderprice_api/${item.id}`)
+            .then(res => {
+                setOrderPrice(res.data.order_price);
+            });
+    }
+
+    useEffect(() => {
+        fetchPromoPrice()
+    }, []);
+
+    const fetchPromoPrice = async () => {
+        await axios.get(`http://localhost:8000/api/promoprice_api/${item.id}`)
+            .then(res => {
+                setPromoPrice(res.data);
+                console.log(promoprice)
+            });
+    }
+
+    const date = typeof item.arrival_date == 'string' ? item.arrival_date.split('/') : '';
+    const month = date[0];
+    var mon;
+    switch (month) {
+        case "1":
+            mon = "January";
+            break;
+        case "2":
+            mon = "February";
+            break;
+        case "3":
+            mon = "March";
+            break;
+        case "4":
+            mon = "April";
+            break;
+        case "5":
+            mon = "May";
+            break;
+        case "6":
+            mon = "June";
+            break;
+        case "7":
+            mon = "July";
+            break;
+        case "8":
+            mon = "August";
+            break;
+        case "9":
+            mon = "September";
+            break;
+        case "10":
+            mon = "October";
+            break;
+        case "11":
+            mon = "November";
+            break;
+        case "12":
+            mon = "December";
+            break;
+        default:
+            mon = "";
+    }
+
+    return (
+
+        <Container>
+            <Circle />
+            <Image src={url + `/ecommerce/items/${item.photo_path}`} />
+            <Info>
+
+                <Icon>
+                    <ShoppingCartOutlined />
+                </Icon>
+
+                <Icon>
+                    <Link to={`/product/${item.id}`}>
+                        <SearchOutlined />
+                    </Link>
+                </Icon>
+
+                <Icon>
+                    <FavoriteBorderOutlined />
+                </Icon>
+            </Info>
+
+            <ProductLineTitle style={{ marginTop: '20px' }}>{item.item_name}&nbsp;
+                {
+                    title == 'Promotion Items' ? <Warm style={{ color: 'tomato' }}>({item.discount_price}%)</Warm> : ''
+                }
+            </ProductLineTitle>
             {
-                title == 'Promotion Items' ? <ProductLinePromo>{item.discount_price}% discount</ProductLinePromo> : ''
+                title == 'Promotion Items' ?
+                    <ProductLinePromo>
+                        <Span>{orderprice}</Span>MMK&nbsp;&nbsp;&nbsp;{promoprice}MMK
+                    </ProductLinePromo> : ''
             }
-        </div>
-            
-    </Container>
-    
-    
-  )
+            {
+                title == 'New Arrival' ?
+                    <ProductLinePromo>
+                        <Date>{
+                            mon
+                        }</Date>
+                    </ProductLinePromo> : ''
+            }
+
+        </Container>
+
+
+    )
 }
 
 export default Item
