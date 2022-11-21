@@ -17,11 +17,12 @@ const Container = styled.div`
     ${mobile({padding: "0px",flexDirection: "column"})}
 `
 
-const SectionTitle = styled.h2`
+const SectionTitle = styled.span`
     margin-top: 20px;
     font-weight: bold;
     font-size:30px;
     margin-left: 20px;
+    color: #2b57b8;
     ${mobile({fontSize: "14px"})}
 `
 

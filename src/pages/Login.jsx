@@ -148,8 +148,8 @@ const Login = () => {
             {/* <Button onClick={handleClick} disabled={isFetching}>LOG IN</Button>
             {error && <Error>Incorrect Username and Password...</Error>} */}
             <Button onClick={handleClick}>LOG IN</Button>
-            <Link>DO YOU REMEMBER THE PASSWORD?</Link>
-            <Link onClick={createAcc}>CREATE NEW ACCOUNT</Link>
+            <Link to="/">DO YOU REMEMBER THE PASSWORD?</Link>
+            <Link to="/register">CREATE NEW ACCOUNT</Link>
         </Form>
         </Wrapper>
     </Container>

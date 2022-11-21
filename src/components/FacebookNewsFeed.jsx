@@ -20,6 +20,7 @@ const SectionTitle = styled.h2`
     font-weight: bold;
     font-size:30px;
     margin-left: 20px;
+    color: #2b57b8;
 `
 
 const FacebookNewsFeed = () => {
