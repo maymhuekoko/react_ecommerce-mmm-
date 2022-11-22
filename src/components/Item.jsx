@@ -104,8 +104,11 @@ const Item = ({ item, title }) => {
     }, []);
 
     const fetchOrderPrice = async () => {
-        await axios.get(`http://familyuniformapp.medicalworld.com.mm/api/orderprice_api/${item.id}`)
+
+        await axios.get(`${url}/api/orderprice_api/${item.id}`)
+
             .then(res => {
+                // alert(res.data.order_price);
                 setOrderPrice(res.data.order_price);
             });
     }
@@ -115,7 +118,9 @@ const Item = ({ item, title }) => {
     }, []);
 
     const fetchPromoPrice = async () => {
-        await axios.get(`http://familyuniformapp.medicalworld.com.mm/api/promoprice_api/${item.id}`)
+
+        await axios.get(`${url}/api/promoprice_api/${item.id}`)
+
             .then(res => {
                 setPromoPrice(res.data);
                 console.log(promoprice)
@@ -197,6 +202,7 @@ const Item = ({ item, title }) => {
                 title == 'Promotion Items' ?
                     <ProductLinePromo>
                         <Span>{orderprice}</Span><small>MMK</small>&nbsp;&nbsp;&nbsp;{promoprice}<small>MMK</small>
+
                     </ProductLinePromo> : ''
             }
             {
