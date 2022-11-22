@@ -3,7 +3,6 @@ import { useLocation, Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Footer from '../components/Footer'
 import ColorNav from '../components/ColorNav'
-import Slider from '../components/Slider'
 import Products from '../components/Products'
 import ItemOne from '../components/ItemOne'
 import SearchIcon from '@mui/icons-material/Search';
@@ -56,8 +55,8 @@ const Input = styled.input`
   padding: 9px;
   margin-left: 45px;
   width: 300px;
-  background: #add8e6;
-  border: 1px solid #add8e6;
+  background: #c8cdcf;
+  border: 1px solid #c8cdcf;
   outline: none;
   border-radius: 5px;
   opacity: 1;
@@ -94,7 +93,7 @@ const Btn = styled.button`
     border-radius: 5px;
     margin-left: 7px;
     float: right;
-    background: #add8e6;
+    background: #c8cdcf;
     border: none;
 `
 const A = styled.a`
@@ -110,27 +109,26 @@ const ProductList = () => {
   // const cat_name = location.pathname.split("/")[3];
   const [filters, setFilters] = useState({});
   const [sort, setSort] = useState("newest");
-  const [search,setSearch] = useState('');
-  const [click,setClick] = useState(false);
+  const [search, setSearch] = useState('');
+  const [click, setClick] = useState(false);
   const [items, setItems] = useState([]);
-  const url= useSelector(state => state.user.url);
+  const url = useSelector(state => state.user.url);
 
   const family = () => {
     setClick(false);
   }
-  
+
   const SearchItems = () => {
     setClick(true);
-    axios.post(url+'/api/searchitem',{
-      item: search      
-    }).then(res=>
-    {
-    alert('success');
-    setItems(res.data);
-   }
-).catch(err =>{
-   console.log('error');
-});
+    axios.post(url + '/api/searchitem', {
+      item: search
+    }).then(res => {
+      // alert('success');
+      setItems(res.data);
+    }
+    ).catch(err => {
+      console.log('error');
+    });
   }
 
   const handleFilters = (e) => {
@@ -142,19 +140,23 @@ const ProductList = () => {
     });
   };
 
-  console.log(filters);
-  console.log(sort);
+  // console.log(filters);
+  // console.log(sort);
+
+  // console.info(location.state.itemsS);
+
+  // console.info(location.state.click);
 
   return (
     <div>
-      <Container>
+      <Container id="top">
 
         <ColorNav />
         {/* <Slider/> */}
 
         <Title>Product Line
           <Btn onClick={SearchItems}><A><SearchIcon /></A></Btn>
-          <Input placeholder='Search Items.........' onChange={(e)=>setSearch(e.target.value)}></Input>
+          <Input placeholder='Search Items.........' onChange={(e) => setSearch(e.target.value)}></Input>
         </Title>
 
         <FilterContainer>
@@ -228,24 +230,24 @@ const ProductList = () => {
           </div>
           <div className='col-md-10'>
             {
-              click == true ? 
+              click == true ?
                 <ContainerOne>
                   <div className='row'>
-              {items.map(item => (
-                
-                <div className='col-md-4'>
-                <ItemOne item={item} key={item.id} />
-                </div>
-               
-              ))}
-               </div>
-               <br></br>
-            </ContainerOne>
+                    {items.map(item => (
 
-               :
-              <Products cat={cat} filters={filters} sort={sort} />
+                      <div className='col-md-4'>
+                        <ItemOne item={item} key={item.id} />
+                      </div>
+
+                    ))}
+                  </div>
+                  <br></br>
+                </ContainerOne>
+
+                :
+                <Products cat={cat} filters={filters} sort={sort} />
             }
-            
+
           </div>
         </div>
       </Container>
