@@ -30,7 +30,7 @@ const Left = styled.div`
     display: flex;
     flex-direction: column;
     padding: 20px;
-    background-color: #eeeeee;
+    background-color: #d4d4d4;
 `
 const Description = styled.p`
     margin: 20px 0px;
@@ -52,7 +52,7 @@ const SocialIcon = styled.div`
 const Center = styled.div`
     flex: 1;
     padding: 20px;
-    background-color: #eeeeee;
+    background-color: #d4d4d4;
     ${mobile({ display: "none" })}
 `
 const Title = styled.h3`
@@ -73,7 +73,7 @@ const ListItem = styled.li`
 const Right = styled.div`
     flex: 1;
     padding: 20px;
-    background-color: #eeeeee;
+    background-color: #d4d4d4;
     ${mobile({ backgroundColor: "#fff8f8" })}
 `
 const ContactItem = styled.div`

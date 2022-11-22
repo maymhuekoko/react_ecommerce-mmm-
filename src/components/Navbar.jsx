@@ -12,6 +12,8 @@ import { Link } from 'react-router-dom'
 import { FaBars } from 'react-icons/fa'
 import ColorNav from './ColorNav'
 import PreDialog from '../components/PreDialog'
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
 
 const Container = styled.div`
     transition: 1s ease;
@@ -138,8 +140,27 @@ const NavbarDropdownContent = styled.div`
   z-index: 1;
 `;
 
+const SInput = styled.input`
+    width: 200px;
+    height: 35px;
+    background-color: #eeeeee;
+    border: 1px solid #2b57b8;
+    outline:none;
+    border-radius: 4px;
+    margin-right: 10px;
+`
+const SSubmit = styled.button`
+    color: white;
+    height: 35px;
+    border: 1px solid #2b57b8;
+    outline:none;
+    border-radius: 4px;
+`
+const Searchbox = styled.div`
+    display: inline-block;
+`
 
-const Navbar = () => {
+const Navbar = (props) => {
     const [isScroll, setIsScroll] = useState(false);
     const [isUser, setIsUser] = useState(false);
     const dispatch = useDispatch();
@@ -170,7 +191,7 @@ const Navbar = () => {
         setIsUser(false);
     }
 
-    const showPreorder = () =>{
+    const showPreorder = () => {
         setShowDialog(true);
     }
 
@@ -184,6 +205,34 @@ const Navbar = () => {
         color: 'white',
     }
 
+    const [search, setSearch] = useState('');
+    const [itemsS, setItems] = useState([]);
+    const [showsearch, setShowSearch] = useState(false);
+
+    const ShowSearch = () => {
+        setShowSearch(true);
+    }
+
+    const navigate = useNavigate();
+
+    const url = useSelector(state => state.user.url);
+
+    const SearchItems = () => {
+        axios.post(url + '/api/searchitem', {
+            item: search
+        }).then(res => {
+            // alert('success');
+            setItems(res.data);
+        }
+        ).catch(err => {
+            console.log('error');
+        });
+        navigate('/products/1/family hospital', { state: { itemsS: itemsS, click: true } })
+
+
+    }
+
+    console.info(itemsS)
 
     return (
         <Container className="fixed-top">
@@ -222,8 +271,8 @@ const Navbar = () => {
                             <MenuItem>ContactUs</MenuItem>
                         </Link>
                         {isUser ? (<Link to="/order_list" style={link}>
-                                <MenuItem>OrderList</MenuItem>
-                            </Link>) : (
+                            <MenuItem>OrderList</MenuItem>
+                        </Link>) : (
                             <Link to="/register" style={link}>
                                 <MenuItem>Register</MenuItem>
                             </Link>)}
@@ -231,35 +280,44 @@ const Navbar = () => {
                             <Link to="/login" style={link}>
                                 <MenuItem>SignIn</MenuItem>
                             </Link>)} */}
-                       
-                        
+
+
 
                     </Center>
 
                     <Right>
+                        <MenuItem>
+                            {
+                                showsearch ?
+                                <Searchbox>
+                                    <SInput placeholder='' onChange={(e) => setSearch(e.target.value)}></SInput>
+                                    <SearchIcon onClick={SearchItems} style={link} />
+                                    {/* <SSubmit onClick={SearchItems} style={link}>Submit</SSubmit> */}
+                                </Searchbox> : ''
+                            }
+                            {
+                                showsearch ?
+                                '' : <SearchIcon onClick={ShowSearch} style={link} />
+                            }
+                        </MenuItem>
                         {isUser ? (
-                        <Link to='/' style={link} onClick={logout}>
-                            <MenuItem>LogOut</MenuItem>
-                        </Link>
+                            <Link to='/' style={link} onClick={logout}>
+                                <MenuItem>LogOut</MenuItem>
+                            </Link>
                         ) : (
-                        <Link to="/login" style={link}>
-                            <MenuItem>SignIn</MenuItem>
-                        </Link>)
+                            <Link to="/login" style={link}>
+                                <MenuItem>SignIn</MenuItem>
+                            </Link>)
                         }
                         <Link to="/cart" style={link}>
                             <MenuItem>
                                 <ShoppingCartIcon />
                             </MenuItem>
                         </Link>
-                        <Link to="/serach">
-                            <MenuItem>
-                                <SearchIcon style={link}/>
-                            </MenuItem>
-                        </Link>
                     </Right>
                 </Wrapper>
             )}
-        <PreDialog open={showDialog} close={()=>setShowDialog(false)}/>
+            <PreDialog open={showDialog} close={() => setShowDialog(false)} />
         </Container>
     )
 }
