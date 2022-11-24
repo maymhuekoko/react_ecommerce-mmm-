@@ -27,6 +27,7 @@ const designSlice = createSlice({
         edit_testname: '',
         edit_testqty: '',
         edit_testprice: '',
+        homesearch: false,
     },
     reducers: {
         addOrder: (state, action) => {
@@ -51,9 +52,16 @@ const designSlice = createSlice({
         },
         resetOrder: (state) => {
             state.orders.length = 0;
+        },
+        showSearch: (state) => {
+            state.homesearch = true;
+        },
+        resetSearch: (state) => {
+            state.homesearch = false;
         }
+
     }
 })
 
-export const { addOrder, removeOrder, resetOrder, editOrder } = designSlice.actions
+export const { addOrder, removeOrder, resetOrder, editOrder,showSearch,resetSearch } = designSlice.actions
 export default designSlice.reducer;

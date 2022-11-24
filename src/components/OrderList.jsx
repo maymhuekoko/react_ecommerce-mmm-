@@ -10,6 +10,7 @@ import axios from 'axios';
 import ColorNav from './ColorNav';
 import Footer from './Footer';
 import InvoiceDialog from './InvoiceDialog';
+import PaymentDialog from './PaymentDialog';
 
 const Div = styled.div`
 margin-top:90px;
@@ -85,6 +86,17 @@ const TableButton1 = styled.button`
     margin-left : 10px;
     border : none;
 `
+const TableButton2 = styled.button`
+    padding: 3px;
+    background-color: rgba(2,127,157,1);
+    color: white;
+    font-size: 17px;
+    font-weight: 600;
+    border-radius: 3px;
+    text-align: center;
+    margin-left : 10px;
+    border : none;
+`
 
 const Span = styled.span`
     background-color: rgba(2,127,157,1);
@@ -139,6 +151,8 @@ const OrderList = () => {
     const [color, setColor] = useState([]);
     const [size, setSize] = useState([]);
     const [showDialog, setShowDialog] = useState(false);
+    const [showPaymentDialog, setShowPaymentDialog] = useState(false);
+    const [orderId,setOrderId] = useState('');
 
     const username = useSelector(state=>state.user);
     const url= useSelector(state => state.user.url);
@@ -161,6 +175,11 @@ const OrderList = () => {
             setSize(res.data.size);
         })
         setShowDialog(true);
+    }
+
+    const onPaymentClicked = (id) => {
+        setShowPaymentDialog(true);
+        setOrderId(id);
     }
     
     const navigate = useNavigate();
@@ -238,9 +257,14 @@ const OrderList = () => {
                             <Td>{order.total_amount}</Td>
                             <Td>
                             {/* <Link to={'/order_detail/'+order.id}> */}
-                                <TableButton onClick={()=>orderDetail(order.id)}>Order Detail</TableButton>
+                            <div class="d-flex align-items-center">
+                            <TableButton onClick={()=>orderDetail(order.id)}>Detail</TableButton>
                             {/* </Link>    */}
-                            <TableButton1 onClick={()=>onInvoiceClicked(order.id)}>Invoice</TableButton1>    
+                            <TableButton1 onClick={()=>onInvoiceClicked(order.id)}>Invoice</TableButton1>
+
+                             <TableButton2 onClick={()=>onPaymentClicked(order.id)}>Payment</TableButton2> 
+                            </div>
+                              
                             </Td>
                         </Tr>
                     ))
@@ -275,10 +299,15 @@ const OrderList = () => {
                             <Td>{preorder.total_quantity}</Td>
                             <Td>{preorder.total_amount}</Td>
                             <Td>
+                            <div class="d-flex align-items-center">
                             <Link to={{ pathname:'/order_detail/'+preorder.id }}>
-                                <TableButton>Order Detail</TableButton>
+                                <TableButton>Detail</TableButton>
                             </Link>
                             <TableButton1 onClick={()=>onInvoiceClicked(preorder.id)}>Invoice</TableButton1>    
+
+                             <TableButton2 onClick={()=>onPaymentClicked(preorder.id)}>Payment</TableButton2> 
+                            </div>
+                           
                             </Td>
                         </Tr>
                     ))
@@ -290,6 +319,7 @@ const OrderList = () => {
         </Div>
         <div>
             <InvoiceDialog open={showDialog} close={()=>setShowDialog(false)} name={name} phone={phone} address={address} unit = {countingunit} ecounting = {ecounting} color = {color} size = {size}/>
+            <PaymentDialog open={showPaymentDialog} close={()=>setShowPaymentDialog(false)} orderId={orderId}/>
             <Footer/>
         </div>
         </div>
