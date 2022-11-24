@@ -15,7 +15,7 @@ import PreDialog from '../components/PreDialog'
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
 import { showSearch } from '../redux/designRedux';
-import ClipLoader from 'react-spinners/ClipLoader';
+// import ClipLoader from 'react-spinners/ClipLoader';
 
 const Container = styled.div`
     transition: 1s ease;
