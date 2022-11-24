@@ -123,7 +123,6 @@ const ProductList = () => {
     axios.post(url + '/api/searchitem', {
       item: search
     }).then(res => {
-      // alert('success');
       setItems(res.data);
     }
     ).catch(err => {
@@ -139,13 +138,6 @@ const ProductList = () => {
       [e.target.name]: value,
     });
   };
-
-  // console.log(filters);
-  // console.log(sort);
-
-  // console.info(location.state.itemsS);
-
-  // console.info(location.state.click);
 
   return (
     <div>
@@ -195,36 +187,17 @@ const ProductList = () => {
           <div className='col-md-2'>
             <Div>
               <FilterTextOne>Brands</FilterTextOne>
-              <DivOne>
-                <Link className='text-decoration-none text-white' to='/products/1/family%20hospital' onClick={family}>Family Hospital</Link><br></br>
-              </DivOne>
-              <DivOne>
-                <Link className='text-decoration-none text-white' to='/products/2/branded' onClick={family}>Branded</Link><br></br>
-              </DivOne>
-              <DivOne>
-                <Link className='text-decoration-none text-white' to='/products/3/ecofamily' onClick={family}>Eco Family</Link><br></br>
-              </DivOne>
-              <DivOne>
-                <Link className='text-decoration-none text-white' to='/' onClick={family}>Oxypas</Link><br></br>
-              </DivOne>
-              <DivOne>
-                <Link className='text-decoration-none text-white' to='/' onClick={family}>Unionmicroclean</Link><br></br>
-              </DivOne>
-              <DivOne>
-                <Link className='text-decoration-none text-white' to='/' onClick={family}>Littman</Link><br></br>
-              </DivOne>
-              <DivOne>
-                <Link className='text-decoration-none text-white' to='/' onClick={family}>Protech Masks</Link><br></br>
-              </DivOne>
-              <DivOne>
-                <Link className='text-decoration-none text-white' to='/' onClick={family}>Polo Club</Link><br></br>
-              </DivOne>
-              <DivOne>
-                <Link className='text-decoration-none text-white' to='/' onClick={family}>Factory Textile</Link><br></br>
-              </DivOne>
-              <DivOne>
-                <Link className='text-decoration-none text-white' to='/' onClick={family}>Factory Material</Link><br></br>
-              </DivOne>
+                <Link className='text-decoration-none text-white' to='/products/1/family%20hospital' onClick={family}><DivOne>Family Hospital</DivOne></Link>
+                <Link className='text-decoration-none text-white' to='/products/2/branded' onClick={family}><DivOne>Branded</DivOne></Link>
+                <Link className='text-decoration-none text-white' to='/products/3/ecofamily' onClick={family}><DivOne>Eco Family</DivOne></Link>
+                <Link className='text-decoration-none text-white' to='/' onClick={family}><DivOne>Oxypas</DivOne></Link>
+                <Link className='text-decoration-none text-white' to='/' onClick={family}><DivOne>Unionmicroclean</DivOne></Link>
+                <Link className='text-decoration-none text-white' to='/' onClick={family}><DivOne>Littman</DivOne></Link>
+                <Link className='text-decoration-none text-white' to='/' onClick={family}><DivOne>Protech Masks</DivOne></Link>
+                <Link className='text-decoration-none text-white' to='/' onClick={family}><DivOne>Polo Club</DivOne></Link>
+                <Link className='text-decoration-none text-white' to='/' onClick={family}><DivOne>Factory Textile</DivOne></Link>
+                <Link className='text-decoration-none text-white' to='/' onClick={family}><DivOne>Factory Material</DivOne></Link>
+              
 
             </Div>
           </div>

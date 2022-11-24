@@ -44,7 +44,6 @@ const App = () => {
         <Route path="/about-us" element={<About/>}/>
         <Route path="/user-profile" element={<Profile/>}/>
       </Routes>
-      {/* hello maymyat */}
     </Router>
   );
   
