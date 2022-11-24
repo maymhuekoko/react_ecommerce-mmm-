@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import { useLocation, Link } from 'react-router-dom'
 import styled from 'styled-components'
 import Footer from '../components/Footer'
@@ -8,7 +8,8 @@ import ItemOne from '../components/ItemOne'
 import SearchIcon from '@mui/icons-material/Search';
 import { mobile } from "../responsive"
 import axios from 'axios'
-import { useSelector } from 'react-redux'
+import { useSelector,useDispatch } from 'react-redux'
+import { resetItem, resetSearch } from "../redux/designRedux"
 
 const Container = styled.div`
 margin: 20px;
@@ -111,13 +112,27 @@ const ProductList = () => {
   const [sort, setSort] = useState("newest");
   const [search, setSearch] = useState('');
   const [click, setClick] = useState(false);
-  const [items, setItems] = useState([]);
   const url = useSelector(state => state.user.url);
+  const hsearch = useSelector(state => state.design.homesearch);
+  const [items, setItems] = useState([]);
+  const dispatch = useDispatch();
 
   const family = () => {
     setClick(false);
   }
 
+  useEffect(() =>{
+    homesearchitem();
+},[]);
+
+  const homesearchitem = () => {
+      if(hsearch == true){
+        setClick(true);
+      setItems(location.state.itemsS);
+      dispatch(resetSearch());
+      }     
+  }
+ 
   const SearchItems = () => {
     setClick(true);
     axios.post(url + '/api/searchitem', {

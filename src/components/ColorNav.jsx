@@ -11,6 +11,9 @@ import {  useDispatch,useSelector } from 'react-redux';
 import { Link } from 'react-router-dom'
 import {FaBars} from 'react-icons/fa'
 import PreDialog from '../components/PreDialog'
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+import { showSearch } from '../redux/designRedux';
 
 const Container = styled.div`
     height: ;
@@ -138,13 +141,32 @@ const NavbarDropdownContent = styled.div`
     z-index: 1;
 `;
 
+const SInput = styled.input`
+    width: 220px;
+    height: 35px;
+    background-color: #eeeeee;
+    border: 1px solid #2b57b8;
+    outline:none;
+    border-radius: 4px;
+    margin-right: 10px;
+`
+
+const Searchbox = styled.div`
+    display: inline-block;
+`
+
 
 const ColorNav = () => {
 
     const username = useSelector(state=>state.user.name);
+    const pcs = useSelector(state=>state.cart.total_pcs);
     const [isUser, setIsUser] = useState(false);
     const dispatch = useDispatch();
     const [showDialog, setShowDialog] = useState(false);
+    const [search, setSearch] = useState('');
+    const [itemsS, setItems] = useState([]);
+    const [showsearch, setShowSearch] = useState(false);
+    const [ok,setOk] = useState(false);
 
     useEffect(()=>{
         if(username != ''){
@@ -169,6 +191,41 @@ const ColorNav = () => {
         textDecoration: 'none',
         color : 'white',
     }
+
+    const ShowSearch = () => {
+        setShowSearch(true);
+    }
+
+    const navigate = useNavigate();
+
+    const url = useSelector(state => state.user.url);
+
+    const SearchItems = () => {
+        if(search != ''){
+            axios.post(url + '/api/searchitem', {
+                item: search
+            }).then(res => {
+                alert('success');
+                // console.log(res.data);
+                setItems(res.data);
+                setOk(true);
+            }
+            ).catch(err => {
+                console.log('error');
+            });
+        }else{
+            // alert('fail');
+            setShowSearch(false);
+        } 
+       
+    }
+
+    if(ok == true){
+        alert('fine');
+        dispatch(showSearch());
+        navigate('/products/1/family hospital', { state: { itemsS: itemsS, click: true } })
+    }
+
      
 
   return (
@@ -220,23 +277,39 @@ const ColorNav = () => {
             </Center>
 
             <RightOne>
-            {isUser ? (<Link to="/" style={link1} onClick={logout}>
+            
+                {/* <Link to="/serach">
+                <MenuItem>   
+               <SearchIcon style={link1}/>
+                </MenuItem>
+                </Link> */}
+                <MenuItem>
+                            {
+                                showsearch ?
+                                <Searchbox>
+                                    <SInput placeholder='' onChange={(e) => setSearch(e.target.value)}></SInput>
+                                    <SearchIcon style={link1} onClick={SearchItems}/>
+                                    {/* <SSubmit onClick={SearchItems} style={link}>Submit</SSubmit> */}
+                                </Searchbox> : ''
+                            }
+                            {
+                                showsearch ?
+                                '' : <SearchIcon onClick={ShowSearch} style={link1} />
+                            }
+                        </MenuItem>
+                <Link to="/cart" style={link1}>
+                <MenuItem> 
+                <ShoppingCartIcon/>
+                <div className="bg-dark badge badge-pill badge-red">{pcs}</div>
+                </MenuItem>
+                </Link>
+                {isUser ? (<Link to="/" style={link1} onClick={logout}>
                 <MenuItem>LogOut</MenuItem>
                 </Link>):(
                 <Link to="/login" style={link1}>
                 <MenuItem>SignIn</MenuItem>
                 </Link> )}
-                <Link to="/cart" style={link1}>
-                <MenuItem> 
-                {/* <div className="bg-dark badge badge-pill badge-red">1</div> */}
-                <ShoppingCartIcon/>
-                </MenuItem>
-                </Link>
-                <Link to="/serach">
-                <MenuItem>   
-               <SearchIcon style={link1}/>
-                </MenuItem>
-                </Link>
+
             </RightOne>
         </WrapperOne>
         <PreDialog open={showDialog} close={()=>setShowDialog(false)}/>

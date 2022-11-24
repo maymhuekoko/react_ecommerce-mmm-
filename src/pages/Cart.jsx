@@ -6,7 +6,7 @@ import Announcement from '../components/Announcement'
 import Footer from '../components/Footer'
 import { Add, Remove } from '@mui/icons-material'
 import {mobile} from "../responsive"
-import { removeProduct } from "../redux/cartRedux"
+import { removeProduct,resetPcs } from "../redux/cartRedux"
 import { useDispatch,useSelector } from 'react-redux'
 import axios from 'axios'
 import CheckoutDialog from '../components/CheckoutDialog'
@@ -198,6 +198,7 @@ const Cart = () => {
         document.getElementById('total_pcs').innerHTML = total_pcs;
         document.getElementById('subtotal').innerHTML = subtotal;
         document.getElementById('total').innerHTML = total;
+        dispatch(resetPcs({total_pcs : total_pcs,total : total}));
     };
 
     const handleQuantityDec = (id) =>{
@@ -210,6 +211,7 @@ const Cart = () => {
             document.getElementById('total_pcs').innerHTML = total_pcs;
             document.getElementById('subtotal').innerHTML = subtotal;
             document.getElementById('total').innerHTML = total;
+            dispatch(resetPcs({total_pcs : total_pcs,total : total}));
             dispatch(removeProduct({id}));
         }else{
             document.getElementById('qty'+id).innerHTML = qty;
@@ -221,6 +223,7 @@ const Cart = () => {
             document.getElementById('total_pcs').innerHTML = total_pcs;
             document.getElementById('subtotal').innerHTML = subtotal;
             document.getElementById('total').innerHTML = total;
+            dispatch(resetPcs({total_pcs : total_pcs,total : total}));
         }
     };
 
@@ -231,6 +234,7 @@ const Cart = () => {
             document.getElementById('total_pcs').innerHTML = total_pcs;
             document.getElementById('subtotal').innerHTML = subtotal;
             document.getElementById('total').innerHTML = total;
+            dispatch(resetPcs({total_pcs : total_pcs,total : total}));
         dispatch(removeProduct({id}));
     }
     
@@ -244,8 +248,10 @@ const Cart = () => {
             <Top>
                 <Link to='/products/1/family%20hospital'><TopButton>CONTINUE SHOPPING</TopButton></Link>
                 <TopTexts>
-                    {/* <TopText>Shopping Cart(2)</TopText> */}
-                    {/* <TopText>Your Wishlist(0)</TopText> */}
+
+                    <TopText>Shopping Cart({cart.total_pcs})</TopText>
+                    <TopText>Your Wishlist(0)</TopText>
+
                 </TopTexts>
 
                 {/* <TopButton type="filled">CHECKOUT NOW</TopButton> */}

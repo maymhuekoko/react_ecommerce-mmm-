@@ -60,6 +60,7 @@ export default function BankInfoDialog(props) {
   const dispatch = useDispatch(); 
   const [file, setFile] = useState(null);
   const [remark, setRemark] = useState('');
+  const [payamount, setPayamount] = useState('');
   const url= useSelector(state => state.user.url);
 
   const onFileChange = (event) => {  
@@ -72,7 +73,8 @@ export default function BankInfoDialog(props) {
     // alert(file.name);
     let formdata={
       file:file,
-      remark:remark,    
+      remark:remark,
+      payamount: payamount,    
     }
     axios.post(url+'/api/storescreenshot', formdata,
     {
@@ -103,6 +105,7 @@ export default function BankInfoDialog(props) {
           </DialogContentText>
             <Form>
               <Input type="file" id='myFile' onChange={onFileChange}/>
+              <Input type="text" id="payamount" name="" placeholder="Pay Amount" onChange={(e)=>setPayamount(e.target.value)}/>
               <Input type="text" id="remark" name="" placeholder="Remark" onChange={(e)=>setRemark(e.target.value)}/>
             </Form>
         </DialogContent>
