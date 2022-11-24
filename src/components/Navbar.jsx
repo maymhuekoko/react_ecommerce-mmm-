@@ -230,7 +230,6 @@ const Navbar = (props) => {
             axios.post(url + '/api/searchitem', {
                 item: search
             }).then(res => {
-                alert('success');
                 // console.log(res.data);
                 setItems(res.data);
                 setOk(true);
