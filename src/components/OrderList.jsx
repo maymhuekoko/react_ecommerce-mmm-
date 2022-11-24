@@ -113,6 +113,7 @@ export const Tabs = styled.div`
   background: #fff;
   font-family: Open Sans;
   height: 3em;
+  margin-left: 200px;
 `;
 
 export const Tab = styled.button`
