@@ -38,6 +38,7 @@ const Container = styled.div`
     flex-direction: column;
     background-color: #f5fbfd;
     position: relative;
+    overflow: hidden;
     &:hover ${Info}{
         opacity: 1;
     }
@@ -49,9 +50,11 @@ const Circle = styled.div`
     border-radius: 50%;
     background-color: white;
     position: absolute;
+    top: 50px;
 `
 const Image = styled.img`
     width: 100%;
+    max-height: 251.8px;
     z-index:2;
 `
 const Icon = styled.div`

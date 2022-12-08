@@ -61,6 +61,7 @@ const MainImage = styled.img`
 const SmallImage = styled.img`
     width: 34%;
     height: auto;
+    max-height: 191.5px;
     object-fit: cover;
     ${mobile({ height: "50%" })}
 `
@@ -437,7 +438,12 @@ const Product = () => {
                unit: counting       
         }).then(res=>
         {
-            alert('success');
+            // alert('success');
+            Swal.fire({
+                title:  "Success!",
+                text: "Success!.",
+                type: 'success',    
+                });
             document.getElementById('price').innerHTML = res.data.data+` MMK`;
             document.getElementById('stock').innerHTML = res.data.stock+` PCS`;
             setPrice(res.data.data);

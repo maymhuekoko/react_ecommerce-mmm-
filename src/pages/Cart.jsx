@@ -261,7 +261,7 @@ const Cart = () => {
                     {cart.products.map((product)=>(
                         <Product>
                         <ProductDetail>
-                            <Image src={url+`/ecommerce/items/family_cute_front.png`}/>
+                            <Image src={url+`/ecommerce/items/${product.unitimg}`}/>
                             <Details>
                                 <ProductName><b>Product: </b> {product.unitname}</ProductName>
                                 <ProductId><b>ID: </b> {product.unitcode}</ProductId>

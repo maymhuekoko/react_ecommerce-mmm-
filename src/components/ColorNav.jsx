@@ -205,7 +205,6 @@ const ColorNav = () => {
             axios.post(url + '/api/searchitem', {
                 item: search
             }).then(res => {
-                alert('success');
                 // console.log(res.data);
                 setItems(res.data);
                 setOk(true);
@@ -221,7 +220,6 @@ const ColorNav = () => {
     }
 
     if(ok == true){
-        alert('fine');
         dispatch(showSearch());
         navigate('/products/1/family hospital', { state: { itemsS: itemsS, click: true } })
     }

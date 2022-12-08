@@ -13,6 +13,7 @@ import {
 import { Link } from 'react-router-dom'
 import ColorNav from '../components/ColorNav'
 import Footer from '../components/Footer'
+import Swal from 'sweetalert2'
 
 // url("https://images.pexels.com/photos/6984650/pexels-photo-6984650.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940") center;
 
@@ -123,13 +124,15 @@ const Login = () => {
                         address : response.data.user.address,
                         email : response.data.user.email,
                     }))   
-                    
+                    Swal.fire({
+                        title:  "Success!",
+                        text: "Login Successful!",
+                        type: 'success',    
+                    });
                 }
                 
             })
-              
-        
-        
+
         // login(dispatch,{username,password});
     }
     
