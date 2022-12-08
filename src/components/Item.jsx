@@ -130,7 +130,7 @@ const Item = ({ item, title }) => {
             });
     }
 
-    const date = typeof item.arrival_date == 'string' ? item.arrival_date.split('/') : '';
+    const date = typeof item.arrival_date == 'string' ? item.arrival_date.split('-') : '';
     const month = date[0];
     var mon;
     switch (month) {
