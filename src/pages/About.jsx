@@ -11,6 +11,7 @@ import ColorNav from "../components/ColorNav";
 import Footer from "../components/Footer";
 import Newsletter from "../components/Newsletter";
 import AboutImgTest from "../slider-images/slider2.jpg";
+import AboutImgTest1 from "../slider-images/slider3.jpg";
 import sample from "../files/sample.mp4";
 import factoryV from "../files/factory.mp4";
 import map from "../files/map.jpg";
@@ -152,7 +153,7 @@ const Image = styled.img`
   height: 100%;
   border-radius: 10px;
   object-fit: contain;
-  background-color: #fcf5f5;
+  background-color: #ffffff;
   ${mobile({ height: "30vh" })}
 `;
 const DeepBox = styled.div`
@@ -250,6 +251,7 @@ const FIbox = styled.div`
 
 const FImg = styled.img`
     width: 100%;
+    max-width: 430px;
     height: auto;
     border: 5px solid white;
     border-radius: 12px;
@@ -281,9 +283,9 @@ const About = () => {
         <ColorNav />
       </div>
       <Div style={{ marginTop: "50px" }}>
-        <Wrapper>
+        <Wrapper style={{ height: "90vh" }}>
           <FirstDiv>
-            <img src={AboutImgTest} style={{ minWidth: "100%" }} />
+            <img src={AboutImgTest1} style={{ minWidth: "100%",maxWidth: "90vh" }} />
           </FirstDiv>
           <SecondDiv
             style={{ width: "60%", backgroundColor: "rgba(50, 84, 155, 0.8)" }}
@@ -307,14 +309,14 @@ const About = () => {
             controls
             style={{
               width: "85%",
-              height: "auto",
+              height: "90vh",
               borderRadius: "10px",
               border: "2px solid #777",
             }}
           />
         </Wrapper>
 
-        <Wrapper>
+        <Wrapper style={{ height: "90vh" }}>
           <FirstDiv>
             <img src={AboutImgTest} style={{ minWidth: "100%" }} />
           </FirstDiv>
@@ -386,7 +388,7 @@ const About = () => {
           </DeepBox>
         </Wrapper>
 
-        <Wrapper style={{ padding: "50px" }}>
+        <Wrapper style={{ padding: "50px", maxHeight: "40vh" }}>
           <DeepBox>
             <Title style={{ color: "#212529" }}>Our History</Title>
             <Box>
@@ -487,7 +489,7 @@ const About = () => {
             controls
             style={{
               width: "85%",
-              height: "auto",
+              height: "90vh",
               borderRadius: "10px",
               border: "2px solid #777",
             }}
