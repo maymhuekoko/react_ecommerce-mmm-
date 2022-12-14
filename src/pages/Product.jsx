@@ -255,10 +255,6 @@ const Product = () => {
         setCheckFabric(true);
     }
 
-    // const filtered = colors.filter(employee => {
-    //     return employee.country === 'Canada';
-    // });
-
     const location = useLocation();
     const id = location.pathname.split("/")[2];
 

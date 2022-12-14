@@ -94,13 +94,6 @@ const Button = styled.button`
 const Image = styled.img`
     width: 100vw;
     object-fit: cover;
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
-
->>>>>>> 6634d3f1ea4e78a63cad72c49921df1c632ffce2
->>>>>>> 006feff150765e30031b447d2425d0cb7685cdc2
 `;
 
 const Slider = () => {
@@ -120,7 +113,10 @@ const Slider = () => {
     }
 
   return (
+<<<<<<< HEAD
 
+=======
+>>>>>>> 006feff150765e30031b447d2425d0cb7685cdc2
     <Container>
         <Arrow direction="left" onClick={()=> handleClick("left")}>
             <ArrowLeftOutlinedIcon/>
