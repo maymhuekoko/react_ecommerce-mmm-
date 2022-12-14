@@ -9,7 +9,7 @@ import { Navigate, useNavigate  } from 'react-router-dom';
 
 const Container = styled.div`
     width: 100%;
-    height: 83vh;
+    height: 95vh;
     display:flex;
     position: relative;
     overflow: hidden;
@@ -21,7 +21,7 @@ const Container = styled.div`
 `
 
 const Wrapper = styled.div`
-    height: 70vh;
+    height: 95vh;
     display: flex;
     transition: all 1.5s ease;
     transform: translateX(${props=> props.slideIndex * -100}vw);
@@ -47,14 +47,14 @@ const Arrow = styled.div`
 `
 const Slide = styled.div`
     width: 100vw;
-    height: 70vh;
+    height: 95vh;
     display: flex;
     align-items: center;
     background-color: #${props=>props.bgc};
 `;
 
 const ImgContainer = styled.div`
-    height: 70vh;
+    height: 95vh;
     width: 100vw;
     flex: 1;
     position: absolute;

@@ -45,7 +45,7 @@ const Categories = () => {
   },[]);
 
   return (
-    <MainContainer style={{padding: '0px 60px'}}>
+    <MainContainer>
       <SectionTitle>Our Brands</SectionTitle>
       <Container>
           {categories.map(item=>(
