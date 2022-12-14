@@ -275,6 +275,9 @@ const Product = () => {
     const [design, setDesign] = useState('');
     const [isInstock, setIsInstock] = useState(false);
 
+    const [instockFlag, setInstockFlag] = useState("");
+    const [preorderFlag, setPreorderFlag] = useState("");
+
     
     useEffect(() => {
         const getProduct = () => {
@@ -284,6 +287,12 @@ const Product = () => {
                     setItem(response.data.item);
                     setDesign(response.data.item.item_name);
                     setUnits(response.data.counting_units);
+
+                    setInstockFlag(response.data.valueofinstock);
+                    console.log(instockFlag);
+
+                    setPreorderFlag(response.data.valueofpreorder);
+                    console.log(preorderFlag);
 
                     const obj = {
                         'category_id': response.data.item.category_id,
@@ -487,7 +496,9 @@ const Product = () => {
                     <Desc>Minimum Order Quantity : </Desc>
                     <Desc>Avaiable Color : </Desc>
                     <Desc>Lead Time : </Desc>
-                    <Link to={'/order/'+item.item_name}><Button>Make Order</Button></Link>
+                    {
+                    preorderFlag == 1 ? <Link to={'/order/'+item.item_name}><Button>Make Order</Button></Link> : 'Preorder Unavaliable!'
+                    }
                     <RowContainer>
                         <PriceLabel>Price: </PriceLabel>
                         <Price id='price'> &nbsp;MMK</Price>
@@ -557,7 +568,11 @@ const Product = () => {
                             <Amount>{quantity}</Amount>
                             <Add onClick={() => handleQuantity("inc")} />
                         </AmountContainer>
-                        <Button  onClick={handleClick} style={{ backgroundColor: butBackColor, color: butColor }}>Add to Cart</Button>
+
+                        {
+                        instockFlag == 1 ? <Button onClick={handleClick} style={{ backgroundColor: butBackColor, color: butColor }}>Add to Cart</Button> : 'Stock Unavaliable!'
+                        }
+                    
                     </AddContainer>
 
                     <AddContainer>
