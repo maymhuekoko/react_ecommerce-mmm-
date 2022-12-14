@@ -1,4 +1,5 @@
-import slider1 from './slider-images/slider1.jpg'
+// import slider1 from './slider-images/slider1.mp4'
+import slider1 from './slider-images/slider1.mp4'
 import slider2 from './slider-images/slider2.jpg'
 import slider3 from './slider-images/slider3.jpg'
 
@@ -15,7 +16,7 @@ export const sliderItems = [
       id: 2,
       img: slider2,
       // img: "http://medicalworldinvpos.kwintechnologykw09.com/files/attachments/slider2_update.jpg",
-      title: "V2",
+      title: "Doctor Coat",
       desc: "New Arrival And Design. Place Your Order Now",
       bg: "fcf1ed",
     },

@@ -9,6 +9,8 @@ const Container = styled.div`
     width: 100%;
     height: auto;
     padding: 20px;
+    margin-top: 40px;
+    margin-bottom: 40px;
 `
 const FeedBox = styled.div`
     width: 100%;
@@ -25,7 +27,7 @@ const SectionTitle = styled.h2`
 
 const FacebookNewsFeed = () => {
     return (
-        <Container>
+        <Container style={{padding: '0px 60px'}}>
             <SectionTitle>Facebook Newsfeed</SectionTitle>
             <FeedBox>
             <div className="card" style={{width: '25%'}}>

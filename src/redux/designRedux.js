@@ -4,8 +4,7 @@ const designSlice = createSlice({
     name: "design",
     initialState: {
         colors: {
-            'ar1': '#FF0000', 'ar2': '#FFA500', 'ar3': '#FF0088', 'ar4': '#FF0AAA', 'ar5': '#FF0800',
-            'ar6': '#800080', 'ar7': '#b5b067', 'ar8': '#91c618', 'ar9': '#FF0000', 'ar10': '#FF8000',
+            'ar6': '#6d676d', 'ar7': '#b5b067', 'ar8': '#91c618',
             'ar16': '#e798cb', 'ar18': '#7da253', 'ar19': '#151617', 'ar20': '#495f93', 
             'ar21': '#141314', 'ar23': '#9d9fa4', 
             'ar26': '#dd7a5c',

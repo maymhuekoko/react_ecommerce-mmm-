@@ -94,7 +94,10 @@ const Button = styled.button`
 const Image = styled.img`
     width: 100vw;
     object-fit: cover;
+<<<<<<< HEAD
+=======
 
+>>>>>>> 6634d3f1ea4e78a63cad72c49921df1c632ffce2
 `;
 
 const Slider = () => {
@@ -122,12 +125,37 @@ const Slider = () => {
             {sliderItems.map((item)=>(
                 <Slide bgc={item.bg} key={item.id}>
                     <ImgContainer>
-                        <Image src={item.img}/>
+                    {
+                        item.img.split(".").pop() === "mp4" ? (
+                        <video
+                            playsInline
+                            autoPlay
+                            muted
+                            poster=""
+                            style={{width: '100%'}}
+                            >
+                            <source
+                                src={item.img}
+                                type="video/mp4"
+                            />
+                        </video>
+                        ) : (
+                            <Image src={item.img} />
+                        )
+                    }
+                    
+                    
                     </ImgContainer>
                     <InfoContainer>
-                        <Title>{item.title}</Title>
-                        <Description>{item.desc}</Description>
-                        <Button onClick={productline}>Shop Now</Button>
+                        {
+                            item.img.split(".").pop() !== "mp4" ? (
+                               <div>
+                                <Title>{item.title}</Title>
+                                <Description>{item.desc}</Description>
+                                <Button onClick={productline}>Shop Now</Button>
+                               </div>
+                            ):''
+                        }
                     </InfoContainer>
                 </Slide>    
             ))}

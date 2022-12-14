@@ -10,7 +10,8 @@ import axios from "axios";
 import ColorNav from "../components/ColorNav";
 import Footer from "../components/Footer";
 import Newsletter from "../components/Newsletter";
-import AboutImgTest from "../slider-images/slider1.jpg";
+import AboutImgTest from "../slider-images/slider2.jpg";
+import AboutImgTest1 from "../slider-images/slider3.jpg";
 import sample from "../files/sample.mp4";
 import factoryV from "../files/factory.mp4";
 import map from "../files/map.jpg";
@@ -152,7 +153,7 @@ const Image = styled.img`
   height: 100%;
   border-radius: 10px;
   object-fit: contain;
-  background-color: #fcf5f5;
+  background-color: #ffffff;
   ${mobile({ height: "30vh" })}
 `;
 const DeepBox = styled.div`
@@ -250,6 +251,7 @@ const FIbox = styled.div`
 
 const FImg = styled.img`
     width: 100%;
+    max-width: 430px;
     height: auto;
     border: 5px solid white;
     border-radius: 12px;
@@ -281,9 +283,9 @@ const About = () => {
         <ColorNav />
       </div>
       <Div style={{ marginTop: "50px" }}>
-        <Wrapper>
+        <Wrapper style={{ height: "90vh" }}>
           <FirstDiv>
-            <img src={AboutImgTest} style={{ minWidth: "100%" }} />
+            <img src={AboutImgTest1} style={{ minWidth: "100%",maxWidth: "90vh" }} />
           </FirstDiv>
           <SecondDiv
             style={{ width: "60%", backgroundColor: "rgba(50, 84, 155, 0.8)" }}
@@ -307,14 +309,14 @@ const About = () => {
             controls
             style={{
               width: "85%",
-              height: "auto",
+              height: "90vh",
               borderRadius: "10px",
               border: "2px solid #777",
             }}
           />
         </Wrapper>
 
-        <Wrapper>
+        <Wrapper style={{ height: "90vh" }}>
           <FirstDiv>
             <img src={AboutImgTest} style={{ minWidth: "100%" }} />
           </FirstDiv>
@@ -322,22 +324,13 @@ const About = () => {
             <Title>Our Vision and Mission Objective</Title>
             <Box>
               <SmallBox>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.? Lorem
-                ipsum dolor sit amet consectetur, adipisicing elit.? Lorem ipsum
-                dolor sit amet consectetur, adipisicing elit.? Lorem ipsum dolor
-                sit amet consectetur, adipisicing elit.?
+                Quality is our Virtue.
               </SmallBox>
               <SmallBox>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.? Lorem
-                ipsum dolor sit amet consectetur, adipisicing elit.? Lorem ipsum
-                dolor sit amet consectetur, adipisicing elit.? Lorem ipsum dolor
-                sit amet consectetur, adipisicing elit.?
+                Flexibility and Responsibilities.
               </SmallBox>
               <SmallBox>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.? Lorem
-                ipsum dolor sit amet consectetur, adipisicing elit.? Lorem ipsum
-                dolor sit amet consectetur, adipisicing elit.? Lorem ipsum dolor
-                sit amet consectetur, adipisicing elit.?
+                Leading in the Local Market and Exporting Abroad in Future.
               </SmallBox>
             </Box>
           </SecondDiv>
@@ -390,6 +383,29 @@ const About = () => {
                 <span style={{ display: "block", textAlign: "center" }}>
                   Vneck
                 </span>
+              </SmallImgBox>
+            </Box>
+          </DeepBox>
+        </Wrapper>
+
+        <Wrapper style={{ padding: "50px", maxHeight: "40vh" }}>
+          <DeepBox>
+            <Title style={{ color: "#212529" }}>Our History</Title>
+            <Box>
+              <SmallImgBox style={{backgroundColor: 'rgba(50, 84, 155, 0.7)', padding: '20px 0px 0px 20px', borderRadius: '7px', color: 'white'}}>
+                <b>Before 2015</b><br/>
+                1. SME Business structure and give services<br/>
+                2. Employee 30-50 OUR<br/>
+              </SmallImgBox>
+              <SmallImgBox style={{backgroundColor: 'rgba(50, 84, 155, 0.7)', padding: '20px 20px 0px 20px', borderRadius: '7px', color: 'white'}}>
+                <b>2015-2019</b><br/>
+                1. Company type and introduces own brand name called Family Hospital Uniform<br/>
+                2. Employee 100-150<br/>
+              </SmallImgBox>
+              <SmallImgBox style={{backgroundColor: 'rgba(50, 84, 155, 0.7)', padding: '20px 0px 20px 20px', borderRadius: '7px', color: 'white'}}>
+                <b>2020-2025</b><br/>
+                1. Five showrooms, Nine dealers in upper and lower Myanmar, and distributes retail and wholesales<br/>
+                2. Employee 160-200<br/>
               </SmallImgBox>
             </Box>
           </DeepBox>
@@ -473,7 +489,7 @@ const About = () => {
             controls
             style={{
               width: "85%",
-              height: "auto",
+              height: "90vh",
               borderRadius: "10px",
               border: "2px solid #777",
             }}

@@ -36,7 +36,7 @@ const Container = styled.div`
     align-items: center;
     justify-content: center;
     flex-direction: column;
-    background-color: #f5fbfd;
+    background-color: white;
     position: relative;
     overflow: hidden;
     &:hover ${Info}{
@@ -54,12 +54,12 @@ const Circle = styled.div`
 `
 const Image = styled.img`
     width: 100%;
-    max-height: 251.8px;
+    max-height: 300px;
     z-index:2;
 `
 const Icon = styled.div`
     width: 40px;
-    height: 40px;
+    height: 40px; 
     border-radius: 50%;
     background-color: white;
     display: flex;
@@ -208,14 +208,14 @@ const Item = ({ item, title }) => {
 
                     </ProductLinePromo> : ''
             }
-            {
+            {/* {
                 title == 'New Arrival' ?
                     <ProductLinePromo>
                         <Date>
                             <small>{mon}</small>
                         </Date>
                     </ProductLinePromo> : ''
-            }
+            } */}
 
         </Container>
 

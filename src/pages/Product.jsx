@@ -240,6 +240,10 @@ const Product = () => {
     const [checkFabric, setCheckFabric] = useState(false);
     const dispatch = useDispatch();
     const url= useSelector(state => state.user.url);
+    
+    // State Colors
+    const colors= useSelector(state => state.design.colors);
+    // console.log(colors);
 
     const cheColor = () => {
         setCheckColor(true);
@@ -405,12 +409,18 @@ const Product = () => {
         setFabric(val);
         let html = '';
         axios.get(url+'/api/ecommerce_order_type/'+item.item_name+'/'+gendername+'/'+val)
-                .then((response) => {  
-                    console.log(response.data.colour);
+                .then((response) => {
+
                     html += `<Option>Choose Colour</Option>`;
-                        Object.keys(response.data.colour).map(key => {
-                            html += `<Option>`+ response.data.colour[key]+`</Option>`;
-                         })  
+
+                    // Object.keys(colors).map(c => { // from design redux colors
+                    //     html += `<Option>`+ c +`</Option>`;
+                    //     console.log(c)
+                    // })
+                    
+                    Object.keys(response.data.colour).map(key => {
+                        html += `<Option>`+ response.data.colour[key]+`</Option>`;
+                    }) 
                     document.getElementById('color').innerHTML = html;
         })
     }
@@ -419,12 +429,13 @@ const Product = () => {
         setColor(val);
         let html = '';
         axios.get(url+'/api/ecommerce_order_type/'+item.item_name+'/'+gendername+'/'+fabric+'/'+val)
-                .then((response) => {  
+                .then((response) => {
                     console.log(response.data.size);
                     html += `<Option>Choose Size</Option>`;
+                        Object.keys(response.data.size)
                         Object.keys(response.data.size).map(key => {
                             html += `<Option>`+ response.data.size[key]+`</Option>`;
-                         })
+                        })
                      
                     document.getElementById('size').innerHTML = html;
         })
@@ -439,11 +450,11 @@ const Product = () => {
         }).then(res=>
         {
             // alert('success');
-            Swal.fire({
-                title:  "Success!",
-                text: "Success!.",
-                type: 'success',    
-                });
+            // Swal.fire({
+            //     title:  "Success!",
+            //     text: "Success!.",
+            //     type: 'success',    
+            //     });
             document.getElementById('price').innerHTML = res.data.data+` MMK`;
             document.getElementById('stock').innerHTML = res.data.stock+` PCS`;
             setPrice(res.data.data);

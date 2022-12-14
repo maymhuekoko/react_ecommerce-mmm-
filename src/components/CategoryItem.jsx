@@ -14,7 +14,7 @@ const Image = styled.img`
     width: 100%;
     height: 100%;
     object-fit: contain;
-    background-color: #fcf5f5;
+    background-color: #ffffff;
     ${mobile({height: "30vh"})}
 `
 const Info = styled.div`
@@ -34,18 +34,17 @@ const Title = styled.h1`
 `
 const Button = styled.button`
     border: solid 1px;
-    padding: 10px;
+    padding: 5px;
     background-color: white;
     color: gray;
     cursor: pointer;
     font-weight: 600;
-    
 `
 
 const CategoryItem = ({item}) => {
     const url= useSelector(state => state.user.url);
   return (
-    <Container>
+    <Container style={{maxHeight: '250px'}}>
         <Link to={`/products/${item.id}/${item.category_name}`}>
         <Image src={url+`/ecommerce/brands/${item.photo_path}`}/>
         {/* <Image src={`http://localhost:8000/ecommerce/brands/${item.photo_path}`}/>  */}

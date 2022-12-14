@@ -20,7 +20,7 @@ import visa from '../files/visa.jpg'
 
 const Container = styled.div`
     display: flex;
-    background-color: #eeeeee;
+    background-color: #dddddd;
     ${mobile({ flexDirection: "column" })}
 `
 const Logo = styled.h2`
@@ -30,7 +30,7 @@ const Left = styled.div`
     display: flex;
     flex-direction: column;
     padding: 20px;
-    background-color: #d4d4d4;
+    background-color: #dddddd;
 `
 const Description = styled.p`
     margin: 20px 0px;
@@ -52,7 +52,7 @@ const SocialIcon = styled.div`
 const Center = styled.div`
     flex: 1;
     padding: 20px;
-    background-color: #d4d4d4;
+    background-color: #dddddd;
     ${mobile({ display: "none" })}
 `
 const Title = styled.h3`
@@ -73,8 +73,8 @@ const ListItem = styled.li`
 const Right = styled.div`
     flex: 1;
     padding: 20px;
-    background-color: #d4d4d4;
-    ${mobile({ backgroundColor: "#fff8f8" })}
+    background-color: #dddddd;
+    ${mobile({ backgroundColor: "#dddddd" })}
 `
 const ContactItem = styled.div`
     margin-bottom: 20px;
@@ -100,7 +100,7 @@ const Logop = styled.img`
 
 const Footer = () => {
     return (
-        <Container>
+        <Container  style={{padding: '0px 60px'}}>
             <Left>
                 <Logo>Medical World</Logo>
                 <Description>
@@ -143,7 +143,7 @@ const Footer = () => {
 
                 <ContactItem>
                     <PhoneIcon style={{ marginRight: "10px" }} />
-                    +95 9 44 88 33 457 , + 95 9 44 88 33 467
+                    +95 9 44 88 33 457 , + 95 9 44 88 33 467 , 09 777005863, 09 777005864
                 </ContactItem>
 
                 <ContactItem>

@@ -6,8 +6,8 @@ import axios from 'axios';
 import { useSelector} from 'react-redux'
 
 const MainContainer = styled.div`
-display: flex;
-flex-direction: column;
+    display: flex;
+    flex-direction: column;
 `
 
 const Container = styled.div`
@@ -45,14 +45,13 @@ const Categories = () => {
   },[]);
 
   return (
-    <MainContainer>
+    <MainContainer style={{padding: '0px 60px'}}>
       <SectionTitle>Our Brands</SectionTitle>
-<Container>
-    
-        {categories.map(item=>(
-            <CategoryItem item={item} key={item.id}/>
-        ))}
-    </Container>
+      <Container>
+          {categories.map(item=>(
+              <CategoryItem item={item} key={item.id}/>
+          ))}
+      </Container>
     </MainContainer>
     
   )
