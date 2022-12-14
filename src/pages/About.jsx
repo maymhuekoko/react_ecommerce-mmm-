@@ -15,6 +15,7 @@ import AboutImgTest1 from "../slider-images/slider3.jpg";
 import sample from "../files/sample.mp4";
 import factoryV from "../files/factory.mp4";
 import map from "../files/map.jpg";
+import video from "../files/video.png";
 import { useSelector } from "react-redux";
 import aryu from "../files/p_logo/aryu_international_hospital.png";
 import asiaRoyal from "../files/p_logo/asia_royal.jpg";
@@ -257,6 +258,17 @@ const FImg = styled.img`
     border-radius: 12px;
 `;
 
+const One = styled.div`
+    width: 60%;
+    height: auto;
+    border-radius: 10px;
+`
+const Two = styled.div`
+    width: 25%;
+    height: auto;
+    padding-left: 20px; 
+`
+
 const About = () => {
   const [partners, setPartners] = useState(false);
   const url = useSelector((state) => state.user.url);
@@ -303,17 +315,30 @@ const About = () => {
           </SecondDiv>
         </Wrapper>
 
-        <Wrapper>
-          <video
-            src={sample}
-            controls
-            style={{
-              width: "85%",
-              height: "90vh",
-              borderRadius: "10px",
-              border: "2px solid #777",
-            }}
-          />
+        <Wrapper style={{display: 'flex', flexDirection: 'row'}}>
+          <One>
+            <img src={AboutImgTest} style={{ width: "100%", height: 'auto', borderRadius: '10px' }} />
+          </One>
+          <Two>
+            <div>
+              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum sapiente dolorem voluptate eos laborum! Incidunt consequatur recusandae assumenda veritatis voluptas maxime ad voluptates provident ratione totam, mollitia dolore saepe alias!</p>
+            </div>
+            <div>
+            <a href='https://www.youtube.com/'>
+              <img src={video} style={{ width: "100%", height: 'auto', borderRadius: '10px' }} />
+              {/* <video
+                src={sample}
+                controls
+                style={{
+                  width: "100%",
+                  height: "auto",
+                  borderRadius: "10px",
+                  border: "2px solid #777",
+                }}
+              />  */}
+            </a>
+            </div>
+          </Two>
         </Wrapper>
 
         <Wrapper style={{ height: "90vh" }}>
