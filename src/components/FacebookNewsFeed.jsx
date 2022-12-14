@@ -27,7 +27,7 @@ const SectionTitle = styled.h2`
 
 const FacebookNewsFeed = () => {
     return (
-        <Container style={{padding: '0px 60px'}}>
+        <Container>
             <SectionTitle>Facebook Newsfeed</SectionTitle>
             <FeedBox>
             <div className="card" style={{width: '25%'}}>

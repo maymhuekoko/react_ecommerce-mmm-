@@ -100,7 +100,7 @@ const Logop = styled.img`
 
 const Footer = () => {
     return (
-        <Container  style={{padding: '0px 60px'}}>
+        <Container  style={{padding: '0px 20px'}}>
             <Left>
                 <Logo>Medical World</Logo>
                 <Description>

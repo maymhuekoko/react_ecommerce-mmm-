@@ -7,10 +7,11 @@ import Item from './Item';
 import { useSelector} from 'react-redux'
 
 const MainContainer = styled.div`
-  max-width: 97%;
+  align-item: center;
+  justify-content: center;
+  max-width: 110%;
   display: flex;
   flex-direction: column;
-  margin-left: 20px;
   margin-top: 30px;
 `
 
@@ -24,6 +25,7 @@ const Container = styled.div`
 const SectionTitle = styled.h2`
     font-weight: bold;
     font-size:30px;
+    margin-top: 20px;
     margin-left: 20px;
     color: #2b57b8;
     ${mobile({ fontSize: "14px" })}
@@ -46,8 +48,8 @@ const HomeItems = ({ title, url }) => {
   },[]);
 
   return ( 
-    <div style={{padding: '0px 60px'}}>
-      <MainContainer style={{boxShadow: '1px 4px 10px 1px rgba(0, 0, 0, 0.2)', padding: '20px'}}>
+    <div>
+      <MainContainer style={{boxShadow: '1px 4px 10px 1px rgba(0, 0, 0, 0.2)'}}>
         <SectionTitle>{title}</SectionTitle>
         <Container>
           {items.map(item => (
