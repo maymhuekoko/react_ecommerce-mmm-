@@ -113,10 +113,6 @@ const Slider = () => {
     }
 
   return (
-<<<<<<< HEAD
-
-=======
->>>>>>> 006feff150765e30031b447d2425d0cb7685cdc2
     <Container>
         <Arrow direction="left" onClick={()=> handleClick("left")}>
             <ArrowLeftOutlinedIcon/>
