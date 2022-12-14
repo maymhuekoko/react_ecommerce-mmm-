@@ -89,5 +89,5 @@ const designSlice = createSlice({
     }
 })
 
-export const { addOrder, removeOrder,addAttach, removeAttach, resetOrder, editOrder,editAttach, showSearch,resetSearch } = designSlice.actions
+export const { addOrder, removeOrder,addAttach, removeAttach, resetOrder,resetAttach, editOrder,editAttach, showSearch,resetSearch } = designSlice.actions
 export default designSlice.reducer;
