@@ -7,7 +7,7 @@ import { Add,Remove, SettingsEthernet } from '@mui/icons-material'
 import axios from 'axios'
 import { useLocation ,useNavigate} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { addOrder,removeOrder,resetOrder,editOrder } from "../redux/designRedux"
+import { addOrder,removeOrder,addAttach,removeAttach,resetOrder,editOrder,editAttach } from "../redux/designRedux"
 import Swal from 'sweetalert2'
 import BankInfoDialog from './BankInfoDialog'
 import PaidInfoDialog from './PaidInfoDialog'
@@ -137,6 +137,15 @@ const Left = styled.div`
     align-items: center;
     margin-top: 10px;
 `
+
+const Center = styled.div`
+    flex: 1;
+    display: flex;
+    align-items: center;
+    text-align: center;
+    margin-top: 10px
+`
+
 const Right = styled.div`
     flex: 1;
     display: flex;
@@ -153,13 +162,20 @@ const Order = () => {
     let [count,setCount] = useState(1);
     const [paymentchannel, setPaymentChannel] = useState('');
     const [paymenttype, setPaymentType] = useState('');
+    const [check,setCheck] = useState(false);
+    const [description, setDescription] = useState('');
+    const [file, setFile] = useState('');
+    const [files, setFiles] = useState('');
     const dispatch = useDispatch();
     const pre = useSelector(state=>state.design.orders);
+    const preattach = useSelector(state=>state.design.attachs);
     const photo = useSelector(state=>state.design.paymentscreenshot);
     console.log( useSelector(state=>state.design.paymentscreenshot));
     const username = useSelector(state => state.user);
     const edittestname = useSelector(state=>state.design.edit_testname);
     const edittestqty = useSelector(state=>state.design.edit_testqty);
+    const editdescription = useSelector(state=>state.design.edit_description);
+    const editfile = useSelector(state=>state.design.edit_file);
     const edittestprice = useSelector(state=>state.design.edit_testprice);
     const navigate = useNavigate();
     const current = new Date();
@@ -351,8 +367,33 @@ const Order = () => {
         document.getElementById('r3').checked = false;
       }
     }
+
+    const attach = () =>{
+        if(document.getElementById('qty1').value == ''){
+            Swal.fire({
+                title:  "Warning!",
+                text: "Please Enter Quantity.",
+                type: 'error',    
+                });
+        }else{
+        let testqty = document.getElementById('qty1').value;
+        let testprice = document.getElementById('price1').value;
+        setCount(++count);
+        let orderid  = count;
+        dispatch(addAttach({orderid,file,files,description,testqty,testprice}));
+        document.getElementById('qty1').value = '';
+        document.getElementById('price1').value = '';
+        document.getElementById('description').value = '';
+        document.getElementById('file').value = '';
+      }
+    }
+
     const remove = (id) => {
     dispatch(removeOrder({id}));  
+}
+
+const removeattach = (id) => {
+    dispatch(removeAttach({id}));  
 }
 
 const changeprice = ()=>{
@@ -413,12 +454,21 @@ const changeprice = ()=>{
 
 }
 
-const savepreorder = () =>{
+const savepreorder = (val) =>{
     
     let tot_qty = 0;
-    pre.map((el) => {
-        tot_qty += parseInt(el.testqty);
-    })
+    if(val == 1){
+        pre.map((el) => {
+            tot_qty += parseInt(el.testqty);
+        })
+        storepreorder();
+    }
+    if(val == 2){
+        preattach.map((el) => {
+            tot_qty += parseInt(el.testqty);
+        })
+        storeattach();
+    }
     console.log(tot_qty);
     if(username.name == ''){
         Swal.fire({
@@ -440,7 +490,9 @@ const savepreorder = () =>{
     phone: username.phone,
     address: username.address,
     email: username.email,
-    preorders: pre
+    preorders: pre,
+    attachs: preattach,
+    type: val,
     }).then(response=>
     {
       console.log(response.data['message']);
@@ -455,26 +507,48 @@ const savepreorder = () =>{
     ).catch(err =>{
         console.log('error');
     });
-    // dispatch(resetPhoto())
-    const res = axios.post(url+'/api/ecommerce_preorder_store', {
+     
+    }
+
+}   
+
+const storepreorder = () => {
+    let formdata={
         id: username.id,
         name: username.name,
         phone: username.phone,
         address: username.address,
         orders: pre,
-        // photo: photo,
-      }).then(function (response) {
-        alert('success store');
-        dispatch(resetOrder());
-        // dispatch(resetPhoto());
-        navigate('/order_list');
-      }).catch(function (error) {
-        alert('fail store');
-      })
+      }
+    
+      const res = axios.post(url+'/api/ecommerce_preorder_store', formdata).then(function (response) {
+        //   alert('success store');
+          dispatch(resetOrder());
+          navigate('/order_list');
+        }).catch(function (error) {
+          alert('fail store');
+        })
+}
 
+const storeattach = () => {
+    const data = JSON.stringify({attachs: preattach,id: username.id,
+        name: username.name,
+        phone: username.phone,
+        address: username.address,})
+    const config = {
+        headers: {'Content-Type': 'application/json'}
+      
     }
-
-}   
+    
+    const res = axios.post(url+'/api/ecommerce_attach_store', data, config)
+    .then(function (response) {
+          alert('success store');
+          // dispatch(resetOrder());
+          // navigate('/order_list');
+        }).catch(function (error) {
+          alert('fail store');
+        })
+}
 
 const edit = (id) => {
     dispatch(editOrder({id}));
@@ -485,10 +559,21 @@ const edit = (id) => {
     document.getElementById('col_name').innerHTML = fullname[3];
     document.getElementById('siz_name').innerHTML = fullname[4];
     document.getElementById('qty').value = edittestqty;
-    document.getElementById('price').value = edittestprice;
-   
+    document.getElementById('price').value = edittestprice; 
 }
 
+const editattach = (id) => {
+    dispatch(editAttach({id}));
+    document.getElementById('qty1').value = edittestqty;
+    document.getElementById('description').value = editdescription;
+    document.getElementById('price1').value = edittestprice; 
+    document.getElementById('file').value = editfile.files[0];
+}
+
+const changefile = (f) => {
+    setFile(URL.createObjectURL(f));
+    setFiles(f);
+}
     
   return (
     <div>
@@ -564,11 +649,86 @@ const edit = (id) => {
                     <Right> <Text1>Price Range : 18000 - 20000</Text1></Right>
                 </MainText>
                 }
-                    
-                    
-
+               
                     <Text>Choose Items that you want!</Text>
-                        
+                    <Text><Input  type="checkbox" name="userdata" style={{marginRight:'10px'}} onClick={()=>setCheck(!check)}></Input>Others</Text>
+                
+                {
+                    check ? 
+                    <>
+                     <table className="table mt-4">
+                    <thead>
+                        <tr className='text-center'>
+                        <th scope="col">Item</th>
+                        <th scope="col">Description</th>
+                        <th scope="col">Quantity</th>
+                        <th scope="col">Price</th>
+                        <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody id="addrow">
+              
+                <tr className='text-center' id="defaultrow">
+                 <td>
+                    <Input type='file' id={"file"} onChange={(e)=>changefile(e.target.files[0])}></Input>
+                 </td>
+                 <td>
+                   <Input type='text' id={"description"} onChange={(e)=>setDescription(e.target.value)}></Input>
+                 </td>
+                 <td><Qty  id={"qty1"} placeholder="0"/></td>
+                 <td><Qty  id={"price1"} placeholder="0"/></td>
+                 <td><Delete onClick={attach}>Add</Delete></td>
+                 <td></td>
+                 </tr>
+                 
+                                 
+                    </tbody>
+                    </table>
+                     <Text>Your Preorder Items</Text>
+                <div className='mt-4 mb-5' id="preorders">
+                    <div className='row mt-2 text-center'>
+                        <div className='col-md-3'>
+                            <span>Item</span>
+                        </div>
+                        <div className='col-md-2'>
+                            <span>Quantity</span>
+                        </div>
+                        <div className='col-md-2'>
+                            <span>Price</span>
+                        </div>
+                        <div className='col-md-2'>
+                            <span>Total</span>
+                        </div>
+                        <div className='col-md-3'>
+                            <span>Action</span>
+                        </div>
+                    </div>
+                    {preattach.map((t)=>(
+                        <div className='row mt-2 text-center'>
+                        <div className='col-md-3'>
+                        <img src={t.file} width="140px" height='auto'/>
+                        </div>
+                        <div className='col-md-2 mt-5'>
+                            <span>{t.testqty}</span>
+                        </div>
+                        <div className='col-md-2 mt-5'>
+                            <span>{t.testprice}</span>
+                        </div>
+                        <div className='col-md-2 mt-5'>
+                            <span>{t.testqty * t.testprice}</span>
+                        </div>
+                        <div className='col-md-3 mt-5'>
+                            <span><Cancel onClick={() => removeattach(t.orderid)}>Cancel</Cancel></span>&nbsp;&nbsp;
+                            <span><Edit onClick={() => editattach(t.orderid)}>Edit</Edit></span>
+                        </div>
+                    </div>
+                    ))}
+                </div>
+                <Save onClick={()=>savepreorder(2)}>Make Order</Save>
+            
+                </>
+                    : 
+                    <>
                     <table className="table mt-4">
                     <thead>
                         <tr className='text-center'>
@@ -598,14 +758,7 @@ const edit = (id) => {
                     <Lable className='px-2'>Female</Lable>
                     <Input  type="radio" name="genderdata" id='r3' onClick={()=>choosegen(3)}></Input>
                     <Lable className='px-2'>Unisex</Lable><br></br><br></br>
-                   
-                 {/* <Select onChange={specification} id={'specs'}>
-                     <Option value="0" hidden>Specs</Option>
-                     <Option value="4" id="gen">Gender</Option>
-                     <Option value="1" id="fab" disabled>Fabric</Option>
-                     <Option value="2" id="col" disabled>Color</Option>
-                     <Option value="3" id="siz" disabled>Size</Option> 
-                 </Select>&nbsp;&nbsp;&nbsp;*/}
+                
 
                     <Lable className='px-2'>Fabric</Lable>
                     <Select id={'types'}> 
@@ -673,8 +826,9 @@ const edit = (id) => {
                     </div>
                     ))}
                 </div>
-
-                <Save onClick={savepreorder}>Make Order</Save>
+                <Save onClick={()=>savepreorder(1)}>Make Order</Save>
+                </>
+                }
             
                 </Div>
             </Wrapper>

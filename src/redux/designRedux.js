@@ -23,9 +23,12 @@ const designSlice = createSlice({
             'ar101': '#78eee0', 'ar106': '#544444',
         },
         orders: [],
+        attachs: [],
         edit_testname: '',
         edit_testqty: '',
         edit_testprice: '',
+        edit_file: '',
+        edit_description: '',
         homesearch: false,
     },
     reducers: {
@@ -52,6 +55,30 @@ const designSlice = createSlice({
         resetOrder: (state) => {
             state.orders.length = 0;
         },
+        addAttach: (state, action) => {
+            state.attachs.push(action.payload);
+        },
+        removeAttach: (state, action) => {
+            for (var i = 0; i < state.attachs.length; i++) {
+                if (state.attachs[i].orderid === action.payload.id) {
+                    state.attachs.splice(i, 1);
+                }
+            }
+        },
+        editAttach: (state,action) => {
+            for (var i = 0; i < state.attachs.length; i++) {
+                if (state.attachs[i].orderid === action.payload.id) {
+                    state.edit_file = state.attachs[i].file;
+                    state.edit_description = state.attachs[i].description;
+                    state.edit_testqty = state.attachs[i].testqty;
+                    state.edit_testprice = state.attachs[i].testprice;
+                    state.attachs.splice(i, 1);
+                }
+            }
+        },
+        resetAttach: (state) => {
+            state.attachs.length = 0;
+        },
         showSearch: (state) => {
             state.homesearch = true;
         },
@@ -62,5 +89,5 @@ const designSlice = createSlice({
     }
 })
 
-export const { addOrder, removeOrder, resetOrder, editOrder,showSearch,resetSearch } = designSlice.actions
+export const { addOrder, removeOrder,addAttach, removeAttach, resetOrder, editOrder,editAttach, showSearch,resetSearch } = designSlice.actions
 export default designSlice.reducer;
