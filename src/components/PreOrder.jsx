@@ -7,7 +7,7 @@ import { Add,Remove, SettingsEthernet } from '@mui/icons-material'
 import axios from 'axios'
 import { useLocation ,useNavigate} from 'react-router-dom'
 import { useSelector, useDispatch } from 'react-redux'
-import { addOrder,removeOrder,addAttach,removeAttach,resetOrder,editOrder,editAttach } from "../redux/designRedux"
+import { addOrder,removeOrder,addAttach,removeAttach,resetOrder,resetAttach,editOrder,editAttach } from "../redux/designRedux"
 import Swal from 'sweetalert2'
 import BankInfoDialog from './BankInfoDialog'
 import PaidInfoDialog from './PaidInfoDialog'
@@ -350,7 +350,7 @@ const Order = () => {
         let testprice = document.getElementById('price').value;
         setCount(++count);
         let orderid  = count;
-        alert(testname,testqty);
+        // alert(testname,testqty);
         dispatch(addOrder({orderid,testname,testqty,testprice}));
         document.getElementById('item_name').innerHTML = design_name;
         document.getElementById('gen_name').innerHTML = '';
@@ -443,7 +443,7 @@ const changeprice = ()=>{
            unit: counting       
     }).then(res=>
     {
-        alert('success');
+        // alert('success');
         document.getElementById('price').value = res.data.data;
     }
     ).catch(err =>{
@@ -461,26 +461,36 @@ const savepreorder = (val) =>{
         pre.map((el) => {
             tot_qty += parseInt(el.testqty);
         })
+        if(tot_qty < 30 ){
+            Swal.fire({
+                title:  'Warning!',
+                text: "Minimun Order Quantity must be 30.",
+                type: 'success',    
+              });
+        }else{
         storepreorder();
+        }
     }
     if(val == 2){
         preattach.map((el) => {
             tot_qty += parseInt(el.testqty);
         })
-        storeattach();
+        if(tot_qty < 30 ){
+            Swal.fire({
+                title:  'Warning!',
+                text: "Minimun Order Quantity must be 30.",
+                type: 'success',    
+              });
+        }else{
+            storeattach();
+        }
+        
     }
     console.log(tot_qty);
     if(username.name == ''){
         Swal.fire({
             title:  'Warning!',
             text: "You need to make register or sign in first.",
-            type: 'success',    
-          });
-    }
-    else if(tot_qty < 30 ){
-        Swal.fire({
-            title:  'Warning!',
-            text: "Minimun Order Quantity must be 30.",
             type: 'success',    
           });
     }else{
@@ -507,8 +517,7 @@ const savepreorder = (val) =>{
     ).catch(err =>{
         console.log('error');
     });
-     
-    }
+}
 
 }   
 
@@ -531,23 +540,28 @@ const storepreorder = () => {
 }
 
 const storeattach = () => {
-    const data = JSON.stringify({attachs: preattach,id: username.id,
+    let totqty = 0; let totamt = 0;
+    preattach.map((el)=>{
+        totqty += el.testqty;
+        totamt += el.testprice;
+        const data = {attachs: el.files,qty: el.testqty,price: el.testprice,totqty: totqty,totamount:totamt,
+        id: username.id,
         name: username.name,
         phone: username.phone,
-        address: username.address,})
-    const config = {
-        headers: {'Content-Type': 'application/json'}
-      
-    }
-    
-    const res = axios.post(url+'/api/ecommerce_attach_store', data, config)
-    .then(function (response) {
-          alert('success store');
-          // dispatch(resetOrder());
-          // navigate('/order_list');
+        address: username.address}
+        const config = {
+            headers: {"Content-Type": "multipart/form-data"}
+        
+        }
+         const res = axios.post(url+'/api/ecommerce_attach_store', data, config)
+       .then(function (response) {
+        //   alert('success store');
+          dispatch(resetAttach());
+          navigate('/order_list');
         }).catch(function (error) {
           alert('fail store');
         })
+    })
 }
 
 const edit = (id) => {
@@ -567,7 +581,7 @@ const editattach = (id) => {
     document.getElementById('qty1').value = edittestqty;
     document.getElementById('description').value = editdescription;
     document.getElementById('price1').value = edittestprice; 
-    document.getElementById('file').value = editfile.files[0];
+    document.getElementById('file').src = editfile;
 }
 
 const changefile = (f) => {
