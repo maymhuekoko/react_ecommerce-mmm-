@@ -259,12 +259,12 @@ const FImg = styled.img`
 `;
 
 const One = styled.div`
-    width: 60%;
+    width: 50%;
     height: auto;
     border-radius: 10px;
 `
 const Two = styled.div`
-    width: 25%;
+    width: 35%;
     height: auto;
     padding-left: 20px; 
 `
@@ -324,9 +324,7 @@ const About = () => {
               <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum sapiente dolorem voluptate eos laborum! Incidunt consequatur recusandae assumenda veritatis voluptas maxime ad voluptates provident ratione totam, mollitia dolore saepe alias!</p>
             </div>
             <div>
-            <a href='https://www.youtube.com/'>
-              <img src={video} style={{ width: "100%", height: 'auto', borderRadius: '10px' }} />
-              {/* <video
+              <video
                 src={sample}
                 controls
                 style={{
@@ -335,8 +333,11 @@ const About = () => {
                   borderRadius: "10px",
                   border: "2px solid #777",
                 }}
-              />  */}
-            </a>
+              /> 
+              {/* <a href='https://www.youtube.com/'>
+                <img src={video} style={{ width: "100%", height: 'auto', borderRadius: '10px' }} />
+                
+              </a> */}
             </div>
           </Two>
         </Wrapper>
