@@ -563,7 +563,7 @@ const preattachstore = (id) => {
     let totqty = 0; let totamt = 0; 
     preattach.map((el)=>{
         totqty += parseInt(el.testqty);
-        totamt += parseInt(el.testprice);
+        totamt += parseInt(el.testprice)*parseInt(el.testqty);
         const data = {attachs: el.files,qty: el.testqty,description: el.description,price: el.testprice,totqty: totqty,totamount:totamt,
         id: id,
        }
