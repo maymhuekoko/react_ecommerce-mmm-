@@ -540,15 +540,25 @@ const storepreorder = () => {
 }
 
 const storeattach = () => {
-    let totqty = 0; let totamt = 0;
-    preattach.map((el)=>{
-        totqty += el.testqty;
-        totamt += el.testprice;
-        const data = {attachs: el.files,qty: el.testqty,price: el.testprice,totqty: totqty,totamount:totamt,
+    let totqty = 0; let totamt = 0; let eid;
+    let formdata={
         id: username.id,
         name: username.name,
         phone: username.phone,
-        address: username.address}
+        address: username.address,
+      }
+    const res = axios.post(url+'/api/ecommerce_attachorder_store', formdata).then(function (response) {
+        //   alert('success store');
+        eid = response.data;
+        }).catch(function (error) {
+          alert('fail store');
+        })
+    preattach.map((el)=>{
+        totqty += parseInt(el.testqty);
+        totamt += parseInt(el.testprice);
+        const data = {attachs: el.files,qty: el.testqty,description: el.description,price: el.testprice,totqty: totqty,totamount:totamt,
+        id: eid,
+       }
         const config = {
             headers: {"Content-Type": "multipart/form-data"}
         

@@ -118,6 +118,7 @@ const OrderList = () => {
 
     const [ inputs, setInputs ] = useState({});
     const [ oinputs, setOInputs ] = useState([]);
+    const [ attachs, setAttachs ] = useState([]);
     const [ecounting, setEcounting] = useState([]);
     const [color, setColor] = useState([]);
     const [size, setSize] = useState([]);
@@ -147,6 +148,7 @@ const OrderList = () => {
                 delivery_fee: res.data.orders.delivery_fee,
             });
             setOInputs(res.data.counting_units);
+            setAttachs(res.data.attachs);
             setEcounting(res.data.units);
             setColor(res.data.color);
             setSize(res.data.size);
@@ -189,7 +191,7 @@ const OrderList = () => {
                         <P>Total Amount : </P>
                         <P>Payment Type : </P>
                         <P>Payment Channel : </P>
-                        <P>Order Status : </P>
+                        <P>Order Status :</P>
                     </Left>
                     <Right>
                         <P> { inputs.order_code } </P>
@@ -201,7 +203,27 @@ const OrderList = () => {
                     </Right>
                 </RBox>
             </BigBox>
-            <Table>
+            {
+                attachs.length > 0 ? 
+                <Table>
+                <Tr>
+                    <Th>No</Th>
+                    <Th>Item Name</Th>
+                    <Th>Qty</Th>
+                    <Th>Price</Th>
+                    <Th>Description</Th>
+                </Tr>
+                {attachs.map((attach, index) => (
+                    <Tr key={attach.id}>
+                    <Td>{++index}</Td>
+                    <Td><img src={url+`/preorder/${attach.item_photo}`} alt="" height='auto' width='170px'/></Td>
+                    <Td>{attach.quantity}</Td>
+                    <Td>{attach.price}</Td>
+                    <Td>{attach.description}</Td>
+                </Tr> 
+                ))} 
+            </Table>  :
+                <Table>
                 <Tr>
                     <Th>No</Th>
                     <Th>Item Name</Th>
@@ -228,6 +250,8 @@ const OrderList = () => {
                 
                 
             </Table> 
+            }
+           
         </Wrapper>
         </Div>
         <div>
