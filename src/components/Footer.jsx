@@ -104,8 +104,10 @@ const Footer = () => {
             <Left>
                 <Logo>Medical World</Logo>
                 <Description>
-                    Lorem ipsum, dolor sit amet consectetur adipisicing elit. Impedit placeat, earum consequatur, molestias cupiditate laboriosam nisi eligendi voluptatum quod totam soluta dolor obcaecati officia sunt repudiandae eaque odio magni architecto.
-                </Description>
+                Medical World Co., Ltd, founded in 2015, is a manufacturing and distribution company of uniforms 
+                and accessories. Over the past 7 years, Medical World Co., Ltd, has been providing uniforms and 
+                accessories for Government Departments and Private Business Sectors.
+            </Description>
                 <SocialContainer>
                     <SocialIcon bgc="3B5999">
                         <a href='https://www.facebook.com/FamilyHospitalUniform' style={{ color: 'white' }}><FacebookIcon /></a>
