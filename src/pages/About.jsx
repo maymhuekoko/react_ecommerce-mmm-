@@ -10,8 +10,8 @@ import axios from "axios";
 import ColorNav from "../components/ColorNav";
 import Footer from "../components/Footer";
 import Newsletter from "../components/Newsletter";
-import AboutImgTest from "../slider-images/slider2.jpg";
-import AboutImgTest1 from "../slider-images/slider3.jpg";
+import profile from "../files/profile.jpg";
+import greengirl from "../slider-images/slider3.jpg";
 import sample from "../files/sample.mp4";
 import factoryV from "../files/factory.mp4";
 import map from "../files/map.jpg";
@@ -104,7 +104,7 @@ const Description = styled.div`
   ${mobile({ textAlign: "center" })}
 `;
 const FirstDiv = styled.div`
-  width: 85%;
+  width: 90%;
   border-radius: 20px;
   overflow: hidden;
   background-image: ;
@@ -129,9 +129,9 @@ const Box = styled.div`
 `;
 const SmallBox = styled.div`
   width: 45%;
-  background-color: rgba(50, 84, 155, 0.7);
+  background-color: rgba(255, 255, 255, 0.7);
   padding: 20px;
-  color: white;
+  color: #32549b;
   text-align: center;
   margin: 10px;
   border-radius: 10px;
@@ -159,6 +159,7 @@ const Image = styled.img`
 `;
 const DeepBox = styled.div`
   width: 100%;
+  min-width: 900px;
 `;
 const FPBox = styled.div`
   display: flex;
@@ -244,7 +245,7 @@ const ShowP = styled.span`
 `;
 
 const FIbox = styled.div`
-  width: 50%;
+  width: 80%;
   display: flex;
   align-item: center;
   flex-direction: row;
@@ -259,14 +260,16 @@ const FImg = styled.img`
 `;
 
 const One = styled.div`
-    width: 50%;
+    width: 65%;
     height: auto;
-    border-radius: 10px;
+    border-radius: 20px;
 `
 const Two = styled.div`
     width: 35%;
     height: auto;
-    padding-left: 20px; 
+    display: flex;
+    flex-direction: column; 
+    padding-left: 20px;
 `
 
 const About = () => {
@@ -297,33 +300,33 @@ const About = () => {
       <Div style={{ marginTop: "50px" }}>
         <Wrapper style={{ height: "90vh" }}>
           <FirstDiv>
-            <img src={AboutImgTest1} style={{ minWidth: "100%",maxWidth: "90vh" }} />
+            <img src={profile} style={{ minWidth: "100%",maxWidth: "90vh" }} />
           </FirstDiv>
           <SecondDiv
             style={{ width: "60%", backgroundColor: "rgba(50, 84, 155, 0.8)" }}
           >
             <Title>Company Profile</Title>
             <Description>
-              Lorem ipsum dolor sit, amet consectetur adipisicing elit.
-              Molestiae autem, ducimus labore quos earum totam! Excepturi sed
-              recusandae a! Sunt culpa ullam architecto. Autem eveniet
-              praesentium beatae hic, optio suscipit. Lorem ipsum dolor sit amet
-              consectetur adipisicing elit. Quam quas error inventore reiciendis
-              perspiciatis facere impedit, veniam, placeat eaque ad sit dolorem
-              aspernatur molestias est odio. Qui perferendis repellendus ipsum!
+            Myanmar Uniform Co., Ltd, founded in 2015, is a manufacturing and distribution company of uniforms 
+            and accessories. Over the past 7 years, Myanmar Uniform Co., Ltd, has been providing uniforms and 
+            accessories for Government Departments and Private Business Sectors. One of our best services, consultation service regarding uniform designs is offered. Customizable 
+            service for business logos imprinted on the uniform is also offered using modernized machines.
             </Description>
           </SecondDiv>
         </Wrapper>
 
-        <Wrapper style={{display: 'flex', flexDirection: 'row'}}>
+        <Wrapper style={{display: 'flex', flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'flex-end', width: '100%', padding: '0px 5%'}}>
           <One>
-            <img src={AboutImgTest} style={{ width: "100%", height: 'auto', borderRadius: '10px' }} />
+            <img src={greengirl} style={{ width: "100%", height: 'auto', borderRadius: '20px' }} />
           </One>
           <Two>
             <div>
-              <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Cum sapiente dolorem voluptate eos laborum! Incidunt consequatur recusandae assumenda veritatis voluptas maxime ad voluptates provident ratione totam, mollitia dolore saepe alias!</p>
+              <p style={{fontSize: '18px', fontWeight: 'bold', color: '#32549b'}}>
+              Accuracy in stitches and spacing are guaranteed in clothing designs. As customers are the company's priority, 
+              only the best and finest services are offered to make the customers satisfied.
+              </p>
             </div>
-            <div>
+            <div style={{marginTop: '30px'}}>
               <video
                 src={sample}
                 controls
@@ -342,30 +345,29 @@ const About = () => {
           </Two>
         </Wrapper>
 
-        <Wrapper style={{ height: "90vh" }}>
-          <FirstDiv>
-            <img src={AboutImgTest} style={{ minWidth: "100%" }} />
+        <Wrapper style={{ height: "80vh" }}>
+          <Title style={{color: '#32549b'}}>Our Vision and Mission Objective</Title>
+          <FirstDiv style={{ width: "100%", display: 'flex', alignItems: 'center', justifyContent: 'center'}} >
+            <img src={profile} style={{ width: "50%", borderRadius: '10px'}}/>
           </FirstDiv>
           <SecondDiv style={{ width: "70%" }}>
-            <Title>Our Vision and Mission Objective</Title>
             <Box>
-              <SmallBox>
-                Quality is our Virtue.
+              <SmallBox style={{maxWidth: '300px'}}>
+                <p style={{color: '#32549b', fontSize: '20px', fontWeight: 'bold'}}>Quality is our Virtue.</p>
               </SmallBox>
-              <SmallBox>
-                Flexibility and Responsibilities.
+              <SmallBox style={{maxWidth: '300px'}}>
+                <p style={{color: '#32549b', fontSize: '20px', fontWeight: 'bold'}}>Flexibility and Responsibilities.</p>
               </SmallBox>
-              <SmallBox>
-                Leading in the Local Market and Exporting Abroad in Future.
+              <SmallBox style={{maxWidth: '400px'}}>
+                <p style={{color: '#32549b', fontSize: '20px', fontWeight: 'bold'}}>Leading in the Local Market and Exporting Abroad in Future.</p>
               </SmallBox>
             </Box>
           </SecondDiv>
         </Wrapper>
 
-        <Wrapper style={{ padding: "50px" }}>
-          {/* <img src={AboutImgTest} style={{ minWidth: '100%' }} /> */}
+        <Wrapper style={{ padding: "50px 0px" }}>
           <DeepBox>
-            <Title style={{ color: "#212529" }}>Our Brands</Title>
+            <Title style={{ color: "#32549b" }}>Our Brands</Title>
             <Box>
               <SmallImgBox>
                 <Image src={url + `/ecommerce/brands/branded.png`} />
@@ -382,25 +384,25 @@ const About = () => {
             </Box>
           </DeepBox>
           <DeepBox>
-            <Title style={{ color: "#212529" }}>Our Products</Title>
+            <Title style={{ color: "#32549b" }}>Our Products</Title>
             <Box>
               <SmallImgBox style={{ paddingBottom: "30px" }}>
                 <Image
                   src={url + `/ecommerce/items/cute_front.png`}
                 />
-                <span style={{ display: "block", textAlign: "center" }}>
+                <span style={{ display: "block", textAlign: "center", fontWeight: 'bold' }}>
                   Cute
                 </span>
               </SmallImgBox>
               <SmallImgBox style={{ paddingBottom: "30px" }}>
                 <Image src={url + `/ecommerce/items/dutycoat_front.png`} />
-                <span style={{ display: "block", textAlign: "center" }}>
+                <span style={{ display: "block", textAlign: "center", fontWeight: 'bold' }}>
                   Duty Coat
                 </span>
               </SmallImgBox>
               <SmallImgBox style={{ paddingBottom: "30px" }}>
                 <Image src={url + `/ecommerce/items/smile_front.png`} />
-                <span style={{ display: "block", textAlign: "center" }}>
+                <span style={{ display: "block", textAlign: "center", fontWeight: 'bold' }}>
                   Smile
                 </span>
               </SmallImgBox>
@@ -414,54 +416,54 @@ const About = () => {
           </DeepBox>
         </Wrapper>
 
-        <Wrapper style={{ padding: "50px", maxHeight: "40vh" }}>
+        <Wrapper style={{ padding: "0px", maxHeight: "40vh" }}>
           <DeepBox>
-            <Title style={{ color: "#212529" }}>Our History</Title>
+            <Title style={{ color: "#32549b" }}>Our History</Title>
             <Box>
-              <SmallImgBox style={{backgroundColor: 'rgba(50, 84, 155, 0.7)', padding: '20px 0px 0px 20px', borderRadius: '7px', color: 'white'}}>
-                <b>Before 2015</b><br/>
+              <SmallImgBox style={{backgroundColor: 'rgba(50, 84, 155, 0.7)', padding: '20px', minWidth: '350px', borderRadius: '7px', color: 'white'}}>
+                <p style={{fontSize: '18px'}}><b>Before 2015</b><br/>
                 1. SME Business structure and give services<br/>
-                2. Employee 30-50 OUR<br/>
+                2. Employee 30-50 OUR<br/></p>
               </SmallImgBox>
-              <SmallImgBox style={{backgroundColor: 'rgba(50, 84, 155, 0.7)', padding: '20px 20px 0px 20px', borderRadius: '7px', color: 'white'}}>
-                <b>2015-2019</b><br/>
+              <SmallImgBox style={{backgroundColor: 'rgba(50, 84, 155, 0.7)', padding: '20px', minWidth: '350px', borderRadius: '7px', color: 'white'}}>
+                <p style={{fontSize: '18px'}}><b>2015-2019</b><br/>
                 1. Company type and introduces own brand name called Family Hospital Uniform<br/>
-                2. Employee 100-150<br/>
+                2. Employee 100-150<br/></p>
               </SmallImgBox>
-              <SmallImgBox style={{backgroundColor: 'rgba(50, 84, 155, 0.7)', padding: '20px 0px 20px 20px', borderRadius: '7px', color: 'white'}}>
-                <b>2020-2025</b><br/>
+              <SmallImgBox style={{backgroundColor: 'rgba(50, 84, 155, 0.7)', padding: '20px', minWidth: '350px', borderRadius: '7px', color: 'white'}}>
+                <p style={{fontSize: '18px'}}><b>2020-2025</b><br/>
                 1. Five showrooms, Nine dealers in upper and lower Myanmar, and distributes retail and wholesales<br/>
-                2. Employee 160-200<br/>
+                2. Employee 160-200<br/></p>
               </SmallImgBox>
             </Box>
           </DeepBox>
         </Wrapper>
 
-        <Wrapper>
-          <Title style={{ color: "#212529" }}>Our Factory and Production</Title>
+        <Wrapper style={{marginTop: '50px'}}>
+          <Title style={{ color: "#32549b" }}>Our Factory and Production</Title>
           <FPBox>
-            <Left>
+            <Left style={{minWidth: '350px'}}>
               <SmallImgBox>
-                <Image src={pho1} />
+                <Image src={pho1} style={{minWidth: '300px'}}/>
               </SmallImgBox>
               <SmallImgBox style={{ marginTop: "10px" }}>
-                <Image src={pho2} />
+                <Image src={pho2} style={{minWidth: '300px'}}/>
               </SmallImgBox>
             </Left>
             <Center>
               <SmallBox style={{ width: "100%", height: "180px" }}>
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit.? Lorem
-                ipsum dolor sit amet consectetur, adipisicing elit.? Lorem ipsum
-                dolor sit amet consectetur, adipisicing elit.? Lorem ipsum dolor
-                sit amet consectetur, adipisicing elit.?
+                <p style={{fontSize: '20px', fontWeight: 'bold'}}>
+                Imported highly qualified raw materials are used to manufacture products and manufacturing is done locally.
+                Matching accessories for uniforms are manufactured locally and distributed to both local and oversea market.
+                </p>
               </SmallBox>
             </Center>
-            <Right>
+            <Right style={{minWidth: '350px'}}>
               <SmallImgBox>
-                <Image src={pho3} />
+                <Image src={pho3} style={{minWidth: '300px'}}/>
               </SmallImgBox>
               <SmallImgBox style={{ marginTop: "10px" }}>
-                <Image src={pho4} />
+                <Image src={pho4} style={{minWidth: '300px'}}/>
               </SmallImgBox>
             </Right>
           </FPBox>
@@ -525,7 +527,7 @@ const About = () => {
         <Wrapper style={{ padding: "30px" }}>
           {/* <img src={AboutImgTest} style={{ minWidth: '100%' }} /> */}
           <DeepBox>
-            <Title style={{ color: "#212529" }}>Our Clients</Title>
+            <Title style={{ color: "#32549b" }}>Our Clients</Title>
             <Box style={{ marginBotton: "20px" }}>
               <SmallImgBoxP>
                 <Image src={aryu} />
@@ -646,7 +648,7 @@ const About = () => {
         </Wrapper>
 
         <Wrapper>
-          <Title style={{ color: "#212529" }}>Our Sale Network</Title>
+          <Title style={{ color: "#32549b" }}>Our Sale Network</Title>
           <Location>
             <Map>
               <Burmar src={map} />
