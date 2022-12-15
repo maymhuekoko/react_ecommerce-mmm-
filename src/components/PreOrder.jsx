@@ -192,6 +192,7 @@ const Order = () => {
     const [colourname, setColourName] = useState('');
     const [sizename, setSizeName] = useState('');
     const url= useSelector(state => state.user.url);
+    const [eid,setEid] = useState(0);
 
     if(design_id == 1){
         const getDesigns = async () =>{
@@ -457,35 +458,6 @@ const changeprice = ()=>{
 const savepreorder = (val) =>{
     
     let tot_qty = 0;
-    if(val == 1){
-        pre.map((el) => {
-            tot_qty += parseInt(el.testqty);
-        })
-        if(tot_qty < 30 ){
-            Swal.fire({
-                title:  'Warning!',
-                text: "Minimun Order Quantity must be 30.",
-                type: 'success',    
-              });
-        }else{
-        storepreorder();
-        }
-    }
-    if(val == 2){
-        preattach.map((el) => {
-            tot_qty += parseInt(el.testqty);
-        })
-        if(tot_qty < 30 ){
-            Swal.fire({
-                title:  'Warning!',
-                text: "Minimun Order Quantity must be 30.",
-                type: 'success',    
-              });
-        }else{
-            storeattach();
-        }
-        
-    }
     console.log(tot_qty);
     if(username.name == ''){
         Swal.fire({
@@ -494,29 +466,36 @@ const savepreorder = (val) =>{
             type: 'success',    
           });
     }else{
-    axios.post(url+'/api/send/invoice_email',{
-    id: username.id,
-    name: username.name,
-    phone: username.phone,
-    address: username.address,
-    email: username.email,
-    preorders: pre,
-    attachs: preattach,
-    type: val,
-    }).then(response=>
-    {
-      console.log(response.data['message']);
-      //Success Message in Sweetalert modal
-      Swal.fire({
-        title:  response.data['message'],
-        text: "Thanks For Your Pre-Orders! Your will be delivered within four to six weeks!",
-        type: 'success',    
-      });
-    
-    }
-    ).catch(err =>{
-        console.log('error');
-    });
+        if(val == 1){
+            pre.map((el) => {
+                tot_qty += parseInt(el.testqty);
+            })
+            if(tot_qty < 30 ){
+                Swal.fire({
+                    title:  'Warning!',
+                    text: "Minimun Order Quantity must be 30.",
+                    type: 'success',    
+                  });
+            }else{
+            storepreorder();
+             sendmail(val);
+            }
+        }
+        if(val == 2){
+            preattach.map((el) => {
+                tot_qty += parseInt(el.testqty);
+            })
+            if(tot_qty < 30 ){
+                Swal.fire({
+                    title:  'Warning!',
+                    text: "Minimun Order Quantity must be 30.",
+                    type: 'success',    
+                  });
+            }else{
+                storeattach();
+            }
+            
+        }
 }
 
 }   
@@ -539,16 +518,55 @@ const storepreorder = () => {
         })
 }
 
-const storeattach = () => {
-    let totqty = 0; let totamt = 0;
-    preattach.map((el)=>{
-        totqty += el.testqty;
-        totamt += el.testprice;
-        const data = {attachs: el.files,qty: el.testqty,price: el.testprice,totqty: totqty,totamount:totamt,
+const sendmail = (val) => {
+    axios.post(url+'/api/send/invoice_email',{
         id: username.id,
         name: username.name,
         phone: username.phone,
-        address: username.address}
+        address: username.address,
+        email: username.email,
+        preorders: pre,
+        attachs: preattach,
+        type: val,
+        }).then(response=>
+        {
+          console.log(response.data['message']);
+          //Success Message in Sweetalert modal
+          Swal.fire({
+            title:  response.data['message'],
+            text: "Thanks For Your Pre-Orders! Your will be delivered within four to six weeks!",
+            type: 'success',    
+          });
+        
+        }
+        ).catch(err =>{
+            console.log('error');
+        });
+}
+
+const storeattach = () => { 
+    let formdata={
+        id: username.id,
+        name: username.name,
+        phone: username.phone,
+        address: username.address,
+      }
+    const res = axios.post(url+'/api/ecommerce_attachorder_store', formdata).then(function (response) {
+       setEid(response.data);
+       preattachstore(response.data);
+        }).catch(function (error) {
+          alert('fail store');
+        })
+}
+
+const preattachstore = (id) => {
+    let totqty = 0; let totamt = 0; 
+    preattach.map((el)=>{
+        totqty += parseInt(el.testqty);
+        totamt += parseInt(el.testprice)*parseInt(el.testqty);
+        const data = {attachs: el.files,qty: el.testqty,description: el.description,price: el.testprice,totqty: totqty,totamount:totamt,
+        id: id,
+       }
         const config = {
             headers: {"Content-Type": "multipart/form-data"}
         
@@ -558,6 +576,29 @@ const storeattach = () => {
         //   alert('success store');
           dispatch(resetAttach());
           navigate('/order_list');
+          axios.post(url+'/api/send/invoice_email',{
+            id: username.id,
+            name: username.name,
+            phone: username.phone,
+            address: username.address,
+            email: username.email,
+            preorders: pre,
+            attachs: preattach,
+            type: 2,
+            }).then(response=>
+            {
+              console.log(response.data['message']);
+              //Success Message in Sweetalert modal
+              Swal.fire({
+                title:  response.data['message'],
+                text: "Thanks For Your Pre-Orders! Your will be delivered within four to six weeks!",
+                type: 'success',    
+              });
+            
+            }
+            ).catch(err =>{
+                console.log('error');
+            });
         }).catch(function (error) {
           alert('fail store');
         })
@@ -664,7 +705,7 @@ const changefile = (f) => {
                 </MainText>
                 }
                
-                    <Text>Choose Items that you want!</Text>
+                    <Text>Choose Items that you want!<input type='hidden' id={'eid'} /></Text>
                     <Text><Input  type="checkbox" name="userdata" style={{marginRight:'10px'}} onClick={()=>setCheck(!check)}></Input>Others</Text>
                 
                 {

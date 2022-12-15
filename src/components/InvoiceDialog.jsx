@@ -94,7 +94,29 @@ export default function InvoiceDialog(props) {
    <Name>Customer Name : {props.name}</Name>
    <Phone>Customer Phone : {props.phone}</Phone>
 </Div>
- <Table className="table table-striped">
+{
+                props.attachs.length > 0 ? 
+                <Table className="table table-striped">
+                <Tr>
+                    <Th>No</Th>
+                    <Th>Item</Th>
+                    <Th>Qty</Th>
+                    <Th>Price</Th>
+                    <Th>Description</Th>
+                </Tr>
+                {props.attachs.map((attach, index) => (
+                    <Tr key={attach.id}>
+                    <Td>{++index}</Td>
+                    <Td><img src={url+`/preorder/${attach.item_photo}`} alt="" height='auto' width='170px'/></Td>
+                    <Td>{attach.quantity}</Td>
+                    <Td>{attach.price}</Td>
+                    <Td>{attach.description}</Td>
+                    <Td hidden>{total_amount += attach.quantity * attach.price}</Td>
+                </Tr> 
+                ))}        
+                </Table>
+                : 
+                <Table className="table table-striped">
                 <Tr>
                     <Th>No</Th>
                     <Th>Item</Th>
@@ -122,7 +144,10 @@ export default function InvoiceDialog(props) {
                     ))
                 }
                 
-            </Table>
+                </Table>
+}
+
+
             <Div>
    <Name>Customer Address : {props.address}</Name>
    <Phone>Total Amount : {total_amount}</Phone>
