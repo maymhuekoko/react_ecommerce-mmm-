@@ -151,6 +151,7 @@ const OrderList = () => {
     const [ecounting, setEcounting] = useState([]);
     const [color, setColor] = useState([]);
     const [size, setSize] = useState([]);
+    const [attachs, setAttachs] = useState([]);
     const [showDialog, setShowDialog] = useState(false);
     const [showPaymentDialog, setShowPaymentDialog] = useState(false);
     const [orderId,setOrderId] = useState('');
@@ -170,6 +171,7 @@ const OrderList = () => {
             setName(res.data.orders.customer_name);
             setPhone(res.data.orders.customer_phone);
             setAddress(res.data.orders.deliver_address);
+            setAttachs(res.data.attachs);
             setCountingUnit(res.data.counting_units);
             setEcounting(res.data.units);
             setColor(res.data.color);
@@ -319,7 +321,7 @@ const OrderList = () => {
          </>
         </Div>
         <div>
-            <InvoiceDialog open={showDialog} close={()=>setShowDialog(false)} name={name} phone={phone} address={address} unit = {countingunit} ecounting = {ecounting} color = {color} size = {size}/>
+            <InvoiceDialog open={showDialog} close={()=>setShowDialog(false)} name={name} phone={phone} address={address} unit = {countingunit} ecounting = {ecounting} color = {color} size = {size} attachs = {attachs} />
             <PaymentDialog open={showPaymentDialog} close={()=>setShowPaymentDialog(false)} orderId={orderId}/>
             <Footer/>
         </div>
