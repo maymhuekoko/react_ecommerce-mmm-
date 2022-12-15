@@ -12,6 +12,7 @@ import Footer from "../components/Footer";
 import Newsletter from "../components/Newsletter";
 import profile from "../files/profile.jpg";
 import greengirl from "../slider-images/slider3.jpg";
+import doctorgirl from "../slider-images/slider2.jpg";
 import sample from "../files/sample.mp4";
 import factoryV from "../files/factory.mp4";
 import map from "../files/map.jpg";
@@ -303,12 +304,12 @@ const About = () => {
             <img src={profile} style={{ minWidth: "100%",maxWidth: "90vh" }} />
           </FirstDiv>
           <SecondDiv
-            style={{ width: "60%", backgroundColor: "rgba(50, 84, 155, 0.8)" }}
+            style={{ width: "60%", backgroundColor: "rgba(255, 255, 255, 0.8)" }}
           >
-            <Title>Company Profile</Title>
-            <Description>
-            Myanmar Uniform Co., Ltd, founded in 2015, is a manufacturing and distribution company of uniforms 
-            and accessories. Over the past 7 years, Myanmar Uniform Co., Ltd, has been providing uniforms and 
+            <Title style={{color: '#32549b'}}>Company Profile</Title>
+            <Description style={{fontSize: '20px', fontWeight: 'bold',color: '#32549b'}}>
+            Medical World Co., Ltd, founded in 2015, is a manufacturing and distribution company of uniforms 
+            and accessories. Over the past 7 years, Medical World Co. Ltd, Ltd, has been providing uniforms and 
             accessories for Government Departments and Private Business Sectors. One of our best services, consultation service regarding uniform designs is offered. Customizable 
             service for business logos imprinted on the uniform is also offered using modernized machines.
             </Description>
@@ -316,23 +317,27 @@ const About = () => {
         </Wrapper>
 
         <Wrapper style={{display: 'flex', flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'flex-end', width: '100%', padding: '0px 5%'}}>
-          <One>
+          <One style={{position: 'relative'}}>
             <img src={greengirl} style={{ width: "100%", height: 'auto', borderRadius: '20px' }} />
-          </One>
-          <Two>
-            <div>
+            <div
+            style={{ width: '400px',position: 'absolute', top: '130px', right: '20px'}}>
               <p style={{fontSize: '18px', fontWeight: 'bold', color: '#32549b'}}>
-              Accuracy in stitches and spacing are guaranteed in clothing designs. As customers are the company's priority, 
-              only the best and finest services are offered to make the customers satisfied.
+                <ul style={{listStyleType: 'disc'}}>
+                  <li>One of our best services, consultation service regarding uniform designs is offered.</li>
+                  <li>Customizable service for business logos imprinted on the uniform is also offered using modernized machines.</li>
+                  <li>Accuracy in stitches and spacing are guaranteed in clothing designs.</li>
+                </ul>
               </p>
             </div>
+          </One>
+          <Two>
             <div style={{marginTop: '30px'}}>
               <video
                 src={sample}
                 controls
                 style={{
                   width: "100%",
-                  height: "auto",
+                  height: "420px",
                   borderRadius: "10px",
                   border: "2px solid #777",
                 }}
@@ -346,19 +351,22 @@ const About = () => {
         </Wrapper>
 
         <Wrapper style={{ height: "80vh" }}>
-          <Title style={{color: '#32549b'}}>Our Vision and Mission Objective</Title>
           <FirstDiv style={{ width: "100%", display: 'flex', alignItems: 'center', justifyContent: 'center'}} >
-            <img src={profile} style={{ width: "50%", borderRadius: '10px'}}/>
+            <img src={doctorgirl} style={{ width: "90%", borderRadius: '10px'}}/>
           </FirstDiv>
           <SecondDiv style={{ width: "70%" }}>
-            <Box>
-              <SmallBox style={{maxWidth: '300px'}}>
+          <Title style={{color: '#32549b'}}>Our Vision and Mission Objective</Title>
+            <Box style={{ marginTop: "30px"}}>
+              <SmallBox>
+                <Title style={{color: '#32549b'}}>Vision</Title>
                 <p style={{color: '#32549b', fontSize: '20px', fontWeight: 'bold'}}>Quality is our Virtue.</p>
               </SmallBox>
-              <SmallBox style={{maxWidth: '300px'}}>
+              <SmallBox>
+                <Title style={{color: '#32549b'}}>Mission</Title>
                 <p style={{color: '#32549b', fontSize: '20px', fontWeight: 'bold'}}>Flexibility and Responsibilities.</p>
               </SmallBox>
-              <SmallBox style={{maxWidth: '400px'}}>
+              <SmallBox>
+              <Title style={{color: '#32549b'}}>Objective</Title>
                 <p style={{color: '#32549b', fontSize: '20px', fontWeight: 'bold'}}>Leading in the Local Market and Exporting Abroad in Future.</p>
               </SmallBox>
             </Box>

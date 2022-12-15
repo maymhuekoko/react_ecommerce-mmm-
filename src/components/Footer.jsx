@@ -104,8 +104,8 @@ const Footer = () => {
             <Left>
                 <Logo>Medical World</Logo>
                 <Description>
-                Myanmar Uniform Co., Ltd, founded in 2015, is a manufacturing and distribution company of uniforms 
-                and accessories. Over the past 7 years, Myanmar Uniform Co., Ltd, has been providing uniforms and 
+                Medical World Co., Ltd, founded in 2015, is a manufacturing and distribution company of uniforms 
+                and accessories. Over the past 7 years, Medical World Co., Ltd, has been providing uniforms and 
                 accessories for Government Departments and Private Business Sectors.
             </Description>
                 <SocialContainer>
