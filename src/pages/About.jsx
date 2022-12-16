@@ -70,6 +70,7 @@ import pho19 from "../files/factory/pho19.png";
 import pho20 from "../files/factory/pho20.png";
 import pho21 from "../files/factory/pho21.png";
 import pho22 from "../files/factory/pho22.png";
+import PlayArrowIcon from '@mui/icons-material/PlayArrow';
 
 const Div = styled.div`
   overflow: hidden;
@@ -83,7 +84,6 @@ const Wrapper = styled.div`
   justify-content: center;
   flex-direction: column;
   position: relative;
-  margin-top: 30px;
   ${mobile({ padding: "50" })}
 `;
 const Title = styled.h1`
@@ -253,25 +253,25 @@ const FIbox = styled.div`
 `;
 
 const FImg = styled.img`
-    width: 100%;
-    max-width: 430px;
-    height: auto;
-    border: 5px solid white;
-    border-radius: 12px;
+  width: 100%;
+  max-width: 430px;
+  height: auto;
+  border: 5px solid transparent;
+  border-radius: 12px;
 `;
 
 const One = styled.div`
-    width: 65%;
-    height: auto;
-    border-radius: 20px;
-`
+  width: 65%;
+  height: auto;
+  border-radius: 20px;
+`;
 const Two = styled.div`
-    width: 35%;
-    height: auto;
-    display: flex;
-    flex-direction: column; 
-    padding-left: 20px;
-`
+  width: 35%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  padding-left: 20px;
+`;
 
 const About = () => {
   const [partners, setPartners] = useState(false);
@@ -288,51 +288,97 @@ const About = () => {
 
   const ShowFactory = () => {
     setFactory(true);
-  }
+  };
   const HideFactory = () => {
     setFactory(false);
-  }
+  };
 
   return (
     <div>
       <div>
         <ColorNav />
       </div>
-      <Div style={{ marginTop: "50px" }}>
-        <Wrapper style={{ height: "90vh" }}>
+      <Div>
+        <Wrapper style={{ height: "90vh", 
+        marginTop: '100px',
+      }}>
           <FirstDiv>
-            <img src={profile} style={{ minWidth: "100%",maxWidth: "90vh" }} />
+            <img src={profile} style={{ minWidth: "100%", maxWidth: "90vh" }} />
           </FirstDiv>
           <SecondDiv
-            style={{ width: "60%", backgroundColor: "rgba(255, 255, 255, 0.8)" }}
+            style={{
+              width: "60%",
+              backgroundColor: "rgba(255, 255, 255, 0.8)",
+            }}
           >
-            <Title style={{color: '#32549b'}}>Company Profile</Title>
-            <Description style={{fontSize: '20px', fontWeight: 'bold',color: '#32549b'}}>
-            Medical World Co., Ltd, founded in 2015, is a manufacturing and distribution company of uniforms 
-            and accessories. Over the past 7 years, Medical World Co. Ltd, Ltd, has been providing uniforms and 
-            accessories for Government Departments and Private Business Sectors. One of our best services, consultation service regarding uniform designs is offered. Customizable 
-            service for business logos imprinted on the uniform is also offered using modernized machines.
+            <Title style={{ color: "#32549b" }}>Company Profile</Title>
+            <Description
+              style={{ fontSize: "20px", fontWeight: "bold", color: "#32549b" }}
+            >
+              Medical World Co., Ltd, founded in 2015, is a manufacturing and
+              distribution company of uniforms and accessories. Over the past 7
+              years, Medical World Co. Ltd, Ltd, has been providing uniforms and
+              accessories for Government Departments and Private Business
+              Sectors. One of our best services, consultation service regarding
+              uniform designs is offered. Customizable service for business
+              logos imprinted on the uniform is also offered using modernized
+              machines.
             </Description>
           </SecondDiv>
         </Wrapper>
 
-        <Wrapper style={{display: 'flex', flexDirection: 'row', alignItems: 'flex-end', justifyContent: 'flex-end', width: '100%', padding: '0px 5%'}}>
-          <One style={{position: 'relative'}}>
-            <img src={greengirl} style={{ width: "100%", height: 'auto', borderRadius: '20px' }} />
+        <Wrapper
+          style={{
+            display: "flex",
+            flexDirection: "row",
+            alignItems: "flex-end",
+            justifyContent: "flex-end",
+            width: "100%",
+            padding: "100px 5%",
+            marginTop: '50px',
+            backgroundImage: "linear-gradient(to right, rgba(55,95,175,1), rgba(80,120,200,0.3))"
+          }}
+        >
+          <One style={{ position: "relative" }}>
+            <img
+              src={greengirl}
+              style={{ width: "100%", height: "auto", borderRadius: "20px" }}
+            />
             <div
-            style={{ width: '400px',position: 'absolute', top: '130px', right: '20px'}}>
-              <p style={{fontSize: '18px', fontWeight: 'bold', color: '#32549b'}}>
-                <ul style={{listStyleType: 'disc'}}>
-                  <li>One of our best services, consultation service regarding uniform designs is offered.</li>
-                  <li>Customizable service for business logos imprinted on the uniform is also offered using modernized machines.</li>
-                  <li>Accuracy in stitches and spacing are guaranteed in clothing designs.</li>
+              style={{
+                width: "400px",
+                position: "absolute",
+                top: "130px",
+                right: "20px",
+              }}
+            >
+              <p
+                style={{
+                  fontSize: "18px",
+                  fontWeight: "bold",
+                  color: "#32549b",
+                }}
+              >
+                <ul style={{ listStyleType: "disc" }}>
+                  <li>
+                    One of our best services, consultation service regarding
+                    uniform designs is offered.
+                  </li>
+                  <li>
+                    Customizable service for business logos imprinted on the
+                    uniform is also offered using modernized machines.
+                  </li>
+                  <li>
+                    Accuracy in stitches and spacing are guaranteed in clothing
+                    designs.
+                  </li>
                 </ul>
               </p>
             </div>
           </One>
           <Two>
-            <div style={{marginTop: '30px'}}>
-              <video
+            <div>
+              {/* <video
                 src={sample}
                 controls
                 style={{
@@ -340,34 +386,77 @@ const About = () => {
                   height: "420px",
                   borderRadius: "10px",
                   border: "2px solid #777",
+                  backgroundColor: '#ffffff'
                 }}
-              /> 
-              {/* <a href='https://www.youtube.com/'>
-                <img src={video} style={{ width: "100%", height: 'auto', borderRadius: '10px' }} />
-                
-              </a> */}
+              /> */}
+              <a href='https://www.youtube.com/watch?v=jUX2R9JOi_A' style={{position: 'relative', width: '100%', height: '100%'}}>
+                <img src={video} style={{ width: "100%", height: '435px', borderRadius: '10px' }} />
+                <span style={{position: 'absolute', top: '-50px', left: '37%', border: '2px solid', borderRadius: '50%'}}>
+                  <PlayArrowIcon style={{fontSize: '100px'}}/>
+                </span>
+              </a>
             </div>
           </Two>
         </Wrapper>
 
-        <Wrapper style={{ height: "80vh" }}>
-          <FirstDiv style={{ width: "100%", display: 'flex', alignItems: 'center', justifyContent: 'center'}} >
-            <img src={doctorgirl} style={{ width: "90%", borderRadius: '10px'}}/>
+        <Wrapper style={{ 
+          height: "80vh",
+          paddingBottom: '50px',
+          backgroundImage: "linear-gradient(to right, rgba(55,95,175,1), rgba(80,120,200,0.3))"
+       }}>
+          <FirstDiv
+            style={{
+              width: "100%",
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <img
+              src={doctorgirl}
+              style={{ width: "90%", borderRadius: "10px" }}
+            />
           </FirstDiv>
           <SecondDiv style={{ width: "70%" }}>
-          <Title style={{color: '#32549b'}}>Our Vision and Mission Objective</Title>
-            <Box style={{ marginTop: "30px"}}>
+            <Title style={{ color: "#32549b" }}>
+              Our Vision and Mission Objective
+            </Title>
+            <Box style={{ marginTop: "30px" }}>
               <SmallBox>
-                <Title style={{color: '#32549b'}}>Vision</Title>
-                <p style={{color: '#32549b', fontSize: '20px', fontWeight: 'bold'}}>Quality is our Virtue.</p>
+                <Title style={{ color: "#32549b" }}>Vision</Title>
+                <p
+                  style={{
+                    color: "#32549b",
+                    fontSize: "20px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Quality is our Virtue.
+                </p>
               </SmallBox>
               <SmallBox>
-                <Title style={{color: '#32549b'}}>Mission</Title>
-                <p style={{color: '#32549b', fontSize: '20px', fontWeight: 'bold'}}>Flexibility and Responsibilities.</p>
+                <Title style={{ color: "#32549b" }}>Mission</Title>
+                <p
+                  style={{
+                    color: "#32549b",
+                    fontSize: "20px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Flexibility and Responsibilities.
+                </p>
               </SmallBox>
               <SmallBox>
-              <Title style={{color: '#32549b'}}>Objective</Title>
-                <p style={{color: '#32549b', fontSize: '20px', fontWeight: 'bold'}}>Leading in the Local Market and Exporting Abroad in Future.</p>
+                <Title style={{ color: "#32549b" }}>Objective</Title>
+                <p
+                  style={{
+                    color: "#32549b",
+                    fontSize: "20px",
+                    fontWeight: "bold",
+                  }}
+                >
+                  Leading in the Local Market and Exporting Abroad in Future.
+                </p>
               </SmallBox>
             </Box>
           </SecondDiv>
@@ -395,22 +484,38 @@ const About = () => {
             <Title style={{ color: "#32549b" }}>Our Products</Title>
             <Box>
               <SmallImgBox style={{ paddingBottom: "30px" }}>
-                <Image
-                  src={url + `/ecommerce/items/cute_front.png`}
-                />
-                <span style={{ display: "block", textAlign: "center", fontWeight: 'bold' }}>
+                <Image src={url + `/ecommerce/items/cute_front.png`} />
+                <span
+                  style={{
+                    display: "block",
+                    textAlign: "center",
+                    fontWeight: "bold",
+                  }}
+                >
                   Cute
                 </span>
               </SmallImgBox>
               <SmallImgBox style={{ paddingBottom: "30px" }}>
                 <Image src={url + `/ecommerce/items/dutycoat_front.png`} />
-                <span style={{ display: "block", textAlign: "center", fontWeight: 'bold' }}>
+                <span
+                  style={{
+                    display: "block",
+                    textAlign: "center",
+                    fontWeight: "bold",
+                  }}
+                >
                   Duty Coat
                 </span>
               </SmallImgBox>
               <SmallImgBox style={{ paddingBottom: "30px" }}>
                 <Image src={url + `/ecommerce/items/smile_front.png`} />
-                <span style={{ display: "block", textAlign: "center", fontWeight: 'bold' }}>
+                <span
+                  style={{
+                    display: "block",
+                    textAlign: "center",
+                    fontWeight: "bold",
+                  }}
+                >
                   Smile
                 </span>
               </SmallImgBox>
@@ -428,98 +533,157 @@ const About = () => {
           <DeepBox>
             <Title style={{ color: "#32549b" }}>Our History</Title>
             <Box>
-              <SmallImgBox style={{backgroundColor: 'rgba(50, 84, 155, 0.7)', padding: '20px', minWidth: '350px', borderRadius: '7px', color: 'white'}}>
-                <p style={{fontSize: '18px'}}><b>Before 2015</b><br/>
-                1. SME Business structure and give services<br/>
-                2. Employee 30-50 OUR<br/></p>
+              <SmallImgBox
+                style={{
+                  backgroundColor: "rgba(50, 84, 155, 0.7)",
+                  padding: "20px",
+                  minWidth: "350px",
+                  borderRadius: "7px",
+                  color: "white",
+                }}
+              >
+                <p style={{ fontSize: "18px" }}>
+                  <b>Before 2015</b>
+                  <br />
+                  1. SME Business structure and give services
+                  <br />
+                  2. Employee 30-50 OUR
+                  <br />
+                </p>
               </SmallImgBox>
-              <SmallImgBox style={{backgroundColor: 'rgba(50, 84, 155, 0.7)', padding: '20px', minWidth: '350px', borderRadius: '7px', color: 'white'}}>
-                <p style={{fontSize: '18px'}}><b>2015-2019</b><br/>
-                1. Company type and introduces own brand name called Family Hospital Uniform<br/>
-                2. Employee 100-150<br/></p>
+              <SmallImgBox
+                style={{
+                  backgroundColor: "rgba(50, 84, 155, 0.7)",
+                  padding: "20px",
+                  minWidth: "350px",
+                  borderRadius: "7px",
+                  color: "white",
+                }}
+              >
+                <p style={{ fontSize: "18px" }}>
+                  <b>2015-2019</b>
+                  <br />
+                  1. Company type and introduces own brand name called Family
+                  Hospital Uniform
+                  <br />
+                  2. Employee 100-150
+                  <br />
+                </p>
               </SmallImgBox>
-              <SmallImgBox style={{backgroundColor: 'rgba(50, 84, 155, 0.7)', padding: '20px', minWidth: '350px', borderRadius: '7px', color: 'white'}}>
-                <p style={{fontSize: '18px'}}><b>2020-2025</b><br/>
-                1. Five showrooms, Nine dealers in upper and lower Myanmar, and distributes retail and wholesales<br/>
-                2. Employee 160-200<br/></p>
+              <SmallImgBox
+                style={{
+                  backgroundColor: "rgba(50, 84, 155, 0.7)",
+                  padding: "20px",
+                  minWidth: "350px",
+                  borderRadius: "7px",
+                  color: "white",
+                }}
+              >
+                <p style={{ fontSize: "18px" }}>
+                  <b>2020-2025</b>
+                  <br />
+                  1. Five showrooms, Nine dealers in upper and lower Myanmar,
+                  and distributes retail and wholesales
+                  <br />
+                  2. Employee 160-200
+                  <br />
+                </p>
               </SmallImgBox>
             </Box>
           </DeepBox>
         </Wrapper>
 
-        <Wrapper style={{marginTop: '50px'}}>
-          <Title style={{ color: "#32549b" }}>Our Factory and Production</Title>
+        <Wrapper style={{ 
+          marginTop: "50px",
+          paddding: '100px 0px',
+          backgroundImage: "linear-gradient(to right, rgba(55,95,175,1), rgba(80,120,200,0.3))"
+
+          }}>
+          <Title style={{ color: "#ffffff", paddingTop: '50px 0px' }}>Our Factory and Production</Title>
           <FPBox>
-            <Left style={{minWidth: '350px'}}>
+            <Left style={{ minWidth: "350px" }}>
               <SmallImgBox>
-                <Image src={pho1} style={{minWidth: '300px'}}/>
+                <Image src={pho1} style={{ minWidth: "300px" }} />
               </SmallImgBox>
               <SmallImgBox style={{ marginTop: "10px" }}>
-                <Image src={pho2} style={{minWidth: '300px'}}/>
+                <Image src={pho2} style={{ minWidth: "300px" }} />
               </SmallImgBox>
             </Left>
             <Center>
-              <SmallBox style={{ width: "100%", height: "180px" }}>
-                <p style={{fontSize: '20px', fontWeight: 'bold'}}>
-                Imported highly qualified raw materials are used to manufacture products and manufacturing is done locally.
-                Matching accessories for uniforms are manufactured locally and distributed to both local and oversea market.
+              <SmallBox style={{ width: "100%", height: "180px" , backgroundColor: 'transparent'}}>
+                <p style={{ fontSize: "20px", fontWeight: "bold", color: '#ffffff' }}>
+                  Imported highly qualified raw materials are used to
+                  manufacture products and manufacturing is done locally.
+                  Matching accessories for uniforms are manufactured locally and
+                  distributed to both local and oversea market.
                 </p>
               </SmallBox>
             </Center>
-            <Right style={{minWidth: '350px'}}>
+            <Right style={{ minWidth: "350px" }}>
               <SmallImgBox>
-                <Image src={pho3} style={{minWidth: '300px'}}/>
+                <Image src={pho3} style={{ minWidth: "300px" }} />
               </SmallImgBox>
               <SmallImgBox style={{ marginTop: "10px" }}>
-                <Image src={pho4} style={{minWidth: '300px'}}/>
+                <Image src={pho4} style={{ minWidth: "300px" }} />
               </SmallImgBox>
             </Right>
           </FPBox>
-            <div style={{ marginTop: "20px" }}>
-              { factory ? <ShowP onClick={HideFactory}>Hide Factory Image</ShowP>:<ShowP onClick={ShowFactory}>See All Factory Image</ShowP>}
-            </div>
+          <div style={{paddingBottom: '50px'}}>
+            {factory ? (
+              <ShowP onClick={HideFactory}>Hide Factory Image</ShowP>
+            ) : (
+              <ShowP onClick={ShowFactory}>See All Factory Image</ShowP>
+            )}
+          </div>
         </Wrapper>
 
-        {
-            factory ? <div>
-                <Wrapper style={{width: '100%'}}>
-            <FIbox style={{width: '85%'}}>
+        {factory ? (
+          <div>
+            <Wrapper style={{ 
+              width: "100%",
+              padding: "50px",
+              backgroundImage: "linear-gradient(to right, rgba(55,95,175,1), rgba(80,120,200,0.3))"
+            }}>
+              <FIbox style={{ width: "85%" }}>
                 <FImg src={pho5} />
                 <FImg src={pho6} />
                 <FImg src={pho7} />
-            </FIbox>
-            <FIbox style={{width: '85%'}}>
+              </FIbox>
+              <FIbox style={{ width: "85%" }}>
                 <FImg src={pho8} />
                 <FImg src={pho9} />
                 <FImg src={pho10} />
-            </FIbox>
-            <FIbox style={{width: '85%'}}>
+              </FIbox>
+              <FIbox style={{ width: "85%" }}>
                 <FImg src={pho11} />
                 <FImg src={pho12} />
                 <FImg src={pho13} />
-            </FIbox>
-            <FIbox style={{width: '85%'}}>
+              </FIbox>
+              <FIbox style={{ width: "85%" }}>
                 <FImg src={pho14} />
                 <FImg src={pho15} />
                 <FImg src={pho16} />
-            </FIbox>
-            <FIbox style={{width: '85%'}}>
+              </FIbox>
+              <FIbox style={{ width: "85%" }}>
                 <FImg src={pho17} />
                 <FImg src={pho18} />
                 <FImg src={pho19} />
-            </FIbox>
-            <FIbox style={{width: '85%'}}>
+              </FIbox>
+              <FIbox style={{ width: "85%" }}>
                 <FImg src={pho20} />
                 <FImg src={pho21} />
                 <FImg src={pho22} />
-            </FIbox>
-        </Wrapper>
-            </div> : ''
-        }
+              </FIbox>
+            </Wrapper>
+          </div>
+        ) : (
+          ""
+        )}
 
-        
+        <Wrapper style={{
+          backgroundImage: "linear-gradient(to right, rgba(55,95,175,1), rgba(80,120,200,0.3))"
 
-        <Wrapper>
+          }}>
           <video
             src={factoryV}
             controls
@@ -527,15 +691,19 @@ const About = () => {
               width: "85%",
               height: "90vh",
               borderRadius: "10px",
-              border: "2px solid #777",
+              border: "2px solid #ffffff",
+              backgroundColor: '#ffffff'
             }}
           />
         </Wrapper>
 
-        <Wrapper style={{ padding: "30px" }}>
+        <Wrapper style={{ 
+          padding: "50px",
+          backgroundImage: "linear-gradient(to right, rgba(55,95,175,1), rgba(80,120,200,0.3))"
+           }}>
           {/* <img src={AboutImgTest} style={{ minWidth: '100%' }} /> */}
           <DeepBox>
-            <Title style={{ color: "#32549b" }}>Our Clients</Title>
+            <Title style={{ color: "#ffffff" }}>Our Clients</Title>
             <Box style={{ marginBotton: "20px" }}>
               <SmallImgBoxP>
                 <Image src={aryu} />
