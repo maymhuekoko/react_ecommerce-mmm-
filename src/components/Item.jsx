@@ -196,7 +196,7 @@ const Item = ({ item, title }) => {
                 </Icon>
             </Info>
 
-            <ProductLineTitle style={{ marginTop: '20px' }}>{item.item_name}&nbsp;
+            <ProductLineTitle style={{ marginTop: '0px' }}>{item.item_name}&nbsp;
                 {
                     title == 'Promotion Items' ? <Warm style={{ color: 'tomato' }}>({item.discount_price}%)</Warm> : ''
                 }

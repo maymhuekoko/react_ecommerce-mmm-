@@ -261,7 +261,7 @@ const Navbar = (props) => {
                     <Left>
                         <Language style={link}><LocationOnIcon />Yangon</Language>
 
-                        <Language style={link}><PhoneInTalkIcon />+95 9448833467</Language>
+                        <Language style={link}><PhoneInTalkIcon />၀၉ ၄၄ ၈၈ ၃၃ ၄၅၇၊<br/> ၀၉ ၄၄ ၈၈ ၃၃ ၄၆၇</Language>
 
                         <NavbarDropdown>
                             <Language style={link}>English</Language>
@@ -272,7 +272,7 @@ const Navbar = (props) => {
                         {/* <SearchContainer>
                                 <Input placeholder="search"/>
                                 <SearchIcon style={{color:"gray",fonSize: 10}}/>
-                            </SearchContainer> */}
+                            </SearchContainer> */}       
                     </Left>
                     <Center>
                         <Logo>Medical World</Logo>
