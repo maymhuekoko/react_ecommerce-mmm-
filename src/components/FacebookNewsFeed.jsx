@@ -37,7 +37,7 @@ const FacebookNewsFeed = () => {
                 <div className="card-body">
                     <h5 className="card-title">Apple</h5>
                     <p className="card-text">This design was launched in 2018 in the market. Available for both Male and Female Pattern differently</p>
-                    <a href="https://www.facebook.com/FamilyHospitalUniform/" className="btn btn-primary">See In Facebook</a>
+                    <a href="https://www.facebook.com/471460249710870/posts/pfbid02qnVFkfXjWAcshTxKGM5Ghg8aNpme4uMZ2hHDkZfQtsyzKo2MvDJeYFGQ1ZhqxGeRl/?mibextid=dDOYBg" className="btn btn-primary">See In Facebook</a>
                 </div>
             </div>
             <div className="card" style={{width: '25%', marginLeft:'20px'}}>
@@ -47,7 +47,7 @@ const FacebookNewsFeed = () => {
                 <div className="card-body">
                     <h5 className="card-title">Cute</h5>
                     <p className="card-text">This design was launched in 2018 in the market. Available for both Male and Female Pattern differently</p>
-                    <a href="https://www.facebook.com/FamilyHospitalUniform/" className="btn btn-primary">See In Facebook</a>
+                    <a href="https://www.facebook.com/471460249710870/posts/pfbid02y1XXaJSyf19iFi4UrgaCENjxH2QG1Tb3SJzSyj5rdwzk1DUptfxHpK3ZVue6Y8unl/?mibextid=dDOYBg" className="btn btn-primary">See In Facebook</a>
                 </div>
             </div>
             <div className="card" style={{width: '25%', marginLeft:'20px'}}>
@@ -57,7 +57,7 @@ const FacebookNewsFeed = () => {
                 <div className="card-body">
                     <h5 className="card-title">Smile</h5>
                     <p className="card-text">This design was launched in 2018 in the market. Available for both Male and Female Pattern differently</p>
-                    <a href="https://www.facebook.com/FamilyHospitalUniform/" className="btn btn-primary">See In Facebook</a>
+                    <a href="https://www.facebook.com/471460249710870/posts/pfbid0W8E6o4t7fdJ1J5f8iFHLThe1M2hrnFNyygKuuqKyorTUo8hFR3BR8zG6NnLe4E99l/?mibextid=dDOYBg" className="btn btn-primary">See In Facebook</a>
                 </div>
             </div>
             <div className="card" style={{width: '25%', marginLeft:'20px'}}>
@@ -67,7 +67,7 @@ const FacebookNewsFeed = () => {
                 <div className="card-body">
                     <h5 className="card-title">Sweet</h5>
                     <p className="card-text">This design was launched in 2018 in the market. Available for both Male and Female Pattern differently</p>
-                    <a href="https://www.facebook.com/FamilyHospitalUniform/" className="btn btn-primary">See In Facebook</a>
+                    <a href="https://www.facebook.com/471460249710870/posts/pfbid02eN8R3V4cwWfCXmbuvRHkNrZSi6dyBLNomQqKnGGxrcizK6RkZwYKoBkSG7iQScsCl/?mibextid=dDOYBg" className="btn btn-primary">See In Facebook</a>
                 </div>
             </div>
             </FeedBox>

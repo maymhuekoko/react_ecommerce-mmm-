@@ -7,7 +7,11 @@ import Footer from "../components/Footer";
 import { useSelector } from "react-redux";
 
 import profile from "../files/profile.jpg";
+import board1 from "../files/board/board1.jpg";
 import board2 from "../files/board/board2.jpg";
+import board3 from "../files/board/board3.jpg";
+import board4 from "../files/board/board4.jpg";
+import board5 from "../files/board/board5.jpg";
 
 import pho1 from "../files/factory/pho1.png";
 import pho2 from "../files/factory/pho2.png";
@@ -214,7 +218,7 @@ const FIbox = styled.div`
 `
 const FImg = styled.img`
     width: 100%;
-    max-width: 430px;
+    max-width: 380px;
     height: auto;
     border: 5px solid transparent;
     border-radius: 12px;
@@ -317,13 +321,13 @@ const About = () => {
                     <SubTitle>Medical World Company Limited</SubTitle>
                     <Content style={{padding: "50px"}}>
                         <Flex>
-                            <CBox><Circle style={{ backgroundImage: ``, backgroundSize: "200px 200px" }}></Circle>U HTET AUNG <br/> (MANAGING DIRECTOR)</CBox>
+                            <CBox><Circle style={{ backgroundImage: `url(${board1})`, backgroundSize: "200px 200px" }}></Circle>U HTET AUNG <br/> (MANAGING DIRECTOR)</CBox>
                             <CBox><Circle style={{ backgroundImage: `url(${board2})`, backgroundSize: "200px 200px" }}></Circle>DAW KHIN THANDAR KO <br/> (DIRECTOR)</CBox>
-                            <CBox><Circle></Circle>DAW KHIN SANDAR KO <br/> (DIRECTOR)</CBox>
+                            <CBox><Circle style={{ backgroundImage: `url(${board3})`, backgroundSize: "200px 200px" }}></Circle>DAW KHIN SANDAR KO <br/> (DIRECTOR)</CBox>
                         </Flex>
                         <Flex>
-                            <CBox><Circle></Circle>U WIN KO KO <br/> (DIRECTOR)</CBox>
-                            <CBox><Circle></Circle>DR. AYE AYE AUNG <br/> (DIRECTOR)</CBox>
+                            <CBox><Circle style={{ backgroundImage: `url(${board4})`, backgroundSize: "200px 200px" }}></Circle>U WIN KO KO <br/> (DIRECTOR)</CBox>
+                            <CBox><Circle style={{ backgroundImage: `url(${board5})`, backgroundSize: "200px 200px" }}></Circle>DR. AYE AYE AUNG <br/> (DIRECTOR)</CBox>
                         </Flex>
                     </Content>
                 </Wrapper>
