@@ -276,10 +276,10 @@ const About = () => {
                     <Title style={{padding: "30px 0px 20px 100px"}}>ABOUT US</Title>
                     <Content style={{padding: "70px 100px" , background: "linear-gradient(to right, rgba(28, 73, 170, 0.5), rgba(5, 59, 175, 0.8))"}}>
                         <Flex>
-                            <BoxOne>
+                            <BoxOne style={{maxHeight: "420px", overflow: "hidden" }} >
                                 <img src={profile} style={{ width: "100%", height: "auto",minHeight: "420px" }} />
                             </BoxOne>
-                            <BoxTwo>
+                            <BoxTwo style={{minHeight: "420px" }} >
                                 <ContentTitle>About Medical World</ContentTitle>
                                 <Description>Medical World Co., Ltd, founded in 2015, is a manufacturing and
                                 distribution company of uniforms and accessories. Over the past 7
@@ -300,11 +300,11 @@ const About = () => {
                     <Title style={{padding: "50px 0px 30px 100px"}}>OUR HISTORY</Title>
                     <Content style={{padding: "0px 100px"}}>
                         <Flex>
-                            <Box style={{paddingRight: "50px", borderRight: "2px solid #777777"}}>
+                            <Box style={{paddingRight: "50px", borderRight: "2px solid #777777", minHeight: "175px"}}>
                                 <ContentTitle>Before 2015</ContentTitle>
                                 <Description>1. SME Business structure and give services <br/> 2. Employee 30-50 OUR</Description>
                             </Box>
-                            <Box style={{padding: "0px 50px", borderRight: "2px solid #777777"}}>
+                            <Box style={{padding: "0px 50px", borderRight: "2px solid #777777", minHeight: "175px"}}>
                                 <ContentTitle>2015-2019</ContentTitle>
                                 <Description>1. Company type and introduces own brand name called Family Hospital Uniform <br/> 2. 2. Employee 100-150</Description>
                             </Box>
@@ -678,8 +678,8 @@ const About = () => {
             <Section>
                 <Wrapper>
                 <Title style={{textAlign: "center"}}>Our Sale Network</Title>
-                    <Flex>
-                        <img src={map} width="50%"/>
+                    <Flex style={{padding: "30px 0px"}}>
+                        <img src={map} width="500px"/>
                     </Flex>
                 </Wrapper>
             </Section>
