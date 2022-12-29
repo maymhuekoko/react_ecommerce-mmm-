@@ -70,6 +70,7 @@ import violin from "../files/p_logo/violin_health_beauty_clinic.jpg";
 import mprivate from "../files/p_logo/myanmar_private_hospital_association.jpg";
 import mmedical from "../files/p_logo/myanmar_medical_association_centre.jpg";
 
+import map from "../files/map.jpg";
 
 const Section = styled.div`
     width: 100%
@@ -424,7 +425,7 @@ const About = () => {
                             <Box>
                                 <Image src={url + `/ecommerce/items/lavender_front.png`} style={{maxWidth: "250px"}} />
                                 <span style={{ display: "block", textAlign: "center", fontWeight: "bold", fontSize: "20px"}}>
-                                Handsome
+                                Lavender
                                 </span>
                             </Box>
                             <Box>
@@ -674,7 +675,14 @@ const About = () => {
                 </DeepBox>
                 </Wrapper>
             </Section>
-
+            <Section>
+                <Wrapper>
+                <Title style={{textAlign: "center"}}>Our Sale Network</Title>
+                    <Flex>
+                        <img src={map} width="50%"/>
+                    </Flex>
+                </Wrapper>
+            </Section>
             <div>
                 <Footer />
             </div>

@@ -261,7 +261,7 @@ const Navbar = (props) => {
                     <Left>
                         <Language style={link}><LocationOnIcon />Yangon</Language>
 
-                        <Language style={link}><PhoneInTalkIcon />09 448833457<br/>09 448833467</Language>
+                        <Language style={link}><PhoneInTalkIcon />09 448833457<br/><PhoneInTalkIcon/>09 448833467</Language>
                         
                         <NavbarDropdown>
                             <Language style={link}>English</Language>
