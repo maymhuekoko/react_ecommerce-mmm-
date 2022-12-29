@@ -70,7 +70,7 @@ import violin from "../files/p_logo/violin_health_beauty_clinic.jpg";
 import mprivate from "../files/p_logo/myanmar_private_hospital_association.jpg";
 import mmedical from "../files/p_logo/myanmar_medical_association_centre.jpg";
 
-import map from "../files/map.jpg";
+import map from "../files/map.png";
 
 const Section = styled.div`
     width: 100%
