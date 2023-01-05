@@ -12,6 +12,10 @@ import { Link } from 'react-router-dom'
 import { FaBars } from 'react-icons/fa'
 import ColorNav from './ColorNav'
 import PreDialog from '../components/PreDialog'
+import axios from 'axios';
+import { useNavigate } from "react-router-dom";
+import { showSearch } from '../redux/designRedux';
+// import ClipLoader from 'react-spinners/ClipLoader';
 
 const Container = styled.div`
     transition: 1s ease;
@@ -138,12 +142,36 @@ const NavbarDropdownContent = styled.div`
   z-index: 1;
 `;
 
+const SInput = styled.input`
+    width: 230px;
+    height: 35px;
+    background-color: #eeeeee;
+    border: 1px solid #2b57b8;
+    outline:none;
+    border-radius: 4px;
+    margin-right: 10px;
+`
+const SSubmit = styled.button`
+    color: white;
+    height: 35px;
+    border: 1px solid #2b57b8;
+    outline:none;
+    border-radius: 4px;
+`
+const Searchbox = styled.div`
+    display: inline-block;
+`
+const Sm = styled.small`
+  font-size : 11px;
+  font-weight : bold;
+`
 
-const Navbar = () => {
+const Navbar = (props) => {
     const [isScroll, setIsScroll] = useState(false);
     const [isUser, setIsUser] = useState(false);
     const dispatch = useDispatch();
     const [showDialog, setShowDialog] = useState(false);
+    const pcs = useSelector(state=>state.cart.total_pcs);
 
     window.onscroll = function () {
         if (document.documentElement.scrollTop > 100) {
@@ -170,7 +198,7 @@ const Navbar = () => {
         setIsUser(false);
     }
 
-    const showPreorder = () =>{
+    const showPreorder = () => {
         setShowDialog(true);
     }
 
@@ -184,6 +212,45 @@ const Navbar = () => {
         color: 'white',
     }
 
+    const [search, setSearch] = useState('');
+    const [itemsS, setItems] = useState([]);
+    const [showsearch, setShowSearch] = useState(false);
+    const [ok,setOk] = useState(false);
+
+    const ShowSearch = () => {
+        setShowSearch(true);
+    }
+
+    const navigate = useNavigate();
+
+    const url = useSelector(state => state.user.url);
+
+    const SearchItems = () => {
+        if(search != ''){
+            axios.post(url + '/api/searchitem', {
+                item: search
+            }).then(res => {
+                // console.log(res.data);
+                setItems(res.data);
+                setOk(true);
+            }
+            ).catch(err => {
+                console.log('error');
+            });
+        }else{
+            // alert('fail');
+            setShowSearch(false);
+        } 
+       
+    }
+
+    if(ok == true){
+        console.log(itemsS);
+        dispatch(showSearch());
+        navigate('/products/1/family hospital', { state: { itemsS: itemsS, click: true } })
+    }
+
+
 
     return (
         <Container className="fixed-top">
@@ -194,8 +261,8 @@ const Navbar = () => {
                     <Left>
                         <Language style={link}><LocationOnIcon />Yangon</Language>
 
-                        <Language style={link}><PhoneInTalkIcon />+95 9778654565</Language>
-
+                        <Language style={link}><PhoneInTalkIcon />09 448833457<br/><PhoneInTalkIcon/>09 448833467</Language>
+                        
                         <NavbarDropdown>
                             <Language style={link}>English</Language>
                             <NavbarDropdownContent>
@@ -205,9 +272,8 @@ const Navbar = () => {
                         {/* <SearchContainer>
                                 <Input placeholder="search"/>
                                 <SearchIcon style={{color:"gray",fonSize: 10}}/>
-                            </SearchContainer> */}
+                            </SearchContainer> */}       
                     </Left>
-                    {/* Phyo */}
                     <Center>
                         <Logo>Medical World</Logo>
                         <Link to="/" style={link}>
@@ -216,51 +282,63 @@ const Navbar = () => {
                         <Link to="/about-us" style={link}>
                             <MenuItem>AboutUs</MenuItem>
                         </Link>
+                        {isUser ? (<Link to="/order_list" style={link}>
+                            <MenuItem>OrderList</MenuItem>
+                        </Link>) : (
+                            <Link to="/register" style={link}>
+                                <MenuItem>Register</MenuItem>
+                            </Link>)}
                         <A onClick={showPreorder} style={link}>
                             <MenuItem>PreOrder</MenuItem>
                         </A>
                         <Link to="/contact-us" style={link}>
                             <MenuItem>ContactUs</MenuItem>
                         </Link>
-                        {isUser ? (<Link to="/order_list" style={link}>
-                                <MenuItem>OrderList</MenuItem>
-                            </Link>) : (
-                            <Link to="/register" style={link}>
-                                <MenuItem>Register</MenuItem>
-                            </Link>)}
-                        {isUser ? (' ') : (
+                        
+                        {/* {isUser ? (' ') : (
                             <Link to="/login" style={link}>
                                 <MenuItem>SignIn</MenuItem>
-                            </Link>)}
-                       
-                        
+                            </Link>)} */}
+
+
 
                     </Center>
 
                     <Right>
-                        {isUser ? (
-                        <Link to='/' style={link} onClick={logout}>
-                            <MenuItem>LogOut</MenuItem>
-                        </Link>
-                        ) : (
-                        <Link to="/login" style={link}>
-                            <MenuItem>SignIn</MenuItem>
-                        </Link>)
-                        }
+                        <MenuItem>
+                            {
+                                showsearch ?
+                                <Searchbox>
+                                    <SInput placeholder='' onChange={(e) => setSearch(e.target.value)}></SInput>
+                                    <SearchIcon onClick={SearchItems} style={link} />
+                                    {/* <SSubmit onClick={SearchItems} style={link}>Submit</SSubmit> */}
+                                </Searchbox> : ''
+                            }
+                            {
+                                showsearch ?
+                                '' : <SearchIcon onClick={ShowSearch} style={link} />
+                            }
+                        </MenuItem>
                         <Link to="/cart" style={link}>
                             <MenuItem>
-                                <ShoppingCartIcon />Cart
+                                <ShoppingCartIcon />
+                                <Sm className='text-primary'>{pcs}</Sm>
                             </MenuItem>
                         </Link>
-                        <Link to="/serach">
-                            <MenuItem>
-                                <SearchIcon style={link}/>
-                            </MenuItem>
-                        </Link>
+                        {isUser ? (
+                            <Link to='/' style={link} onClick={logout}>
+                                <MenuItem>LogOut</MenuItem>
+                            </Link>
+                        ) : (
+                            <Link to="/login" style={link}>
+                                <MenuItem>SignIn</MenuItem>
+                            </Link>)
+                        }
+                        
                     </Right>
                 </Wrapper>
             )}
-        <PreDialog open={showDialog} close={()=>setShowDialog(false)}/>
+            <PreDialog open={showDialog} close={() => setShowDialog(false)} />
         </Container>
     )
 }

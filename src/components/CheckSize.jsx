@@ -33,9 +33,9 @@ const CheckSize = (props) => {
         <DialogContent>
           
         {gen == 'm' ? (
-        <Img src={url+`/ecommerce/sizechart/`+deg+`_male_sizechart.jpg`} />
+        <Img src={url+`/ecommerce/sizechart/`+deg+`_male_sizechart.png`} />
       ) : (
-        <Img src={url+`/ecommerce/sizechart/`+deg+`_female_sizechart.jpg`} />
+        <Img src={url+`/ecommerce/sizechart/`+deg+`_female_sizechart.png`} />
       )}
 
         </DialogContent>

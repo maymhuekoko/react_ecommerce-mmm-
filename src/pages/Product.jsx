@@ -61,13 +61,16 @@ const MainImage = styled.img`
 const SmallImage = styled.img`
     width: 34%;
     height: auto;
+    max-height: 191.5px;
     object-fit: cover;
     ${mobile({ height: "50%" })}
 `
 
 const SmallImageOne = styled.img`
-    width: 250px;
-    height: 50vh;
+    width: 100%;
+    min-width: 250px;
+    min-height: 250px;
+    max-height: 250px;
     object-fit: contain;
     ${mobile({ height: "50%" })}
 `
@@ -225,6 +228,10 @@ const SmallImgName = styled.div`
     color: #111111;
 `
 
+const Opt = styled.option`
+
+`
+
 
 const Product = () => {
 
@@ -233,13 +240,16 @@ const Product = () => {
     const [checkFabric, setCheckFabric] = useState(false);
     const dispatch = useDispatch();
     const url= useSelector(state => state.user.url);
+    
+    // State Colors
+    const colors= useSelector(state => state.design.colors);
+    // console.log(colors);
 
     const cheColor = () => {
         setCheckColor(true);
     }
     const cheSize = () => {
         setCheckSize(true);
-        
     }
     const cheFabric = () => {
         setCheckFabric(true);
@@ -265,6 +275,9 @@ const Product = () => {
     const [design, setDesign] = useState('');
     const [isInstock, setIsInstock] = useState(false);
 
+    const [instockFlag, setInstockFlag] = useState("");
+    const [preorderFlag, setPreorderFlag] = useState("");
+
     
     useEffect(() => {
         const getProduct = () => {
@@ -274,6 +287,12 @@ const Product = () => {
                     setItem(response.data.item);
                     setDesign(response.data.item.item_name);
                     setUnits(response.data.counting_units);
+
+                    setInstockFlag(response.data.valueofinstock);
+                    console.log(instockFlag);
+
+                    setPreorderFlag(response.data.valueofpreorder);
+                    console.log(preorderFlag);
 
                     const obj = {
                         'category_id': response.data.item.category_id,
@@ -399,12 +418,18 @@ const Product = () => {
         setFabric(val);
         let html = '';
         axios.get(url+'/api/ecommerce_order_type/'+item.item_name+'/'+gendername+'/'+val)
-                .then((response) => {  
-                    console.log(response.data.colour);
+                .then((response) => {
+
                     html += `<Option>Choose Colour</Option>`;
-                        Object.keys(response.data.colour).map(key => {
-                            html += `<Option>`+ response.data.colour[key]+`</Option>`;
-                         })  
+
+                    // Object.keys(colors).map(c => { // from design redux colors
+                    //     html += `<Option>`+ c +`</Option>`;
+                    //     console.log(c)
+                    // })
+                    
+                    Object.keys(response.data.colour).map(key => {
+                        html += `<Option>`+ response.data.colour[key]+`</Option>`;
+                    }) 
                     document.getElementById('color').innerHTML = html;
         })
     }
@@ -413,12 +438,13 @@ const Product = () => {
         setColor(val);
         let html = '';
         axios.get(url+'/api/ecommerce_order_type/'+item.item_name+'/'+gendername+'/'+fabric+'/'+val)
-                .then((response) => {  
+                .then((response) => {
                     console.log(response.data.size);
                     html += `<Option>Choose Size</Option>`;
+                        Object.keys(response.data.size)
                         Object.keys(response.data.size).map(key => {
                             html += `<Option>`+ response.data.size[key]+`</Option>`;
-                         })
+                        })
                      
                     document.getElementById('size').innerHTML = html;
         })
@@ -432,7 +458,12 @@ const Product = () => {
                unit: counting       
         }).then(res=>
         {
-            alert('success');
+            // alert('success');
+            // Swal.fire({
+            //     title:  "Success!",
+            //     text: "Success!.",
+            //     type: 'success',    
+            //     });
             document.getElementById('price').innerHTML = res.data.data+` MMK`;
             document.getElementById('stock').innerHTML = res.data.stock+` PCS`;
             setPrice(res.data.data);
@@ -451,14 +482,12 @@ const Product = () => {
             <Wrapper style={{ marginTop: '100px' }}>
                 <ImgContainer>
 
-
                     <MainImage src={url+`/ecommerce/items/${item.photo_path}`} id='main' />
 
                     <SmallImgContainer>
                         <SmallImage src={url+`/ecommerce/items/${item.photo_path?.replace("front", "left")}`} onClick={change_photo} id='' />
                         <SmallImage src={url+`/ecommerce/items/${item.photo_path?.replace("front", "right")}`} onClick={change_photo} id='' />
                         <SmallImage src={url+`/ecommerce/items/${item.photo_path?.replace("front", "body")}`} onClick={change_photo} id='hel' />
-
                     </SmallImgContainer>
 
                 </ImgContainer>
@@ -467,7 +496,9 @@ const Product = () => {
                     <Desc>Minimum Order Quantity : </Desc>
                     <Desc>Avaiable Color : </Desc>
                     <Desc>Lead Time : </Desc>
-                    <Link to={'/order/'+item.item_name}><Button>Make Order</Button></Link>
+                    {
+                    preorderFlag == 1 ? <Link to={'/order/'+item.item_name}><Button>Make Order</Button></Link> : 'Preorder Unavaliable!'
+                    }
                     <RowContainer>
                         <PriceLabel>Price: </PriceLabel>
                         <Price id='price'> &nbsp;MMK</Price>
@@ -494,7 +525,7 @@ const Product = () => {
                             <DivF>
                                 <div>
                                     <FilterFabric onChange={(e) => ChangeFabric(e.target.value)} id="fabric">
-                                        
+                                        <Opt>Choose Fabric</Opt>
                                     </FilterFabric>
                                 </div>
                                 {/* <div>
@@ -507,7 +538,7 @@ const Product = () => {
                             <DivF>
                                 <div>
                                     <FilterColor onChange={(e) => ChangeColor(e.target.value)} id="color">
-                                       
+                                    <Opt>Choose Color</Opt>
                                     </FilterColor>
                                 </div>
                                 <div>
@@ -521,7 +552,7 @@ const Product = () => {
                             <DivF>
                                 <div>
                                     <FilterSize onChange={(e) => ChangeSize(e.target.value)} id="size">
-                                      
+                                    <Opt>Choose Size</Opt>
                                     </FilterSize>
                                 </div>
                                 <div>
@@ -537,7 +568,11 @@ const Product = () => {
                             <Amount>{quantity}</Amount>
                             <Add onClick={() => handleQuantity("inc")} />
                         </AmountContainer>
-                        <Button  onClick={handleClick} style={{ backgroundColor: butBackColor, color: butColor }}>Add to Cart</Button>
+
+                        {
+                        instockFlag == 1 ? <Button onClick={handleClick} style={{ backgroundColor: butBackColor, color: butColor }}>Add to Cart</Button> : 'Stock Unavaliable!'
+                        }
+                    
                     </AddContainer>
 
                     <AddContainer>

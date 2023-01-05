@@ -9,7 +9,7 @@ import { Navigate, useNavigate  } from 'react-router-dom';
 
 const Container = styled.div`
     width: 100%;
-    height: 83vh;
+    height: 95vh;
     display:flex;
     position: relative;
     overflow: hidden;
@@ -21,7 +21,7 @@ const Container = styled.div`
 `
 
 const Wrapper = styled.div`
-    height: 70vh;
+    height: 95vh;
     display: flex;
     transition: all 1.5s ease;
     transform: translateX(${props=> props.slideIndex * -100}vw);
@@ -47,14 +47,14 @@ const Arrow = styled.div`
 `
 const Slide = styled.div`
     width: 100vw;
-    height: 70vh;
+    height: 95vh;
     display: flex;
     align-items: center;
     background-color: #${props=>props.bgc};
 `;
 
 const ImgContainer = styled.div`
-    height: 70vh;
+    height: 95vh;
     width: 100vw;
     flex: 1;
     position: absolute;
@@ -94,7 +94,6 @@ const Button = styled.button`
 const Image = styled.img`
     width: 100vw;
     object-fit: cover;
-
 `;
 
 const Slider = () => {
@@ -102,8 +101,12 @@ const Slider = () => {
     const handleClick = (direction) => {
         if(direction === "left"){
             setSlideIndex(slideIndex > 0 ? slideIndex-1: 2)
+        }else if(direction === "left"){
+            setSlideIndex(slideIndex < 2 ? slideIndex-1: 4)
+        }else if(direction === "left"){
+            setSlideIndex(slideIndex < 4 ? slideIndex-1: 6)
         }else{
-            setSlideIndex(slideIndex < 2 ? slideIndex+1: 0)
+            setSlideIndex(slideIndex < 6 ? slideIndex+1: 0)
         }
     }
      
@@ -122,12 +125,37 @@ const Slider = () => {
             {sliderItems.map((item)=>(
                 <Slide bgc={item.bg} key={item.id}>
                     <ImgContainer>
-                        <Image src={item.img}/>
+                    {
+                        item.img.split(".").pop() === "mp4" ? (
+                        <video
+                            playsInline
+                            autoPlay
+                            muted
+                            poster=""
+                            style={{width: '100%'}}
+                            >
+                            <source
+                                src={item.img}
+                                type="video/mp4"
+                            />
+                        </video>
+                        ) : (
+                            <Image src={item.img} />
+                        )
+                    }
+                    
+                    
                     </ImgContainer>
                     <InfoContainer>
-                        <Title>{item.title}</Title>
-                        <Description>{item.desc}</Description>
-                        <Button onClick={productline}>Shop Now</Button>
+                        {
+                            item.img.split(".").pop() !== "mp4" ? (
+                               <div>
+                                <Title>{item.title}</Title>
+                                <Description>{item.desc}</Description>
+                                <Button onClick={productline}>Shop Now</Button>
+                               </div>
+                            ):''
+                        }
                     </InfoContainer>
                 </Slide>    
             ))}

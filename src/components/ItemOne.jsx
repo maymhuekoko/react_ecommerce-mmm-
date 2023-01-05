@@ -82,7 +82,7 @@ bottom: 0;
 const ItemOne = ({item}) => {
     const url= useSelector(state => state.user.url);
   return (
-    <Container className='col-6'>
+    <Container>
         <Circle/>
         <Image src={url+`/ecommerce/items/${item.photo_path}`}/>
         <Info>
@@ -100,7 +100,6 @@ const ItemOne = ({item}) => {
 
             <Icon>
                 <FavoriteBorderOutlined/>
-
             </Icon>
             
         </Info>

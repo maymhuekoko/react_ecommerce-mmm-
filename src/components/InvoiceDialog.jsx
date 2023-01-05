@@ -94,7 +94,29 @@ export default function InvoiceDialog(props) {
    <Name>Customer Name : {props.name}</Name>
    <Phone>Customer Phone : {props.phone}</Phone>
 </Div>
- <Table className="table table-striped">
+{
+                props.attachs.length > 0 ? 
+                <Table className="table table-striped">
+                <Tr>
+                    <Th>No</Th>
+                    <Th>Item</Th>
+                    <Th>Qty</Th>
+                    <Th>Price</Th>
+                    <Th>Description</Th>
+                </Tr>
+                {props.attachs.map((attach, index) => (
+                    <Tr key={attach.id}>
+                    <Td>{++index}</Td>
+                    <Td><img src={url+`/preorder/${attach.item_photo}`} alt="" height='auto' width='170px'/></Td>
+                    <Td>{attach.quantity}</Td>
+                    <Td>{attach.price}</Td>
+                    <Td>{attach.description}</Td>
+                    <Td hidden>{total_amount += attach.quantity * attach.price}</Td>
+                </Tr> 
+                ))}        
+                </Table>
+                : 
+                <Table className="table table-striped">
                 <Tr>
                     <Th>No</Th>
                     <Th>Item</Th>
@@ -102,24 +124,30 @@ export default function InvoiceDialog(props) {
                     <Th>Size</Th>
                     <Th>Qty</Th>
                     <Th>Price</Th>
-                    <Th>Total</Th>
+                    {/* <Th>Total</Th> */}
                 </Tr>
                 {
                     props.unit.map((unit, index) => (
-                        <Tr>
-                        <Td>{++index}</Td>
-                        <Td>{unit.unit_name}</Td>
-                        <Td>{unit.colour_id}</Td>
-                        <Td>{unit.size_id}</Td>
-                        <Td>{unit.current_quantity}</Td>
-                        <Td>{unit.order_price}</Td>
-                        <Td>{unit.current_quantity * unit.order_price}</Td>
-                        <Td hidden>{total_amount += unit.current_quantity * unit.order_price}</Td>
-                    </Tr>
+                        props.ecounting.map((ec, i) => (
+                            unit.id == ec.counting_unit_id ?
+                        <Tr key={unit.id}>
+                            <Td>{++index}</Td>
+                            <Td>{unit.unit_name}</Td>
+                            <Td>{props.color[i]}</Td>
+                            <Td>{props.size[i]}</Td>
+                            <Td>{ec.quantity}</Td>
+                            <Td>{ec.price}</Td>
+                            <Td hidden>{total_amount += ec.quantity * ec.price}</Td>
+                        </Tr> : null
+                    ))
+                
                     ))
                 }
                 
-            </Table>
+                </Table>
+}
+
+
             <Div>
    <Name>Customer Address : {props.address}</Name>
    <Phone>Total Amount : {total_amount}</Phone>

@@ -30,7 +30,7 @@ const InstockDialog = (props) => {
   return (
     <div>
         <Dialog open={props.open} onClose={props.close}>
-        <DialogTitle  className='text-center'><Title>NoInstock!</Title></DialogTitle>
+        <DialogTitle  className='text-center'><Title>Stock Unavaliable!</Title></DialogTitle>
         <DialogContent>
         <DialogContentText className='text-center'><b>If you want to make preorder,please click  the Preorder button.</b></DialogContentText>
         

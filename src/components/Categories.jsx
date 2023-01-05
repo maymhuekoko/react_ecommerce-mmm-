@@ -6,8 +6,8 @@ import axios from 'axios';
 import { useSelector} from 'react-redux'
 
 const MainContainer = styled.div`
-display: flex;
-flex-direction: column;
+    display: flex;
+    flex-direction: column;
 `
 
 const Container = styled.div`
@@ -17,11 +17,12 @@ const Container = styled.div`
     ${mobile({padding: "0px",flexDirection: "column"})}
 `
 
-const SectionTitle = styled.h2`
+const SectionTitle = styled.span`
     margin-top: 20px;
     font-weight: bold;
     font-size:30px;
     margin-left: 20px;
+    color: #2b57b8;
     ${mobile({fontSize: "14px"})}
 `
 
@@ -46,12 +47,11 @@ const Categories = () => {
   return (
     <MainContainer>
       <SectionTitle>Our Brands</SectionTitle>
-<Container>
-    
-        {categories.map(item=>(
-            <CategoryItem item={item} key={item.id}/>
-        ))}
-    </Container>
+      <Container>
+          {categories.map(item=>(
+              <CategoryItem item={item} key={item.id}/>
+          ))}
+      </Container>
     </MainContainer>
     
   )

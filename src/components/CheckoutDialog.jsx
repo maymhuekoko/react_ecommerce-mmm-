@@ -172,7 +172,7 @@ export default function CheckoutDialog(props) {
               <FilterTitle>Payment Type</FilterTitle>
               <FilterSelect value={paymenttype} onChange={onPaymentTypeChanged}>
                 <FilterOption>Select Payment Type</FilterOption>
-                <FilterOption value='1'>Prepaid Partial</FilterOption>
+                {/* <FilterOption value='1'>Prepaid Partial</FilterOption> */}
                 <FilterOption value='2'>Prepaid Full</FilterOption>
               </FilterSelect>
             </Filter>

@@ -1,12 +1,16 @@
-import slider1 from './slider-images/slider1.jpg'
+// import slider1 from './slider-images/slider1.mp4'
+import slider1 from './slider-images/slider1.mp4'
 import slider2 from './slider-images/slider2.jpg'
 import slider3 from './slider-images/slider3.jpg'
+import slider4 from './slider-images/slider4.jpg'
+import slider5 from './slider-images/slider5.jpg'
+import slider6 from './slider-images/slider6.jpg'
+import slider7 from './slider-images/slider7.jpg'
 
 export const sliderItems = [
     {
       id: 1,
       img: slider1,
-      // img: "http://medicalworldinvpos.kwintechnologykw09.com/files/attachments/slider1_update.jpg",
       title: "Medical Scrubs",
       desc: "New Arrival And Design. Place Your Order Now",
       bg: "f5fafd",
@@ -14,16 +18,42 @@ export const sliderItems = [
     {
       id: 2,
       img: slider2,
-      // img: "http://medicalworldinvpos.kwintechnologykw09.com/files/attachments/slider2_update.jpg",
-      title: "Doctor Coats",
+      title: "Medical Scrubs",
       desc: "New Arrival And Design. Place Your Order Now",
       bg: "fcf1ed",
     },
     {
       id: 3,
       img: slider3,
-      // img: "http://medicalworldinvpos.kwintechnologykw09.com/files/attachments/slider_photo3.jpg",
-      title: "Surgeon Gowns",
+      title: "Doctor Coat",
+      desc: "New Arrival And Design. Place Your Order Now",
+      bg: "fbf0f4",
+    },
+    {
+      id: 4,
+      img: slider4,
+      title: "VNeck",
+      desc: "New Arrival And Design. Place Your Order Now",
+      bg: "fbf0f4",
+    },
+    {
+      id: 5,
+      img: slider5,
+      title: "Medical Scrubs",
+      desc: "New Arrival And Design. Place Your Order Now",
+      bg: "fbf0f4",
+    },
+    {
+      id: 6,
+      img: slider6,
+      title: "Doctor Coat",
+      desc: "New Arrival And Design. Place Your Order Now",
+      bg: "fbf0f4",
+    },
+    {
+      id: 7,
+      img: slider7,
+      title: "VNeck",
       desc: "New Arrival And Design. Place Your Order Now",
       bg: "fbf0f4",
     },

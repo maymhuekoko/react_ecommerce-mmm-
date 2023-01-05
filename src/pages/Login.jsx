@@ -10,8 +10,10 @@ import { red } from '@mui/material/colors'
 import {
     useNavigate,useLocation
   } from "react-router-dom";
+import { Link } from 'react-router-dom'
 import ColorNav from '../components/ColorNav'
 import Footer from '../components/Footer'
+import Swal from 'sweetalert2'
 
 // url("https://images.pexels.com/photos/6984650/pexels-photo-6984650.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940") center;
 
@@ -59,15 +61,12 @@ const Button = styled.button`
     }
 `
 
-const Link = styled.a`
-    margin: 5px 0px;
-    font-size: 14px;
-    text-decoration: underline;
-    cursor: pointer;
-`
-
 const Error = styled.span`
     color: red;
+`
+
+const A = styled.a`
+
 `
 
 const Login = () => {
@@ -125,15 +124,18 @@ const Login = () => {
                         address : response.data.user.address,
                         email : response.data.user.email,
                     }))   
-                    
+                    Swal.fire({
+                        title:  "Success!",
+                        text: "Login Successful!",
+                        type: 'success',    
+                    });
                 }
                 
             })
-              
-        
-        
+
         // login(dispatch,{username,password});
     }
+    
   return (
     <>
     { successmsg ? (
@@ -151,8 +153,10 @@ const Login = () => {
             {/* <Button onClick={handleClick} disabled={isFetching}>LOG IN</Button>
             {error && <Error>Incorrect Username and Password...</Error>} */}
             <Button onClick={handleClick}>LOG IN</Button>
-            <Link>DO YOU REMEMBER THE PASSWORD?</Link>
-            <Link>CREATE NEW ACCOUNT</Link>
+
+            <A>DO YOU REMEMBER THE PASSWORD?</A>
+            <Link to='/register'>CREATE NEW ACCOUNT</Link>
+
         </Form>
         </Wrapper>
     </Container>

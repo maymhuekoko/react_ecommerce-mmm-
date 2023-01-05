@@ -4,8 +4,7 @@ const designSlice = createSlice({
     name: "design",
     initialState: {
         colors: {
-            'ar1': '#FF0000', 'ar2': '#FFA500', 'ar3': '#FF0088', 'ar4': '#FF0AAA', 'ar5': '#FF0800',
-            'ar6': '#800080', 'ar7': '#b5b067', 'ar8': '#91c618', 'ar9': '#FF0000', 'ar10': '#FF8000',
+            'ar6': '#6d676d', 'ar7': '#b5b067', 'ar8': '#91c618',
             'ar16': '#e798cb', 'ar18': '#7da253', 'ar19': '#151617', 'ar20': '#495f93', 
             'ar21': '#141314', 'ar23': '#9d9fa4', 
             'ar26': '#dd7a5c',
@@ -23,24 +22,14 @@ const designSlice = createSlice({
             'ar96': '#0a3e38', 'ar98': '#0b7694', 
             'ar101': '#78eee0', 'ar106': '#544444',
         },
-        sizes: [
-            {
-                "design_type": "vneck",
-                "gender_type": "m",
-                "filename": "vneck_male_sizechart.PNG",
-            },
-            {
-                "design_type": "vneck",
-                "gender_type": "f",
-                "filename": "vneck_female_sizechart.jpg",
-            },
-            {
-                "design_type": "v2",
-                "gender_type": "f",
-                "filename": "vneck_female_sizechart.jpg",
-            },
-        ],
         orders: [],
+        attachs: [],
+        edit_testname: '',
+        edit_testqty: '',
+        edit_testprice: '',
+        edit_file: '',
+        edit_description: '',
+        homesearch: false,
     },
     reducers: {
         addOrder: (state, action) => {
@@ -53,11 +42,52 @@ const designSlice = createSlice({
                 }
             }
         },
+        editOrder: (state,action) => {
+            for (var i = 0; i < state.orders.length; i++) {
+                if (state.orders[i].orderid === action.payload.id) {
+                    state.edit_testname = state.orders[i].testname;
+                    state.edit_testqty = state.orders[i].testqty;
+                    state.edit_testprice = state.orders[i].testprice;
+                    state.orders.splice(i, 1);
+                }
+            }
+        },
         resetOrder: (state) => {
             state.orders.length = 0;
+        },
+        addAttach: (state, action) => {
+            state.attachs.push(action.payload);
+        },
+        removeAttach: (state, action) => {
+            for (var i = 0; i < state.attachs.length; i++) {
+                if (state.attachs[i].orderid === action.payload.id) {
+                    state.attachs.splice(i, 1);
+                }
+            }
+        },
+        editAttach: (state,action) => {
+            for (var i = 0; i < state.attachs.length; i++) {
+                if (state.attachs[i].orderid === action.payload.id) {
+                    state.edit_file = state.attachs[i].file;
+                    state.edit_description = state.attachs[i].description;
+                    state.edit_testqty = state.attachs[i].testqty;
+                    state.edit_testprice = state.attachs[i].testprice;
+                    state.attachs.splice(i, 1);
+                }
+            }
+        },
+        resetAttach: (state) => {
+            state.attachs.length = 0;
+        },
+        showSearch: (state) => {
+            state.homesearch = true;
+        },
+        resetSearch: (state) => {
+            state.homesearch = false;
         }
+
     }
 })
 
-export const { addOrder, removeOrder, resetOrder, addPhoto, resetPhoto } = designSlice.actions
+export const { addOrder, removeOrder,addAttach, removeAttach, resetOrder,resetAttach, editOrder,editAttach, showSearch,resetSearch } = designSlice.actions
 export default designSlice.reducer;

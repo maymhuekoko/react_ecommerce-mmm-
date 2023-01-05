@@ -118,6 +118,10 @@ const OrderList = () => {
 
     const [ inputs, setInputs ] = useState({});
     const [ oinputs, setOInputs ] = useState([]);
+    const [ attachs, setAttachs ] = useState([]);
+    const [ecounting, setEcounting] = useState([]);
+    const [color, setColor] = useState([]);
+    const [size, setSize] = useState([]);
     const url= useSelector(state => state.user.url);
 
     const {id} = useParams();
@@ -144,6 +148,10 @@ const OrderList = () => {
                 delivery_fee: res.data.orders.delivery_fee,
             });
             setOInputs(res.data.counting_units);
+            setAttachs(res.data.attachs);
+            setEcounting(res.data.units);
+            setColor(res.data.color);
+            setSize(res.data.size);
         });
     }
 
@@ -183,7 +191,7 @@ const OrderList = () => {
                         <P>Total Amount : </P>
                         <P>Payment Type : </P>
                         <P>Payment Channel : </P>
-                        <P>Order Status : </P>
+                        <P>Order Status :</P>
                     </Left>
                     <Right>
                         <P> { inputs.order_code } </P>
@@ -195,29 +203,55 @@ const OrderList = () => {
                     </Right>
                 </RBox>
             </BigBox>
-            <Table>
+            {
+                attachs.length > 0 ? 
+                <Table>
                 <Tr>
-                    <Th>Item Id</Th>
-                    <Th>Item No</Th>
+                    <Th>No</Th>
                     <Th>Item Name</Th>
-                    <Th>Item Quantity</Th>
-                    <Th>Item Price</Th>
-                    <Th>Item Purchase Price</Th>
+                    <Th>Qty</Th>
+                    <Th>Price</Th>
+                    <Th>Description</Th>
+                </Tr>
+                {attachs.map((attach, index) => (
+                    <Tr key={attach.id}>
+                    <Td>{++index}</Td>
+                    <Td><img src={url+`/preorder/${attach.item_photo}`} alt="" height='auto' width='170px'/></Td>
+                    <Td>{attach.quantity}</Td>
+                    <Td>{attach.price}</Td>
+                    <Td>{attach.description}</Td>
+                </Tr> 
+                ))} 
+            </Table>  :
+                <Table>
+                <Tr>
+                    <Th>No</Th>
+                    <Th>Item Name</Th>
+                    <Th>Color</Th>
+                    <Th>Size</Th>
+                    <Th>Qty</Th>
+                    <Th>Price</Th>
                 </Tr>
                 {
-                    oinputs.map((oinput) => (
+                    oinputs.map((oinput, index) => (
+                        ecounting.map((ec, i) => (
+                            oinput.id == ec.counting_unit_id ?
                         <Tr key={oinput.id}>
-                            <Td>{oinput.id}</Td>
-                            <Td>{oinput.item_id}</Td>
+                            <Td>{++index}</Td>
                             <Td>{oinput.unit_name}</Td>
-                            <Td>{oinput.current_quantity}</Td>
-                            <Td>{oinput.order_price}</Td>
-                            <Td>{oinput.purchase_price}</Td>
-                        </Tr>
+                            <Td>{color[i]}</Td>
+                            <Td>{size[i]}</Td>
+                            <Td>{ec.quantity}</Td>
+                            <Td>{ec.price}</Td>
+                        </Tr> : null
+                    ))
                     ))
                 }
                 
+                
             </Table> 
+            }
+           
         </Wrapper>
         </Div>
         <div>

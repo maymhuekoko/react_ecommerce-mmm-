@@ -9,6 +9,7 @@ import { setUserInfo } from "../redux/userRedux"
 import Navbar from '../components/Navbar'
 import ColorNav from '../components/ColorNav'
 import Footer from '../components/Footer'
+import Swal from 'sweetalert2'
 
 const Container = styled.div`
     width: 100vw;
@@ -87,7 +88,7 @@ const Register = () => {
             password: password,
             email : email,
         }).then(function(response){
-            alert(response.data.data)
+            // alert(response.data.data)
             setShowDialog(true);
             // dispatch(setUserInfo(response.data.id,name,phone,email,address));
             dispatch(setUserInfo({
@@ -97,6 +98,11 @@ const Register = () => {
                 address : address,
                 email : email,
             })) 
+            Swal.fire({
+                title:  "Success!",
+                text: "Registered Successful!",
+                type: 'success',    
+                });
             navigate(-1);
         }).catch(function(error){
             console.log(error);
