@@ -273,15 +273,15 @@ const About = () => {
             </div>
             <Section>
                 <Wrapper style={{paddingTop: "60px"}}>
-                    <Title style={{padding: "30px 0px 20px 100px"}}>ABOUT US</Title>
+                    {/* <Title style={{padding: "30px 0px 20px 100px"}}>ABOUT US</Title> */}
                     <Content style={{padding: "70px 100px" , background: "linear-gradient(to right, rgba(28, 73, 170, 0.5), rgba(5, 59, 175, 0.8))"}}>
                         <Flex>
-                            <BoxOne style={{maxHeight: "420px", overflow: "hidden" }} >
-                                <img src={profile} style={{ width: "100%", height: "auto",minHeight: "420px" }} />
+                            <BoxOne style={{maxHeight: "500px", overflow: "hidden" }} >
+                                <img src={profile} style={{ width: "100%", height: "auto",minHeight: "500px" }} />
                             </BoxOne>
-                            <BoxTwo style={{minHeight: "420px" }} >
+                            <BoxTwo style={{minHeight: "500px" }} >
                                 <ContentTitle>About Medical World</ContentTitle>
-                                <Description>Medical World Co., Ltd, founded in 2015, is a manufacturing and
+                                <Description style={{lineHeight: '40px'}}>Medical World Co., Ltd, founded in 2015, is a manufacturing and
                                 distribution company of uniforms and accessories. Over the past 7
                                 years, Medical World Co. Ltd, has been providing uniforms and
                                 accessories for Government Departments and Private Business
